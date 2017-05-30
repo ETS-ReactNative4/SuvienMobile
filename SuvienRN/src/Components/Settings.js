@@ -16,11 +16,13 @@ class Settings extends Component {
                 </CardSection>
 
                 <CardSection>
+                    <Text style={styles.radioTextStyle}>Stage</Text>
                     <RadioForm
                         radio_props={radioProps}
                         initial={0}
+                        style={{ flex: 6 }}
                         buttonColor={'#4A86E8'}
-                        onPress={((value) => { console.log(value); })}
+                        onPress={((label) => { console.log(label); })}
                     />
                 </CardSection>
             </View>
@@ -33,4 +35,12 @@ const radioProps = [
   { label: 'Late', value: 1 }
 ];
 
+const styles = {
+    radioTextStyle: {
+        fontSize: 20,
+        marginLeft: 100,
+        flex: 1,
+        alignSelf: 'center'
+    }
+};
 export default Settings;
