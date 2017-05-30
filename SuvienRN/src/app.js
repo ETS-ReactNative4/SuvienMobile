@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
+import Button from './Components/common/Button';
+import CardSection from './Components/common/CardSection';
 
 class App extends Component {
     render() {
@@ -8,7 +10,13 @@ class App extends Component {
             <Image 
             source={require('./Images/suviensplash.png')}
             style={styles.imageStyle}
-            />
+            >
+                <CardSection>
+                    <Button>
+                     Get Started
+                    </Button>
+                </CardSection>
+            </Image>
         );
     }
 }
