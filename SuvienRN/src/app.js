@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
+import Button from './Components/common/Button';
 
 class App extends Component {
     render() {
@@ -8,7 +9,11 @@ class App extends Component {
             <Image 
             source={require('./Images/suviensplash.png')}
             style={styles.imageStyle}
-            />
+            >
+                <Button>
+                    Click me!
+                </Button>
+            </Image>
         );
     }
 }
