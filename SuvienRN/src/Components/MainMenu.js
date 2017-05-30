@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Button, CardSection } from './common';
 
 class MainMenu extends Component {
+    onButtonPress() {
+        Actions.Settings();
+    }
     render() {
         return (
             <Image 
@@ -10,7 +14,7 @@ class MainMenu extends Component {
             style={styles.imageStyle}
             >
                 <CardSection>
-                    <Button>
+                    <Button onPress={this.onButtonPress.bind(this)}>
                      Get Started
                     </Button>
                 </CardSection>

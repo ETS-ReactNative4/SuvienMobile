@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import MainMenu from './Components/MainMenu';
+import RouterComponent from './Router';
 
 class App extends Component {
     render() {
         return (
-            <MainMenu />
+            <RouterComponent />
         );
     }
 }
