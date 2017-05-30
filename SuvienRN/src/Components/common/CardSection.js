@@ -14,6 +14,7 @@ const styles = {
     marginTop: 300,
     //marginLeft: 200,
     width: 590,
+    height: 70,
     //borderBottomWidth: 1,
     padding: 5,
     //backgroundColor: '#fff',
