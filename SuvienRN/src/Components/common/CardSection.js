@@ -11,7 +11,7 @@ const CardSection = (props) => {
 
 const styles = {
   containerStyle: {
-    marginTop: 300,
+    marginTop: 320,
     //marginLeft: 200,
     width: 590,
     height: 70,
