@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { CardSection, Input, Button } from './common';
+import { CardSection, Input } from './common';
 import RadioForm from 'react-native-simple-radio-button';
 
 class Settings extends Component {
