@@ -6,23 +6,17 @@ import RadioForm from 'react-native-simple-radio-button';
 class Settings extends Component {
     state = { name: '', stage: null };
     async componentWillMount() {
-        console.log('method started!');
         if (await AsyncStorage.getItem('name') !== null) {
-            console.log('Im in the if!');
-            const namec = await AsyncStorage.getItem('name');
-            const stagec = await AsyncStorage.getItem('stage');
-            console.log('Ive got the stuff!');
-            this.setState({ name: namec, stage: stagec });
-            console.log('time to leave again!');
-            console.log(this.state.stage);
+            this.setState({ 
+                name: await AsyncStorage.getItem('name'), 
+                stage: await AsyncStorage.getItem('stage') 
+            });
         }
     }
     async onButtonPress() {
         try {
             await AsyncStorage.setItem('name', this.state.name);
             await AsyncStorage.setItem('stage', this.state.stage);
-            console.log(await AsyncStorage.getItem('name'));
-            console.log(await AsyncStorage.getItem('stage'));
             } catch (error) {
             console.log(error);
         }
@@ -43,14 +37,13 @@ class Settings extends Component {
             );
         }
         if (this.state.stage === null) {
+            //Spinner may be added here
             return (
                 <Text>I'm Waiting!</Text>
             );
         }
     }
     render() {
-        const stages = parseInt(this.state.stage);
-        console.log(stages);
         return (
             <View style={{ marginTop: 60 }}>
                 <Text style={{ fontSize: 30, alignSelf: 'center' }}>Edit Information</Text>
