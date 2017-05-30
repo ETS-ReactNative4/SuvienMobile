@@ -1,0 +1,3 @@
+rootProject.name = 'SuvienRN'
+
+include ':app'
