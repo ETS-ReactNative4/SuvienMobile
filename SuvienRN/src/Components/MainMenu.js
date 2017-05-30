@@ -13,7 +13,7 @@ class MainMenu extends Component {
             source={require('../Images/suviensplash.png')}
             style={styles.imageStyle}
             >
-                <CardSection>
+                <CardSection style={styles.containerStyle}>
                     <Button onPress={this.onButtonPress.bind(this)}>
                      Get Started
                     </Button>
@@ -28,7 +28,17 @@ const styles = {
         flex: 1,
         height: null,
         width: null
-    }
+    },
+    containerStyle: {
+        marginTop: 320,
+        width: 590,
+        height: 70,
+        padding: 5,
+        borderBottomWidth: 0,
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        position: 'relative'
+  }
 };
 
 export default MainMenu;

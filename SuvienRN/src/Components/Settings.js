@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Text, View } from 'react-native';
+import { CardSection, Input } from './common';
+
 
 class Settings extends Component {
     render() {
         return (
-            <View>
-                <Text>Welcome to Settings!</Text>
+            <View style={{ marginTop: 60 }}>
+                <CardSection>
+                    <Input
+                    placeholder="Lance McClain"
+                    label="Name"
+                    />
+                </CardSection>
             </View>
         );
     }
