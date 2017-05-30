@@ -8,6 +8,7 @@ class Settings extends Component {
         return (
             <View style={{ marginTop: 60 }}>
                 <CardSection>
+                    <Text style={{ fontSize: 30, alignSelf: 'center' }}>Edit Information</Text>
                     <Input
                     placeholder="Lance McClain"
                     label="Name"
