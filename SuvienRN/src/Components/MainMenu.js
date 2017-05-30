@@ -6,7 +6,7 @@ class MainMenu extends Component {
     render() {
         return (
             <Image 
-            source={require('./Images/suviensplash.png')}
+            source={require('../Images/suviensplash.png')}
             style={styles.imageStyle}
             >
                 <CardSection>
