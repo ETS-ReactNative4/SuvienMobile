@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import { Header, Card, CardSection, Button } from './common';
-import { Text } from 'react-native';
+import { Header, Card, PictureTile } from './common';
 
 class Home extends Component {
     render() {
         return (
-            <Header headerText="It's a lovely day!" />
             <Card>
-                <CardSection>
-                    
-                </CardSection>
+                <Header headerText="It's a lovely day!" />
+                <PictureTile />
             </Card>
         );
     }
