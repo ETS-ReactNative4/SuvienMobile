@@ -4,6 +4,7 @@ import MainMenu from './Components/MainMenu';
 import Settings from './Components/Settings';
 import Home from './Components/Home';
 import AddPhoto from './Components/AddPhoto';
+import VideoPageTest from './Components/VideoPageTest';
 
 const RouterComponent = () => (
         <Router>
@@ -34,6 +35,12 @@ const RouterComponent = () => (
             hideNavBar={false}
             title="Add Photo"
             titleStyle={styles.titleStyles}
+            />
+
+            <Scene
+            key="VideoPageTest"
+            component={VideoPageTest}
+            hideNavBar
             />
                  
         </Router>
