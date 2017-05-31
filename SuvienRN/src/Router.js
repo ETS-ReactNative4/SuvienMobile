@@ -4,6 +4,8 @@ import MainMenu from './Components/MainMenu';
 import Settings from './Components/Settings';
 import Home from './Components/Home';
 import AddPhoto from './Components/AddPhoto';
+import VideoPageTest from './Components/VideoPageTest';
+import AddVideo from './Components/AddVideo';
 
 const RouterComponent = () => (
         <Router>
@@ -31,6 +33,22 @@ const RouterComponent = () => (
             <Scene
             key="AddPhoto"
             component={AddPhoto}
+            hideNavBar={false}
+            title="Add Photo"
+            titleStyle={styles.titleStyles}
+            />
+
+            <Scene
+            key="AddVideo"
+            component={AddVideo}
+            hideNavBar={false}
+            title="Add Video"
+            titleStyle={styles.titleStyles}
+            />
+
+            <Scene
+            key="VideoPageTest"
+            component={VideoPageTest}
             hideNavBar
             />
                  

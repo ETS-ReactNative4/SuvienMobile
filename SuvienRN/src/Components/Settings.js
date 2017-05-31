@@ -26,6 +26,7 @@ class Settings extends Component {
             } catch (error) {
             console.log(error);
         }
+        //Actions.Home();
         Actions.Home();
 }
     renderRadioButton() {
