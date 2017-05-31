@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import { Text, View, AsyncStorage } from 'react-native';
 import { CardSection, Input, Button } from './common';
 import RadioForm from 'react-native-simple-radio-button';
+import { Actions } from 'react-native-router-flux';
 
 class Settings extends Component {
-    state = { name: '', stage: null };
+    state = { name: '', stage: null, isFirst: false };
     async componentWillMount() {
         if (await AsyncStorage.getItem('name') !== null) {
             this.setState({ 
                 name: await AsyncStorage.getItem('name'), 
                 stage: await AsyncStorage.getItem('stage') 
+            });
+        }
+        if (await AsyncStorage.getItem('name') === null) {
+            this.setState({
+                isFirst: true
             });
         }
     }
@@ -20,6 +26,7 @@ class Settings extends Component {
             } catch (error) {
             console.log(error);
         }
+        Actions.Home();
 }
     renderRadioButton() {
         if (this.state.stage !== null) {
@@ -36,10 +43,24 @@ class Settings extends Component {
             </CardSection>
             );
         }
-        if (this.state.stage === null) {
+        if (this.state.stage === null && this.state.isFirst === false) {
             //Spinner may be added here
             return (
                 <Text>I'm Waiting!</Text>
+            );
+        }
+        if (this.state.stage === null && this.state.isFirst) {
+            return (
+                <CardSection>
+                <Text style={styles.radioTextStyle}>Stage</Text>
+                <RadioForm
+                        radio_props={radioProps}
+                        initial={0}
+                        style={{ flex: 6 }}
+                        buttonColor={'#4A86E8'}
+                        onPress={(stage) => this.setState({ stage: stage.toString() })} 
+                />
+            </CardSection>
             );
         }
     }
