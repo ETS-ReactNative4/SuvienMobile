@@ -36,8 +36,20 @@ class AddVideo extends Component {
         );
     }
 
+    onEnding() {
+        return (
+            this.player.seek(0)
+        );
+    }  
+
+    onloading() {
+        return (
+            this.player.seek(0)
+        );
+    }
+
     render() {
-        console.log(this.state.pauseing)
+        console.log(this.state.pauseing);
         return (
             <View style={{ marginTop: 60 }}>
                 <CardSection>
@@ -58,16 +70,18 @@ class AddVideo extends Component {
                 <TouchableOpacity style={{ height: 400, width: 400 }} onPress={this.playVideo.bind(this)}>
                     <Video
                     source={require('../Images/suvienvideofinal.mp4')}
-                    ref={(ref) => {
-                        this.player = ref;
+                    ref={(video) => {
+                        this.player = video;
                         }}                                   // Store reference
                     rate={1.0}                              // 0 is paused, 1 is normal.
                     volume={1.0}                            // 0 is muted, 1 is normal.
-                    muted={false}                           // Mutes the audio entirely.
-                    paused={true}
+                    muted={false}  
+                    //ActiveStatePauseStatus={this.state.pauseing}                         // Mutes the audio entirely.
+                    paused={this.state.pauseing}
+                    onLoad={this.onloading.bind(this)}
                     style={styles.backgroundVideo} 
                     resizeMode="cover"                      // Fill the whole screen at aspect ratio.*
-                    repeat                           // Repeat forever.
+                    onEnd={this.onEnding.bind(this)}
                     playInBackground={false}
                     />
                 </TouchableOpacity>
