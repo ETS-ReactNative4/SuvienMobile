@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Button } from './common';
 import Video from 'react-native-video';
+import ImagePicker from 'react-native-image-picker';
 
 class AddVideo extends Component {
     state = { videouri: null, pauseing: true }
@@ -12,7 +13,6 @@ class AddVideo extends Component {
 
    onChooseVideoPress() {
         return (
-            /*
             ImagePicker.launchImageLibrary(options, (response) => {
                 let source = { uri: response.uri };
                 if (source.uri === undefined) {
@@ -21,8 +21,7 @@ class AddVideo extends Component {
                 this.setState({ videouri: source });
                 console.log(this.state.videouri);
             }
-            )*/
-            console.log('Wait!')
+            )
         );
     }
 
@@ -89,6 +88,17 @@ class AddVideo extends Component {
         );
     }
 }
+
+const options = {
+            title: 'Select Avatar',
+            customButtons: [
+                { name: 'fb', title: 'Choose Photo from Facebook' },
+                ],
+                storageOptions: {
+                    skipBackup: true,
+                    path: 'images'
+                }
+};
 
 const styles = {
   backgroundVideo: {
