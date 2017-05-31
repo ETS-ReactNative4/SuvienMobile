@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button, CardSection } from './common';
+import Orientation from 'react-native-orientation';
 
 class MainMenu extends Component {
+    componentDidMount() {
+        Orientation.lockToLandscape();
+    }
     onButtonPress() {
         Actions.AddVideo();
     }
