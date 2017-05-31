@@ -3,6 +3,7 @@ import { Scene, Router } from 'react-native-router-flux';
 import MainMenu from './Components/MainMenu';
 import Settings from './Components/Settings';
 import Home from './Components/Home';
+import AddPhoto from './Components/AddPhoto';
 
 const RouterComponent = () => (
         <Router>
@@ -25,7 +26,14 @@ const RouterComponent = () => (
             key="Home"
             component={Home}
             hideNavBar
-            />        
+            />   
+
+            <Scene
+            key="AddPhoto"
+            component={AddPhoto}
+            hideNavBar
+            />
+                 
         </Router>
     );
 
