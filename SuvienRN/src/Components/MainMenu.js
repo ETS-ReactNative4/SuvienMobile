@@ -5,7 +5,7 @@ import { Button, CardSection } from './common';
 
 class MainMenu extends Component {
     onButtonPress() {
-        Actions.VideoPageTest();
+        Actions.AddVideo();
     }
     render() {
         return (
