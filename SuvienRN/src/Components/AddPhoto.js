@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import ImagePicker from 'react-native-image-picker';
 
 class AddPhoto extends Component {
     render() {
+        
         return (
-            <Text>Add Photos Here!</Text>
-        );
+            ImagePicker.showImagePicker(options, (response) => {
+                console.log('Response = ', response);
+            }));
     }
 }
 
