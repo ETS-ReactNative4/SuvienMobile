@@ -2,6 +2,7 @@ import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import MainMenu from './Components/MainMenu';
 import Settings from './Components/Settings';
+import Home from './Components/Home';
 
 const RouterComponent = () => (
         <Router>
@@ -19,6 +20,12 @@ const RouterComponent = () => (
             title="Settings"
             titleStyle={styles.titleStyles}
             />
+
+            <Scene
+            key="Home"
+            component={Home}
+            hideNavBar
+            />        
         </Router>
     );
 
