@@ -10,8 +10,11 @@ class PictureTile extends Component {
         return (
             ImagePicker.launchImageLibrary(options, (response) => {
                 let source = { uri: response.uri };
-                console.log(source);
+                if (source.uri === undefined) {
+                    source.uri = null;
+                }
                 this.setState({ imageuri: source });
+                console.log(this.state.imageuri);
             }));
     }
     renderPhoto() {
