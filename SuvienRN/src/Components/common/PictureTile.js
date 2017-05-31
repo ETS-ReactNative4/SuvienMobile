@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, Image } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import { CardSection } from './CardSection';
 import ImagePicker from 'react-native-image-picker';
 
@@ -9,7 +8,7 @@ class PictureTile extends Component {
     onTilePress() {
         return (
             ImagePicker.launchImageLibrary(options, (response) => {
-                let source = { uri: response.uri };
+                const source = { uri: response.uri };
                 if (source.uri === undefined) {
                     source.uri = null;
                 }
@@ -17,6 +16,7 @@ class PictureTile extends Component {
                 console.log(this.state.imageuri);
             }));
     }
+    
     renderPhoto() {
         if (this.state.imageuri === null) {
             return (
@@ -29,6 +29,7 @@ class PictureTile extends Component {
             );
         }
     }
+    
     render() {
         return (
             <TouchableOpacity onPress={this.onTilePress.bind(this)}>
