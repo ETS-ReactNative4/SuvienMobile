@@ -26,7 +26,8 @@ class Settings extends Component {
             } catch (error) {
             console.log(error);
         }
-        Actions.Home();
+        //Actions.Home();
+        Actions.AddPhoto();
 }
     renderRadioButton() {
         if (this.state.stage !== null) {

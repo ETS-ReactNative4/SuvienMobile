@@ -31,7 +31,9 @@ const RouterComponent = () => (
             <Scene
             key="AddPhoto"
             component={AddPhoto}
-            hideNavBar
+            hideNavBar={false}
+            title="Add Photo"
+            titleStyle={styles.titleStyles}
             />
                  
         </Router>
