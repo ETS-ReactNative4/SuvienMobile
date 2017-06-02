@@ -1,28 +1,20 @@
 import React, { Component } from 'react';
-import { Image, View } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { View, Image } from 'react-native';
 import { Button, CardSection } from './common';
-import Orientation from 'react-native-orientation';
 
-class MainMenu extends Component {
-    componentDidMount() {
-        Orientation.lockToLandscape();
-    }
-    onButtonPress() {
-        Actions.Settings();
-    }
+class MainMenuFlexBox extends Component {
     render() {
         return (
             <View style={styles.bigContainer}>
                 <View style={styles.leftContainer}>
                     <Image source={require('../Images/leftss.png')} style={{ flex: 1, height: null, width: null }}>
-                        <CardSection style={{ borderBottomWidth: 0, flex: 251, backgroundColor: 'transparent' }} />
+                        <CardSection style={{ borderBottomWidth: 0, flex: 251, backgroundColor: 'transparent'}} />
                         <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent' }}>
-                            <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
-                                Get Started
+                            <Button style={styles.buttonContainer}>
+                                Click me!!!
                             </Button>
                         </CardSection>
-                        <CardSection style={{ borderBottomWidth: 0, flex: 270, backgroundColor: 'transparent' }} />
+                        <CardSection style={{ borderBottomWidth: 0, flex: 270, backgroundColor: 'transparent'}} />
                     </Image>
                 </View>
                 <View style={styles.rightContainer}>
@@ -30,26 +22,11 @@ class MainMenu extends Component {
                 </View>
             </View>
         );
-    }
+    }    
 }
 
 const styles = {
-    imageStyle: {
-        flex: 1,
-        height: null,
-        width: null
-    },
-    containerStyle: {
-        marginTop: 320,
-        width: 590,
-        height: 70,
-        padding: 5,
-        borderBottomWidth: 0,
-        justifyContent: 'flex-start',
-        flexDirection: 'row',
-        position: 'relative'
-  },
-      bigContainer: {
+    bigContainer: {
         flex: 1,
         flexDirection: 'row',
         position: 'relative'
@@ -72,4 +49,4 @@ const styles = {
     }
 };
 
-export default MainMenu;
+export default MainMenuFlexBox;
