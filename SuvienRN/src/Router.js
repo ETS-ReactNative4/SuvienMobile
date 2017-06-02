@@ -6,13 +6,12 @@ import Home from './Components/Home';
 import AddPhoto from './Components/AddPhoto';
 import VideoPageTest from './Components/VideoPageTest';
 import AddVideo from './Components/AddVideo';
-import MainMenuFlexBox from './Components/MainMenuFlexBox';
 
 const RouterComponent = () => (
         <Router>
             <Scene 
             key="MainMenu"
-            component={MainMenuFlexBox}
+            component={MainMenu}
             hideNavBar
             initial 
             />

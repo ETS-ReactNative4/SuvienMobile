@@ -41,21 +41,6 @@ const styles = {
         flexDirection: 'column',
         position: 'relative'
     },
-    topContainer: {
-        flex: 401, //301
-        flexDirection: 'column',
-        position: 'relative'
-    },
-    bottomContainer: {
-        flex: 170, //270
-        flexDirection: 'column',
-        position: 'relative'
-    },
-    logoContainer: {
-        flex: 251,
-        flexDirection: 'column',
-        position: 'relative'
-    },
     buttonContainer: {
         flexDirection: 'column',
         position: 'relative',
