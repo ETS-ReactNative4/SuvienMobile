@@ -9,7 +9,7 @@ class MainMenu extends Component {
         Orientation.lockToLandscape();
     }
     onButtonPress() {
-        Actions.AddPhoto();
+        Actions.Settings();
     }
     render() {
         return (
