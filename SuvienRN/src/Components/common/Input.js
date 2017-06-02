@@ -29,7 +29,7 @@ const styles = {
     flex: 6
   },
   labelStyle: {
-    fontSize: 20,
+    fontSize: 16, //20 on android
     marginLeft: 100,
     flex: 1,
     marginBottom: 7
