@@ -54,6 +54,8 @@ class AddPhoto extends Component {
                 <View>
                     <CardSection>
                         <Text>No Image Selected</Text>
+                    </CardSection>
+                    <CardSection>
                         <Input
                         placeholder="Family vacation to Hawaii"
                         label="Caption"
@@ -68,6 +70,8 @@ class AddPhoto extends Component {
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
                         />
+                    </CardSection>
+                    <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
                             Save and Continue
                         </Button>
@@ -87,6 +91,8 @@ class AddPhoto extends Component {
                             alignItems: 'center'
                         }} 
                         />
+                    </CardSection>
+                    <CardSection>
                         <Input
                         placeholder="Family vacation to Hawaii"
                         label="Caption"
@@ -101,6 +107,8 @@ class AddPhoto extends Component {
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
                         />
+                    </CardSection>
+                    <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
                             Save and Continue
                         </Button>
