@@ -59,7 +59,6 @@ const styles = {
     buttonContainer: {
         flexDirection: 'column',
         position: 'relative',
-        height: 70,
         alignItems: 'center',
         justifyContent: 'center'
     }
