@@ -4,7 +4,7 @@ import { View, AsyncStorage, Text, Image } from 'react-native';
 import { CardSection, Button, Input } from './common';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null }
+    state = { imageuri: null, caption: null, group: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
 
     async onSaveItemPress() {
         const namefile = Date.now().toString();
@@ -32,12 +32,12 @@ class AddPhoto extends Component {
     onChoosePhotoPress() {
         return (
             ImagePicker.launchImageLibrary(options, (response) => {
-                const source = { uri: response.uri };
+                const source = { uri: response.fileName };
                 if (source.uri === undefined) {
                     source.uri = null;
                 }
                 this.setState({ imageuri: source });
-                console.log(this.state.imageuri);
+                console.log(response);
             }
             )
         );
