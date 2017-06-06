@@ -3,6 +3,7 @@ package com.suvienrn;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.reactlibrary.RNReactNativeMusicplayercontrollerPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.brentvatne.react.ReactVideoPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeYouTube(),
             new RNReactNativeMusicplayercontrollerPackage(),
             new OrientationPackage(),
             new ReactVideoPackage(),

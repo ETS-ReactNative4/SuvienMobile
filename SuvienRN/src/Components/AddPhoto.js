@@ -153,4 +153,4 @@ const options = {
                 }
 };
 
-export default AddPhoto;
+export { AddPhoto };

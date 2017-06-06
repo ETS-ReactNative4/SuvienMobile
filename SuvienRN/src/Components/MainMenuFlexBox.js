@@ -64,4 +64,4 @@ const styles = {
 },
 };
 
-export default MainMenuFlexBox;
+export { MainMenuFlexBox };

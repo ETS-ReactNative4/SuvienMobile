@@ -50,6 +50,8 @@ class AddVideo extends Component {
     render() {
         console.log(this.state.pauseing);
         return (
+            console.log('wee!')
+            /*
             <View style={{ marginTop: 60 }}>
                 <CardSection>
                     <Button onPress={this.onTakeVideoPress.bind(this)}>
@@ -84,7 +86,7 @@ class AddVideo extends Component {
                     playInBackground={false}
                     />
                 </TouchableOpacity>
-            </View>
+            </View> */
         );
     }
 }
@@ -114,4 +116,4 @@ const styles = {
   },
 };
 
-export default AddVideo;
+export { AddVideo };

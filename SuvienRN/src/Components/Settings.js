@@ -67,7 +67,7 @@ class Settings extends Component {
     }
     render() {
         return (
-            <View style={{ marginTop: 60 }}>
+            <View style={{ marginTop: 80}}>
                 <Text style={{ fontSize: 30, alignSelf: 'center' }}>Edit Information</Text>
                 <CardSection>
                     <Input
@@ -103,4 +103,4 @@ const styles = {
         alignSelf: 'center'
     }
 };
-export default Settings;
+export { Settings };

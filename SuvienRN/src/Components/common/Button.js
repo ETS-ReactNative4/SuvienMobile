@@ -20,7 +20,7 @@ const styles = {
     color: '#4A86E8',
     fontSize: 27, //27 for android
     fontWeight: '100',
-    fontFamily: 'Arial',
+    fontFamily: 'Roboto',
     paddingTop: 10, //Issues with padding for ios. Is 10 for android
     paddingBottom: 10
   },

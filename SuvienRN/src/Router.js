@@ -1,19 +1,22 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
-import MainMenu from './Components/MainMenu';
-import Settings from './Components/Settings';
-import Home from './Components/Home';
-import AddPhoto from './Components/AddPhoto';
-import VideoPageTest from './Components/VideoPageTest';
-import AddVideo from './Components/AddVideo';
-import AddAudio from './Components/AddAudio';
-import MainMenuFlexBox from './Components/MainMenuFlexBox';
+import {
+    MainMenu,
+    Settings,
+    Home,
+    AddPhoto,
+    VideoPageTest,
+    AddVideo,
+    AddAudio,
+    MainMenuFlexBox,
+    YouTubeVideoScreen
+} from './Components';
 
 const RouterComponent = () => (
         <Router>
             <Scene 
             key="MainMenu"
-            component={MainMenuFlexBox}
+            component={MainMenu}
             hideNavBar
             initial 
             />

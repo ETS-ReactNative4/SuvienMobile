@@ -58,4 +58,4 @@ class AddAudio extends Component {
     }
 }
 
-export default AddAudio;
+export { AddAudio };
