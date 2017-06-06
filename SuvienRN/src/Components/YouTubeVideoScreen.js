@@ -5,10 +5,12 @@ import Orientation from 'react-native-orientation';
 
 class YouTubeVideoScreen extends Component {
     state = { isReady: null, status: null, quality: null, error: null, currentTime: null, duration: null }
-    render() {
+    ComponentDidMount() {
         Orientation.lockToPortrait();
         Orientation.unlockAllOrientations();
         Orientation.lockToLandscapeLeft();
+    }
+    render() {
         return (
             //<WebView source={{ uri: 'https://www.youtube.com/watch?v=KVZ-P-ZI6W4' }} style={{ alignSelf: 'stretch', height: 700, backgroundColor: 'black', marginVertical: 10 }} />
             <YouTube
