@@ -18,11 +18,11 @@ const styles = {
     alignSelf: 'center',
     justifyContent: 'center',
     color: '#4A86E8',
-    fontSize: 16, //27 for android
+    fontSize: 27, //27 for android
     fontWeight: '100',
     fontFamily: 'Arial',
-    paddingTop: 5, //Issues with padding for ios. Is 10 for android
-    paddingBottom: 5
+    paddingTop: 10, //Issues with padding for ios. Is 10 for android
+    paddingBottom: 10
   },
   buttonStyle: {
     flex: 1,
