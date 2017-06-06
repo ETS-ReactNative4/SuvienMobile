@@ -8,7 +8,7 @@ import {
     VideoPageTest,
     AddVideo,
     AddAudio,
-    MainMenuFlexBox
+    MainMenuFlexBox,
     YouTubeVideoScreen
 } from './Components';
 

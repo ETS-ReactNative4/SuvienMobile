@@ -50,6 +50,7 @@ class AddVideo extends Component {
     render() {
         console.log(this.state.pauseing);
         return (
+            console.log('wee!')
             /*
             <View style={{ marginTop: 60 }}>
                 <CardSection>
