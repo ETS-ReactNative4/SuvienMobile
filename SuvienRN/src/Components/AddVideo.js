@@ -50,6 +50,7 @@ class AddVideo extends Component {
     render() {
         console.log(this.state.pauseing);
         return (
+            /*
             <View style={{ marginTop: 60 }}>
                 <CardSection>
                     <Button onPress={this.onTakeVideoPress.bind(this)}>
@@ -84,7 +85,7 @@ class AddVideo extends Component {
                     playInBackground={false}
                     />
                 </TouchableOpacity>
-            </View>
+            </View> */
         );
     }
 }

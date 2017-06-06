@@ -13,43 +13,28 @@ class MainMenu extends Component {
     }
     render() {
         return (
-            <View style={styles.bigContainer}>
-                <View style={styles.leftContainer}>
-                    <Image source={require('../Images/leftss.png')} style={{ flex: 1, height: null, width: null }}>
-                        <CardSection style={{ borderBottomWidth: 0, flex: 251, backgroundColor: 'transparent' }} />
-                        <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent' }}>
-                            <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
-                                Get Started
-                            </Button>
-                        </CardSection>
-                        <CardSection style={{ borderBottomWidth: 0, flex: 270, backgroundColor: 'transparent' }} />
-                    </Image>
-                </View>
-                <View style={styles.rightContainer}>
-                    <Image source={require('../Images/rightss.png')} style={{ flex: 1, height: null, width: null }} />
-                </View>
-            </View>
+                <Image resizeMode="stretch" source={require('../Images/suviensplash.png')} style={styles.canvas}>
+                    <View style={{ backgroundColor: 'transparent', flexDirection: 'row', flex: 1, position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, height: null, width: null }}>
+                        <View style={styles.leftContainer}>
+                            <CardSection style={{ borderBottomWidth: 0, flex: 251, backgroundColor: 'transparent', position: 'relative' }} />
+                            <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative' }}>
+                                <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
+                                    Get Started
+                                </Button>
+                            </CardSection>
+                            <CardSection style={{ borderBottomWidth: 0, flex: 270, backgroundColor: 'transparent', position: 'relative' }} />
+                        </View>
+                        <View style={styles.rightContainer}>
+                            <CardSection style={{ borderBottomWidth: 0, flex: 456, backgroundColor: 'transparent', flexDirection: 'column', position: 'relative' }} />
+                        </View>
+                    </View>
+                </Image>
         );
-    }
+    }    
 }
 
 const styles = {
-    imageStyle: {
-        flex: 1,
-        height: null,
-        width: null
-    },
-    containerStyle: {
-        marginTop: 320,
-        width: 590,
-        height: 70,
-        padding: 5,
-        borderBottomWidth: 0,
-        justifyContent: 'flex-start',
-        flexDirection: 'row',
-        position: 'relative'
-  },
-      bigContainer: {
+    bigContainer: {
         flex: 1,
         flexDirection: 'row',
         position: 'relative'
@@ -58,6 +43,7 @@ const styles = {
         flex: 412,
         flexDirection: 'column',
         position: 'relative',
+        backgroundColor: 'transparent'
     },
     rightContainer: {
         flex: 456,
@@ -69,7 +55,17 @@ const styles = {
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    },
+    canvas: {
+        flex: 1,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        height: null,
+        width: null
+},
 };
 
 export { MainMenu };
