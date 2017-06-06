@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -41,6 +40,7 @@
 		6917A18CA0C240B88EB36C6E /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3541B4E2DCDC4E6E89323488 /* libRCTCamera.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A76C341F7C54410BAFD86D9A /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B86F2633424C4AFC8724720B /* libRNImagePicker.a */; };
+		2C05399577CB4E899A8151F4 /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AF9C0D2D504AC49EC01203 /* libRCTYouTube.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -305,6 +305,8 @@
 		B86F2633424C4AFC8724720B /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		F79C946D4F9D430092ABE364 /* RNReactNativeMusicplayercontroller.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeMusicplayercontroller.xcodeproj; path = "../node_modules/react-native-musicplayercontroller/ios/RNReactNativeMusicplayercontroller.xcodeproj"; sourceTree = "<group>"; };
 		F9F0D82BF555427A98D05537 /* libRCTOrientation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOrientation.a; sourceTree = "<group>"; };
+		243D25E6D3A34D069689DFF1 /* RCTYouTube.xcodeproj */ = {isa = PBXFileReference; name = "RCTYouTube.xcodeproj"; path = "../node_modules/react-native-youtube/RCTYouTube.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		F9AF9C0D2D504AC49EC01203 /* libRCTYouTube.a */ = {isa = PBXFileReference; name = "libRCTYouTube.a"; path = "libRCTYouTube.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,6 +338,7 @@
 				50958FC2713C4043A2DF8665 /* libRCTVideo.a in Frameworks */,
 				1988736B27484D039F9A92DE /* libRCTOrientation.a in Frameworks */,
 				250D0C83BBC94D9BB81F89CD /* libRNReactNativeMusicplayercontroller.a in Frameworks */,
+				2C05399577CB4E899A8151F4 /* libRCTYouTube.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +550,7 @@
 				85BD386D4EB44832B6CB5E19 /* RCTVideo.xcodeproj */,
 				55219E0736DA49B3BA478EA5 /* RCTOrientation.xcodeproj */,
 				F79C946D4F9D430092ABE364 /* RNReactNativeMusicplayercontroller.xcodeproj */,
+				243D25E6D3A34D069689DFF1 /* RCTYouTube.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -567,6 +571,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* SuvienRNTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				DC6AAEF0BEF040928F07CD43 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -582,6 +587,14 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		DC6AAEF0BEF040928F07CD43 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1130,12 +1143,14 @@
 					"$(SRCROOT)..\node_modules\neact-native-videoios",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
 					"$(SRCROOT)..\node_modules\neact-native-musicplayercontrollerios",
+					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 				);
 				INFOPLIST_FILE = SuvienRNTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1164,12 +1179,14 @@
 					"$(SRCROOT)..\node_modules\neact-native-videoios",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
 					"$(SRCROOT)..\node_modules\neact-native-musicplayercontrollerios",
+					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 				);
 				INFOPLIST_FILE = SuvienRNTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1200,6 +1217,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-videoios",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
 					"$(SRCROOT)..\node_modules\neact-native-musicplayercontrollerios",
+					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 				);
 				INFOPLIST_FILE = SuvienRN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1227,6 +1245,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-videoios",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
 					"$(SRCROOT)..\node_modules\neact-native-musicplayercontrollerios",
+					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 				);
 				INFOPLIST_FILE = SuvienRN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1260,11 +1279,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-videoios",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
 					"$(SRCROOT)..\node_modules\neact-native-musicplayercontrollerios",
+					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 				);
 				INFOPLIST_FILE = "SuvienRN-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1302,11 +1323,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-videoios",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
 					"$(SRCROOT)..\node_modules\neact-native-musicplayercontrollerios",
+					"$(SRCROOT)\..\node_modules\react-native-youtube/**",
 				);
 				INFOPLIST_FILE = "SuvienRN-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1345,6 +1368,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.SuvienRN-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1369,6 +1393,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

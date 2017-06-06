@@ -15,7 +15,8 @@
     "react-native-orientation": "git+https://github.com/yamill/react-native-orientation.git",
     "react-native-router-flux": "^3.39.1",
     "react-native-simple-radio-button": "^2.5.0-alpha.1",
-    "react-native-video": "^1.0.0"
+    "react-native-video": "^1.0.0",
+    "react-native-youtube": "^1.0.0-alpha.4"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",

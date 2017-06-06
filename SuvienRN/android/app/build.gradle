@@ -126,6 +126,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-youtube')
     compile project(':react-native-musicplayercontroller')
     compile project(':react-native-orientation')
     compile project(':react-native-camera')
