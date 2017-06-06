@@ -8,12 +8,13 @@ import VideoPageTest from './Components/VideoPageTest';
 import AddVideo from './Components/AddVideo';
 import AddAudio from './Components/AddAudio';
 import MainMenuFlexBox from './Components/MainMenuFlexBox';
+import YouTubeVideoScreen from './Components/YouTubeVideoScreen';
 
 const RouterComponent = () => (
         <Router>
             <Scene 
             key="MainMenu"
-            component={MainMenuFlexBox}
+            component={YouTubeVideoScreen}
             hideNavBar
             initial 
             />
