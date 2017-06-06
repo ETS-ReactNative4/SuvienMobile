@@ -103,4 +103,4 @@ const styles = {
         alignSelf: 'center'
     }
 };
-export default Settings;
+export { Settings };

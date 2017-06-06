@@ -72,4 +72,4 @@ const styles = {
     }
 };
 
-export default MainMenu;
+export { MainMenu };

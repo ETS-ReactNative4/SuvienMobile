@@ -71,4 +71,4 @@ const styles = {
   }
 };
 
-export default VideoPageTest;
+export { VideoPageTest };

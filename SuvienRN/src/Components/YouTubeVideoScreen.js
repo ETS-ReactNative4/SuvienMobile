@@ -36,4 +36,4 @@ class YouTubeVideoScreen extends Component {
     }
 }
 
-export default YouTubeVideoScreen;
+export { YouTubeVideoScreen };
