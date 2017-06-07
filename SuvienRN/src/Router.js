@@ -16,7 +16,7 @@ const RouterComponent = () => (
         <Router>
             <Scene 
             key="MainMenu"
-            component={MainMenu}
+            component={AddAudio}
             hideNavBar
             //initial 
             />
