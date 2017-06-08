@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import ImagePicker from 'react-native-image-picker';
 import { View, Text, Image } from 'react-native';
 import { CardSection, Button, Input } from './common';
+import Orientation from 'react-native-orientation';
 
 class AddPhoto extends Component {
     state = { imageuri: null, caption: null, group: null }
+    componentWillMount() {
+        Orientation.lockToLandscape();
+    }
     onTakePhotoPress() {
         return (
             ImagePicker.launchCamera(options, (response) => {
