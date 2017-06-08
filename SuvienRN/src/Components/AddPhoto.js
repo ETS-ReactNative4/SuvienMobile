@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import ImagePicker from 'react-native-image-picker';
-import { View, AsyncStorage, Text, Image } from 'react-native';
+import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity } from 'react-native';
 import { CardSection, Button, Input } from './common';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    state = { imageuri: null, caption: null, group: null, isDone: false } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
 
     async onSaveItemPress() {
         const namefile = Date.now().toString();
@@ -19,6 +18,8 @@ class AddPhoto extends Component {
 
     onTakePhotoPress() {
         return (
+            console.log('Wee!')
+            /*
             ImagePicker.launchCamera(options, (response) => {
                 const source = { uri: response.uri };
                 if (source.uri === undefined) {
@@ -26,27 +27,53 @@ class AddPhoto extends Component {
                 }
                 this.setState({ imageuri: source });
                 console.log(this.state.imageuri);
-            }));
+            })*/);
+    }
+
+    onPressPhotos() {
+            CameraRoll.getPhotos({
+                first: 10000, //Quick and dirty fix. Will update to a more friendly fix in later versions
+                assetType: 'All'
+            })
+            .then(r => this.setState({ photos: r.edges, imageuri: { uri: r.edges[0].node.image.uri } }));
+            console.log(this.state.photos);
     }
 
     onChoosePhotoPress() {
+        CameraRoll.getPhotos({
+                first: 10000, //Quick and dirty fix. Will update to a more friendly fix in later versions
+                assetType: 'All'
+            })
+            .then(r => this.setState({ photos: r.edges, imageuri: { uri: r.edges[0].node.image.uri } }));
         return (
-            //ImagePicker.launchImageLibrary(options, (response) => {
-                /*
-                const source = { uri: response.uri };
-                if (source.uri === undefined) {
-                    source.uri = null;*/
-                //this.setState({ imageuri: source });
-                console.log('Im in the onchoosephotopress!')
-            //}
+            <View>
+                <Modal
+                    animationType={'fade'}
+                    transparent
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => console.log('Modal has been closed')}
+                >
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+                            <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center' }}>
+                                <Text style={{ fontSize: 27 }}>Select Photo</Text>
+                            </View>
+                            <View style={{ height: 590, width: 910, backgroundColor: '#EFEFEF', position: 'relative', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'row' }}>
+                                <ScrollView>
+                                    <View style={{ marginLeft: 20, flexDirection: 'row', flexWrap: 'wrap' }}>
+                                        {this.renderPhotos()}
+                                    </View>
+                                </ScrollView>
+                            </View>
+                        </View>
+                    </Modal>
+                </View>
         );
     }
-
     onAddWebPhotoPress() {
         
     }
 
-    /*onPhotoSelect() {
+    onPhotoSelect() {
         //1496411711468
         if (this.state.imageuri === null) {
             return (
@@ -84,7 +111,7 @@ class AddPhoto extends Component {
             return (
                 <View>
                     <CardSection>
-                        <Text>No Image Selected</Text>
+                        <Image source={{ uri: this.state.imageuri }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection>
                         <Input
@@ -110,7 +137,24 @@ class AddPhoto extends Component {
                 </View>
             );
         }
-    }*/
+    }
+    
+    setModalVisible(visible) {
+        this.setState({ modalVisible: visible });
+    }
+
+    renderPhotos() {
+        const allphotos = this.state.photos.map((photo) => 
+            //For future applications, long press may prove to be more user friendly
+             (
+            <TouchableOpacity onPress={() => this.setState({ imageuri: photo.node.image.uri, isDone: true })} key={photo.node.image.uri}>
+                <Image style={{ height: 150, width: 150, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.node.image.uri }} />
+            </TouchableOpacity>
+            ));
+            return (
+                [...allphotos]
+            );
+    }
 
     render() {
         console.log('Im rendering!');
@@ -131,46 +175,10 @@ class AddPhoto extends Component {
                         Add from web using Image URL
                     </Button>
                 </CardSection>
-                <View>
-                    <CardSection>
-                        <Text>No Image Selected</Text>
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
-                        value={this.state.caption}
-                        onChangeText={(caption) => this.setState({ caption })}
-                        />
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
-                        value={this.state.group}
-                        onChangeText={(group) => this.setState({ group })}
-                        />
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Continue
-                        </Button>
-                    </CardSection>
-                </View>
+                {this.onPhotoSelect()}
             </View>
         );
     }
 }
-
-const options = {
-            title: 'Select Avatar',
-            customButtons: [
-                { name: 'fb', title: 'Choose Photo from Facebook' },
-                ],
-                storageOptions: {
-                    skipBackup: true,
-                    path: 'images'
-                }
-};
 
 export { AddPhoto };
