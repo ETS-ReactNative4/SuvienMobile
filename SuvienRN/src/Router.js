@@ -57,6 +57,7 @@ const RouterComponent = () => (
             key="VideoPageTest"
             component={VideoPageTest}
             hideNavBar
+            //initial
             />
                  
         </Router>

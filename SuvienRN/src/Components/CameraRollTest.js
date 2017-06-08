@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CameraRoll, View, Text, Image, Modal, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import { CameraRoll, View, Text, Image, Modal, TouchableOpacity, ScrollView } from 'react-native';
 import { Button } from './common';
 
 class CameraRollTest extends Component {
