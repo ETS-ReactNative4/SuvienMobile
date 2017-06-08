@@ -55,6 +55,8 @@ const styles = {
   container: {
     flex: 1,
     flexDirection: 'row',
+    height: 600,
+    width: 600
   },
   preview: {
     flex: 1,
