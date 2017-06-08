@@ -31,15 +31,14 @@ class AddPhoto extends Component {
 
     onChoosePhotoPress() {
         return (
-            ImagePicker.launchImageLibrary(options, (response) => {
-                const source = { uri: response.fileName };
+            //ImagePicker.launchImageLibrary(options, (response) => {
+                /*
+                const source = { uri: response.uri };
                 if (source.uri === undefined) {
-                    source.uri = null;
-                }
-                this.setState({ imageuri: source });
-                console.log(response);
-            }
-            )
+                    source.uri = null;*/
+                //this.setState({ imageuri: source });
+                console.log('Im in the onchoosephotopress!')
+            //}
         );
     }
 
@@ -47,7 +46,7 @@ class AddPhoto extends Component {
         
     }
 
-    onPhotoSelect() {
+    /*onPhotoSelect() {
         //1496411711468
         if (this.state.imageuri === null) {
             return (
@@ -80,17 +79,12 @@ class AddPhoto extends Component {
             );
         }
         if (this.state.imageuri !== null) {
+            console.log('I have an image uri! Its:');
+            console.log(this.state.imageuri);
             return (
                 <View>
                     <CardSection>
-                        <Image 
-                        source={this.state.imageuri} 
-                        style={{ 
-                            height: 400, 
-                            width: 400,
-                            alignItems: 'center'
-                        }} 
-                        />
+                        <Text>No Image Selected</Text>
                     </CardSection>
                     <CardSection>
                         <Input
@@ -116,9 +110,10 @@ class AddPhoto extends Component {
                 </View>
             );
         }
-    }
+    }*/
 
     render() {
+        console.log('Im rendering!');
         return (
             <View style={{ marginTop: 60 }}>
                 <CardSection>
@@ -136,7 +131,32 @@ class AddPhoto extends Component {
                         Add from web using Image URL
                     </Button>
                 </CardSection>
-                {this.onPhotoSelect()}
+                <View>
+                    <CardSection>
+                        <Text>No Image Selected</Text>
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                        placeholder="Family vacation to Hawaii"
+                        label="Caption"
+                        value={this.state.caption}
+                        onChangeText={(caption) => this.setState({ caption })}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                        placeholder="SummerVacation2017"
+                        label="Tag"
+                        value={this.state.group}
+                        onChangeText={(group) => this.setState({ group })}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Button onPress={this.onSaveItemPress.bind(this)}>
+                            Save and Continue
+                        </Button>
+                    </CardSection>
+                </View>
             </View>
         );
     }

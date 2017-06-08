@@ -18,7 +18,7 @@ const RouterComponent = () => (
             key="MainMenu"
             component={AddAudio}
             hideNavBar
-            initial 
+            //initial 
             />
 
             <Scene
@@ -41,7 +41,7 @@ const RouterComponent = () => (
             hideNavBar={false}
             title="Add Photo"
             titleStyle={styles.titleStyles}
-            //initial
+            initial
             />
 
             <Scene
