@@ -37,7 +37,6 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A76C341F7C54410BAFD86D9A /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B86F2633424C4AFC8724720B /* libRNImagePicker.a */; };
 		4CE6CAA5A2B8414389672566 /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4161686EE62248DAAF9E3984 /* libRCTOrientation.a */; };
-		CB8643A7371746359F49CA99 /* libRNReactNativeMusicplayercontroller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1DEC854B4144F5D9741418F /* libRNReactNativeMusicplayercontroller.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -261,8 +260,6 @@
 		B86F2633424C4AFC8724720B /* libRNImagePicker.a */ = {isa = PBXFileReference; name = "libRNImagePicker.a"; path = "libRNImagePicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		D2E415497D9F47B0A887BC30 /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; name = "RCTOrientation.xcodeproj"; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		4161686EE62248DAAF9E3984 /* libRCTOrientation.a */ = {isa = PBXFileReference; name = "libRCTOrientation.a"; path = "libRCTOrientation.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		0F3A6F3B3E5241C8A25B3FB6 /* RNReactNativeMusicplayercontroller.xcodeproj */ = {isa = PBXFileReference; name = "RNReactNativeMusicplayercontroller.xcodeproj"; path = "../node_modules/react-native-musicplayercontroller/ios/RNReactNativeMusicplayercontroller.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		C1DEC854B4144F5D9741418F /* libRNReactNativeMusicplayercontroller.a */ = {isa = PBXFileReference; name = "libRNReactNativeMusicplayercontroller.a"; path = "libRNReactNativeMusicplayercontroller.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,7 +288,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				A76C341F7C54410BAFD86D9A /* libRNImagePicker.a in Frameworks */,
 				4CE6CAA5A2B8414389672566 /* libRCTOrientation.a in Frameworks */,
-				CB8643A7371746359F49CA99 /* libRNReactNativeMusicplayercontroller.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,7 +456,6 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				752C882935ED4EA78B2CA3A2 /* RNImagePicker.xcodeproj */,
 				D2E415497D9F47B0A887BC30 /* RCTOrientation.xcodeproj */,
-				0F3A6F3B3E5241C8A25B3FB6 /* RNReactNativeMusicplayercontroller.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -990,13 +985,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
-					"$(SRCROOT)\..\node_modules\react-native-musicplayercontroller\ios",
 				);
 			};
 			name = Debug;
@@ -1019,13 +1012,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
-					"$(SRCROOT)\..\node_modules\react-native-musicplayercontroller\ios",
 				);
 			};
 			name = Release;
@@ -1049,7 +1040,6 @@
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
-					"$(SRCROOT)\..\node_modules\react-native-musicplayercontroller\ios",
 				);
 			};
 			name = Debug;
@@ -1072,7 +1062,6 @@
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
-					"$(SRCROOT)\..\node_modules\react-native-musicplayercontroller\ios",
 				);
 			};
 			name = Release;
@@ -1104,13 +1093,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
-					"$(SRCROOT)\..\node_modules\react-native-musicplayercontroller\ios",
 				);
 			};
 			name = Debug;
@@ -1142,13 +1129,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
-					"$(SRCROOT)\..\node_modules\react-native-musicplayercontroller\ios",
 				);
 			};
 			name = Release;
@@ -1175,7 +1160,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1200,7 +1184,6 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
