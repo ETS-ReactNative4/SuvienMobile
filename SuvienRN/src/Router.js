@@ -11,14 +11,15 @@ import {
     MainMenuFlexBox,
     YouTubeVideoScreen
 } from './Components';
+import CameraRollTest from './Components/CameraRollTest';
 
 const RouterComponent = () => (
         <Router>
             <Scene 
             key="MainMenu"
-            component={AddAudio}
+            component={CameraRollTest}
             hideNavBar
-            //initial 
+            initial 
             />
 
             <Scene
@@ -41,7 +42,7 @@ const RouterComponent = () => (
             hideNavBar={false}
             title="Add Photo"
             titleStyle={styles.titleStyles}
-            initial
+            //initial
             />
 
             <Scene
