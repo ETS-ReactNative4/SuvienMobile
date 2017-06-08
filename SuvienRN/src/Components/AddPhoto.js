@@ -3,7 +3,6 @@ import ImagePicker from 'react-native-image-picker';
 import { View, Text, Image } from 'react-native';
 import { CardSection, Button, Input } from './common';
 import Orientation from 'react-native-orientation';
-import MusicPlayerController from 'react-native-musicplayercontroller';
 
 class AddPhoto extends Component {
     state = { imageuri: null, caption: null, group: null }
@@ -13,7 +12,7 @@ class AddPhoto extends Component {
     onTakePhotoPress() {
         return (
             ImagePicker.launchCamera(options, (response) => {
-                const source = { uri: response.uri };
+                let source = { uri: response.uri };
                 if (source.uri === undefined) {
                     source.uri = null;
                 }
@@ -25,7 +24,7 @@ class AddPhoto extends Component {
     onChoosePhotoPress() {
         return (
             ImagePicker.launchImageLibrary(options, (response) => {
-                const source = { uri: response.uri };
+                let source = { uri: response.uri };
                 if (source.uri === undefined) {
                     source.uri = null;
                 }
@@ -37,12 +36,16 @@ class AddPhoto extends Component {
     }
 
     onAddWebPhotoPress() {
+<<<<<<< HEAD
         /*
         MusicPlayerController.presentPicker(false, (metadata) => {
             console.log(metadata[0].title);
             }, () => {
             console.log('Cancel');
         });*/
+=======
+
+>>>>>>> parent of 93198bb... Added present picker option
     }
 
     onSaveItemPress() {
