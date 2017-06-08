@@ -37,11 +37,12 @@ class AddPhoto extends Component {
     }
 
     onAddWebPhotoPress() {
+        /*
         MusicPlayerController.presentPicker(false, (metadata) => {
             console.log(metadata[0].title);
             }, () => {
             console.log('Cancel');
-        });
+        });*/
     }
 
     onSaveItemPress() {
