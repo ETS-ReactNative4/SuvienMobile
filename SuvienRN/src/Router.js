@@ -11,13 +11,14 @@ import {
     MainMenuFlexBox,
     YouTubeVideoScreen
 } from './Components';
+import MediaExplorer from './Components/MediaExplorer';
 import CameraRollTest from './Components/CameraRollTest';
 
 const RouterComponent = () => (
         <Router>
             <Scene 
             key="MainMenu"
-            component={AddAudio}
+            component={MediaExplorer}
             hideNavBar
             initial 
             />
