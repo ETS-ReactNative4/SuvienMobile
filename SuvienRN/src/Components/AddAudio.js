@@ -38,7 +38,7 @@ class AddAudio extends Component {
         }, () => {
             console.log('I didnt find it :(');
         });*/
-        MusicPlayerController.preloadMusic('5609467967152999000', (metadata) => {
+        MusicPlayerController.preloadMusic(5609467967152999000, (metadata) => {
             console.log('I found the music! Its:');
             console.log(metadata);
         }, () => {

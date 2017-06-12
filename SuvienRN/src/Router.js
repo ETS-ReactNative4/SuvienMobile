@@ -19,7 +19,7 @@ const RouterComponent = () => (
             key="MainMenu"
             component={AddAudio}
             hideNavBar
-            //initial 
+            initial 
             />
 
             <Scene
@@ -57,7 +57,7 @@ const RouterComponent = () => (
             key="VideoPageTest"
             component={VideoPageTest}
             hideNavBar
-            initial
+            //initial
             />
                  
         </Router>
