@@ -29,6 +29,8 @@ startRecording() {
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}
           captureMode={Camera.constants.CaptureMode.still}
+          onFocusChanged={() => {}}
+          onZoomChanged={() => {}}
         >
           <Text style={styles.capture} onPress={this.startRecording.bind(this)}>[TAKE PHOTO]</Text>
         </Camera>
