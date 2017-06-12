@@ -3,7 +3,7 @@ import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, Touchab
 import { CardSection, Button, Input } from './common';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null, isDone: false } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    state = { imageuri: null, caption: null, group: null, modalVisible: false } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
 
     async onSaveItemPress() {
         const namefile = Date.now().toString();
@@ -44,7 +44,7 @@ class AddPhoto extends Component {
                 first: 10000, //Quick and dirty fix. Will update to a more friendly fix in later versions
                 assetType: 'All'
             })
-            .then(r => this.setState({ photos: r.edges, imageuri: { uri: r.edges[0].node.image.uri } }));
+            .then(r => this.setState({ photos: r.edges }));
         return (
             <View>
                 <Modal
@@ -147,7 +147,12 @@ class AddPhoto extends Component {
         const allphotos = this.state.photos.map((photo) => 
             //For future applications, long press may prove to be more user friendly
              (
-            <TouchableOpacity onPress={() => this.setState({ imageuri: photo.node.image.uri, isDone: true })} key={photo.node.image.uri}>
+            <TouchableOpacity 
+            onPress={() => {
+                this.setState({ imageuri: photo.node.image.uri });
+                this.setModalVisible(false);
+                }}
+                key={photo.node.image.uri}>
                 <Image style={{ height: 150, width: 150, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.node.image.uri }} />
             </TouchableOpacity>
             ));
