@@ -38,7 +38,7 @@ class AddAudio extends Component {
         }, () => {
             console.log('I didnt find it :(');
         });*/
-        MusicPlayerController.preloadMusic('Addicted To You', 'True', 148.48, 'Avicii', (metadata) => {
+        MusicPlayerController.preloadMusic(['Addicted To You', 'True', 148.48, 'Avicii'], (metadata) => {
             console.log('I found the music! Its:');
             console.log(metadata);
         }, () => {
