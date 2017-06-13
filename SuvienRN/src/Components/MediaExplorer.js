@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { View, Image, TouchableOpacity, ScrollView, Text, AsyncStorage } from 'react-native';
-import { CardSection } from './common';
+import { CardSection, Button } from './common';
 
 class MediaExplorer extends Component {
     //content://media/external/images/media/379
     //content://media/external/images/media/378
     //content://media/external/images/media/1214
-    state = { hasData: false, imageuri: null, tags: null, images: null}
+    state = { isFiltered: false, imageuri: null, tags: null, images: null, filter: null, filteredImages: null }
     componentWillMount() {
         this.fetchData();
+    }
+    filterContent() {
+        const filterTags = this.state.images.filter((imagep) => {
+                return imagep.tag === this.state.filter;
+            });
+            this.setState({ filteredImages: filterTags, isFiltered: true });
+            console.log(filterTags);
     }
     async fetchData() {
         this.setState({ tags: JSON.parse(await AsyncStorage.getItem('Tags')), images: JSON.parse(await AsyncStorage.getItem('Pictures')) });
@@ -27,20 +34,8 @@ class MediaExplorer extends Component {
         console.log(await AsyncStorage.getItem('Tags'));
         */
     }
-    renderList() {
-        const tagged = this.state.tags;
-        const allTags = tagged.map((tag) => (
-                <CardSection>
-                    <Text>
-                        {tag}
-                    </Text>
-                </CardSection>
-            ));
-        return (
-            [...allTags]
-        );
-    }
-    render() {
+
+    renderSideLeft() {
         if (this.state.tags === null) {
             console.log('Im null!');
             return (
@@ -50,14 +45,96 @@ class MediaExplorer extends Component {
             );
         }
         if (this.state.tags !== null) {
-            const filterTags = this.state.images.filter((imagep) => {
+            /*const filterTags = this.state.images.filter((imagep) => {
                 return imagep.tag === 'Tests';
             });
             console.log(filterTags);
+            */
             return (
-                <Text>
-                    Im Done!
-                </Text>
+                this.renderList()
+            );
+        }
+    }
+    renderList() {
+        const tagged = this.state.tags;
+        const allTags = tagged.map((tag) => (
+            <TouchableOpacity onPress={() => this.setState({ filter: tag })}>
+                <CardSection>
+                    <Text>
+                        {tag}
+                    </Text>
+                </CardSection>
+            </TouchableOpacity>
+            ));
+        return (
+            [...allTags]
+        );
+    }
+
+    renderFilterList() {  
+        const allPhotos = this.state.images.map((imageu) => {
+            return (
+                <TouchableOpacity onPress={() => this.setState({ imageuri: imageu.uri })}>
+                    <Image source={imageu.uri} style={{ height: 150, width: 150 }} />
+                </TouchableOpacity>
+            );
+        });
+        console.log(this.state.imageuri);
+        return (
+            [...allPhotos]
+        );
+    }
+    render() {
+        if (this.state.isFiltered === false && this.state.filter === null){
+        return (
+            <View style={{ flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Text style={{ fontSize: 27 }}>Choose a filter</Text>
+                    {this.renderSideLeft()}
+                </View>
+                <View style={{ flex: 1 }}>
+                    <Text style={{ fontSize: 27 }}> Upload a new...</Text>
+                    <CardSection>
+                        <Button style={{ height: 300, width: 600 }}>Photo</Button>
+                    </CardSection>
+                    <CardSection>
+                        <Button style={{ height: 300, width: 600 }}>Audio</Button>
+                    </CardSection>
+                    <CardSection>
+                        <Button style={{ height: 300, width: 600 }}>Video</Button>
+                    </CardSection>
+                </View>
+            </View>
+        );
+    }
+        if (this.state.isFiltered === false && this.state.filter !== null){
+                this.filterContent();
+                return (
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={{ flex: 1 }}>
+                        <Text style={{ fontSize: 27 }}>Choose a filter</Text>
+                        {this.renderSideLeft()}
+                    </View>
+                    <View style={{ flex: 1 }}>
+                        <Text style={{ fontSize: 27 }}> Upload a new...</Text>
+                        <CardSection>
+                            <Button style={{ height: 300, width: 600 }}>Photo</Button>
+                        </CardSection>
+                        <CardSection>
+                            <Button style={{ height: 300, width: 600 }}>Audio</Button>
+                        </CardSection>
+                        <CardSection>
+                            <Button style={{ height: 300, width: 600 }}>Video</Button>
+                        </CardSection>
+                    </View>
+                </View>
+        );
+        }
+        if (this.state.isFiltered === true) {
+            return (
+                <View>
+                    {this.renderFilterList()}
+                </View>
             );
         }
         /*
