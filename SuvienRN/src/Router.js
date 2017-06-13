@@ -18,7 +18,7 @@ const RouterComponent = () => (
         <Router>
             <Scene 
             key="MainMenu"
-            component={MediaExplorer}
+            component={MainMenu}
             hideNavBar
             initial 
             />
@@ -54,6 +54,14 @@ const RouterComponent = () => (
             titleStyle={styles.titleStyles}
             />
 
+            <Scene
+            key="AddAudio"
+            component={AddAudio}
+            hideNavBar={false}
+            title="Add Audio"
+            titleStyle={styles.titleStyles}
+            />
+            
             <Scene
             key="VideoPageTest"
             component={VideoPageTest}

@@ -65,9 +65,22 @@ class Settings extends Component {
             );
         }
     }
+
+    onPhotoButtonPress() {
+        Actions.AddPhoto();
+    }
+
+    onVideoButtonPress() {
+        Actions.AddVideo();
+    }
+
+    onAudioButtonPress() {
+        Actions.AddAudio();
+    }
+
     render() {
         return (
-            <View style={{ marginTop: 80}}>
+            <View style={{ marginTop: 80, marginLeft: 80, marginRight: 80 }}>
                 <Text style={{ fontSize: 30, alignSelf: 'center' }}>Edit Information</Text>
                 <CardSection>
                     <Input
@@ -84,6 +97,16 @@ class Settings extends Component {
                     <Button onPress={this.onButtonPress.bind(this)}>
                         Save and Continue
                     </Button>
+                </CardSection>
+                <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30 }}>Upload a new...</Text>
+                <CardSection>
+                    <Button onPress={this.onPhotoButtonPress.bind(this)}>Photo</Button>
+                </CardSection>
+                <CardSection>
+                    <Button onPress={this.onVideoButtonPress.bind(this)}>Video</Button>
+                </CardSection>
+                <CardSection>
+                    <Button onPress={this.onAudioButtonPress.bind(this)}>Audio</Button>
                 </CardSection>
             </View>
         );
