@@ -8,16 +8,26 @@ class MediaExplorer extends Component {
     //content://media/external/images/media/1214
     state = { isFiltered: false, imageuri: null, tags: null, images: null, filter: null, filteredImages: null }
     componentWillMount() {
+        //console.log('Im in compwillmount');
         this.fetchData();
     }
+
+    componentDidUpdate() {
+        //console.log('Im in component will update!');
+        if (this.state.isFiltered === false && this.state.filter !== null){
+                this.filterContent();
+        }
+    }
     filterContent() {
+        //console.log('Im in filtercontent!')
         const filterTags = this.state.images.filter((imagep) => {
                 return imagep.tag === this.state.filter;
             });
             this.setState({ filteredImages: filterTags, isFiltered: true });
-            console.log(filterTags);
+            //console.log(this.state.filteredImages);
     }
     async fetchData() {
+        //console.log('Im in fetch data');
         this.setState({ tags: JSON.parse(await AsyncStorage.getItem('Tags')), images: JSON.parse(await AsyncStorage.getItem('Pictures')) });
         console.log(this.state.tags);
         console.log(JSON.parse(await AsyncStorage.getItem('Pictures')));
@@ -37,7 +47,7 @@ class MediaExplorer extends Component {
 
     renderSideLeft() {
         if (this.state.tags === null) {
-            console.log('Im null!');
+            //console.log('Im null!');
             return (
                 <Text>
                     I'm not ready!
@@ -51,7 +61,9 @@ class MediaExplorer extends Component {
             console.log(filterTags);
             */
             return (
-                this.renderList()
+                <View>
+                    {this.renderList()}
+                </View>
             );
         }
     }
@@ -66,13 +78,16 @@ class MediaExplorer extends Component {
                 </CardSection>
             </TouchableOpacity>
             ));
+            //console.log('Ive set the filter to:');
+            //console.log(this.state.filter);
         return (
             [...allTags]
         );
     }
 
     renderFilterList() {  
-        const allPhotos = this.state.images.map((imageu) => {
+        //console.log('Im in renderfilterlist');
+        const allPhotos = this.state.filteredImages.map((imageu) => {
             return (
                 <TouchableOpacity onPress={() => this.setState({ imageuri: imageu.uri })}>
                     <Image source={imageu.uri} style={{ height: 150, width: 150 }} />
@@ -85,7 +100,8 @@ class MediaExplorer extends Component {
         );
     }
     render() {
-        if (this.state.isFiltered === false && this.state.filter === null){
+        //console.log('Im in render!')
+        if (this.state.isFiltered === false) {
         return (
             <View style={{ flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
@@ -107,30 +123,8 @@ class MediaExplorer extends Component {
             </View>
         );
     }
-        if (this.state.isFiltered === false && this.state.filter !== null){
-                this.filterContent();
-                return (
-                <View style={{ flexDirection: 'row' }}>
-                    <View style={{ flex: 1 }}>
-                        <Text style={{ fontSize: 27 }}>Choose a filter</Text>
-                        {this.renderSideLeft()}
-                    </View>
-                    <View style={{ flex: 1 }}>
-                        <Text style={{ fontSize: 27 }}> Upload a new...</Text>
-                        <CardSection>
-                            <Button style={{ height: 300, width: 600 }}>Photo</Button>
-                        </CardSection>
-                        <CardSection>
-                            <Button style={{ height: 300, width: 600 }}>Audio</Button>
-                        </CardSection>
-                        <CardSection>
-                            <Button style={{ height: 300, width: 600 }}>Video</Button>
-                        </CardSection>
-                    </View>
-                </View>
-        );
-        }
         if (this.state.isFiltered === true) {
+            //console.log('Im filtered!');
             return (
                 <View>
                     {this.renderFilterList()}
