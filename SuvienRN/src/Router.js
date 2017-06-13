@@ -14,6 +14,7 @@ import {
 } from './Components';
 import MediaExplorer from './Components/MediaExplorer';
 import CameraRollTest from './Components/CameraRollTest';
+import TakePhoto from './Components/TakePhoto';
 
 const RouterComponent = () => (
         <Router>
