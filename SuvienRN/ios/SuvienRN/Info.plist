@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string></string>
+	<key>kTCCServiceMediaLibrary</key>
+	<string>Suvien would like to request access to your music library</string>
+  <key>NSAppleMusicUsageDescription</key>
+  <string>Suvien would like to request access to your music library</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Suvien would like to request access to your camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>

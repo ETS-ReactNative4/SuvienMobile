@@ -28,15 +28,17 @@ startRecording() {
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}
-          captureMode={Camera.constants.CaptureMode.video}
+          captureMode={Camera.constants.CaptureMode.still}
+          onFocusChanged={() => {}}
+          onZoomChanged={() => {}}
         >
-          <Text style={styles.capture} onPress={this.startRecording.bind(this)}>[CAPTURE]</Text>
-          <Text style={styles.capture} onPress={this.stopRecording.bind(this)}>[CAPTURE]</Text>
+          <Text style={styles.capture} onPress={this.startRecording.bind(this)}>[TAKE PHOTO]</Text>
         </Camera>
       </View>
     );
 }
 /*
+<Text style={styles.capture} onPress={this.stopRecording.bind(this)}>[STOP CAPTURE]</Text>
 stopTheCapture() {
     this.camera.stopCapture();
     console.log("Capture Done!");
