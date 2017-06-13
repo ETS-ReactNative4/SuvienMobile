@@ -24,14 +24,16 @@ const styles = {
     color: '#000',
     marginRight: 100,
     marginLeft: 5,
-    fontSize: 18,
-    lineHeight: 23,
+    fontSize: 20,
+    fontFamily: 'Roboto',
+    paddingTop: 3,
     flex: 6
   },
   labelStyle: {
-    fontSize: 20, //20 on android
+    fontSize: 23, //20 on android
     marginLeft: 100,
     flex: 1,
+    fontFamily: 'ClementePDag-Book',
     marginBottom: 7
   },
   containerStyle: {
