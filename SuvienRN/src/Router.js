@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 import {
     MainMenu,
@@ -29,6 +30,9 @@ const RouterComponent = () => (
             hideNavBar={false}
             title="Settings"
             titleStyle={styles.titleStyles}
+            onLeft={() => {}}
+            renderBackButton={() => <Image source={require('./Images/placeholderphoto.png')} style={{ marginLeft: 30, marginBottom: 10, height: 29, width: 100 }} />}
+            //LeftButtonImage={require('./Images/placeholderphoto.png')}
             />
 
             <Scene
@@ -43,6 +47,8 @@ const RouterComponent = () => (
             hideNavBar={false}
             title="Add Photo"
             titleStyle={styles.titleStyles}
+            onLeft={() => {}}
+            renderBackButton={() => <Image source={require('./Images/placeholderphoto.png')} style={{ marginLeft: 30, marginBottom: 10, height: 29, width: 100 }} />}
             //initial
             />
 
@@ -74,9 +80,9 @@ const RouterComponent = () => (
 
 const styles = {
     titleStyles: {
-        fontFamily: 'Roboto',
-        fontSize: 25,
-        fontWeight: '100'
+        fontFamily: 'ClementePDag-Book',
+        fontSize: 27,
+        fontWeight: '100',
     }
 };
 
