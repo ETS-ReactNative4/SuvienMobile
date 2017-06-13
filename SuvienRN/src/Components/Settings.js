@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, AsyncStorage } from 'react-native';
+import { Text, View, AsyncStorage, Image } from 'react-native';
 import { CardSection, Input, Button } from './common';
 import RadioForm from 'react-native-simple-radio-button';
 import { Actions } from 'react-native-router-flux';
@@ -80,8 +80,11 @@ class Settings extends Component {
 
     render() {
         return (
-            <View style={{ marginTop: 80, marginLeft: 80, marginRight: 80 }}>
-                <Text style={{ fontSize: 30, alignSelf: 'center' }}>Edit Information</Text>
+            <View style={{ marginTop: 80, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'ClementePDae-Light' }}>Edit Information</Text>
+                    <Image source={require('../Images/infoicon.jpg')} style={{ marginLeft: 10, height: 30, width: 30 }} />
+                </View>
                 <CardSection>
                     <Input
                     placeholder="Lance McClain"
@@ -98,7 +101,10 @@ class Settings extends Component {
                         Save and Continue
                     </Button>
                 </CardSection>
-                <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30 }}>Upload a new...</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30, fontFamily: 'ClementePDae-Light' }}>Upload a new...</Text>
+                    <Image source={require('../Images/multimedia.jpg')} style={{ marginLeft: 5, height: 30, width: 90 }} />
+                </View>
                 <CardSection>
                     <Button onPress={this.onPhotoButtonPress.bind(this)}>Photo</Button>
                 </CardSection>
@@ -120,10 +126,11 @@ const radioProps = [
 
 const styles = {
     radioTextStyle: {
-        fontSize: 20,
+        fontSize: 23,
         marginLeft: 100,
         flex: 1,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        fontFamily: 'ClementePDag-Book'
     }
 };
 export { Settings };

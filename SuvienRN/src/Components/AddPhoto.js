@@ -55,11 +55,11 @@ class AddPhoto extends Component {
         //1496411711468
         if (this.state.imageuri === null) {
             return (
-                <View>
-                    <CardSection>
-                        <Text>No Image Selected</Text>
+                <View style={{ alignItems: 'center' }}>
+                    <CardSection style={{ borderBottomWidth: 0 }}>
+                        <Image source={require('../Images/noimage.jpg')} style={{ height: 300, width: 300 }} />
                     </CardSection>
-                    <CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
                         placeholder="Family vacation to Hawaii"
                         label="Caption"
@@ -78,6 +78,7 @@ class AddPhoto extends Component {
                     <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
                             Save and Continue
+                            <Image source={require('../Images/saveicon.jpg')} style={{ height: 30, width: 40 }} />
                         </Button>
                     </CardSection>
                 </View>
@@ -87,11 +88,11 @@ class AddPhoto extends Component {
             console.log('I have an image uri! Its:');
             console.log(this.state.imageuri);
             return (
-                <View>
-                    <CardSection>
+                <View style={{ alignItems: 'center' }}>
+                    <CardSection style={{ borderBottomWidth: 0 }}>
                         <Image source={{ uri: this.state.imageuri }} style={{ height: 300, width: 300 }} />
                     </CardSection>
-                    <CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
                         placeholder="Family vacation to Hawaii"
                         label="Caption"
@@ -110,6 +111,7 @@ class AddPhoto extends Component {
                     <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
                             Save and Continue
+                            <Image source={require('../Images/saveicon.jpg')} style={{ height: 30, width: 40 }} />
                         </Button>
                     </CardSection>
                 </View>
@@ -145,24 +147,29 @@ class AddPhoto extends Component {
         console.log('Im rendering!');
         if (this.state.photos === null || this.state.modalVisible === false) {
             return (
-                <View style={{ marginTop: 60 }}>
-                    <CardSection>
-                        <Button onPress={this.onTakePhotoPress.bind(this)}>
-                            Take Photo
-                        </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={this.onChoosePhotoPress.bind(this)}>
-                            Choose from Photo Library
-                        </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={this.onPressPhotos.bind(this)}>
-                            Add from web using Image URL
-                        </Button>
-                    </CardSection>
-                    {this.onPhotoSelect()}
-                </View>
+                <ScrollView>
+                    <View style={{ marginTop: 60, marginLeft: 80, marginRight: 80 }}>
+                        <CardSection>
+                            <Button onPress={this.onTakePhotoPress.bind(this)}>
+                                Take Photo
+                                <Image source={require('../Images/photoimage.jpg')} style={{ height: 30, width: 40 }} />
+                            </Button>
+                        </CardSection>
+                        <CardSection>
+                            <Button onPress={this.onChoosePhotoPress.bind(this)}>
+                                Choose from Photo Library
+                                <Image source={require('../Images/choosefromlibrary.jpg')} style={{ height: 30, width: 40 }} />
+                            </Button>
+                        </CardSection>
+                        <CardSection>
+                            <Button onPress={this.onPressPhotos.bind(this)}>
+                                Add from web using Image URL
+                                <Image source={require('../Images/webicon.jpg')} style={{ height: 30, width: 40 }} />
+                            </Button>
+                        </CardSection>
+                        {this.onPhotoSelect()}
+                    </View>
+                </ScrollView>
         );
     }
         if (this.state.photos !== null && this.state.modalVisible === true) {
