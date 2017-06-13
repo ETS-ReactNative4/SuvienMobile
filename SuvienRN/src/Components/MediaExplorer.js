@@ -105,7 +105,7 @@ class MediaExplorer extends Component {
         return (
             <View style={{ flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
-                    <Text style={{ fontSize: 27 }}>Choose a filter</Text>
+                    <Text style={{ fontSize: 27 }}>Search Using a Tag</Text>
                     {this.renderSideLeft()}
                 </View>
                 <View style={{ flex: 1 }}>
@@ -127,7 +127,10 @@ class MediaExplorer extends Component {
             //console.log('Im filtered!');
             return (
                 <View>
-                    {this.renderFilterList()}
+                    <Text style={{ fontSize: 27 }}>Showing Results for {this.state.filter}</Text>
+                    <View style={{ flexDirection: 'row' }}>
+                        {this.renderFilterList()}
+                    </View>
                 </View>
             );
         }
