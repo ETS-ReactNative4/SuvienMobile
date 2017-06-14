@@ -10,7 +10,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        this.renderTiles();
+        this.doMath();
     }
     async getInfo() {
         this.setState({ name: await AsyncStorage.getItem('name') });
@@ -36,11 +36,26 @@ class Home extends Component {
         }
         this.setState({ currentDate: `${weekday[numbDay]}, ${months[month]} ${numbDate}, ${numbYear}` });
     }
-    renderTiles() {
+    doMath() {
         const ourWidth = this.state.width;
         const pictureDim = Math.trunc(((ourWidth - 55) / 4));
         this.setState({ dim: pictureDim });
     }
+
+    renderTiles() {
+        //Later this will be a map helper. For testing, It's now a for
+        const allTiles = [];
+        let i;
+        for (i = 0; i < 8; i++) {
+            allTiles.push(
+                <PictureTile onPress={() => console.log('Weeeee!')} source={require('../Images/nocontent.jpg')} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} unique={i} />
+            );
+        }
+        return (
+            [...allTiles]
+        );
+        }
+
     render() {
         const { currentDate, greeting, name } = this.state;
         return (
@@ -51,16 +66,7 @@ class Home extends Component {
                 </Header>
                 <ScrollView>
                     <View style={{ marginLeft: 15, flexDirection: 'row', flexWrap: 'wrap' }}>
-                        <Image source={require('../Images/nocontent.jpg')} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} />
-                        <Image source={require('../Images/nocontent.jpg')} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} />
-                        <Image source={require('../Images/nocontent.jpg')} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} />
-                        <Image source={require('../Images/nocontent.jpg')} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} />
-                        <Image source={require('../Images/nocontent.jpg')} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} />
-                        <Image source={require('../Images/nocontent.jpg')} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} />
-                        <Image source={require('../Images/nocontent.jpg')} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} />
-                        <Image source={require('../Images/nocontent.jpg')} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} />
-                        <Image source={require('../Images/nocontent.jpg')} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} />
-                        <Image source={require('../Images/nocontent.jpg')} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} />
+                        {this.renderTiles()}
                     </View>
                 </ScrollView>
             </View>
