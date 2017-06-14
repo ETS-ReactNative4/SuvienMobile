@@ -13,6 +13,7 @@ import {
     YouTubeVideoScreen
 } from './Components';
 import MediaExplorer from './Components/MediaExplorer';
+import FirstLanding from './Components/FirstLanding';
 import CameraRollTest from './Components/CameraRollTest';
 import TakePhoto from './Components/TakePhoto';
 
@@ -41,6 +42,16 @@ const RouterComponent = () => (
             component={Home}
             hideNavBar
             />   
+
+            <Scene
+            key="FirstLanding"
+            component={FirstLanding}
+            hideNavBar={false}
+            title="Welcome!"
+            titleStyle={styles.titleStyles}
+            onLeft={() => {}}
+            renderBackButton={() => <Image source={require('./Images/placeholderphoto.png')} style={{ marginLeft: 30, marginBottom: 10, height: 29, width: 100 }} />}
+            />
 
             <Scene
             key="AddPhoto"

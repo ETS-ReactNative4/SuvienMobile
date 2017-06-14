@@ -79,6 +79,7 @@ class Settings extends Component {
     }
 
     render() {
+        if (this.state.isFirst === false) {
         return (
             <View style={{ marginTop: 80, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row' }}>
@@ -116,6 +117,33 @@ class Settings extends Component {
                 </CardSection>
             </View>
         );
+    }
+    if (this.state.isFirst === true) {
+        return (
+            <View style={{ marginTop: 80, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'ClementePDae-Light' }}>Edit Information</Text>
+                    <Image source={require('../Images/infoicon.jpg')} style={{ marginLeft: 10, height: 30, width: 30 }} />
+                </View>
+                <CardSection>
+                    <Input
+                    placeholder="Lance McClain"
+                    label="Name"
+                    value={this.state.name}
+                    onChangeText={(name) => this.setState({ name })}
+                    />
+                </CardSection>
+
+                {this.renderRadioButton()}
+
+                <CardSection>
+                    <Button onPress={this.onButtonPress.bind(this)}>
+                        Save and Continue
+                    </Button>
+                </CardSection>
+            </View>
+        );
+    }
     }
 }
 
