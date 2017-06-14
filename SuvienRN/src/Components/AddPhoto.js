@@ -152,7 +152,7 @@ class AddPhoto extends Component {
                         <CardSection>
                             <Button onPress={this.onTakePhotoPress.bind(this)}>
                                 Take Photo
-                                <Image source={require('../Images/photoimage.jpg')} style={{ height: 30, width: 40 }} />
+                                <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
                             </Button>
                         </CardSection>
                         <CardSection>
