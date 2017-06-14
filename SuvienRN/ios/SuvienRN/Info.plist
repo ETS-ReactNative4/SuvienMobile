@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>kTCCServiceMediaLibrary</key>
 	<string>Suvien would like to request access to your music library</string>
 	<key>NSAppleMusicUsageDescription</key>
@@ -51,7 +51,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -65,6 +65,8 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>ClementePDae-Light.ttf</string>
+		<string>ClementePDag-Book.ttf</string>
 		<string>Roboto-Medium.ttf</string>
 		<string>ClementePDac-ExtraLight.ttf</string>
 	</array>
