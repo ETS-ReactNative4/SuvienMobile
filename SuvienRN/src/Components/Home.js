@@ -4,8 +4,8 @@ import { Actions } from 'react-native-router-flux';
 import { Header, Card, PictureTile } from './common';
 
 class Home extends Component {
-    state = { currentDate: null, greeting: null, name: null, width: null, dim: null, sizes: null, hour: null, minute: null, aorp: null, section: null }
-    componentWillMount() {
+    state = { currentDate: null, greeting: null, name: null, width: null, dim: null, sizes: null, hour: null, minute: null, aorp: null, section: null, temp: null }
+    async componentWillMount() {
         this.setState({ width: Dimensions.get('window').width });
         this.getInfo();
     }
@@ -75,13 +75,16 @@ class Home extends Component {
         this.setState({ dim: pictureDim });
     }
 
+    async getData() {
+        this.setState({ temp: await AsyncStorage.getItem('temp') });
+    }
     renderTiles() {
-        //Later this will be a map helper. For testing, It's now a for
+        this.getData();
         const allTiles = [];
         let i;
         for (i = 0; i < 8; i++) {
             allTiles.push(
-                <PictureTile onPress={() => console.log('Weeeee!')} source={require('../Images/nocontent.jpg')} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} unique={i} />
+                <PictureTile onPress={() => Actions.MediaExplorer()} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} data={this.state.temp} unique={i} />
             );
         }
         return (

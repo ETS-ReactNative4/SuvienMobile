@@ -26,6 +26,13 @@ const RouterComponent = () => (
             initial 
             />
 
+            <Scene 
+            key="MediaExplorer"
+            component={MediaExplorer}
+            hideNavBar
+            //initial 
+            />
+
             <Scene
             key="Settings"
             component={Settings}
