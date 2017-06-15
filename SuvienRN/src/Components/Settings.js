@@ -20,12 +20,23 @@ class Settings extends Component {
         }
     }
     async onButtonPress() {
-        try {
-            await AsyncStorage.setItem('name', this.state.name);
-            await AsyncStorage.setItem('stage', this.state.stage);
-            } catch (error) {
-            console.log(error);
+        if (this.state.stage === null) {
+            try {
+                await AsyncStorage.setItem('name', this.state.name);
+                await AsyncStorage.setItem('stage', '0');
+                } catch (error) {
+                console.log(error);
         }
+    }
+        if (this.state.stage !== null) {
+            try {
+                await AsyncStorage.setItem('name', this.state.name);
+                await AsyncStorage.setItem('stage', this.state.stage);
+                } catch (error) {
+                console.log(error);
+        }
+        }
+        
         //Actions.Home();
         Actions.Home();
 }
@@ -42,12 +53,6 @@ class Settings extends Component {
                         onPress={(stage) => this.setState({ stage: stage.toString() })} 
                 />
             </CardSection>
-            );
-        }
-        if (this.state.stage === null && this.state.isFirst === false) {
-            //Spinner may be added here
-            return (
-                <Text>I'm Waiting!</Text>
             );
         }
         if (this.state.stage === null && this.state.isFirst) {
