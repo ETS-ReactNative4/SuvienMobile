@@ -21,7 +21,7 @@ const RouterComponent = () => (
         <Router>
             <Scene 
             key="MainMenu"
-            component={MainMenu}
+            component={FirstLanding}
             hideNavBar
             initial 
             />
