@@ -15,15 +15,16 @@ import {
 import MediaExplorer from './Components/MediaExplorer';
 import FirstLanding from './Components/FirstLanding';
 import CameraRollTest from './Components/CameraRollTest';
+import TimerTest from './Components/TimerTest';
 import TakePhoto from './Components/TakePhoto';
 
 const RouterComponent = () => (
         <Router>
             <Scene 
             key="MainMenu"
-            component={FirstLanding}
+            component={MainMenu}
             hideNavBar
-            initial 
+            //initial 
             />
 
             <Scene 
@@ -46,8 +47,9 @@ const RouterComponent = () => (
 
             <Scene
             key="Home"
-            component={Home}
+            component={TimerTest}
             hideNavBar
+            initial
             />   
 
             <Scene

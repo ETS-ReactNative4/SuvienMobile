@@ -8,7 +8,7 @@ class PictureTile extends Component {
         const dataobj = JSON.parse(this.props.data);
         if (this.props.data === null) {
             return (
-            <TouchableOpacity onPress={}>
+            <TouchableOpacity onPress={() => console.log('weee!')}>
                 <Image source={require('./nocontent.jpg')} style={this.props.style} />
             </TouchableOpacity>
         );
