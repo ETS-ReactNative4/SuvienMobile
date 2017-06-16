@@ -6,11 +6,15 @@ import Orientation from 'react-native-orientation';
 
 class MainMenu extends Component {
     state = { isFirst: true }
-    componentDidMount() {
+    async componentDidMount() {
         Orientation.lockToLandscape();
-        /*AsyncStorage.setItem('Presets', JSON.stringify(
+        //AsyncStorage.multiRemove(['1497641389590', 'Presets', 'temp', 'Tags']);
+        //AsyncStorage.setItem('Tags', JSON.stringify(['General']));
+        /*
+        AsyncStorage.setItem('Presets', JSON.stringify(
             [{ name: 'general', content: [] }]
         ));*/
+        //console.log(AsyncStorage.getAllKeys());
         this.getFirst();
     }
     onButtonPress() {

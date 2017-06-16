@@ -8,8 +8,15 @@ class AddPhoto extends Component {
 
     async onSaveItemPress() {
         const namefile = Date.now().toString();
+        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
         const objec = JSON.parse(await AsyncStorage.getItem('temp'));
         const gen = JSON.parse(await AsyncStorage.getItem('Presets'));
+        const photos = JSON.parse(await AsyncStorage.getItem('Pictures'));
+        photos.push({ 
+            imageuri: this.state.imageuri, 
+            caption: this.state.caption, 
+            group: this.state.group 
+        });
         gen[0].content.push({
             uniqueID: objec.uniqueID, 
             imageuri: this.state.imageuri, 
@@ -24,11 +31,19 @@ class AddPhoto extends Component {
             caption: this.state.caption, 
             group: this.state.group 
         }));
+        const findTags = mytags.find((tag) => tag === this.state.group);
+        if (findTags === undefined) {
+            mytags.push(this.state.group);
+            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+        }
         AsyncStorage.setItem('temp', JSON.stringify(objec));
         AsyncStorage.setItem('Presets', JSON.stringify(gen));
+        AsyncStorage.setItem('Pictures', JSON.stringify(photos));
         console.log(JSON.parse(await AsyncStorage.getItem('temp')));
         console.log(JSON.parse(await AsyncStorage.getItem('Presets')));
-        console.log(JSON.parse(await AsyncStorage.getItem(namefile)));
+        console.log(JSON.parse(await AsyncStorage.getItem('Tags')));
+        console.log(JSON.parse(await AsyncStorage.getItem('Pictures')));
+        //console.log(JSON.parse(await AsyncStorage.getItem(namefile)));
         Actions.Home();
     }
 

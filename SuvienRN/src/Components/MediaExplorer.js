@@ -15,24 +15,24 @@ class MediaExplorer extends Component {
 
     componentDidUpdate() {
         //console.log('Im in component will update!');
-        if (this.state.isFiltered === false && this.state.filter !== null){
+        if (this.state.isFiltered === false && this.state.filter !== null) {
                 this.filterContent();
         }
     }
     filterContent() {
         //console.log('Im in filtercontent!')
+        //console.log(this.state.filter);
         const filterTags = this.state.images.filter((imagep) => {
-                return imagep.tag === this.state.filter;
+                return imagep.group === this.state.filter;
             });
-            this.setState({ filteredImages: filterTags, isFiltered: true });
-            //console.log(this.state.filteredImages);
+            this.setState({ filteredImages: [...filterTags], isFiltered: true });
     }
     async fetchData() {
         //console.log('Im in fetch data');
-        console.log(AsyncStorage.getAllKeys());
+        //console.log(AsyncStorage.getAllKeys());
         this.setState({ tags: JSON.parse(await AsyncStorage.getItem('Tags')), images: JSON.parse(await AsyncStorage.getItem('Pictures')) });
-        console.log(this.state.tags);
-        console.log(JSON.parse(await AsyncStorage.getItem('Pictures')));
+        //console.log(this.state.tags);
+        //console.log(this.state.images);
         /*
         const library = JSON.parse(await AsyncStorage.getItem('Pictures'));
         library.push({ uri: { uri: 'content://media/external/images/media/1062' }, caption: 'Random Test Paper', tag: 'Tests' });
@@ -89,20 +89,20 @@ class MediaExplorer extends Component {
 
     renderFilterList() {  
         //console.log('Im in renderfilterlist');
+        console.log(this.state.filteredImages);
         const allPhotos = this.state.filteredImages.map((imageu) => {
             return (
                 <TouchableOpacity onPress={() => this.setState({ imageuri: imageu.uri })}>
-                    <Image source={imageu.uri} style={{ height: 150, width: 150 }} />
+                    <Image source={{ uri: imageu.imageuri }} style={{ height: 150, width: 150 }} />
                 </TouchableOpacity>
             );
         });
-        console.log(this.state.imageuri);
+        //console.log(this.state.imageuri);
         return (
             [...allPhotos]
         );
     }
     render() {
-        //console.log('Im in render!')
         if (this.state.isFiltered === false) {
         return (
             <View style={{ flexDirection: 'row', paddingTop: 15 }}>

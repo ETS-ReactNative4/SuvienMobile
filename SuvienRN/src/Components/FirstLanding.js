@@ -6,6 +6,7 @@ import { Actions } from 'react-native-router-flux';
 class FirstLanding extends Component {
     async setInitialDatas() {
         AsyncStorage.setItem('Tags', JSON.stringify(['General']));
+        AsyncStorage.setItem('Pictures', JSON.stringify([]));
     }
     render() {
         this.setInitialDatas();

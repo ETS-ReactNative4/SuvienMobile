@@ -74,6 +74,7 @@ class Home extends Component {
         }
         if (ourdata[0].content.length === 0) {
             this.setState({ presets: null });
+            console.log(this.state.presets)
         }
     }
     renderTiles() {
@@ -98,11 +99,18 @@ class Home extends Component {
             );
         }
         if (this.state.presets === null) {
+            const allTiles = [];
+            let i;
+            for (i = 0; i < 8; i++) {
+                allTiles.push(
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} data={null} unique={i} key={`${i}p`} />
+                );
+            }
             return (
-                <View />
+                [...allTiles]
             );
+            }
         }
-    }
     
     parseHour(i) {
         const times = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '8', '9', '10', '11'];
