@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { View, AsyncStorage, Text, Dimensions, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { Header, Card, PictureTile } from './common';
+import { Header, PictureTile } from './common';
 
 class Home extends Component {
     state = { currentDate: null, greeting: null, name: null, width: null, dim: null, sizes: null, hour: null, minute: null, aorp: null, section: null, temp: null, sizes2: null }
-    async componentWillMount() {
+    componentWillMount() {
         this.setState({ width: Dimensions.get('window').width });
-        setInterval(() => console.log('Yay!'), 1000);
         this.getInfo();
+        this.getData();
     }
 
     componentDidMount() {
-        console.log('Im in component Did mount!');
+        this.clockUpdate();
         this.doMath();
     }
 
@@ -41,20 +41,24 @@ class Home extends Component {
         this.setState({ currentDate: `${weekday[numbDay]}, ${months[month]} ${numbDate}, ${numbYear}` });
     }
     
-    parseHour(i) {
-        const times = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '8', '9', '10', '11'];
-        return times[i];
-    }
-    addZero(p) {
-        if (p < 10) {
-            p = `0${p}`;
-        }
-        return p;
-    }
+    
     clockUpdate() {
-        return (
-            console.log('Bleh')
-        );
+        setInterval(() => {
+            const dd = new Date();
+            this.setState({ hour: this.parseHour(dd.getHours()), minute: this.addZero(dd.getMinutes()) });
+            if (dd.getHours() < 12) {
+            this.setState({ greeting: 'It\'s a lovely morning,', aorp: 'am', section: require('../Images/morning.png') });
+            }
+            if (dd.getHours() >= 12 && dd.getHours() < 17) {
+            this.setState({ greeting: 'It\'s a lovely afternoon,', aorp: 'pm', section: require('../Images/afternoon.png') });
+            }
+            if (dd.getHours() >= 18 && dd.getHours() < 21) {
+            this.setState({ greeting: 'It\'s a lovely evening,', section: require('../Images/evening.png') });
+            }
+            if (dd.getHours() >= 22) {
+            this.setState({ greeting: 'It\'s a lovely night,', section: require('../Images/night.png') });
+        }
+            }, 1000);
     }
 
     doMath() {
@@ -67,19 +71,28 @@ class Home extends Component {
         this.setState({ temp: await AsyncStorage.getItem('temp') });
     }
     renderTiles() {
-        this.getData();
         const allTiles = [];
         let i;
         for (i = 0; i < 8; i++) {
             allTiles.push(
-                <PictureTile onPress={() => Actions.MediaExplorer()} style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} data={this.state.temp} unique={i} key={`${i}p`} />
+                <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} data={this.state.temp} unique={i} key={`${i}p`} />
             );
         }
         return (
             [...allTiles]
         );
+    }
+    
+    parseHour(i) {
+        const times = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '8', '9', '10', '11'];
+        return times[i];
+    }
+    addZero(p) {
+        if (p < 10) {
+            p = `0${p}`;
         }
-
+        return p;
+    }
     render() {
         //console.log(this.state.minute);
         const { currentDate, greeting, name, width, sizes } = this.state;
@@ -101,7 +114,7 @@ class Home extends Component {
                         </View>
                         <View style={{ alignItems: 'flex-end', width: finalsize }}>
                             <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
-                                <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80, paddingRight: 20 }} />
+                                <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80, marginRight: 30 }} />
                             </TouchableWithoutFeedback>
                         </View>
                     </View>
@@ -136,7 +149,6 @@ class Home extends Component {
                 </ScrollView>
             </View>
         );
-    
     }
 }
 

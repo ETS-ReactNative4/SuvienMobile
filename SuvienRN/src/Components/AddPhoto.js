@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity } from 'react-native';
 import { CardSection, Button, Input } from './common';
+import { Actions } from 'react-native-router-flux';
 
 class AddPhoto extends Component {
     state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
 
     async onSaveItemPress() {
         const namefile = Date.now().toString();
+        const objec = JSON.parse(await AsyncStorage.getItem('temp'));
+        objec.uri = this.state.imageuri;
+        objec.caption = this.state.caption;
+        objec.group = this.state.group;
         AsyncStorage.setItem(namefile, JSON.stringify({ 
             imageuri: this.state.imageuri, 
             caption: this.state.caption, 
             group: this.state.group 
         }));
-        console.log(namefile);
+        AsyncStorage.setItem('temp', JSON.stringify(objec));
+        console.log(JSON.parse(await AsyncStorage.getItem('temp')));
         console.log(JSON.parse(await AsyncStorage.getItem(namefile)));
+        Actions.Home();
     }
 
     onTakePhotoPress() {
