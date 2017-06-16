@@ -8,6 +8,7 @@ class MainMenu extends Component {
     state = { isFirst: true }
     componentDidMount() {
         Orientation.lockToLandscape();
+        console.log(AsyncStorage.getAllKeys());
         this.getFirst();
     }
     onButtonPress() {

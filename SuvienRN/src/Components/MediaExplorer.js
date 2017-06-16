@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, TouchableOpacity, ScrollView, Text, AsyncStorage } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { CardSection, Button } from './common';
 
 class MediaExplorer extends Component {
@@ -50,7 +51,7 @@ class MediaExplorer extends Component {
             //console.log('Im null!');
             return (
                 <Text>
-                    I'm not ready!
+                    There appears to be no tags set. Upload media to apply one!
                 </Text>
             );
         }
@@ -103,7 +104,7 @@ class MediaExplorer extends Component {
         //console.log('Im in render!')
         if (this.state.isFiltered === false) {
         return (
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', paddingTop: 15 }}>
                 <View style={{ flex: 1 }}>
                     <Text style={{ fontSize: 27 }}>Search Using a Tag</Text>
                     {this.renderSideLeft()}
@@ -111,13 +112,13 @@ class MediaExplorer extends Component {
                 <View style={{ flex: 1 }}>
                     <Text style={{ fontSize: 27 }}> Upload a new...</Text>
                     <CardSection>
-                        <Button style={{ height: 300, width: 600 }}>Photo</Button>
+                        <Button onPress={() => Actions.AddPhoto()} style={{ height: 300, width: 600 }}>Photo</Button>
                     </CardSection>
                     <CardSection>
-                        <Button style={{ height: 300, width: 600 }}>Audio</Button>
+                        <Button onPress={() => Actions.AddAudio()} style={{ height: 300, width: 600 }}>Audio</Button>
                     </CardSection>
                     <CardSection>
-                        <Button style={{ height: 300, width: 600 }}>Video</Button>
+                        <Button onPress={() => Actions.AddVideo()} style={{ height: 300, width: 600 }}>Video</Button>
                     </CardSection>
                 </View>
             </View>

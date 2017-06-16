@@ -24,7 +24,7 @@ const RouterComponent = () => (
             key="MainMenu"
             component={MainMenu}
             hideNavBar
-            //initial 
+            initial 
             />
 
             <Scene 
@@ -47,9 +47,9 @@ const RouterComponent = () => (
 
             <Scene
             key="Home"
-            component={TimerTest}
+            component={Home}
             hideNavBar
-            initial
+            //initial
             />   
 
             <Scene
