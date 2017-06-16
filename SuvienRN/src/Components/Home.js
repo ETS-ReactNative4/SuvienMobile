@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Header, PictureTile } from './common';
 
 class Home extends Component {
-    state = { currentDate: null, greeting: null, name: null, width: null, dim: null, sizes: null, hour: null, minute: null, aorp: null, section: null, temp: null, sizes2: null }
+    state = { currentDate: null, greeting: null, name: null, width: null, dim: null, sizes: null, hour: null, minute: null, aorp: null, section: null, presets: null, sizes2: null }
     componentWillMount() {
         this.setState({ width: Dimensions.get('window').width });
         this.getInfo();
@@ -68,19 +68,40 @@ class Home extends Component {
     }
 
     async getData() {
-        this.setState({ temp: await AsyncStorage.getItem('temp') });
+        const ourdata = JSON.parse(await AsyncStorage.getItem('Presets'));
+        if (ourdata[0].content.length > 0) {
+            this.setState({ presets: ourdata });
+        }
+        if (ourdata[0].content.length === 0) {
+            this.setState({ presets: null });
+        }
     }
     renderTiles() {
-        const allTiles = [];
-        let i;
-        for (i = 0; i < 8; i++) {
-            allTiles.push(
-                <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} data={this.state.temp} unique={i} key={`${i}p`} />
+        if (this.state.presets !== null) {
+            const allTiles = [];
+            let i;
+            for (i = 0; i < 8; i++) {
+                let isFound = this.state.presets[0].content.find((preset) => preset.uniqueID === i);
+                if (isFound === undefined) {
+                    allTiles.push(
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} data={null} unique={i} key={`${i}p`} />
+                );  
+                }
+                if (isFound !== undefined) {
+                    allTiles.push(
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} data={isFound} unique={i} key={`${i}p`} />
+                );
+                }
+            }
+            return (
+                [...allTiles]
             );
         }
-        return (
-            [...allTiles]
-        );
+        if (this.state.presets === null) {
+            return (
+                <View />
+            );
+        }
     }
     
     parseHour(i) {
@@ -108,7 +129,7 @@ class Home extends Component {
                             <Image source={this.state.section} style={{ height: 80, width: 80 }} />
                             <Text style={{ fontSize: 30, fontFamily: 'ClementePDag-Book', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
                         </View>
-                        <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height });}}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
                             <Text style={{ fontSize: 27, fontFamily: 'ClementePDag-Book' }}>{greeting} { name }!</Text>
                             <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book' }}>It is { currentDate }</Text>
                         </View>
@@ -131,7 +152,7 @@ class Home extends Component {
             <View>
                 <Header>
                     <View style={{ flexDirection: 'row' }}>
-                        <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width });}}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width }); }}>
                             <Text style={{ fontSize: 27, fontFamily: 'ClementePDag-Book' }}>{greeting} { name }!</Text>
                             <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book' }}>It is { currentDate }</Text>
                         </View>

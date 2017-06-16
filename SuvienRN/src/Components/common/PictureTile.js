@@ -5,16 +5,10 @@ import { Actions } from 'react-native-router-flux';
 
 class PictureTile extends Component {
     state = { imageuri: null, caption: null, tag: null, isNull: true }
-    componentWillReceiveProps(nextProps) {
-        if (this.props !== nextProps && nextProps.data !== null && isNull ==) {
-            if (JSON.parse(nextProps.data).uniqueID === nextProps.unique) {
-            this.setState({ imageuri: JSON.parse(nextProps.data).uri, caption: JSON.parse(nextProps.data).caption, tag: JSON.parse(nextProps.data).group, isNull: false });
-            }
-        }
-    }
+
 
     render() {
-        if (this.state.isNull === true) {
+        if (this.props.data === null) {
             return (
             <TouchableOpacity 
             onPress={() => {
@@ -30,13 +24,18 @@ class PictureTile extends Component {
             </TouchableOpacity>
         );
     }
-    if (this.state.isNull === false) {
-       return (
-           <TouchableOpacity onPress={this.props.onPress}>
-                <Image source={{ uri: this.state.imageuri }} style={this.props.style} />
+    if (this.props.data !== null) {
+        return (
+        <TouchableOpacity 
+            onPress={() => {
+                console.log('I did it!');
+                    }
+                    }
+        >
+                <Image source={{ uri: this.props.data.imageuri }} style={this.props.style} />
             </TouchableOpacity>
-       );
-    }
+        );
+        }
     }
 }
 

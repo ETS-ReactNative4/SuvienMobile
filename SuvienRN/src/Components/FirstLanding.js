@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, AsyncStorage } from 'react-native';
 import { Button, CardSection } from './common';
 import { Actions } from 'react-native-router-flux';
 
 class FirstLanding extends Component {
+    async setInitialDatas() {
+        AsyncStorage.setItem('Tags', JSON.stringify(['General']));
+    }
     render() {
+        this.setInitialDatas();
         return (
             <View style={{ marginLeft: 80, marginRight: 80, marginTop: 60, flexWrap: 'wrap' }}>
                 <View style={{ marginLeft: 30, marginRight: 30 }}>

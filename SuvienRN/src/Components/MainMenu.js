@@ -8,7 +8,9 @@ class MainMenu extends Component {
     state = { isFirst: true }
     componentDidMount() {
         Orientation.lockToLandscape();
-        console.log(AsyncStorage.getAllKeys());
+        /*AsyncStorage.setItem('Presets', JSON.stringify(
+            [{ name: 'general', content: [] }]
+        ));*/
         this.getFirst();
     }
     onButtonPress() {

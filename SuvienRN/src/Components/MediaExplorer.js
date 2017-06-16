@@ -29,6 +29,7 @@ class MediaExplorer extends Component {
     }
     async fetchData() {
         //console.log('Im in fetch data');
+        console.log(AsyncStorage.getAllKeys());
         this.setState({ tags: JSON.parse(await AsyncStorage.getItem('Tags')), images: JSON.parse(await AsyncStorage.getItem('Pictures')) });
         console.log(this.state.tags);
         console.log(JSON.parse(await AsyncStorage.getItem('Pictures')));

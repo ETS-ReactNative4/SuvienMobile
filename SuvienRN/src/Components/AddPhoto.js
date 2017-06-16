@@ -9,6 +9,13 @@ class AddPhoto extends Component {
     async onSaveItemPress() {
         const namefile = Date.now().toString();
         const objec = JSON.parse(await AsyncStorage.getItem('temp'));
+        const gen = JSON.parse(await AsyncStorage.getItem('Presets'));
+        gen[0].content.push({
+            uniqueID: objec.uniqueID, 
+            imageuri: this.state.imageuri, 
+            caption: this.state.caption, 
+            group: this.state.group 
+        });
         objec.uri = this.state.imageuri;
         objec.caption = this.state.caption;
         objec.group = this.state.group;
@@ -18,7 +25,9 @@ class AddPhoto extends Component {
             group: this.state.group 
         }));
         AsyncStorage.setItem('temp', JSON.stringify(objec));
+        AsyncStorage.setItem('Presets', JSON.stringify(gen));
         console.log(JSON.parse(await AsyncStorage.getItem('temp')));
+        console.log(JSON.parse(await AsyncStorage.getItem('Presets')));
         console.log(JSON.parse(await AsyncStorage.getItem(namefile)));
         Actions.Home();
     }
