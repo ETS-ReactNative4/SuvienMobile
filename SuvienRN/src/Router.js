@@ -18,6 +18,7 @@ import FirstLanding from './Components/FirstLanding';
 import CameraRollTest from './Components/CameraRollTest';
 import TimerTest from './Components/TimerTest';
 import TakePhoto from './Components/TakePhoto';
+import Test from './Components/Test';
 
 const RouterComponent = () => (
         <Router
