@@ -4,7 +4,7 @@ import { CardSection, Button, Input } from './common';
 import { Actions } from 'react-native-router-flux';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null, height: null, width: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null, height: null, width: null, title: null, isFavourite: false } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
 
     async onSaveItemPress() {
         const namefile = Date.now().toString();
@@ -12,26 +12,32 @@ class AddPhoto extends Component {
         const objec = JSON.parse(await AsyncStorage.getItem('temp'));
         const gen = JSON.parse(await AsyncStorage.getItem('Presets'));
         const photos = JSON.parse(await AsyncStorage.getItem('Pictures'));
-        photos.push({ 
+        photos.push({
+            title: this.state.title,
             imageuri: this.state.imageuri, 
             caption: this.state.caption, 
             group: this.state.group,
             height: this.state.height,
-            width: this.state.width
+            width: this.state.width,
+            isFavourite: this.state.isFavourite
         });
         gen[0].content.push({
             uniqueID: objec.uniqueID, 
+            title: this.state.title,
             imageuri: this.state.imageuri, 
             caption: this.state.caption, 
             group: this.state.group,
             height: this.state.height,
-            width: this.state.width
+            width: this.state.width,
+            isFavourite: this.state.isFavourite
         });
         objec.uri = this.state.imageuri;
+        objec.title = this.state.title;
         objec.caption = this.state.caption;
         objec.group = this.state.group;
         objec.height = this.state.height;
         objec.width = this.state.width;
+        objec.isFavourite = this.state.isFavourite;
         const findTags = mytags.find((tag) => tag === this.state.group);
         if (findTags === undefined) {
             mytags.push(this.state.group);
@@ -93,6 +99,14 @@ class AddPhoto extends Component {
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
+                        placeholder="At the Beach"
+                        label="Title"
+                        value={this.state.title}
+                        onChangeText={(title) => this.setState({ title })}
+                        />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
                         placeholder="Family vacation to Hawaii"
                         label="Caption"
                         value={this.state.caption}
@@ -128,6 +142,14 @@ class AddPhoto extends Component {
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
                         <Image source={{ uri: this.state.imageuri }} style={{ height: 300, width: 300 }} />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="At the Beach"
+                        label="Title"
+                        value={this.state.title}
+                        onChangeText={(title) => this.setState({ title })}
+                        />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input

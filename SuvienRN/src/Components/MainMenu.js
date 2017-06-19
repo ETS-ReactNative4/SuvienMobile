@@ -9,7 +9,7 @@ class MainMenu extends Component {
     async componentDidMount() {
         Orientation.lockToLandscape();
         /*
-        AsyncStorage.multiRemove(['1497642236875', '1497643328302', '1497643350239', 'Pictures', 'Presets', 'temp', 'Tags']);
+        AsyncStorage.multiRemove(['Pictures', 'Presets', 'temp', 'Tags']);
         AsyncStorage.setItem('Tags', JSON.stringify(['General']));
         AsyncStorage.setItem('Presets', JSON.stringify(
             [{ name: 'general', content: [] }]
@@ -39,7 +39,9 @@ class MainMenu extends Component {
     render() {
         if (this.state.isFirst === null) {
             return (
-                <Text>Loading</Text>
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
+                </View>
             );
         }
         if (this.state.isFirst === false) {

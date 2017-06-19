@@ -32,7 +32,8 @@ class PictureTile extends Component {
                 caption: this.props.data.caption, 
                 tag: this.props.data.group,
                 height: this.props.data.height,
-                width: this.props.data.width
+                width: this.props.data.width,
+                isFavourite: this.props.data.isFavourite
                 }));
                 Actions.Media();
             }

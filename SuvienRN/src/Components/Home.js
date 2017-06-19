@@ -52,11 +52,11 @@ class Home extends Component {
             if (dd.getHours() >= 12 && dd.getHours() < 17) {
             this.setState({ greeting: 'It\'s a lovely afternoon,', aorp: 'pm', section: require('../Images/afternoon.png') });
             }
-            if (dd.getHours() >= 18 && dd.getHours() < 21) {
-            this.setState({ greeting: 'It\'s a lovely evening,', section: require('../Images/evening.png') });
+            if (dd.getHours() >= 17 && dd.getHours() < 21) {
+            this.setState({ greeting: 'It\'s a lovely evening,', aorp: 'pm', section: require('../Images/evening.png') });
             }
             if (dd.getHours() >= 22) {
-            this.setState({ greeting: 'It\'s a lovely night,', section: require('../Images/night.png') });
+            this.setState({ greeting: 'It\'s a lovely night,', aorp: 'pm', section: require('../Images/night.png') });
         }
             }, 1000);
     }
@@ -123,11 +123,14 @@ class Home extends Component {
     }
     render() {
         //console.log(this.state.minute);
-        const { currentDate, greeting, name, width, sizes, hour, minute, section } = this.state;
+        const { currentDate, greeting, name, width, sizes, hour, minute, section, aorp } = this.state;
+        //console.log(aorp);
         //console.log(this.state.sizes);
-        if (currentDate === null || greeting === null || name === null || hour === null || minute === null || section === null){
+        if (currentDate === null || greeting === null || name === null || hour === null || minute === null || section === null || aorp === null) {
             return (
-            <Image source={require('../Images/loading.gif')} style={{ height: 300, width: 300 }} />
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
+                </View>
             );
         }
         if (this.state.sizes !== null) {
