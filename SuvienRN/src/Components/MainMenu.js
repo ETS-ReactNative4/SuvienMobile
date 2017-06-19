@@ -5,16 +5,18 @@ import { Button, CardSection } from './common';
 import Orientation from 'react-native-orientation';
 
 class MainMenu extends Component {
-    state = { isFirst: true }
+    state = { isFirst: null }
     async componentDidMount() {
         Orientation.lockToLandscape();
-        //AsyncStorage.multiRemove(['1497641389590', 'Presets', 'temp', 'Tags']);
-        //AsyncStorage.setItem('Tags', JSON.stringify(['General']));
         /*
+        AsyncStorage.multiRemove(['1497642236875', '1497643328302', '1497643350239', 'Pictures', 'Presets', 'temp', 'Tags']);
+        AsyncStorage.setItem('Tags', JSON.stringify(['General']));
         AsyncStorage.setItem('Presets', JSON.stringify(
             [{ name: 'general', content: [] }]
-        ));*/
-        //console.log(AsyncStorage.getAllKeys());
+        ));
+        AsyncStorage.setItem('Pictures', JSON.stringify([]));
+        console.log(AsyncStorage.getAllKeys());
+        */
         this.getFirst();
     }
     onButtonPress() {
@@ -35,6 +37,11 @@ class MainMenu extends Component {
     }
 
     render() {
+        if (this.state.isFirst === null) {
+            return (
+                <Text>Loading</Text>
+            );
+        }
         if (this.state.isFirst === false) {
             return (
                 <Image resizeMode="stretch" source={require('../Images/suviensplash.png')} style={styles.canvas}>

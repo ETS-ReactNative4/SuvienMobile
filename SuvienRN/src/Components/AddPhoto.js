@@ -4,7 +4,7 @@ import { CardSection, Button, Input } from './common';
 import { Actions } from 'react-native-router-flux';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null, height: null, width: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
 
     async onSaveItemPress() {
         const namefile = Date.now().toString();
@@ -15,22 +15,23 @@ class AddPhoto extends Component {
         photos.push({ 
             imageuri: this.state.imageuri, 
             caption: this.state.caption, 
-            group: this.state.group 
+            group: this.state.group,
+            height: this.state.height,
+            width: this.state.width
         });
         gen[0].content.push({
             uniqueID: objec.uniqueID, 
             imageuri: this.state.imageuri, 
             caption: this.state.caption, 
-            group: this.state.group 
+            group: this.state.group,
+            height: this.state.height,
+            width: this.state.width
         });
         objec.uri = this.state.imageuri;
         objec.caption = this.state.caption;
         objec.group = this.state.group;
-        AsyncStorage.setItem(namefile, JSON.stringify({ 
-            imageuri: this.state.imageuri, 
-            caption: this.state.caption, 
-            group: this.state.group 
-        }));
+        objec.height = this.state.height;
+        objec.width = this.state.width;
         const findTags = mytags.find((tag) => tag === this.state.group);
         if (findTags === undefined) {
             mytags.push(this.state.group);
@@ -112,6 +113,11 @@ class AddPhoto extends Component {
                             <Image source={require('../Images/saveicon.jpg')} style={{ height: 30, width: 40 }} />
                         </Button>
                     </CardSection>
+                    <CardSection>
+                        <Button onPress={() => Actions.Home()}>
+                            Return to Home
+                        </Button>
+                    </CardSection>
                 </View>
             );
         }
@@ -145,6 +151,11 @@ class AddPhoto extends Component {
                             <Image source={require('../Images/saveicon.jpg')} style={{ height: 30, width: 40 }} />
                         </Button>
                     </CardSection>
+                    <CardSection>
+                        <Button onPress={() => Actions.Home()}>
+                            Return to Home
+                        </Button>
+                    </CardSection>
                 </View>
             );
         }
@@ -161,7 +172,7 @@ class AddPhoto extends Component {
              (
             <TouchableOpacity 
             onPress={() => {
-                this.setState({ imageuri: photo.node.image.uri });
+                this.setState({ imageuri: photo.node.image.uri, height: photo.node.image.height, width: photo.node.image.width });/** */
                 this.setModalVisible(false);
                 }}
                 key={photo.node.image.uri}

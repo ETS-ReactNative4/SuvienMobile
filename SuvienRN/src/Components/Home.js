@@ -74,7 +74,6 @@ class Home extends Component {
         }
         if (ourdata[0].content.length === 0) {
             this.setState({ presets: null });
-            console.log(this.state.presets)
         }
     }
     renderTiles() {
@@ -124,8 +123,13 @@ class Home extends Component {
     }
     render() {
         //console.log(this.state.minute);
-        const { currentDate, greeting, name, width, sizes } = this.state;
+        const { currentDate, greeting, name, width, sizes, hour, minute, section } = this.state;
         //console.log(this.state.sizes);
+        if (currentDate === null || greeting === null || name === null || hour === null || minute === null || section === null){
+            return (
+            <Image source={require('../Images/loading.gif')} style={{ height: 300, width: 300 }} />
+            );
+        }
         if (this.state.sizes !== null) {
             const newSize = (parseInt(this.state.sizes2) + 30);
             const finalsize = Math.trunc((width - sizes) / 2);

@@ -12,6 +12,7 @@ import {
     MainMenuFlexBox,
     YouTubeVideoScreen
 } from './Components';
+import Media from './Components/Media';
 import MediaExplorer from './Components/MediaExplorer';
 import FirstLanding from './Components/FirstLanding';
 import CameraRollTest from './Components/CameraRollTest';
@@ -19,7 +20,9 @@ import TimerTest from './Components/TimerTest';
 import TakePhoto from './Components/TakePhoto';
 
 const RouterComponent = () => (
-        <Router>
+        <Router
+        duration={0}
+        >
             <Scene 
             key="MainMenu"
             component={MainMenu}
@@ -32,6 +35,12 @@ const RouterComponent = () => (
             component={MediaExplorer}
             hideNavBar
             //initial 
+            />
+
+            <Scene
+            key="Media"
+            component={Media}
+            hideNavBar
             />
 
             <Scene
