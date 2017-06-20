@@ -19,7 +19,8 @@ class AddPhoto extends Component {
             group: this.state.group,
             height: this.state.height,
             width: this.state.width,
-            isFavourite: this.state.isFavourite
+            isFavourite: this.state.isFavourite,
+            mediaType: 'Photo'
         });
         gen[0].content.push({
             uniqueID: objec.uniqueID, 
@@ -29,7 +30,8 @@ class AddPhoto extends Component {
             group: this.state.group,
             height: this.state.height,
             width: this.state.width,
-            isFavourite: this.state.isFavourite
+            isFavourite: this.state.isFavourite,
+            mediaType: 'Photo'
         });
         objec.uri = this.state.imageuri;
         objec.title = this.state.title;
@@ -38,6 +40,7 @@ class AddPhoto extends Component {
         objec.height = this.state.height;
         objec.width = this.state.width;
         objec.isFavourite = this.state.isFavourite;
+        objec.mediaType = 'Photo';
         const findTags = mytags.find((tag) => tag === this.state.group);
         if (findTags === undefined) {
             mytags.push(this.state.group);

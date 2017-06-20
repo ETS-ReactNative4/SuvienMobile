@@ -19,6 +19,7 @@ import CameraRollTest from './Components/CameraRollTest';
 import TimerTest from './Components/TimerTest';
 import TakePhoto from './Components/TakePhoto';
 import Test from './Components/Test';
+import AddVideoYoutube from './Components/AddVideoYoutube';
 
 const RouterComponent = () => (
         <Router
@@ -85,7 +86,7 @@ const RouterComponent = () => (
 
             <Scene
             key="AddVideo"
-            component={AddVideo}
+            component={AddVideoYoutube}
             hideNavBar={false}
             title="Add Video"
             titleStyle={styles.titleStyles}
