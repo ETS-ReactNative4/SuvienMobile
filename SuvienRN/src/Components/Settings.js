@@ -109,7 +109,7 @@ class Settings extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', alignItems: 'center'}}>
                     <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30, fontFamily: 'ClementePDae-Light' }}>Upload a new...</Text>
-                    <Image source={require('../Images/multimedia.jpg')} style={{ marginLeft: 5, height: 30, width: 90 }} />
+                    <Image source={require('../Images/multimedia.png')} style={{ marginLeft: 5, height: 30, width: 90 }} />
                 </View>
                 <CardSection>
                     <Button onPress={this.onPhotoButtonPress.bind(this)}>Photo</Button>

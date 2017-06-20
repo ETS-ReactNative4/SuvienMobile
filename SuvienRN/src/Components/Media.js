@@ -133,16 +133,16 @@ class Media extends Component {
 
                 return (
                 <Image source={require('../Images/picturebackground.png')} style={{ flex: 1, height: null, width: null }}>
-                    <View style={{ backgroundColor: '#a2aebe', height: (newHeight + 100), flexDirection: 'row', marginTop: (paddingheight - 50), alignItems: 'center', justifyContent: 'center' }}>
-                        <View style={{ flexDirection: 'row', height: scheight, backgroundColor: 'transparent', justifyContent: 'center' }}>
-                            <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: paddingheight, backgroundColor: 'transparent' }}>
-                                <Image source={{ uri: this.state.uri }} style={{ height: newHeight, width: newWidth }} />
-                                <View style={{ height: newHeight, width: 400, backgroundColor: '#a4c0e5' }}>
-                                    <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book', marginTop: 10, backgroundColor: 'grey', marginLeft: 5, marginRight: 5 }}>Caption</Text>
-                                    <Text style={{ fontSize: 20, fontFamily: 'ClementePDag-Book', marginBottom: 10, backgroundColor: 'white', marginLeft: 5, marginRight: 5 }}>{this.state.caption}</Text>
-                                    <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book' }}>Tag</Text>
-                                    <Text style={{ fontSize: 20, fontFamily: 'ClementePDag-Book', marginBottom: 10 }}>{this.state.tag}</Text>
-                                    <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book' }}>Favourite</Text>
+                    <View style={styles.imageContainerStyle}>
+                        <View style={styles.imageInnerContainerStyle}>
+                            <View style={styles.imageInnerStyle}>
+                                <Image source={{ uri: this.state.uri }} style={styles.imageStyle} />
+                                <View style={styles.textSideStyle}>
+                                        <Text style={styles.textHeaderStyle}>Caption</Text>
+                                        <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
+                                        <Text style={styles.textHeaderStyle}>Tag</Text>
+                                        <Text style={styles.textBodyStyle}>{this.state.tag}</Text>
+                                    <Text style={styles.favouriteImageStyle}>Favourite</Text>
                                     <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                         <Image source={imagerend} style={{ height: 60, width: 60 }} />
                                     </TouchableWithoutFeedback>
@@ -199,10 +199,10 @@ class Media extends Component {
                             <View style={{ height: 400, backgroundColor: '#a4c0e5' }}>
                                 <ScrollView>
                                     <View>
-                                        <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book', marginTop: 10, backgroundColor: 'grey', marginLeft: 5, marginRight: 5 }}>Caption</Text>
-                                        <Text style={{ fontSize: 20, fontFamily: 'ClementePDag-Book', marginBottom: 10, backgroundColor: 'white', marginLeft: 5, marginRight: 5 }}>{this.state.caption}</Text>
-                                        <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book' }}>Tag</Text>
-                                        <Text style={{ fontSize: 20, fontFamily: 'ClementePDag-Book', marginBottom: 10 }}>{this.state.tag}</Text>
+                                        <Text style={styles.textHeaderStyle}>Caption</Text>
+                                        <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
+                                        <Text style={styles.textHeaderStyle}>Tag</Text>
+                                        <Text style={styles.textBodyStyle}>{this.state.tag}</Text>
                                         <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book' }}>Favourite</Text>
                                         <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                             <Image source={imagerend} style={{ height: 60, width: 60 }} />
@@ -218,6 +218,75 @@ class Media extends Component {
             }
         }
         }
+    }
+    
+    let newHeight;
+    let paddingheight;
+    let scheight;
+    let newWidth;
+    const styles = {
+        textHeaderStyle: {
+            fontSize: 25, 
+            fontFamily: 'ClementePDag-Book', 
+            marginTop: 10, 
+            backgroundColor: 'grey', 
+            marginLeft: 5, 
+            marginRight: 5, 
+            borderTopLeftRadius: 10, 
+            borderTopRightRadius: 10
+        },
+        textBodyStyle: {
+            fontSize: 20, 
+            fontFamily: 'ClementePDag-Book', 
+            marginBottom: 10, 
+            backgroundColor: 'white', 
+            marginLeft: 5, 
+            marginRight: 5,
+            borderBottomLeftRadius: 10, 
+            borderBottomRightRadius: 10
+        },
+        imageContainerStyle: {
+            backgroundColor: '#a2aebe', 
+            height: (newHeight + 100), 
+            flexDirection: 'row', 
+            marginTop: (paddingheight - 50), 
+            alignItems: 'center', 
+            justifyContent: 'center' 
+        },
+        imageInnerContainerStyle: {
+            flexDirection: 'row', 
+            height: scheight, 
+            backgroundColor: 'transparent', 
+            justifyContent: 'center'
+        },
+        imageInnerStyle: { 
+            flexDirection: 'row', 
+            alignSelf: 'flex-end', 
+            marginBottom: paddingheight, 
+            backgroundColor: 'transparent' 
+        },
+        imageStyle: { 
+            height: newHeight, 
+            width: newWidth 
+        },
+        favouriteImageStyle: {
+            height: 60, 
+            width: 60
+        },
+        textSideStyle: {
+            height: newHeight, 
+            width: 400, 
+            backgroundColor: '#a4c0e5'
+        },
+        buttonSectionStyle: {
+            backgroundColor: 'transparent', 
+            marginLeft: 0, 
+            borderBottomWidth: 0
+        },
+        imageLoadingStyle: {
+            alignItems: 'center', 
+            justifyContent: 'center'
         }
+    };
 
 export default Media;

@@ -127,7 +127,7 @@ class AddPhoto extends Component {
                     <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
                             Save and Continue
-                            <Image source={require('../Images/saveicon.jpg')} style={{ height: 30, width: 40 }} />
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 40 }} />
                         </Button>
                     </CardSection>
                     <CardSection>
@@ -173,7 +173,7 @@ class AddPhoto extends Component {
                     <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
                             Save and Continue
-                            <Image source={require('../Images/saveicon.jpg')} style={{ height: 30, width: 40 }} />
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 40 }} />
                         </Button>
                     </CardSection>
                     <CardSection>
@@ -225,13 +225,13 @@ class AddPhoto extends Component {
                         <CardSection>
                             <Button onPress={this.onChoosePhotoPress.bind(this)}>
                                 Choose from Photo Library
-                                <Image source={require('../Images/choosefromlibrary.jpg')} style={{ height: 30, width: 40 }} />
+                                <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
                             </Button>
                         </CardSection>
                         <CardSection>
                             <Button onPress={this.onPressPhotos.bind(this)}>
                                 Add from web using Image URL
-                                <Image source={require('../Images/webicon.jpg')} style={{ height: 30, width: 40 }} />
+                                <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                             </Button>
                         </CardSection>
                         {this.onPhotoSelect()}
