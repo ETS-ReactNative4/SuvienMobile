@@ -10,13 +10,8 @@ class MainMenu extends Component {
         Orientation.lockToLandscape();
         /*
         AsyncStorage.multiRemove(['Pictures', 'Presets', 'temp', 'Tags']);
-        AsyncStorage.setItem('Tags', JSON.stringify(['General']));
-        AsyncStorage.setItem('Presets', JSON.stringify(
-            [{ name: 'general', content: [] }]
-        ));
-        AsyncStorage.setItem('Pictures', JSON.stringify([]));
-        console.log(AsyncStorage.getAllKeys());
         */
+        //console.log(AsyncStorage.getAllKeys());
         this.getFirst();
     }
     onButtonPress() {
@@ -31,7 +26,12 @@ class MainMenu extends Component {
     async getFirst() {
         if (await AsyncStorage.getItem('name') === null && await AsyncStorage.getItem('stage') === null){
             this.setState({ isFirst: true });
-    } else {
+            AsyncStorage.setItem('Tags', JSON.stringify(['General']));
+            AsyncStorage.setItem('Presets', JSON.stringify(
+                [{ name: 'general', content: [] }]
+            ));
+            AsyncStorage.setItem('Pictures', JSON.stringify([]));
+        } else {
         this.setState({ isFirst: false });
     }
     }
