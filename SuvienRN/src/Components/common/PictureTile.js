@@ -1,56 +1,49 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, Image } from 'react-native';
+import { Text, TouchableOpacity, Image, AsyncStorage, View, Modal } from 'react-native';
 import { CardSection } from './CardSection';
-import ImagePicker from 'react-native-image-picker';
+import { Actions } from 'react-native-router-flux';
 
-class PictureTile extends Component { 
-    state = { imageuri: null }
-    onTilePress() {
-        return (
-            ImagePicker.launchImageLibrary(options, (response) => {
-                const source = { uri: response.uri };
-                if (source.uri === undefined) {
-                    source.uri = null;
-                }
-                this.setState({ imageuri: source });
-                console.log(this.state.imageuri);
-            }));
-    }
-    
-    renderPhoto() {
-        if (this.state.imageuri === null) {
-            return (
-            <Text>Click me for pictures!</Text>
-            );
-        }
-        if (this.state.imageuri !== null) {
-            return (
-                <Image source={this.state.imageuri} style={{ height: 200, width: 200 }} />
-            );
-        }
-    }
-    
+class PictureTile extends Component {
+    state = { imageuri: null, caption: null, tag: null, isNull: true }
+
     render() {
-        return (
-            <TouchableOpacity onPress={this.onTilePress.bind(this)}>
-                <CardSection style={{ height: 400 }}>
-                    {this.renderPhoto()}
-                </CardSection>
+        if (this.props.data === null) {
+            return (
+            <TouchableOpacity 
+            onPress={() => {
+                AsyncStorage.setItem('temp', JSON.stringify(
+                    { uniqueID: this.props.unique, uri: { uri: null } }
+                    ));
+                    console.log(this.props.unique);
+                    Actions.MediaExplorer();
+                    }
+                    }
+            >
+                <Image source={require('./nocontent.jpg')} style={this.props.style} />
             </TouchableOpacity>
         );
     }
-    
+    if (this.props.data !== null) {
+        return (
+        <TouchableOpacity 
+            onPress={() => {
+                AsyncStorage.setItem('isSelected', JSON.stringify(
+                { uri: this.props.data.imageuri, 
+                caption: this.props.data.caption, 
+                tag: this.props.data.group,
+                height: this.props.data.height,
+                width: this.props.data.width,
+                isFavourite: this.props.data.isFavourite
+                }));
+                Actions.Media();
+            }
+            }
+        >
+                <Image source={{ uri: this.props.data.imageuri }} style={this.props.style} />
+            </TouchableOpacity>
+        );
+        }
+    }
 }
-
-const options = {
-            title: 'Select Avatar',
-            customButtons: [
-                { name: 'fb', title: 'Choose Photo from Facebook' },
-                ],
-                storageOptions: {
-                    skipBackup: true,
-                    path: 'images'
-                }
-};
 
 export { PictureTile };

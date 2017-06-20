@@ -6,8 +6,8 @@
 	<string></string>
 	<key>kTCCServiceMediaLibrary</key>
 	<string>Suvien would like to request access to your music library</string>
-  <key>NSAppleMusicUsageDescription</key>
-  <string>Suvien would like to request access to your music library</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Suvien would like to request access to your music library</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Suvien would like to request access to your camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -65,7 +65,10 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>ClementePDae-Light.ttf</string>
+		<string>ClementePDag-Book.ttf</string>
 		<string>Roboto-Medium.ttf</string>
+		<string>ClementePDac-ExtraLight.ttf</string>
 	</array>
 </dict>
 </plist>

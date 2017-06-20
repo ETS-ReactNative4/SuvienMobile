@@ -19,15 +19,15 @@ const styles = {
     justifyContent: 'center',
     color: '#4A86E8',
     fontSize: 27, //27 for android
-    fontWeight: '100',
-    fontFamily: 'Roboto',
+    fontWeight: '300',
+    fontFamily: 'ClementePDag-Book',
     paddingTop: 10, //Issues with padding for ios. Is 10 for android
     paddingBottom: 10
   },
   buttonStyle: {
     flex: 1,
+    backgroundColor: 'white',
     alignSelf: 'stretch',
-    backgroundColor: 'transparent',
     borderRadius: 5,
     borderWidth: 1,
     borderColor: '#CCCCCC',
