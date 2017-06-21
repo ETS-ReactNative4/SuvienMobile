@@ -15,7 +15,6 @@ class MainMenu extends Component {
         AsyncStorage.setItem('Media', JSON.stringify([]));
         AsyncStorage.setItem('Pictures', JSON.stringify([]));
         AsyncStorage.setItem('Favourites', JSON.stringify([]));
-        */
         /*
         AsyncStorage.setItem('Videos', JSON.stringify([]));
         AsyncStorage.setItem('Tags', JSON.stringify(['General']));
@@ -70,7 +69,7 @@ class MainMenu extends Component {
                                     </Button>
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
-                                <Text style={{ fontSize: 23, fontFamily: 'ClementePDag-Book' }}>Have questions? Visit our help page!</Text>
+                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>Have questions? Visit our help page!</Text>
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
                                 <View style={{ flex: 150 }}>

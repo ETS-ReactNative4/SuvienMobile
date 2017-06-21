@@ -112,9 +112,10 @@ const RouterComponent = () => (
 
 const styles = {
     titleStyles: {
-        fontFamily: 'ClementePDag-Book',
+        fontFamily: 'Roboto-Thin',
         fontSize: 27,
         fontWeight: '100',
+        justifyContent: 'center'
     }
 };
 

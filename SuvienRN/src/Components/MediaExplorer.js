@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, TouchableOpacity, ScrollView, Text, AsyncStorage } from 'react-native';
+import { View, Image, TouchableOpacity, ScrollView, Text, AsyncStorage, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Button } from './common';
 
@@ -7,12 +7,18 @@ class MediaExplorer extends Component {
     //content://media/external/images/media/379
     //content://media/external/images/media/378
     //content://media/external/images/media/1214
-    state = { isFiltered: false, imageuri: null, tags: null, images: null, filter: null, filteredImages: null }
+    state = { isFiltered: false, imageuri: null, tags: null, images: null, filter: null, filteredImages: null, media: null, height: null, width: null }
     componentWillMount() {
         //console.log('Im in compwillmount');
         this.fetchData();
     }
 
+    componentDidMount() {
+        this.setState({ 
+            height: Dimensions.get('window').height,
+            width: Dimensions.get('window').width 
+        });
+    }
     componentDidUpdate() {
         //console.log('Im in component will update!');
         if (this.state.isFiltered === false && this.state.filter !== null) {
@@ -22,6 +28,9 @@ class MediaExplorer extends Component {
     filterContent() {
         //console.log('Im in filtercontent!')
         //console.log(this.state.filter);
+        if (this.state.filter === 'All') {
+            this.setState({ filteredImages: this.state.media, isFiltered: true });
+        }
         if (this.state.filter === 'Favourites') {
             const filterTags = this.state.images.filter((imagep) => imagep.isFavourite === true);
             this.setState({ filteredImages: [...filterTags], isFiltered: true });
@@ -33,7 +42,7 @@ class MediaExplorer extends Component {
     async fetchData() {
         //console.log('Im in fetch data');
         //console.log(AsyncStorage.getAllKeys());
-        this.setState({ tags: JSON.parse(await AsyncStorage.getItem('Tags')), images: JSON.parse(await AsyncStorage.getItem('Pictures')) });
+        this.setState({ tags: JSON.parse(await AsyncStorage.getItem('Tags')), images: JSON.parse(await AsyncStorage.getItem('Pictures')), media: JSON.parse(await AsyncStorage.getItem('Media')) });
         //console.log(this.state.tags);
         //console.log(this.state.images);
         /*
@@ -54,9 +63,9 @@ class MediaExplorer extends Component {
         if (this.state.tags === null || this.state.tags === []) {
             //console.log('Im null!');
             return (
-                <Text>
-                    There appears to be no tags set. Upload media to apply one!
-                </Text>
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
+                </View>
             );
         }
         if (this.state.tags !== null) {
@@ -76,8 +85,9 @@ class MediaExplorer extends Component {
         const tagged = this.state.tags;
         const allTags = tagged.map((tag) => (
             <TouchableOpacity onPress={() => this.setState({ filter: tag })}>
-                <CardSection>
-                    <Text>
+                <CardSection style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15, marginRight: 15, backgroundColor: '#f9f7f7' }}>
+                    <Image source={require('../Images/tag.png')} style={{ height: 40, width: 40 }} />
+                    <Text style={{ fontSize: 20, fontFamily: 'Roboto-Light', alignSelf: 'flex-end' }}>
                         {tag}
                     </Text>
                 </CardSection>
@@ -86,9 +96,18 @@ class MediaExplorer extends Component {
             //console.log('Ive set the filter to:');
             //console.log(this.state.filter);
         return (
-            [<TouchableOpacity onPress={() => this.setState({ filter: 'Favourites' })}>
-                <CardSection>
-                    <Text>
+            [<TouchableOpacity onPress={() => this.setState({ filter: 'All' })}>
+                <CardSection style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15, marginRight: 15, backgroundColor: '#f9f7f7' }}>
+                    <Image source={require('../Images/tag.png')} style={{ height: 40, width: 40 }} />
+                    <Text style={{ fontSize: 20, fontFamily: 'Roboto-Light', alignSelf: 'flex-end' }}>
+                        All
+                    </Text>
+                </CardSection>
+            </TouchableOpacity>,
+            <TouchableOpacity onPress={() => this.setState({ filter: 'Favourites' })}>
+                <CardSection style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15, marginRight: 15, backgroundColor: '#f9f7f7' }}>
+                    <Image source={require('../Images/tag.png')} style={{ height: 40, width: 40 }} />
+                    <Text style={{ fontSize: 20, fontFamily: 'Roboto-Light', alignSelf: 'flex-end' }}>
                         Favourites
                     </Text>
                 </CardSection>
@@ -98,6 +117,7 @@ class MediaExplorer extends Component {
     }
 
     renderFilterList() {  
+        console.log(this.state.filteredImages);
         //console.log('Im in renderfilterlist');
         const allPhotos = this.state.filteredImages.map((imageu) => (
                 <TouchableOpacity onPress={() => this.setState({ imageuri: imageu.uri })}>
@@ -110,23 +130,38 @@ class MediaExplorer extends Component {
         );
     }
     render() {
+        console.log(this.state.filter);
         if (this.state.isFiltered === false) {
         return (
-            <View style={{ flexDirection: 'row', paddingTop: 15 }}>
+            <View style={{ flexDirection: 'row', paddingTop: 15, backgroundColor: '#f9f7f7', height: this.state.height, width: this.state.width }}>
                 <View style={{ flex: 1 }}>
-                    <Text style={{ fontSize: 27 }}>Search Using a Tag</Text>
-                    {this.renderSideLeft()}
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginLeft: 10 }}>Search Using a Tag</Text>
+                        <Image source={require('../Images/search.png')} style={{ height: 40, width: 40 }} />
+                    </View>
+                    <View style={{ backgroundColor: '#f9f7f7', borderRadius: 10, marginLeft: 5 }}>
+                        {this.renderSideLeft()}
+                    </View>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <Text style={{ fontSize: 27 }}> Upload a new...</Text>
+                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}> Upload a new...</Text>
                     <CardSection>
-                        <Button onPress={() => Actions.AddPhoto()} style={{ height: 300, width: 600 }}>Photo</Button>
+                        <Button onPress={() => Actions.AddPhoto()} style={{ height: 300, width: 600 }}>
+                            Photo
+                            <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
                     </CardSection>
                     <CardSection>
-                        <Button onPress={() => Actions.AddAudio()} style={{ height: 300, width: 600 }}>Audio</Button>
+                        <Button onPress={() => Actions.AddAudio()} style={{ height: 300, width: 600 }}>
+                            Audio
+                            <Image source={require('../Images/audioicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
                     </CardSection>
                     <CardSection>
-                        <Button onPress={() => Actions.AddVideo()} style={{ height: 300, width: 600 }}>Video</Button>
+                        <Button onPress={() => Actions.AddVideo()} style={{ height: 300, width: 600 }}>
+                            Video
+                            <Image source={require('../Images/videoicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
                     </CardSection>
                 </View>
             </View>

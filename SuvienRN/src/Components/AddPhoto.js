@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity } from 'react-native';
+import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import { CardSection, Button, Input } from './common';
 import { Actions } from 'react-native-router-flux';
+import Camera from 'react-native-camera';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null, height: null, width: null, title: null, isFavourite: false } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
-
+    state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back' } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    componentWillMount() {
+        this.setState({ 
+            heightc: Dimensions.get('window').height,
+            widthc: Dimensions.get('window').width 
+        });
+    }
     async onSaveItemPress() {
         const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
         const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
@@ -58,7 +64,7 @@ class AddPhoto extends Component {
 
     onTakePhotoPress() {
         return (
-            console.log('Wee!')
+            this.setState({ isRecording: true })
             /*
             ImagePicker.launchCamera(options, (response) => {
                 const source = { uri: response.uri };
@@ -189,6 +195,26 @@ class AddPhoto extends Component {
         this.setState({ modalVisible: visible });
     }
 
+    takePicture() {
+        console.log('Ive started the capture!');
+        const options = {};
+        //options.location = ...
+        this.camera.capture({ metadata: options })
+        .then((data) => {
+            this.setState({ imageuri: data.path, isRecording: false, height: this.state.heightc, width: this.state.widthc });
+        })
+        .catch(err => console.error(err));
+    }
+
+    onSwitchCameraPress() {
+        if (this.state.cameraType === 'front') {
+            this.setState({ cameraType: 'back' });
+        }
+        if (this.state.cameraType === 'back') {
+            this.setState({ cameraType: 'front' });
+        }
+    }
+
     renderPhotos() {
         console.log(this.state.photos);
         const allphotos = this.state.photos.map((photo) => 
@@ -210,8 +236,8 @@ class AddPhoto extends Component {
     }
 
     render() {
-        console.log('Im rendering!');
-        if (this.state.photos === null || this.state.modalVisible === false) {
+        if (this.state.isRecording === false) {
+            if (this.state.photos === null || this.state.modalVisible === false) {
             return (
                 <ScrollView>
                     <View style={{ marginTop: 60, marginLeft: 80, marginRight: 80 }}>
@@ -263,7 +289,60 @@ class AddPhoto extends Component {
                     </View>
         );
     }
+        }
+        if (this.state.isRecording === true) {
+            return (
+                <View style={styles.container}>
+                    <Camera
+                    ref={(cam) => {
+                    this.camera = cam;
+                    }}
+                    style={styles.preview}
+                    playSoundOnCapture={false}
+                    aspect={Camera.constants.Aspect.fill}
+                    captureMode={Camera.constants.CaptureMode.still}
+                    onFocusChanged={() => {}}
+                    onZoomChanged={() => {}}
+                    type={this.state.cameraType}
+                    >
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
+                            <TouchableWithoutFeedback onPress={this.takePicture.bind(this)}>
+                                <Image source={require('../Images/cameracapture.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
+                                <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                                <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
+                        </View>
+                </View>
+        </Camera>
+      </View>
+    );
+        }
     }
 }
+
+const styles = {
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    color: '#000',
+    padding: 10,
+    margin: 40
+  }
+};
 
 export { AddPhoto };
