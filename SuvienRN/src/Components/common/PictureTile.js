@@ -29,7 +29,8 @@ class PictureTile extends Component {
             <TouchableOpacity 
             onPress={() => {
                 AsyncStorage.setItem('isSelected', JSON.stringify(
-                { uri: this.props.data.imageuri, 
+                { uri: this.props.data.imageuri,
+                title: this.props.data.title, 
                 caption: this.props.data.caption, 
                 tag: this.props.data.group,
                 height: this.props.data.height,

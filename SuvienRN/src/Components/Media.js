@@ -68,7 +68,8 @@ class Media extends Component {
             title: chosen.title,
             mediaType: chosen.mediaType
         });
-        }
+    }
+    console.log(chosen);
     }
 
     componentDidMount() {
@@ -140,6 +141,7 @@ class Media extends Component {
     }
 
     render() {
+        console.log(this.state.title);
         if (this.state.mediaType === null){
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -172,18 +174,20 @@ class Media extends Component {
                 <Image source={require('../Images/picturebackground.png')} style={{ flex: 1, height: null, width: null }}>
                     <View 
                     style={{
-                        backgroundColor: '#a2aebe', 
+                        backgroundColor: '#dee9f7', 
                         height: (newHeight + 100), 
                         flexDirection: 'row', 
                         marginTop: (paddingheight - 50), 
                         alignItems: 'center', 
-                        justifyContent: 'center' 
+                        justifyContent: 'center',
+                        elevation: 5
                         }}
                     >
-                        <View style={{ flexDirection: 'row', height: scheight, backgroundColor: 'transparent', justifyContent: 'center' }}>
+                        <View style={{ flexDirection: 'row', height: scheight, backgroundColor: 'transparent', justifyContent: 'center', elevation: 5 }}>
                             <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: paddingheight, backgroundColor: 'transparent' }}>
                                 <Image source={{ uri: this.state.uri }} style={{ height: newHeight, width: newWidth }} />
                                 <View style={{ height: newHeight, width: 400, backgroundColor: '#a4c0e5' }}>
+                                        <Text style={{ fontSize: 30, fontFamily: 'ClementePDag-Book', backgroundColor: '#b7d6ff', marginTop: 10, marginLeft: 5, marginRight: 5, borderRadius: 5, elevation: 5 }}>{this.state.title}</Text>
                                         <Text style={styles.textHeaderStyle}>Caption</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                         <Text style={styles.textHeaderStyle}>Tag</Text>
@@ -244,6 +248,7 @@ class Media extends Component {
                             <View style={{ height: 400, backgroundColor: '#a4c0e5' }}>
                                 <ScrollView>
                                     <View>
+                                        <Text style={{ fontSize: 30, fontFamily: 'ClementePDag-Book', backgroundColor: '#b7d6ff', marginTop: 10, marginLeft: 5, marginRight: 5, borderRadius: 5 }}>{this.state.title}</Text>
                                         <Text style={styles.textHeaderStyle}>Caption</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                         <Text style={styles.textHeaderStyle}>Tag</Text>
@@ -273,9 +278,10 @@ class Media extends Component {
             fontSize: 25, 
             fontFamily: 'ClementePDag-Book', 
             marginTop: 10, 
-            backgroundColor: 'grey', 
+            backgroundColor: '#b0cdf4', 
             marginLeft: 5, 
             marginRight: 5, 
+            elevation: 5,
             borderTopLeftRadius: 10, 
             borderTopRightRadius: 10
         },
@@ -283,9 +289,10 @@ class Media extends Component {
             fontSize: 20, 
             fontFamily: 'ClementePDag-Book', 
             marginBottom: 10, 
-            backgroundColor: 'white', 
+            backgroundColor: '#b7d6ff', 
             marginLeft: 5, 
             marginRight: 5,
+            elevation: 5,
             borderBottomLeftRadius: 10, 
             borderBottomRightRadius: 10
         },

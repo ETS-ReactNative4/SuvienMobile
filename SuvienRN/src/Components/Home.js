@@ -126,14 +126,7 @@ class Home extends Component {
         const { currentDate, greeting, name, width, sizes, hour, minute, section, aorp } = this.state;
         //console.log(aorp);
         //console.log(this.state.sizes);
-        if (currentDate === null || greeting === null || name === null || hour === null || minute === null || section === null || aorp === null) {
-            return (
-                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
-                </View>
-            );
-        }
-        if (this.state.sizes !== null) {
+        if (this.state.sizes !== null && hour !== null && minute !== null) {
             const newSize = (parseInt(this.state.sizes2) + 30);
             const finalsize = Math.trunc((width - sizes) / 2);
             return (
@@ -165,24 +158,29 @@ class Home extends Component {
     } 
         return (
             <View>
-                <Header>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width }); }}>
-                            <Text style={{ fontSize: 27, fontFamily: 'ClementePDag-Book' }}>{greeting} { name }!</Text>
-                            <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book' }}>It is { currentDate }</Text>
-                        </View>
-                        <View style={{ alignItems: 'flex-end' }}>
-                            <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
+                </View>
+                <View style={{ opacity: 0 }}>
+                    <Header>
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width }); }}>
+                                <Text style={{ fontSize: 27, fontFamily: 'ClementePDag-Book' }}>{greeting} { name }!</Text>
+                                <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book' }}>It is { currentDate }</Text>
+                            </View>
+                            <View style={{ alignItems: 'flex-end' }}>
+                                <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
                                 <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80 }} />
-                            </TouchableWithoutFeedback>
+                                </TouchableWithoutFeedback>
+                            </View>
                         </View>
-                    </View>
-                </Header>
-                <ScrollView>
-                    <View style={{ marginLeft: 15, flexDirection: 'row', flexWrap: 'wrap' }}>
-                        {this.renderTiles()}
-                    </View>
-                </ScrollView>
+                    </Header>
+                    <ScrollView>
+                        <View style={{ marginLeft: 15, flexDirection: 'row', flexWrap: 'wrap' }}>
+                            {this.renderTiles()}
+                        </View>
+                    </ScrollView>
+                </View>
             </View>
         );
     }
