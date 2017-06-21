@@ -22,10 +22,13 @@ class MediaExplorer extends Component {
     filterContent() {
         //console.log('Im in filtercontent!')
         //console.log(this.state.filter);
-        const filterTags = this.state.images.filter((imagep) => {
-                return imagep.group === this.state.filter;
-            });
+        if (this.state.filter === 'Favourites') {
+            const filterTags = this.state.images.filter((imagep) => imagep.isFavourite === true);
             this.setState({ filteredImages: [...filterTags], isFiltered: true });
+        } else {
+            const filterTags = this.state.images.filter((imagep) => imagep.group === this.state.filter);
+            this.setState({ filteredImages: [...filterTags], isFiltered: true });
+        }
     }
     async fetchData() {
         //console.log('Im in fetch data');
@@ -83,20 +86,24 @@ class MediaExplorer extends Component {
             //console.log('Ive set the filter to:');
             //console.log(this.state.filter);
         return (
-            [...allTags]
+            [<TouchableOpacity onPress={() => this.setState({ filter: 'Favourites' })}>
+                <CardSection>
+                    <Text>
+                        Favourites
+                    </Text>
+                </CardSection>
+            </TouchableOpacity>,
+             ...allTags]
         );
     }
 
     renderFilterList() {  
         //console.log('Im in renderfilterlist');
-        console.log(this.state.filteredImages);
-        const allPhotos = this.state.filteredImages.map((imageu) => {
-            return (
+        const allPhotos = this.state.filteredImages.map((imageu) => (
                 <TouchableOpacity onPress={() => this.setState({ imageuri: imageu.uri })}>
                     <Image source={{ uri: imageu.imageuri }} style={{ height: 150, width: 150 }} />
                 </TouchableOpacity>
-            );
-        });
+            ));
         //console.log(this.state.imageuri);
         return (
             [...allPhotos]

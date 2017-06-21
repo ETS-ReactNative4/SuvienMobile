@@ -79,7 +79,6 @@ class Media extends Component {
     }
 
     onHomeReturn() {
-        /*
         if (this.state.mediaType === 'Photo') {
             const myimages = this.state.pictures;
             const loca = myimages.findIndex((element, index, array) => {
@@ -128,7 +127,6 @@ class Media extends Component {
             mymedia[locatio].isFavourite = this.state.isFavourite;
             AsyncStorage.setItem('Media', JSON.stringify(mymedia));
         }
-        */
         Actions.Home();
     }
 
