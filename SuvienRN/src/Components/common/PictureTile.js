@@ -19,7 +19,7 @@ class PictureTile extends Component {
                     }
                     }
             >
-                <Image source={require('./nocontent.jpg')} style={this.props.style} />
+                <Image source={require('./nocontent.png')} style={this.props.style} />
             </TouchableOpacity>
         );
     }

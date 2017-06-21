@@ -131,15 +131,15 @@ class Home extends Component {
             const finalsize = Math.trunc((width - sizes) / 2);
             return (
             <View>
-                <Header style={{ height: newSize }} >
+                <Header>
                     <View style={{ flexDirection: 'row', paddingTop: 15 }}>
                         <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
                             <Image source={this.state.section} style={{ height: 80, width: 80 }} />
-                            <Text style={{ fontSize: 30, fontFamily: 'ClementePDag-Book', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
+                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
                         </View>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
-                            <Text style={{ fontSize: 27, fontFamily: 'ClementePDag-Book' }}>{greeting} { name }!</Text>
-                            <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book' }}>It is { currentDate }</Text>
+                            <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{greeting} { name }!</Text>
+                            <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
                         </View>
                         <View style={{ alignItems: 'flex-end', width: finalsize }}>
                             <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
@@ -165,8 +165,8 @@ class Home extends Component {
                     <Header>
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width }); }}>
-                                <Text style={{ fontSize: 27, fontFamily: 'ClementePDag-Book' }}>{greeting} { name }!</Text>
-                                <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book' }}>It is { currentDate }</Text>
+                                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{greeting} { name }!</Text>
+                                <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
                             </View>
                             <View style={{ alignItems: 'flex-end' }}>
                                 <TouchableWithoutFeedback onPress={() => Actions.Settings()}>

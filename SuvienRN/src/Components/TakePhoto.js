@@ -44,6 +44,7 @@ startRecording() {
             this.camera = cam;
           }}
           style={styles.preview}
+          playSoundOnCapture={false}
           aspect={Camera.constants.Aspect.fill}
           captureMode={Camera.constants.CaptureMode.still}
           onFocusChanged={() => {}}
@@ -52,7 +53,9 @@ startRecording() {
         >
         <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.width, height: this.state.height }}>
           <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.height }}>
-            <Image source={require('../Images/cameracapture.png')} style={{ height: 100, width: 100, marginBottom: 25 }}onPress={this.takePicture.bind(this)} />
+            <TouchableWithoutFeedback onPress={this.takePicture.bind(this)}>
+              <Image source={require('../Images/cameracapture.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+            </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
               <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
             </TouchableWithoutFeedback>
@@ -71,7 +74,10 @@ takePicture() {
     const options = {};
     //options.location = ...
     this.camera.capture({ metadata: options })
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        Actions.AddPhoto();
+      })
       .catch(err => console.error(err));
   }
 }
