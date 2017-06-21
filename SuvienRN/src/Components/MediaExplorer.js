@@ -85,7 +85,7 @@ class MediaExplorer extends Component {
         const tagged = this.state.tags;
         const allTags = tagged.map((tag) => (
             <TouchableOpacity onPress={() => this.setState({ filter: tag })}>
-                <CardSection style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15, marginRight: 15, backgroundColor: '#f9f7f7' }}>
+                <CardSection style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15, marginRight: 15, backgroundColor: 'white' }}>
                     <Image source={require('../Images/tag.png')} style={{ height: 40, width: 40 }} />
                     <Text style={{ fontSize: 20, fontFamily: 'Roboto-Light', alignSelf: 'flex-end' }}>
                         {tag}
@@ -97,7 +97,7 @@ class MediaExplorer extends Component {
             //console.log(this.state.filter);
         return (
             [<TouchableOpacity onPress={() => this.setState({ filter: 'All' })}>
-                <CardSection style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15, marginRight: 15, backgroundColor: '#f9f7f7' }}>
+                <CardSection style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15, marginRight: 15, backgroundColor: 'white' }}>
                     <Image source={require('../Images/tag.png')} style={{ height: 40, width: 40 }} />
                     <Text style={{ fontSize: 20, fontFamily: 'Roboto-Light', alignSelf: 'flex-end' }}>
                         All
@@ -105,7 +105,7 @@ class MediaExplorer extends Component {
                 </CardSection>
             </TouchableOpacity>,
             <TouchableOpacity onPress={() => this.setState({ filter: 'Favourites' })}>
-                <CardSection style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15, marginRight: 15, backgroundColor: '#f9f7f7' }}>
+                <CardSection style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15, marginRight: 15, backgroundColor: 'white' }}>
                     <Image source={require('../Images/tag.png')} style={{ height: 40, width: 40 }} />
                     <Text style={{ fontSize: 20, fontFamily: 'Roboto-Light', alignSelf: 'flex-end' }}>
                         Favourites
@@ -136,28 +136,28 @@ class MediaExplorer extends Component {
             <View style={{ flexDirection: 'row', paddingTop: 15, backgroundColor: '#f9f7f7', height: this.state.height, width: this.state.width }}>
                 <View style={{ flex: 1 }}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginLeft: 10 }}>Search Using a Tag</Text>
+                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginLeft: 10, marginTop: 10, marginBottom: 10 }}>Search Using a Tag</Text>
                         <Image source={require('../Images/search.png')} style={{ height: 40, width: 40 }} />
                     </View>
-                    <View style={{ backgroundColor: '#f9f7f7', borderRadius: 10, marginLeft: 5 }}>
+                    <View style={{ backgroundColor: 'white', borderRadius: 20, marginLeft: 5 }}>
                         {this.renderSideLeft()}
                     </View>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}> Upload a new...</Text>
-                    <CardSection>
+                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginTop: 10, marginBottom: 10 }}> Upload a new...</Text>
+                    <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}>
                         <Button onPress={() => Actions.AddPhoto()} style={{ height: 300, width: 600 }}>
                             Photo
                             <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                     </CardSection>
-                    <CardSection>
+                    <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}>
                         <Button onPress={() => Actions.AddAudio()} style={{ height: 300, width: 600 }}>
                             Audio
                             <Image source={require('../Images/audioicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                     </CardSection>
-                    <CardSection>
+                    <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}>
                         <Button onPress={() => Actions.AddVideo()} style={{ height: 300, width: 600 }}>
                             Video
                             <Image source={require('../Images/videoicon.png')} style={{ height: 30, width: 30 }} />

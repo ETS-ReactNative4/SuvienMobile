@@ -27,9 +27,19 @@ class Media extends Component {
         quality: null,
         error: null,
         currentTime: null,
-        duration: null 
+        duration: null,
+        chosen: null 
     }
     async componentWillMount() {
+        //Note. The orientation issue only persists on android, not ios
+        /*
+        if (this.state.isReady === null) {
+            Orientation.lockToPortrait();
+            Orientation.unlockAllOrientations();
+            Orientation.lockToLandscape();
+        }
+        
+        */
         const chosen = JSON.parse(await AsyncStorage.getItem('isSelected'));
         if (chosen.mediaType === 'Photo'){
         this.setState({ 
@@ -66,10 +76,10 @@ class Media extends Component {
             tag: chosen.tag,
             isFavourite: chosen.isFavourite,
             title: chosen.title,
-            mediaType: chosen.mediaType
+            mediaType: chosen.mediaType,
+            chosen
         });
     }
-    console.log(chosen);
     }
 
     componentDidMount() {
@@ -141,7 +151,7 @@ class Media extends Component {
     }
 
     render() {
-        console.log(this.state.title);
+        console.log(this.state.chosen);
         if (this.state.mediaType === null){
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -217,9 +227,6 @@ class Media extends Component {
             );
         }
             if (uri !== null && imageuri !== null) {
-                Orientation.lockToPortrait();
-                Orientation.unlockAllOrientations();
-                Orientation.lockToLandscape();
             return (
                     <View>
                             <YouTube

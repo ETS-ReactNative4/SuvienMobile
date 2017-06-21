@@ -53,6 +53,7 @@ class PictureTile extends Component {
             onPress={() => {
                 AsyncStorage.setItem('isSelected', JSON.stringify(
                 { uri: this.props.data.videouri,
+                title: this.props.data.title,
                 imageuri: this.props.imageuri, 
                 caption: this.props.data.caption, 
                 tag: this.props.data.group,

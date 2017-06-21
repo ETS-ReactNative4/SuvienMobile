@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity, TouchableWithoutFeedback, Dimensions } from 'react-native';
-import { CardSection, Button, Input } from './common';
+import { CardSection, Button, Input, Header } from './common';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
@@ -239,8 +239,12 @@ class AddPhoto extends Component {
         if (this.state.isRecording === false) {
             if (this.state.photos === null || this.state.modalVisible === false) {
             return (
+                <View style={{ flex: 1 }}>
+                <Header style={{ height: 80 }}>
+                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Add Photo</Text>
+                </Header>
                 <ScrollView>
-                    <View style={{ marginTop: 60, marginLeft: 80, marginRight: 80 }}>
+                    <View style={{ marginTop: 5, marginLeft: 80, marginRight: 80, flex: 1 }}>
                         <CardSection>
                             <Button onPress={this.onTakePhotoPress.bind(this)}>
                                 Take Photo
@@ -262,6 +266,7 @@ class AddPhoto extends Component {
                         {this.onPhotoSelect()}
                     </View>
                 </ScrollView>
+                </View>
         );
     }
         if (this.state.photos !== null && this.state.modalVisible === true) {

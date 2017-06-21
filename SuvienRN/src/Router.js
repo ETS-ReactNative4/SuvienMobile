@@ -76,7 +76,7 @@ const RouterComponent = () => (
             <Scene
             key="AddPhoto"
             component={AddPhoto}
-            hideNavBar={false}
+            hideNavBar
             title="Add Photo"
             titleStyle={styles.titleStyles}
             onLeft={() => {}}

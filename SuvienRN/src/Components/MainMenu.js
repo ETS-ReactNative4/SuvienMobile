@@ -16,6 +16,7 @@ class MainMenu extends Component {
         AsyncStorage.setItem('Pictures', JSON.stringify([]));
         AsyncStorage.setItem('Favourites', JSON.stringify([]));
         /*
+        /*
         AsyncStorage.setItem('Videos', JSON.stringify([]));
         AsyncStorage.setItem('Tags', JSON.stringify(['General']));
         AsyncStorage.setItem('Presets', JSON.stringify(
