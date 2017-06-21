@@ -7,10 +7,9 @@ class AddPhoto extends Component {
     state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null, height: null, width: null, title: null, isFavourite: false } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
 
     async onSaveItemPress() {
-        const namefile = Date.now().toString();
         const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
-        const objec = JSON.parse(await AsyncStorage.getItem('temp'));
-        const gen = JSON.parse(await AsyncStorage.getItem('Presets'));
+        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
         const photos = JSON.parse(await AsyncStorage.getItem('Pictures'));
         photos.push({
             title: this.state.title,
@@ -22,7 +21,7 @@ class AddPhoto extends Component {
             isFavourite: this.state.isFavourite,
             mediaType: 'Photo'
         });
-        gen[0].content.push({
+        gen.push({
             uniqueID: objec.uniqueID, 
             title: this.state.title,
             imageuri: this.state.imageuri, 
@@ -46,11 +45,11 @@ class AddPhoto extends Component {
             mytags.push(this.state.group);
             AsyncStorage.setItem('Tags', JSON.stringify(mytags));
         }
-        AsyncStorage.setItem('temp', JSON.stringify(objec));
-        AsyncStorage.setItem('Presets', JSON.stringify(gen));
+        AsyncStorage.setItem('uniqueID', JSON.stringify(objec));
+        AsyncStorage.setItem('Media', JSON.stringify(gen));
         AsyncStorage.setItem('Pictures', JSON.stringify(photos));
-        console.log(JSON.parse(await AsyncStorage.getItem('temp')));
-        console.log(JSON.parse(await AsyncStorage.getItem('Presets')));
+        console.log(JSON.parse(await AsyncStorage.getItem('uniqueID')));
+        console.log(JSON.parse(await AsyncStorage.getItem('Media')));
         console.log(JSON.parse(await AsyncStorage.getItem('Tags')));
         console.log(JSON.parse(await AsyncStorage.getItem('Pictures')));
         //console.log(JSON.parse(await AsyncStorage.getItem(namefile)));

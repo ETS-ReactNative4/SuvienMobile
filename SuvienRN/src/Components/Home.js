@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Header, PictureTile } from './common';
 
 class Home extends Component {
-    state = { currentDate: null, greeting: null, name: null, width: null, dim: null, sizes: null, hour: null, minute: null, aorp: null, section: null, presets: null, sizes2: null }
+    state = { currentDate: null, greeting: null, name: null, width: null, dim: null, sizes: null, hour: null, minute: null, aorp: null, section: null, media: null, sizes2: null }
     componentWillMount() {
         this.setState({ width: Dimensions.get('window').width });
         this.getInfo();
@@ -68,20 +68,20 @@ class Home extends Component {
     }
 
     async getData() {
-        const ourdata = JSON.parse(await AsyncStorage.getItem('Presets'));
-        if (ourdata[0].content.length > 0) {
-            this.setState({ presets: ourdata });
+        const ourdata = JSON.parse(await AsyncStorage.getItem('Media'));
+        if (ourdata.length > 0) {
+            this.setState({ media: ourdata });
         }
-        if (ourdata[0].content.length === 0) {
-            this.setState({ presets: null });
+        if (ourdata.length === 0) {
+            this.setState({ media: null });
         }
     }
     renderTiles() {
-        if (this.state.presets !== null) {
+        if (this.state.media !== null) {
             const allTiles = [];
             let i;
             for (i = 0; i < 8; i++) {
-                let isFound = this.state.presets[0].content.find((preset) => preset.uniqueID === i);
+                let isFound = this.state.media.find((medi) => medi.uniqueID === i);
                 if (isFound === undefined) {
                     allTiles.push(
                     <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} data={null} unique={i} key={`${i}p`} />
@@ -97,7 +97,7 @@ class Home extends Component {
                 [...allTiles]
             );
         }
-        if (this.state.presets === null) {
+        if (this.state.media === null) {
             const allTiles = [];
             let i;
             for (i = 0; i < 8; i++) {

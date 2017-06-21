@@ -48,7 +48,7 @@ class MediaExplorer extends Component {
     }
 
     renderSideLeft() {
-        if (this.state.tags === null) {
+        if (this.state.tags === null || this.state.tags === []) {
             //console.log('Im null!');
             return (
                 <Text>

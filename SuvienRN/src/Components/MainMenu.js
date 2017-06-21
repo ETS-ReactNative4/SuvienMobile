@@ -9,6 +9,14 @@ class MainMenu extends Component {
     async componentDidMount() {
         Orientation.lockToLandscape();
         /*
+        AsyncStorage.multiRemove(['Pictures', 'Presets', 'temp', 'Tags', 'Videos', 'isSelected']);
+        AsyncStorage.setItem('Videos', JSON.stringify([]));
+        AsyncStorage.setItem('Tags', JSON.stringify([]));
+        AsyncStorage.setItem('Media', JSON.stringify([]));
+        AsyncStorage.setItem('Pictures', JSON.stringify([]));
+        AsyncStorage.setItem('Favourites', JSON.stringify([]));
+        */
+        /*
         AsyncStorage.setItem('Videos', JSON.stringify([]));
         AsyncStorage.setItem('Tags', JSON.stringify(['General']));
         AsyncStorage.setItem('Presets', JSON.stringify(
@@ -16,7 +24,7 @@ class MainMenu extends Component {
         ));
         AsyncStorage.setItem('Pictures', JSON.stringify([]));
         */
-        //AsyncStorage.multiRemove(['Pictures', 'Presets', 'temp', 'Tags', 'Videos', 'isSelected']);
+        //
         //console.log(AsyncStorage.getAllKeys());
         this.getFirst();
     }
@@ -33,11 +41,10 @@ class MainMenu extends Component {
         if (await AsyncStorage.getItem('name') === null && await AsyncStorage.getItem('stage') === null){
             this.setState({ isFirst: true });
             AsyncStorage.setItem('Videos', JSON.stringify([]));
-            AsyncStorage.setItem('Tags', JSON.stringify(['General']));
-            AsyncStorage.setItem('Presets', JSON.stringify(
-                [{ name: 'general', content: [] }]
-            ));
+            AsyncStorage.setItem('Tags', JSON.stringify([]));
+            AsyncStorage.setItem('Media', JSON.stringify([]));
             AsyncStorage.setItem('Pictures', JSON.stringify([]));
+            AsyncStorage.setItem('Favourites', JSON.stringify([]));
         } else {
         this.setState({ isFirst: false });
     }

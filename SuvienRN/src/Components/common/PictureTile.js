@@ -11,8 +11,8 @@ class PictureTile extends Component {
             return (
             <TouchableOpacity 
             onPress={() => {
-                AsyncStorage.setItem('temp', JSON.stringify(
-                    { uniqueID: this.props.unique, uri: { uri: null } }
+                AsyncStorage.setItem('uniqueID', JSON.stringify(
+                    { uniqueID: this.props.unique }
                     ));
                     console.log(this.props.unique);
                     Actions.MediaExplorer();

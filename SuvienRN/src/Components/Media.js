@@ -17,7 +17,7 @@ class Media extends Component {
         isFavourite: null, 
         imagerend: null, 
         pictures: null, 
-        presets: null, 
+        media: null, 
         title: null,
         videos: null, 
         mediaType: null,
@@ -31,14 +31,10 @@ class Media extends Component {
     }
     async componentWillMount() {
         const chosen = JSON.parse(await AsyncStorage.getItem('isSelected'));
-        console.log(chosen);
-        if (chosen === undefined) {
-            console.log('Null!');
-        }
         if (chosen.mediaType === 'Photo'){
         this.setState({ 
             pictures: JSON.parse(await AsyncStorage.getItem('Pictures')),
-            presets: JSON.parse(await AsyncStorage.getItem('Presets')),
+            media: JSON.parse(await AsyncStorage.getItem('Media')),
             uri: chosen.uri, 
             caption: chosen.caption, 
             tag: chosen.tag,
@@ -56,8 +52,7 @@ class Media extends Component {
         }
     }
         if (chosen.mediaType === 'Youtube') {
-        this.setState({ videos: JSON.parse(await AsyncStorage.getItem('Videos')), presets: JSON.parse(await AsyncStorage.getItem('Presets')) });
-        console.log(chosen);
+        this.setState({ videos: JSON.parse(await AsyncStorage.getItem('Videos')), media: JSON.parse(await AsyncStorage.getItem('Media')) });
         if (chosen.isFavourite === false) {
             this.setState({ imagerend: require('../Images/favouritenot.png') });
         }
@@ -85,9 +80,55 @@ class Media extends Component {
 
     onHomeReturn() {
         /*
-        const { pictures, presets, title } = this.state;
-        const image = pictures.filter((picture) => picture.title === title);
-        const location = presets[0].content.indexOf()*/
+        if (this.state.mediaType === 'Photo') {
+            const myimages = this.state.pictures;
+            const loca = myimages.findIndex((element, index, array) => {
+                if (element.imageuri === this.state.uri) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            });
+            myimages[loca].isFavourite = this.state.isFavourite;
+            AsyncStorage.setItem('Pictures', JSON.stringify(myimages));
+            const mymedia = this.state.media;
+            const locati = mymedia.findIndex(((element, index, array) => {
+                if (element.imageuri === this.state.uri) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }));
+            mymedia[locati].isFavourite = this.state.isFavourite;
+            AsyncStorage.setItem('Media', JSON.stringify(mymedia));
+        }
+        if (this.state.mediaType === 'Youtube') {
+            const myvideos = this.state.videos;
+            const locat = myvideos.findIndex((element, index, array) => {
+                if (element.videouri === this.state.uri) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            });
+            myvideos[locat].isFavourite = this.state.isFavourite;
+            AsyncStorage.setItem('Videos', JSON.stringify(myvideos));
+            const mymedia = this.state.media;
+            const locatio = mymedia.findIndex(((element, index, array) => {
+                if (element.videouri === this.state.uri) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }));
+            mymedia[locatio].isFavourite = this.state.isFavourite;
+            AsyncStorage.setItem('Media', JSON.stringify(mymedia));
+        }
+        */
         Actions.Home();
     }
 
@@ -98,11 +139,9 @@ class Media extends Component {
         if (this.state.isFavourite === true) {
             this.setState({ isFavourite: false, imagerend: require('../Images/favouritenot.png')});
         }
-        console.log(this.state.isFavourite);
     }
 
     render() {
-        console.log(this.state.mediaType);
         if (this.state.mediaType === null){
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -133,16 +172,24 @@ class Media extends Component {
 
                 return (
                 <Image source={require('../Images/picturebackground.png')} style={{ flex: 1, height: null, width: null }}>
-                    <View style={styles.imageContainerStyle}>
-                        <View style={styles.imageInnerContainerStyle}>
-                            <View style={styles.imageInnerStyle}>
-                                <Image source={{ uri: this.state.uri }} style={styles.imageStyle} />
-                                <View style={styles.textSideStyle}>
+                    <View 
+                    style={{
+                        backgroundColor: '#a2aebe', 
+                        height: (newHeight + 100), 
+                        flexDirection: 'row', 
+                        marginTop: (paddingheight - 50), 
+                        alignItems: 'center', 
+                        justifyContent: 'center' 
+                        }}
+                    >
+                        <View style={{ flexDirection: 'row', height: scheight, backgroundColor: 'transparent', justifyContent: 'center' }}>
+                            <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: paddingheight, backgroundColor: 'transparent' }}>
+                                <Image source={{ uri: this.state.uri }} style={{ height: newHeight, width: newWidth }} />
+                                <View style={{ height: newHeight, width: 400, backgroundColor: '#a4c0e5' }}>
                                         <Text style={styles.textHeaderStyle}>Caption</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                         <Text style={styles.textHeaderStyle}>Tag</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.tag}</Text>
-                                    <Text style={styles.favouriteImageStyle}>Favourite</Text>
                                     <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                         <Image source={imagerend} style={{ height: 60, width: 60 }} />
                                     </TouchableWithoutFeedback>
@@ -203,7 +250,6 @@ class Media extends Component {
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                         <Text style={styles.textHeaderStyle}>Tag</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.tag}</Text>
-                                        <Text style={{ fontSize: 25, fontFamily: 'ClementePDag-Book' }}>Favourite</Text>
                                         <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                             <Image source={imagerend} style={{ height: 60, width: 60 }} />
                                         </TouchableWithoutFeedback>

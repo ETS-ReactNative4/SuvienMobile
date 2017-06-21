@@ -20,8 +20,8 @@ class AddVideoYoutube extends Component {
     async onSaveItemPress() {
         const { mediaType, videoID, thumbnail, title, caption, group } = this.state;
         const videoobj = JSON.parse(await AsyncStorage.getItem('Videos'));
-        const objec = JSON.parse(await AsyncStorage.getItem('temp'));
-        const gen = JSON.parse(await AsyncStorage.getItem('Presets'));
+        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
         const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
         videoobj.push(
             { 
@@ -34,7 +34,7 @@ class AddVideoYoutube extends Component {
                 isFavourite: false
             }
         );
-        gen[0].content.push({
+        gen.push({
             uniqueID: objec.uniqueID, 
             title,
             videouri: videoID,
@@ -50,7 +50,7 @@ class AddVideoYoutube extends Component {
             AsyncStorage.setItem('Tags', JSON.stringify(mytags));
         }
         AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
-        AsyncStorage.setItem('Presets', JSON.stringify(gen));
+        AsyncStorage.setItem('Media', JSON.stringify(gen));
         console.log(videoobj);
     }
 
