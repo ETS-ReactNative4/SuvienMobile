@@ -8,6 +8,7 @@ class MainMenu extends Component {
     state = { isFirst: null }
     async componentDidMount() {
         Orientation.lockToLandscape();
+        /*
         AsyncStorage.setItem('Acheivement', 'INCOM');
         AsyncStorage.multiRemove(['Pictures', 'Presets', 'temp', 'Tags', 'Videos', 'isSelected']);
         AsyncStorage.setItem('Videos', JSON.stringify([]));
@@ -16,7 +17,6 @@ class MainMenu extends Component {
         AsyncStorage.setItem('Pictures', JSON.stringify([]));
         AsyncStorage.setItem('Favourites', JSON.stringify([]));
         AsyncStorage.setItem('Preset', 'None');
-        /*
         AsyncStorage.multiRemove(['Pictures', 'Presets', 'temp', 'Tags', 'Videos', 'isSelected']);
         AsyncStorage.setItem('Videos', JSON.stringify([]));
         AsyncStorage.setItem('Tags', JSON.stringify([]));

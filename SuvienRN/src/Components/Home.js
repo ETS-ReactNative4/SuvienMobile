@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, AsyncStorage, Text, Dimensions, ScrollView, Modal, TouchableOpacity, Image } from 'react-native';
+import { View, AsyncStorage, Text, Dimensions, ScrollView } from 'react-native';
 import { Header, PictureTile, Button, CardSection } from './common';
 import { Actions } from 'react-native-router-flux';
 import HomeBar from './HomeBar';
+import CongratsModal from './CongratsModal';
 
 class Home extends Component {
     state = { dim: null, media: null, preset: null, tags: null, width: null, acheivement: null }
@@ -45,6 +46,10 @@ class Home extends Component {
     async getData() {
         const ourdata = JSON.parse(await AsyncStorage.getItem('Media'));
         this.setState({ preset: await AsyncStorage.getItem('Preset'), tags: JSON.parse(await AsyncStorage.getItem('Tags')), acheivement: await AsyncStorage.getItem('Acheivement') });
+        if (ourdata.length === 8) {
+            console.log('Im setting it!');
+            AsyncStorage.setItem('Acheivement', 'COM');
+        }
         if (ourdata.length > 0) {
             this.setState({ media: ourdata });
         }
@@ -227,41 +232,10 @@ class Home extends Component {
         //console.log(this.state.minute);;
         //console.log(aorp);
         //console.log(this.state.sizes);
-        if ((this.state.media !== null || this.state.media === []) && this.state.acheivement !== null) {
-            let setModal;
-            if (this.state.acheivement === 'INCOM' && this.state.media.length === 8) {
-                setModal = true;
-            }
-            else {
-                setModal = false;
-            }
+        if ((this.state.media !== null || this.state.media === []) && this.state.acheivement !== null && this.state.acheivement ) {
         return (
             <View style={{ flex: 1 }}>
-                <Modal
-                animationType={"slide"}
-                transparent
-                visible={setModal}
-                onRequestClose={() => {}}
-                >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
-                        <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-                            <Image source={require('../Images/trophy.png')} style={{ height: 300, width: 300 }} />
-                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>Congrats!</Text>
-                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>You've uploaded your first 8 images! You can now chose different filters for the main screen.</Text>
-                            <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
-                                <Button 
-                                onPress={() => {
-                                    setModal = false;
-                                    AsyncStorage.setItem('Acheivement', 'COM');
-                                    Actions.Settings();
-                                }}
-                                >
-                                    Go to settings
-                                </Button>
-                            </CardSection>
-                        </View>
-                    </View>
-                </Modal>
+                <CongratsModal />
                 <Header>
                     <HomeBar />
                 </Header>

@@ -86,7 +86,7 @@ class Settings extends Component {
 
     render() {
         if (this.state.isFirst === false) {
-            if (this.state.acheivement === 'COM') {
+            if (this.state.acheivement === 'COMP') {
                  return (
             <ScrollView>
             <View style={{ marginTop: 80, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
