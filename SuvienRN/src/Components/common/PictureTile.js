@@ -14,7 +14,6 @@ class PictureTile extends Component {
                 AsyncStorage.setItem('uniqueID', JSON.stringify(
                     { uniqueID: this.props.unique }
                     ));
-                    console.log(this.props.unique);
                     Actions.MediaExplorer();
                     }
                     }
@@ -38,7 +37,6 @@ class PictureTile extends Component {
                 isFavourite: this.props.data.isFavourite,
                 mediaType: 'Photo'
                 }));
-                console.log(this.props.data.mediaType);
                 Actions.Media();
             }
             }
@@ -60,7 +58,6 @@ class PictureTile extends Component {
                 isFavourite: this.props.data.isFavourite,
                 mediaType: 'Youtube'
                 }));
-                console.log(this.props.data.mediaType);
                 Actions.Media();
             }
             }

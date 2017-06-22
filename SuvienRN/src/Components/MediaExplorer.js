@@ -117,7 +117,6 @@ class MediaExplorer extends Component {
     }
 
     renderFilterList() {  
-        console.log(this.state.filteredImages);
         //console.log('Im in renderfilterlist');
         const allPhotos = this.state.filteredImages.map((imageu) => (
                 <TouchableOpacity onPress={() => this.setState({ imageuri: imageu.uri })}>
@@ -130,7 +129,6 @@ class MediaExplorer extends Component {
         );
     }
     render() {
-        console.log(this.state.filter);
         if (this.state.isFiltered === false) {
         return (
             <View style={{ flexDirection: 'row', paddingTop: 15, backgroundColor: '#f9f7f7', height: this.state.height, width: this.state.width }}>
