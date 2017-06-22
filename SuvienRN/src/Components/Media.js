@@ -151,11 +151,10 @@ class Media extends Component {
     }
 
     render() {
-        console.log(this.state.chosen);
         if (this.state.mediaType === null){
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
+                    <Text>Loading</Text>
                 </View>  
             );
         }
@@ -164,7 +163,7 @@ class Media extends Component {
             if (scheight === null || width === null || uri === null || caption === null || tag === null || height === null || scwidth === null || isFavourite === null || imagerend === null){
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
+                    <Text>Loading</Text>
                 </View>  
             );
         }
@@ -181,23 +180,22 @@ class Media extends Component {
                 const paddingheight = (scheight - newHeight) / 2;
 
                 return (
-                <Image source={require('../Images/picturebackground.png')} style={{ flex: 1, height: null, width: null }}>
+                <View style={{ flex: 1, height: null, width: null, backgroundColor: '#d5deea' }}>
                     <View 
                     style={{
-                        backgroundColor: '#dee9f7', 
+                        backgroundColor: '#d5deea', 
                         height: (newHeight + 100), 
                         flexDirection: 'row', 
                         marginTop: (paddingheight - 50), 
                         alignItems: 'center', 
                         justifyContent: 'center',
-                        elevation: 5
                         }}
                     >
-                        <View style={{ flexDirection: 'row', height: scheight, backgroundColor: 'transparent', justifyContent: 'center', elevation: 5 }}>
-                            <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: paddingheight, backgroundColor: 'transparent' }}>
+                        <View style={{ flexDirection: 'row', height: scheight, backgroundColor: 'transparent', justifyContent: 'center' }}>
+                            <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: paddingheight, backgroundColor: '#c7d0db' }}>
                                 <Image source={{ uri: this.state.uri }} style={{ height: newHeight, width: newWidth }} />
-                                <View style={{ height: newHeight, width: 400, backgroundColor: '#a4c0e5' }}>
-                                        <Text style={{ fontSize: 30, fontFamily: 'ClementePDag-Book', backgroundColor: '#b7d6ff', marginTop: 10, marginLeft: 5, marginRight: 5, borderRadius: 5, elevation: 5 }}>{this.state.title}</Text>
+                                <View style={{ height: newHeight, width: (scwidth - newWidth), backgroundColor: '#d5deea' }}>
+                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', backgroundColor: '#c7d0db', marginTop: 10, marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
                                         <Text style={styles.textHeaderStyle}>Caption</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                         <Text style={styles.textHeaderStyle}>Tag</Text>
@@ -212,7 +210,7 @@ class Media extends Component {
                             </View>
                         </View>
                     </View>
-                </Image>
+                </View>
             );
             }
         }
@@ -222,7 +220,7 @@ class Media extends Component {
             if (uri === null || caption === null || tag === null || isFavourite === null || imageuri === null || imagerend === null) {
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
+                    <Text>Loading</Text>
                 </View>  
             );
         }
@@ -255,7 +253,7 @@ class Media extends Component {
                             <View style={{ height: 400, backgroundColor: '#a4c0e5' }}>
                                 <ScrollView>
                                     <View>
-                                        <Text style={{ fontSize: 30, fontFamily: 'ClementePDag-Book', backgroundColor: '#b7d6ff', marginTop: 10, marginLeft: 5, marginRight: 5, borderRadius: 5 }}>{this.state.title}</Text>
+                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', backgroundColor: '#b7d6ff', marginTop: 10, marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
                                         <Text style={styles.textHeaderStyle}>Caption</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                         <Text style={styles.textHeaderStyle}>Tag</Text>
@@ -283,28 +281,26 @@ class Media extends Component {
     const styles = {
         textHeaderStyle: {
             fontSize: 25, 
-            fontFamily: 'ClementePDag-Book', 
+            fontFamily: 'Roboto-Light', 
             marginTop: 10, 
-            backgroundColor: '#b0cdf4', 
+            backgroundColor: '#c7d0db', 
             marginLeft: 5, 
             marginRight: 5, 
-            elevation: 5,
-            borderTopLeftRadius: 10, 
-            borderTopRightRadius: 10
+            //borderTopLeftRadius: 10, 
+            //borderTopRightRadius: 10
         },
         textBodyStyle: {
             fontSize: 20, 
-            fontFamily: 'ClementePDag-Book', 
+            fontFamily: 'Roboto-Thin', 
             marginBottom: 10, 
-            backgroundColor: '#b7d6ff', 
+            backgroundColor: '#e3edf9', 
             marginLeft: 5, 
             marginRight: 5,
-            elevation: 5,
-            borderBottomLeftRadius: 10, 
-            borderBottomRightRadius: 10
+            //borderBottomLeftRadius: 10, 
+            //borderBottomRightRadius: 10
         },
         imageContainerStyle: {
-            backgroundColor: '#a2aebe', 
+            backgroundColor: 'black', 
             height: (newHeight + 100), 
             flexDirection: 'row', 
             marginTop: (paddingheight - 50), 

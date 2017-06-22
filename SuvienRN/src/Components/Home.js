@@ -1,64 +1,20 @@
 import React, { Component } from 'react';
-import { View, AsyncStorage, Text, Dimensions, Image, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { View, AsyncStorage, Text, Dimensions, ScrollView, Modal, TouchableOpacity, Image } from 'react-native';
+import { Header, PictureTile, Button, CardSection } from './common';
 import { Actions } from 'react-native-router-flux';
-import { Header, PictureTile } from './common';
+import HomeBar from './HomeBar';
 
 class Home extends Component {
-    state = { currentDate: null, greeting: null, name: null, width: null, dim: null, sizes: null, hour: null, minute: null, aorp: null, section: null, media: null, sizes2: null }
-    componentWillMount() {
+    state = { dim: null, media: null, preset: null, tags: null, width: null, acheivement: null }
+    async componentWillMount() {
         this.setState({ width: Dimensions.get('window').width });
-        this.getInfo();
+        //console.log('Im in componentwillmount!');
         this.getData();
     }
 
     componentDidMount() {
-        this.clockUpdate();
+        //console.log('Im in componentdidmount!');
         this.doMath();
-    }
-
-    async getInfo() {
-        this.setState({ name: await AsyncStorage.getItem('name') });
-        const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        const d = new Date();
-        const numbDay = d.getDay();
-        const numbDate = d.getDate();
-        const numbYear = d.getFullYear();
-        const currentHour = d.getHours();
-        const month = d.getMonth();
-        if (currentHour < 12) {
-            this.setState({ greeting: 'It\'s a lovely morning,', section: require('../Images/morning.png') });
-        }
-        if (currentHour >= 12 && currentHour < 17) {
-            this.setState({ greeting: 'It\'s a lovely afternoon,', section: require('../Images/afternoon.png') });
-        }
-        if (currentHour >= 18 && currentHour < 21) {
-            this.setState({ greeting: 'It\'s a lovely evening,', section: require('../Images/evening.png') });
-        }
-        if (currentHour >= 22) {
-            this.setState({ greeting: 'It\'s a lovely night,', section: require('../Images/night.png') });
-        }
-        this.setState({ currentDate: `${weekday[numbDay]}, ${months[month]} ${numbDate}, ${numbYear}` });
-    }
-    
-    
-    clockUpdate() {
-        setInterval(() => {
-            const dd = new Date();
-            this.setState({ hour: this.parseHour(dd.getHours()), minute: this.addZero(dd.getMinutes()) });
-            if (dd.getHours() < 12) {
-            this.setState({ greeting: 'It\'s a lovely morning,', aorp: 'am', section: require('../Images/morning.png') });
-            }
-            if (dd.getHours() >= 12 && dd.getHours() < 17) {
-            this.setState({ greeting: 'It\'s a lovely afternoon,', aorp: 'pm', section: require('../Images/afternoon.png') });
-            }
-            if (dd.getHours() >= 17 && dd.getHours() < 21) {
-            this.setState({ greeting: 'It\'s a lovely evening,', aorp: 'pm', section: require('../Images/evening.png') });
-            }
-            if (dd.getHours() >= 22) {
-            this.setState({ greeting: 'It\'s a lovely night,', aorp: 'pm', section: require('../Images/night.png') });
-        }
-            }, 1000);
     }
 
     doMath() {
@@ -67,29 +23,56 @@ class Home extends Component {
         this.setState({ dim: pictureDim });
     }
 
+    shuffle(array) {
+        let currentIndex = array.length, 
+        temporaryValue, 
+        randomIndex;
+
+        // While there remain elements to shuffle...
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+        // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
     async getData() {
         const ourdata = JSON.parse(await AsyncStorage.getItem('Media'));
+        this.setState({ preset: await AsyncStorage.getItem('Preset'), tags: JSON.parse(await AsyncStorage.getItem('Tags')), acheivement: await AsyncStorage.getItem('Acheivement') });
         if (ourdata.length > 0) {
             this.setState({ media: ourdata });
         }
         if (ourdata.length === 0) {
-            this.setState({ media: null });
+            this.setState({ media: [] });
         }
     }
+
     renderTiles() {
         if (this.state.media !== null) {
+            if (this.state.preset === 'Date') {
+            const newMedia = this.state.media.reverse();
+            let j;
+            for (j = 0; j < newMedia.length; j++) {
+                newMedia[j].uniqueID = j;
+            }
             const allTiles = [];
             let i;
-            for (i = 0; i < 8; i++) {
-                let isFound = this.state.media.find((medi) => medi.uniqueID === i);
+            for (i = 0; i < newMedia.length; i++) {
+                let isFound = newMedia.find((medi) => medi.uniqueID === i);
                 if (isFound === undefined) {
                     allTiles.push(
-                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} data={null} unique={i} key={`${i}p`} />
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={null} unique={i} key={`${i}p`} />
                 );  
                 }
                 if (isFound !== undefined) {
                     allTiles.push(
-                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} data={isFound} unique={i} key={`${i}p`} />
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} />
                 );
                 }
             }
@@ -97,19 +80,136 @@ class Home extends Component {
                 [...allTiles]
             );
         }
-        if (this.state.media === null) {
+        if (this.state.tags.find((tag) => this.state.preset === tag) !== undefined) {
+            const newMedia = this.state.media.reverse();
+            const filterTags = newMedia.filter((imagep) => imagep.group === this.state.preset);
+            let j;
+            for (j = 0; j < filterTags.length; j++) {
+                filterTags[j].uniqueID = j;
+            }
             const allTiles = [];
             let i;
-            for (i = 0; i < 8; i++) {
-                allTiles.push(
-                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim }} data={null} unique={i} key={`${i}p`} />
+            for (i = 0; i < filterTags.length; i++) {
+                let isFound = filterTags.find((medi) => medi.uniqueID === i);
+                if (isFound === undefined) {
+                    allTiles.push(
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={null} unique={i} key={`${i}p`} />
+                );  
+                }
+                if (isFound !== undefined) {
+                    allTiles.push(
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} />
                 );
+                }
             }
             return (
                 [...allTiles]
             );
+        }
+        if (this.state.preset === 'Favourites') {
+            const newMedia = this.state.media.reverse();
+            const filterTags = newMedia.filter((imagep) => imagep.isFavourite === true);
+            let j;
+            for (j = 0; j < filterTags.length; j++) {
+                filterTags[j].uniqueID = j;
+            }
+            const allTiles = [];
+            let i;
+            for (i = 0; i < filterTags.length; i++) {
+                let isFound = filterTags.find((medi) => medi.uniqueID === i);
+                if (isFound === undefined) {
+                    allTiles.push(
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={null} unique={i} key={`${i}p`} />
+                );  
+                }
+                if (isFound !== undefined) {
+                    allTiles.push(
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} />
+                );
+                }
+            }
+            return (
+                [...allTiles]
+            );
+        }
+
+        if (this.state.preset === 'Random') {
+            const newMedia = this.state.media;
+            const numbarray = [];
+            let k;
+            for (k = 0; k < newMedia.length; k++) {
+                numbarray.push(k);
+            }
+            const randarray = this.shuffle(numbarray);
+            let j;
+            for (j = 0; j < newMedia.length; j++) {
+                newMedia[j].uniqueID = randarray[j];
+            }
+            const allTiles = [];
+            let i;
+            for (i = 0; i < newMedia.length; i++) {
+                let isFound = newMedia.find((medi) => medi.uniqueID === i);
+                if (isFound === undefined) {
+                    allTiles.push(
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={null} unique={i} key={`${i}p`} />
+                );  
+                }
+                if (isFound !== undefined) {
+                    allTiles.push(
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} />
+                );
+                }
+            }
+            return (
+                [...allTiles]
+            );
+        }
+        
+        }
+
+        if (this.state.preset === 'None') {
+            //console.logconsole.log('Im in preset!');
+            if (this.state.media !== null) {
+                //console.log('Im in media not null')
+                const allTiles = [];
+                let i;
+                for (i = 0; i < 8; i++) {
+                    let isFound = this.state.media.find((medi) => medi.uniqueID === i);
+                    if (isFound === undefined) {
+                        allTiles.push(
+                        <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={null} unique={i} key={`${i}p`} />
+                    );  
+                    }
+                    if (isFound !== undefined) {
+                    allTiles.push(
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} />
+                    );
+                    }
+                }
+                //console.log(allTiles);
+                return (
+                    [...allTiles]
+                );
+            }
+            if (this.state.media === null) {
+                const allTiles = [];
+                let i;
+                for (i = 0; i < 8; i++) {
+                    allTiles.push(
+                        <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={null} unique={i} key={`${i}p`} />
+                    );
+                }
+                return (
+                    [...allTiles]
+                );
             }
         }
+        if (this.state.media === null) {
+            return (
+                <View />
+            );
+        }
+    }
     
     parseHour(i) {
         const times = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '8', '9', '10', '11'];
@@ -122,68 +222,63 @@ class Home extends Component {
         return p;
     }
     render() {
-        //console.log(this.state.minute);
-        const { currentDate, greeting, name, width, sizes, hour, minute, section, aorp } = this.state;
+        console.log(this.state.acheivement);
+        //console.log('Im rendering!');
+        //console.log(this.state.minute);;
         //console.log(aorp);
         //console.log(this.state.sizes);
-        if (this.state.sizes !== null && hour !== null && minute !== null) {
-            const newSize = (parseInt(this.state.sizes2) + 30);
-            const finalsize = Math.trunc((width - sizes) / 2);
-            return (
-            <View>
-                <Header>
-                    <View style={{ flexDirection: 'row', paddingTop: 15 }}>
-                        <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
-                            <Image source={this.state.section} style={{ height: 80, width: 80 }} />
-                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
-                        </View>
-                        <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
-                            <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{greeting} { name }!</Text>
-                            <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
-                        </View>
-                        <View style={{ alignItems: 'flex-end', width: finalsize }}>
-                            <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
-                                <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80, marginRight: 30 }} />
-                            </TouchableWithoutFeedback>
+        if ((this.state.media !== null || this.state.media === []) && this.state.acheivement !== null) {
+            let setModal;
+            if (this.state.acheivement === 'INCOM' && this.state.media.length === 8) {
+                setModal = true;
+            }
+            else {
+                setModal = false;
+            }
+        return (
+            <View style={{ flex: 1 }}>
+                <Modal
+                animationType={"slide"}
+                transparent
+                visible={setModal}
+                onRequestClose={() => {}}
+                >
+                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                        <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                            <Image source={require('../Images/trophy.png')} style={{ height: 300, width: 300 }} />
+                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>Congrats!</Text>
+                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>You've uploaded your first 8 images! You can now chose different filters for the main screen.</Text>
+                            <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                                <Button 
+                                onPress={() => {
+                                    setModal = false;
+                                    AsyncStorage.setItem('Acheivement', 'COM');
+                                    Actions.Settings();
+                                }}
+                                >
+                                    Go to settings
+                                </Button>
+                            </CardSection>
                         </View>
                     </View>
+                </Modal>
+                <Header>
+                    <HomeBar />
                 </Header>
-                <ScrollView style={{ paddingTop: 10 }}>
-                    <View style={{ marginLeft: 15, flexDirection: 'row', flexWrap: 'wrap' }}>
+                <ScrollView>
+                    <View style={{ marginLeft: 15, flexDirection: 'row', flexWrap: 'wrap', flex: 1, paddingTop: 10 }}>
                         {this.renderTiles()}
                     </View>
                 </ScrollView>
             </View>
         );
-    } 
-        return (
-            <View>
-                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
-                </View>
-                <View style={{ opacity: 0 }}>
-                    <Header>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width }); }}>
-                                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{greeting} { name }!</Text>
-                                <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
-                            </View>
-                            <View style={{ alignItems: 'flex-end' }}>
-                                <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
-                                <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80 }} />
-                                </TouchableWithoutFeedback>
-                            </View>
-                        </View>
-                    </Header>
-                    <ScrollView>
-                        <View style={{ marginLeft: 15, flexDirection: 'row', flexWrap: 'wrap' }}>
-                            {this.renderTiles()}
-                        </View>
-                    </ScrollView>
-                </View>
-            </View>
-        );
     }
-}
+        if (this.state.media === null && this.state.media !== []) {
+            return (
+                <Text>Loading</Text>
+            );
+        }
+    } 
+    }
 
 export { Home };

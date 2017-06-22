@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { Text, View, AsyncStorage, Image } from 'react-native';
+import { Text, View, AsyncStorage, Image, ScrollView } from 'react-native';
 import { CardSection, Input, Button } from './common';
 import RadioForm from 'react-native-simple-radio-button';
 import { Actions } from 'react-native-router-flux';
 
 class Settings extends Component {
-    state = { name: '', stage: null, isFirst: false };
+    state = { name: '', stage: null, isFirst: false, acheivement: null };
     async componentWillMount() {
         if (await AsyncStorage.getItem('name') !== null) {
             this.setState({ 
                 name: await AsyncStorage.getItem('name'), 
-                stage: await AsyncStorage.getItem('stage') 
+                stage: await AsyncStorage.getItem('stage'),
+                acheivement: await AsyncStorage.getItem('Acheivement') 
             });
         }
         if (await AsyncStorage.getItem('name') === null) {
@@ -85,7 +86,9 @@ class Settings extends Component {
 
     render() {
         if (this.state.isFirst === false) {
-        return (
+            if (this.state.acheivement === 'COM') {
+                 return (
+            <ScrollView>
             <View style={{ marginTop: 80, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>Edit Information</Text>
@@ -120,9 +123,51 @@ class Settings extends Component {
                 <CardSection>
                     <Button onPress={this.onAudioButtonPress.bind(this)}>Audio</Button>
                 </CardSection>
+                <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30, fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>View Media by...</Text>
+                <CardSection>
+                    <Button 
+                    onPress={() => {
+                        AsyncStorage.setItem('Preset', 'Date');
+                        Actions.Home();
+                        }}
+                    >Sort by Date
+                    </Button>
+                </CardSection>
+                <CardSection>
+                    <Button 
+                    onPress={() => {
+                        Actions.TagSelect();
+                        }}
+                    >Sort by Tag
+                    </Button>
+                </CardSection>
+                <CardSection>
+                    <Button 
+                    onPress={() => {
+                        AsyncStorage.setItem('Preset', 'Favourites');
+                        Actions.Home();
+                        }}
+                    >Sort by Favourites
+                    </Button>
+                </CardSection>
+                <CardSection>
+                    <Button 
+                    onPress={() => {
+                        AsyncStorage.setItem('Preset', 'Random');
+                        Actions.Home();
+                        }}
+                    >Random
+                    </Button>
+                </CardSection>
             </View>
+            </ScrollView>
         );
-    }
+            } else {
+                return (
+                    <View />
+                );
+            }
+       }
     if (this.state.isFirst === true) {
         return (
             <View style={{ marginTop: 80, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
