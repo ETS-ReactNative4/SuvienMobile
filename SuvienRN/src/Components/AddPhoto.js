@@ -54,10 +54,6 @@ class AddPhoto extends Component {
         AsyncStorage.setItem('uniqueID', JSON.stringify(objec));
         AsyncStorage.setItem('Media', JSON.stringify(gen));
         AsyncStorage.setItem('Pictures', JSON.stringify(photos));
-        console.log(JSON.parse(await AsyncStorage.getItem('uniqueID')));
-        console.log(JSON.parse(await AsyncStorage.getItem('Media')));
-        console.log(JSON.parse(await AsyncStorage.getItem('Tags')));
-        console.log(JSON.parse(await AsyncStorage.getItem('Pictures')));
         //console.log(JSON.parse(await AsyncStorage.getItem(namefile)));
         Actions.Home();
     }
@@ -82,7 +78,6 @@ class AddPhoto extends Component {
                 assetType: 'All'
             })
             .then(r => this.setState({ photos: r.edges, imageuri: { uri: r.edges[0].node.image.uri } }));
-            console.log(this.state.photos);
     }
 
     onChoosePhotoPress() {
@@ -144,8 +139,6 @@ class AddPhoto extends Component {
             );
         }
         if (this.state.imageuri !== null) {
-            console.log('I have an image uri! Its:');
-            console.log(this.state.imageuri);
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
@@ -196,7 +189,6 @@ class AddPhoto extends Component {
     }
 
     takePicture() {
-        console.log('Ive started the capture!');
         const options = {};
         //options.location = ...
         this.camera.capture({ metadata: options })
@@ -216,7 +208,6 @@ class AddPhoto extends Component {
     }
 
     renderPhotos() {
-        console.log(this.state.photos);
         const allphotos = this.state.photos.map((photo) => 
             //For future applications, long press may prove to be more user friendly
              (
@@ -276,7 +267,7 @@ class AddPhoto extends Component {
                         animationType={'fade'}
                         transparent
                         visible={this.state.modalVisible}
-                        onRequestClose={() => console.log('Modal has been closed')}
+                        onRequestClose={() => {}}
                     >
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                                 <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center' }}>
