@@ -23,7 +23,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		147A696F15214C48A9DDC590 /* ClementePDac-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 315018080580419CB4DA2039 /* ClementePDac-ExtraLight.ttf */; };
 		1988736B27484D039F9A92DE /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9F0D82BF555427A98D05537 /* libRCTOrientation.a */; };
 		250D0C83BBC94D9BB81F89CD /* libRNReactNativeMusicplayercontroller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69ABDCC154B64C4F872708B9 /* libRNReactNativeMusicplayercontroller.a */; };
 		2C05399577CB4E899A8151F4 /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AF9C0D2D504AC49EC01203 /* libRCTYouTube.a */; };
@@ -42,15 +41,27 @@
 		50958FC2713C4043A2DF8665 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2201807E9FA7490D9F933BDA /* libRCTVideo.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6917A18CA0C240B88EB36C6E /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3541B4E2DCDC4E6E89323488 /* libRCTCamera.a */; };
+		7408C6061EFAFB7700F952B2 /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6021EFAFB7700F952B2 /* ClementePDag-Book.ttf */; };
+		7408C6071EFAFB7700F952B2 /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6021EFAFB7700F952B2 /* ClementePDag-Book.ttf */; };
+		7408C6081EFAFB7700F952B2 /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6021EFAFB7700F952B2 /* ClementePDag-Book.ttf */; };
+		7408C6091EFAFB7700F952B2 /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6021EFAFB7700F952B2 /* ClementePDag-Book.ttf */; };
+		7408C60A1EFAFB7700F952B2 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6031EFAFB7700F952B2 /* Roboto-Light.ttf */; };
+		7408C60B1EFAFB7700F952B2 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6031EFAFB7700F952B2 /* Roboto-Light.ttf */; };
+		7408C60C1EFAFB7700F952B2 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6031EFAFB7700F952B2 /* Roboto-Light.ttf */; };
+		7408C60D1EFAFB7700F952B2 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6031EFAFB7700F952B2 /* Roboto-Light.ttf */; };
+		7408C60E1EFAFB7700F952B2 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6041EFAFB7700F952B2 /* Roboto-Thin.ttf */; };
+		7408C60F1EFAFB7700F952B2 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6041EFAFB7700F952B2 /* Roboto-Thin.ttf */; };
+		7408C6101EFAFB7700F952B2 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6041EFAFB7700F952B2 /* Roboto-Thin.ttf */; };
+		7408C6111EFAFB7700F952B2 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6041EFAFB7700F952B2 /* Roboto-Thin.ttf */; };
+		7408C6121EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6051EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf */; };
+		7408C6131EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6051EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf */; };
+		7408C6141EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6051EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf */; };
+		7408C6151EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6051EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf */; };
 		7462BA811EE72A9200DB279F /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7462BA801EE72A9100DB279F /* Roboto-Medium.ttf */; };
 		74FAC1EB1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */; };
 		74FAC1EC1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */; };
 		74FAC1ED1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */; };
 		74FAC1EE1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */; };
-		74FAC2101EF1671100F4E4FC /* ClementePDae-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC20F1EF1671100F4E4FC /* ClementePDae-Light.ttf */; };
-		74FAC2111EF1671100F4E4FC /* ClementePDae-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC20F1EF1671100F4E4FC /* ClementePDae-Light.ttf */; };
-		74FAC2121EF1671100F4E4FC /* ClementePDae-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC20F1EF1671100F4E4FC /* ClementePDae-Light.ttf */; };
-		74FAC2131EF1671100F4E4FC /* ClementePDae-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC20F1EF1671100F4E4FC /* ClementePDae-Light.ttf */; };
 		74FECB191EEED0C600934A37 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FECB181EEED08700934A37 /* libRCTCameraRoll.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A76C341F7C54410BAFD86D9A /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B86F2633424C4AFC8724720B /* libRNImagePicker.a */; };
@@ -327,6 +338,10 @@
 		55219E0736DA49B3BA478EA5 /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOrientation.xcodeproj; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		69ABDCC154B64C4F872708B9 /* libRNReactNativeMusicplayercontroller.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReactNativeMusicplayercontroller.a; sourceTree = "<group>"; };
+		7408C6021EFAFB7700F952B2 /* ClementePDag-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ClementePDag-Book.ttf"; sourceTree = "<group>"; };
+		7408C6031EFAFB7700F952B2 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		7408C6041EFAFB7700F952B2 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		7408C6051EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UltimaPDac-UltraLight.ttf"; sourceTree = "<group>"; };
 		7462BA801EE72A9100DB279F /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "../../../../../Downloads/Roboto/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClementePDag-Book.ttf"; path = "../android/app/src/main/assets/fonts/ClementePDag-Book.ttf"; sourceTree = "<group>"; };
 		74FAC20F1EF1671100F4E4FC /* ClementePDae-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClementePDae-Light.ttf"; path = "../android/app/src/main/assets/fonts/ClementePDae-Light.ttf"; sourceTree = "<group>"; };
@@ -618,6 +633,10 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				7408C6021EFAFB7700F952B2 /* ClementePDag-Book.ttf */,
+				7408C6031EFAFB7700F952B2 /* Roboto-Light.ttf */,
+				7408C6041EFAFB7700F952B2 /* Roboto-Thin.ttf */,
+				7408C6051EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf */,
 				7462BA801EE72A9100DB279F /* Roboto-Medium.ttf */,
 				13B07FAE1A68108700A75B9A /* SuvienRN */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -1081,7 +1100,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74FAC2111EF1671100F4E4FC /* ClementePDae-Light.ttf in Resources */,
+				7408C6071EFAFB7700F952B2 /* ClementePDag-Book.ttf in Resources */,
+				7408C60B1EFAFB7700F952B2 /* Roboto-Light.ttf in Resources */,
+				7408C60F1EFAFB7700F952B2 /* Roboto-Thin.ttf in Resources */,
+				7408C6131EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf in Resources */,
 				74FAC1EC1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1092,11 +1114,13 @@
 			files = (
 				7462BA811EE72A9200DB279F /* Roboto-Medium.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				74FAC2101EF1671100F4E4FC /* ClementePDae-Light.ttf in Resources */,
+				7408C6061EFAFB7700F952B2 /* ClementePDag-Book.ttf in Resources */,
+				7408C6121EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				0219E0EEC8E646C4B7C4CA44 /* YTPlayerView-iframe-player.html in Resources */,
 				74FAC1EB1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */,
-				147A696F15214C48A9DDC590 /* ClementePDac-ExtraLight.ttf in Resources */,
+				7408C60E1EFAFB7700F952B2 /* Roboto-Thin.ttf in Resources */,
+				7408C60A1EFAFB7700F952B2 /* Roboto-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1104,8 +1128,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74FAC2121EF1671100F4E4FC /* ClementePDae-Light.ttf in Resources */,
 				74FAC1ED1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */,
+				7408C6101EFAFB7700F952B2 /* Roboto-Thin.ttf in Resources */,
+				7408C60C1EFAFB7700F952B2 /* Roboto-Light.ttf in Resources */,
+				7408C6141EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf in Resources */,
+				7408C6081EFAFB7700F952B2 /* ClementePDag-Book.ttf in Resources */,
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1114,7 +1141,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74FAC2131EF1671100F4E4FC /* ClementePDae-Light.ttf in Resources */,
+				7408C6091EFAFB7700F952B2 /* ClementePDag-Book.ttf in Resources */,
+				7408C60D1EFAFB7700F952B2 /* Roboto-Light.ttf in Resources */,
+				7408C6111EFAFB7700F952B2 /* Roboto-Thin.ttf in Resources */,
+				7408C6151EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf in Resources */,
 				74FAC1EE1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

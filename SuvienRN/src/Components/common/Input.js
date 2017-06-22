@@ -25,7 +25,7 @@ const styles = {
     marginRight: 100,
     marginLeft: 5,
     fontSize: 20,
-    fontFamily: 'Roboto',
+    fontFamily: 'Roboto-Light',
     paddingTop: 3,
     flex: 6
   },
@@ -33,7 +33,7 @@ const styles = {
     fontSize: 23, //20 on android
     marginLeft: 100,
     flex: 1,
-    fontFamily: 'ClementePDag-Book',
+    fontFamily: 'Roboto-Light',
     marginBottom: 7
   },
   containerStyle: {

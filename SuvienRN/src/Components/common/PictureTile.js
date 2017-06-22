@@ -11,30 +11,56 @@ class PictureTile extends Component {
             return (
             <TouchableOpacity 
             onPress={() => {
-                AsyncStorage.setItem('temp', JSON.stringify(
-                    { uniqueID: this.props.unique, uri: { uri: null } }
+                AsyncStorage.setItem('uniqueID', JSON.stringify(
+                    { uniqueID: this.props.unique }
                     ));
                     console.log(this.props.unique);
                     Actions.MediaExplorer();
                     }
                     }
             >
-                <Image source={require('./nocontent.jpg')} style={this.props.style} />
+                <Image source={require('./nocontent.png')} style={this.props.style} />
             </TouchableOpacity>
         );
     }
     if (this.props.data !== null) {
-        return (
-        <TouchableOpacity 
+        if (this.props.data.mediaType === 'Photo'){
+            return (
+            <TouchableOpacity 
             onPress={() => {
                 AsyncStorage.setItem('isSelected', JSON.stringify(
-                { uri: this.props.data.imageuri, 
+                { uri: this.props.data.imageuri,
+                title: this.props.data.title, 
                 caption: this.props.data.caption, 
                 tag: this.props.data.group,
                 height: this.props.data.height,
                 width: this.props.data.width,
-                isFavourite: this.props.data.isFavourite
+                isFavourite: this.props.data.isFavourite,
+                mediaType: 'Photo'
                 }));
+                console.log(this.props.data.mediaType);
+                Actions.Media();
+            }
+            }
+            >
+                <Image source={{ uri: this.props.data.imageuri }} style={this.props.style} />
+            </TouchableOpacity>
+        );
+    }
+    if (this.props.data.mediaType === 'Youtube') {
+        return (
+        <TouchableOpacity 
+            onPress={() => {
+                AsyncStorage.setItem('isSelected', JSON.stringify(
+                { uri: this.props.data.videouri,
+                title: this.props.data.title,
+                imageuri: this.props.imageuri, 
+                caption: this.props.data.caption, 
+                tag: this.props.data.group,
+                isFavourite: this.props.data.isFavourite,
+                mediaType: 'Youtube'
+                }));
+                console.log(this.props.data.mediaType);
                 Actions.Media();
             }
             }
@@ -42,6 +68,7 @@ class PictureTile extends Component {
                 <Image source={{ uri: this.props.data.imageuri }} style={this.props.style} />
             </TouchableOpacity>
         );
+    }
         }
     }
 }

@@ -88,7 +88,7 @@ class Settings extends Component {
         return (
             <View style={{ marginTop: 80, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'ClementePDae-Light' }}>Edit Information</Text>
+                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>Edit Information</Text>
                     <Image source={require('../Images/infoicon.jpg')} style={{ marginLeft: 10, height: 30, width: 30 }} />
                 </View>
                 <CardSection>
@@ -108,8 +108,8 @@ class Settings extends Component {
                     </Button>
                 </CardSection>
                 <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-                    <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30, fontFamily: 'ClementePDae-Light' }}>Upload a new...</Text>
-                    <Image source={require('../Images/multimedia.jpg')} style={{ marginLeft: 5, height: 30, width: 90 }} />
+                    <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30, fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>Upload a new...</Text>
+                    <Image source={require('../Images/multimedia.png')} style={{ marginLeft: 5, height: 30, width: 90 }} />
                 </View>
                 <CardSection>
                     <Button onPress={this.onPhotoButtonPress.bind(this)}>Photo</Button>
@@ -163,7 +163,7 @@ const styles = {
         marginLeft: 100,
         flex: 1,
         alignSelf: 'center',
-        fontFamily: 'ClementePDag-Book'
+        fontFamily: 'Roboto-Light'
     }
 };
 export { Settings };

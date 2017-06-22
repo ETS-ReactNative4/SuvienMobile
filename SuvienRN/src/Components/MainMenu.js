@@ -9,8 +9,22 @@ class MainMenu extends Component {
     async componentDidMount() {
         Orientation.lockToLandscape();
         /*
-        AsyncStorage.multiRemove(['Pictures', 'Presets', 'temp', 'Tags']);
+        AsyncStorage.multiRemove(['Pictures', 'Presets', 'temp', 'Tags', 'Videos', 'isSelected']);
+        AsyncStorage.setItem('Videos', JSON.stringify([]));
+        AsyncStorage.setItem('Tags', JSON.stringify([]));
+        AsyncStorage.setItem('Media', JSON.stringify([]));
+        AsyncStorage.setItem('Pictures', JSON.stringify([]));
+        AsyncStorage.setItem('Favourites', JSON.stringify([]));
+        /*
+        /*
+        AsyncStorage.setItem('Videos', JSON.stringify([]));
+        AsyncStorage.setItem('Tags', JSON.stringify(['General']));
+        AsyncStorage.setItem('Presets', JSON.stringify(
+                [{ name: 'general', content: [] }]
+        ));
+        AsyncStorage.setItem('Pictures', JSON.stringify([]));
         */
+        //
         //console.log(AsyncStorage.getAllKeys());
         this.getFirst();
     }
@@ -26,11 +40,11 @@ class MainMenu extends Component {
     async getFirst() {
         if (await AsyncStorage.getItem('name') === null && await AsyncStorage.getItem('stage') === null){
             this.setState({ isFirst: true });
-            AsyncStorage.setItem('Tags', JSON.stringify(['General']));
-            AsyncStorage.setItem('Presets', JSON.stringify(
-                [{ name: 'general', content: [] }]
-            ));
+            AsyncStorage.setItem('Videos', JSON.stringify([]));
+            AsyncStorage.setItem('Tags', JSON.stringify([]));
+            AsyncStorage.setItem('Media', JSON.stringify([]));
             AsyncStorage.setItem('Pictures', JSON.stringify([]));
+            AsyncStorage.setItem('Favourites', JSON.stringify([]));
         } else {
         this.setState({ isFirst: false });
     }
@@ -56,7 +70,7 @@ class MainMenu extends Component {
                                     </Button>
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
-                                <Text style={{ fontSize: 23, fontFamily: 'ClementePDag-Book' }}>Have questions? Visit our help page!</Text>
+                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>Have questions? Visit our help page!</Text>
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
                                 <View style={{ flex: 150 }}>

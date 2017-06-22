@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
-import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity } from 'react-native';
-import { CardSection, Button, Input } from './common';
+import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity, TouchableWithoutFeedback, Dimensions } from 'react-native';
+import { CardSection, Button, Input, Header } from './common';
 import { Actions } from 'react-native-router-flux';
+import Camera from 'react-native-camera';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null, height: null, width: null, title: null, isFavourite: false } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
-
+    state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back' } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    componentWillMount() {
+        this.setState({ 
+            heightc: Dimensions.get('window').height,
+            widthc: Dimensions.get('window').width 
+        });
+    }
     async onSaveItemPress() {
-        const namefile = Date.now().toString();
         const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
-        const objec = JSON.parse(await AsyncStorage.getItem('temp'));
-        const gen = JSON.parse(await AsyncStorage.getItem('Presets'));
+        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
         const photos = JSON.parse(await AsyncStorage.getItem('Pictures'));
         photos.push({
             title: this.state.title,
@@ -19,9 +24,10 @@ class AddPhoto extends Component {
             group: this.state.group,
             height: this.state.height,
             width: this.state.width,
-            isFavourite: this.state.isFavourite
+            isFavourite: this.state.isFavourite,
+            mediaType: 'Photo'
         });
-        gen[0].content.push({
+        gen.push({
             uniqueID: objec.uniqueID, 
             title: this.state.title,
             imageuri: this.state.imageuri, 
@@ -29,7 +35,8 @@ class AddPhoto extends Component {
             group: this.state.group,
             height: this.state.height,
             width: this.state.width,
-            isFavourite: this.state.isFavourite
+            isFavourite: this.state.isFavourite,
+            mediaType: 'Photo'
         });
         objec.uri = this.state.imageuri;
         objec.title = this.state.title;
@@ -38,16 +45,17 @@ class AddPhoto extends Component {
         objec.height = this.state.height;
         objec.width = this.state.width;
         objec.isFavourite = this.state.isFavourite;
+        objec.mediaType = 'Photo';
         const findTags = mytags.find((tag) => tag === this.state.group);
         if (findTags === undefined) {
             mytags.push(this.state.group);
             AsyncStorage.setItem('Tags', JSON.stringify(mytags));
         }
-        AsyncStorage.setItem('temp', JSON.stringify(objec));
-        AsyncStorage.setItem('Presets', JSON.stringify(gen));
+        AsyncStorage.setItem('uniqueID', JSON.stringify(objec));
+        AsyncStorage.setItem('Media', JSON.stringify(gen));
         AsyncStorage.setItem('Pictures', JSON.stringify(photos));
-        console.log(JSON.parse(await AsyncStorage.getItem('temp')));
-        console.log(JSON.parse(await AsyncStorage.getItem('Presets')));
+        console.log(JSON.parse(await AsyncStorage.getItem('uniqueID')));
+        console.log(JSON.parse(await AsyncStorage.getItem('Media')));
         console.log(JSON.parse(await AsyncStorage.getItem('Tags')));
         console.log(JSON.parse(await AsyncStorage.getItem('Pictures')));
         //console.log(JSON.parse(await AsyncStorage.getItem(namefile)));
@@ -56,7 +64,7 @@ class AddPhoto extends Component {
 
     onTakePhotoPress() {
         return (
-            console.log('Wee!')
+            this.setState({ isRecording: true })
             /*
             ImagePicker.launchCamera(options, (response) => {
                 const source = { uri: response.uri };
@@ -124,7 +132,7 @@ class AddPhoto extends Component {
                     <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
                             Save and Continue
-                            <Image source={require('../Images/saveicon.jpg')} style={{ height: 30, width: 40 }} />
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 40 }} />
                         </Button>
                     </CardSection>
                     <CardSection>
@@ -170,7 +178,7 @@ class AddPhoto extends Component {
                     <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
                             Save and Continue
-                            <Image source={require('../Images/saveicon.jpg')} style={{ height: 30, width: 40 }} />
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 40 }} />
                         </Button>
                     </CardSection>
                     <CardSection>
@@ -185,6 +193,26 @@ class AddPhoto extends Component {
     
     setModalVisible(visible) {
         this.setState({ modalVisible: visible });
+    }
+
+    takePicture() {
+        console.log('Ive started the capture!');
+        const options = {};
+        //options.location = ...
+        this.camera.capture({ metadata: options })
+        .then((data) => {
+            this.setState({ imageuri: data.path, isRecording: false, height: this.state.heightc, width: this.state.widthc });
+        })
+        .catch(err => console.error(err));
+    }
+
+    onSwitchCameraPress() {
+        if (this.state.cameraType === 'front') {
+            this.setState({ cameraType: 'back' });
+        }
+        if (this.state.cameraType === 'back') {
+            this.setState({ cameraType: 'front' });
+        }
     }
 
     renderPhotos() {
@@ -208,11 +236,15 @@ class AddPhoto extends Component {
     }
 
     render() {
-        console.log('Im rendering!');
-        if (this.state.photos === null || this.state.modalVisible === false) {
+        if (this.state.isRecording === false) {
+            if (this.state.photos === null || this.state.modalVisible === false) {
             return (
+                <View style={{ flex: 1 }}>
+                <Header style={{ height: 80 }}>
+                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Add Photo</Text>
+                </Header>
                 <ScrollView>
-                    <View style={{ marginTop: 60, marginLeft: 80, marginRight: 80 }}>
+                    <View style={{ marginTop: 5, marginLeft: 80, marginRight: 80, flex: 1 }}>
                         <CardSection>
                             <Button onPress={this.onTakePhotoPress.bind(this)}>
                                 Take Photo
@@ -222,18 +254,19 @@ class AddPhoto extends Component {
                         <CardSection>
                             <Button onPress={this.onChoosePhotoPress.bind(this)}>
                                 Choose from Photo Library
-                                <Image source={require('../Images/choosefromlibrary.jpg')} style={{ height: 30, width: 40 }} />
+                                <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
                             </Button>
                         </CardSection>
                         <CardSection>
                             <Button onPress={this.onPressPhotos.bind(this)}>
                                 Add from web using Image URL
-                                <Image source={require('../Images/webicon.jpg')} style={{ height: 30, width: 40 }} />
+                                <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                             </Button>
                         </CardSection>
                         {this.onPhotoSelect()}
                     </View>
                 </ScrollView>
+                </View>
         );
     }
         if (this.state.photos !== null && this.state.modalVisible === true) {
@@ -261,7 +294,60 @@ class AddPhoto extends Component {
                     </View>
         );
     }
+        }
+        if (this.state.isRecording === true) {
+            return (
+                <View style={styles.container}>
+                    <Camera
+                    ref={(cam) => {
+                    this.camera = cam;
+                    }}
+                    style={styles.preview}
+                    playSoundOnCapture={false}
+                    aspect={Camera.constants.Aspect.fill}
+                    captureMode={Camera.constants.CaptureMode.still}
+                    onFocusChanged={() => {}}
+                    onZoomChanged={() => {}}
+                    type={this.state.cameraType}
+                    >
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
+                            <TouchableWithoutFeedback onPress={this.takePicture.bind(this)}>
+                                <Image source={require('../Images/cameracapture.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
+                                <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                                <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
+                        </View>
+                </View>
+        </Camera>
+      </View>
+    );
+        }
     }
 }
+
+const styles = {
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    color: '#000',
+    padding: 10,
+    margin: 40
+  }
+};
 
 export { AddPhoto };

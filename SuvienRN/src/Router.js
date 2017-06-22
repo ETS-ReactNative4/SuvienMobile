@@ -19,6 +19,7 @@ import CameraRollTest from './Components/CameraRollTest';
 import TimerTest from './Components/TimerTest';
 import TakePhoto from './Components/TakePhoto';
 import Test from './Components/Test';
+import AddVideoYoutube from './Components/AddVideoYoutube';
 
 const RouterComponent = () => (
         <Router
@@ -75,7 +76,7 @@ const RouterComponent = () => (
             <Scene
             key="AddPhoto"
             component={AddPhoto}
-            hideNavBar={false}
+            hideNavBar
             title="Add Photo"
             titleStyle={styles.titleStyles}
             onLeft={() => {}}
@@ -85,7 +86,7 @@ const RouterComponent = () => (
 
             <Scene
             key="AddVideo"
-            component={AddVideo}
+            component={AddVideoYoutube}
             hideNavBar={false}
             title="Add Video"
             titleStyle={styles.titleStyles}
@@ -111,9 +112,10 @@ const RouterComponent = () => (
 
 const styles = {
     titleStyles: {
-        fontFamily: 'ClementePDag-Book',
+        fontFamily: 'Roboto-Thin',
         fontSize: 27,
         fontWeight: '100',
+        justifyContent: 'center'
     }
 };
 

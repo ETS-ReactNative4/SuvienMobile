@@ -17,10 +17,10 @@ const styles = {
   textStyle: {
     alignSelf: 'center',
     justifyContent: 'center',
-    color: '#4A86E8',
+    color: '#7ba4d9',
     fontSize: 27, //27 for android
-    fontWeight: '300',
-    fontFamily: 'ClementePDag-Book',
+    fontWeight: '100',
+    fontFamily: 'Roboto-Light',
     paddingTop: 10, //Issues with padding for ios. Is 10 for android
     paddingBottom: 10
   },
@@ -28,9 +28,9 @@ const styles = {
     flex: 1,
     backgroundColor: 'white',
     alignSelf: 'stretch',
-    borderRadius: 5,
+    borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#CCCCCC',
+    borderColor: '#7ba4d9',
     marginLeft: 5,
     marginRight: 5
   }
