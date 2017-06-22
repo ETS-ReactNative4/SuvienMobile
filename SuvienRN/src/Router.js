@@ -19,6 +19,7 @@ import CameraRollTest from './Components/CameraRollTest';
 import TimerTest from './Components/TimerTest';
 import TakePhoto from './Components/TakePhoto';
 import Test from './Components/Test';
+import TagSelect from './Components/TagSelect';
 import AddVideoYoutube from './Components/AddVideoYoutube';
 
 const RouterComponent = () => (
@@ -30,6 +31,12 @@ const RouterComponent = () => (
             component={MainMenu}
             hideNavBar
             initial 
+            />
+
+            <Scene
+            key="TagSelect"
+            component={TagSelect}
+            hideNavBar
             />
 
             <Scene 
