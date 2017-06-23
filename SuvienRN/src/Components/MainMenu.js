@@ -8,6 +8,22 @@ class MainMenu extends Component {
     state = { isFirst: null }
     async componentDidMount() {
         Orientation.lockToLandscape();
+        //AsyncStorage.setItem('Preset', 'None');
+        //AsyncStorage.setItem('Acheivement', 'INCOM');
+        /*
+        const media = JSON.parse(await AsyncStorage.getItem('Media'));
+        const pictures = JSON.parse(await AsyncStorage.getItem('Pictures'));
+        media.splice(8, 1);
+        media.splice(7, 1);
+        media.splice(6, 1);
+        media.splice(5, 1);
+        pictures.splice(8, 1);
+        pictures.splice(7, 1);
+        pictures.splice(6, 1);
+        pictures.splice(5, 1);
+        AsyncStorage.setItem('Media', JSON.stringify(media));
+        AsyncStorage.setItem('Pictures', JSON.stringify(pictures));
+        */
         /*
         AsyncStorage.setItem('Acheivement', 'INCOM');
         AsyncStorage.multiRemove(['Pictures', 'Presets', 'temp', 'Tags', 'Videos', 'isSelected']);

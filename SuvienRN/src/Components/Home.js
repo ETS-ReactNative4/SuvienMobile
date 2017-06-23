@@ -46,8 +46,7 @@ class Home extends Component {
     async getData() {
         const ourdata = JSON.parse(await AsyncStorage.getItem('Media'));
         this.setState({ preset: await AsyncStorage.getItem('Preset'), tags: JSON.parse(await AsyncStorage.getItem('Tags')), acheivement: await AsyncStorage.getItem('Acheivement') });
-        if (ourdata.length === 8) {
-            console.log('Im setting it!');
+        if (ourdata.length === 8 && await AsyncStorage.getItem('Acheivement') === 'INCOM') {
             AsyncStorage.setItem('Acheivement', 'COM');
         }
         if (ourdata.length > 0) {

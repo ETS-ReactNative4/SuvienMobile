@@ -64,7 +64,7 @@ class MediaExplorer extends Component {
             //console.log('Im null!');
             return (
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
+                    <Text>Loading</Text>
                 </View>
             );
         }
