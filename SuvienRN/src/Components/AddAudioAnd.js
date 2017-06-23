@@ -225,4 +225,4 @@ class AddAudioAnd extends Component {
     }
 }
 
-export default AddAudioAnd;
+export { AddAudioAnd };

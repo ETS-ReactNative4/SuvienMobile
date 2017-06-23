@@ -501,4 +501,4 @@ class Media extends Component {
         }
     };
 
-export default Media;
+export { Media };

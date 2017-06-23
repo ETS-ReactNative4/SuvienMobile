@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, AsyncStorage, Image, ScrollView } from 'react-native';
+import { Text, View, AsyncStorage, Image, ScrollView, Platform } from 'react-native';
 import { CardSection, Input, Button } from './common';
 import RadioForm from 'react-native-simple-radio-button';
 import { Actions } from 'react-native-router-flux';
@@ -81,8 +81,13 @@ class Settings extends Component {
         Actions.AddVideo();
     }
 
-    onAudioButtonPress() {
-        Actions.AddAudio();
+    onAudioButtonPress() { 
+         if (Platform.OS === 'ios') {
+            Actions.AddAudio();
+        }
+        if (Platform.OS === 'android') {
+            Actions.AddAudioAnd();
+        }
     }
 
     render() {

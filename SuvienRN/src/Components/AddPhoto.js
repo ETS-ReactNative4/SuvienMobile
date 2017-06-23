@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back' } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
     componentWillMount() {
         this.setState({ 
             heightc: Dimensions.get('window').height,
@@ -58,6 +58,36 @@ class AddPhoto extends Component {
         Actions.Home();
     }
 
+    onSaveURLPress() {
+        this.setState({ imageuri: this.state.imgsrc });
+    }
+
+    renderWeb() {
+        if (this.state.webphoto === true) {
+            return (
+                <View>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="https://68.media.tumblr.com/58023028ed8452496ba154aa4b0c229f/tumblr_nnorxsvxtT1tmz3boo1_500.jpg"
+                        label="URL"
+                        value={this.state.imgsrc}
+                        onChangeText={(imgsrc) => this.setState({ imgsrc })}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Button onPress={this.onSaveURLPress.bind(this)}>
+                            Save
+                        </Button>
+                    </CardSection>
+                </View>
+            );
+        }
+        else {
+            return (
+                <View />
+            );
+        }
+    }
     onTakePhotoPress() {
         return (
             this.setState({ isRecording: true })
@@ -89,7 +119,7 @@ class AddPhoto extends Component {
     }
 
     onAddWebPhotoPress() {
-        
+        this.setState({ webphoto: true });
     }
 
     onPhotoSelect() {
@@ -249,11 +279,12 @@ class AddPhoto extends Component {
                             </Button>
                         </CardSection>
                         <CardSection>
-                            <Button onPress={this.onPressPhotos.bind(this)}>
+                            <Button onPress={this.onAddWebPhotoPress.bind(this)}>
                                 Add from web using Image URL
                                 <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                             </Button>
                         </CardSection>
+                        {this.renderWeb()}
                         {this.onPhotoSelect()}
                     </View>
                 </ScrollView>

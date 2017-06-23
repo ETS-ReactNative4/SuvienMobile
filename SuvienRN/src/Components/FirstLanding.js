@@ -34,4 +34,4 @@ class FirstLanding extends Component {
     }
 }
 
-export default FirstLanding;
+export { FirstLanding };

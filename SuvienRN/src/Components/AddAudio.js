@@ -6,16 +6,6 @@ import { Actions } from 'react-native-router-flux';
 
 class AddAudio extends Component {
     state = { information: null, caption: null, group: null }
-    async onRecordAudioPress() {
-       MusicPlayerController.playMusic(() => {
-            console.log('I playin!');
-    // Successfully playing
-}, () => {
-    console.log('I failed Nooooo');
-    // Failed to play
-});
-    //console.log(JSON.parse(await AsyncStorage.getItem('samplemusic')));
-}
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async onSaveItemPress() {
         const { information, caption, group } = this.state;
@@ -201,11 +191,6 @@ class AddAudio extends Component {
         return (
             <View style={{ marginTop: 60, flex: 1 }}>
                 <ScrollView>
-                    <CardSection>
-                        <Button onPress={this.onRecordAudioPress.bind(this)}>
-                            Record Audio
-                        </Button>
-                    </CardSection>
                     <CardSection>
                         <Button onPress={this.onChooseMusicPress.bind(this)}>
                             Choose from Music Library
