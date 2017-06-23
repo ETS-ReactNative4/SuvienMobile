@@ -87,7 +87,7 @@ class Settings extends Component {
     render() {
         if (this.state.isFirst === false) {
             if (this.state.acheivement === 'COMP') {
-                 return (
+            return (
             <ScrollView>
             <View style={{ marginTop: 80, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row' }}>
@@ -162,7 +162,49 @@ class Settings extends Component {
             </View>
             </ScrollView>
         );
-            } else {
+            } 
+        if (this.state.acheivement === 'INCOM') {
+            return (
+            <ScrollView>
+            <View style={{ marginTop: 80, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>Edit Information</Text>
+                    <Image source={require('../Images/infoicon.jpg')} style={{ marginLeft: 10, height: 30, width: 30 }} />
+                </View>
+                <CardSection>
+                    <Input
+                    placeholder="Lance McClain"
+                    label="Name"
+                    value={this.state.name}
+                    onChangeText={(name) => this.setState({ name })}
+                    />
+                </CardSection>
+
+                {this.renderRadioButton()}
+
+                <CardSection>
+                    <Button onPress={this.onButtonPress.bind(this)}>
+                        Save and Continue
+                    </Button>
+                </CardSection>
+                <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30, fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>Upload a new...</Text>
+                    <Image source={require('../Images/multimedia.png')} style={{ marginLeft: 5, height: 30, width: 90 }} />
+                </View>
+                <CardSection>
+                    <Button onPress={this.onPhotoButtonPress.bind(this)}>Photo</Button>
+                </CardSection>
+                <CardSection>
+                    <Button onPress={this.onVideoButtonPress.bind(this)}>Video</Button>
+                </CardSection>
+                <CardSection>
+                    <Button onPress={this.onAudioButtonPress.bind(this)}>Audio</Button>
+                </CardSection>
+                </View>
+                </ScrollView>
+                );
+            }
+            if (this.state.acheivement === null) {
                 return (
                     <View />
                 );
