@@ -21,6 +21,7 @@ import TakePhoto from './Components/TakePhoto';
 import Test from './Components/Test';
 import TagSelect from './Components/TagSelect';
 import AddVideoYoutube from './Components/AddVideoYoutube';
+import AddAudioAnd from './Components/AddAudioAnd';
 
 const RouterComponent = () => (
         <Router
@@ -101,7 +102,7 @@ const RouterComponent = () => (
 
             <Scene
             key="AddAudio"
-            component={AddAudio}
+            component={AddAudioAnd}
             hideNavBar={false}
             title="Add Audio"
             titleStyle={styles.titleStyles}

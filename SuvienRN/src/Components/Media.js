@@ -102,6 +102,26 @@ class Media extends Component {
                 mediaType: chosen.mediaType,
                 chosen
         });
+    }
+    if (chosen.mediaType === 'MusicAnd') {
+            this.setState({ audios: JSON.parse(await AsyncStorage.getItem('Audio')), media: JSON.parse(await AsyncStorage.getItem('Media')) });
+            if (chosen.isFavourite === false) {
+                this.setState({ imagerend: require('../Images/favouritenot.png') });
+            }
+            if (chosen.isFavourite === true) {
+                this.setState({ imagerend: require('../Images/favourite.png') });
+            }
+            this.setState({
+                uri: chosen.uri,
+                album: chosen.album,
+                artist: chosen.artist,
+                caption: chosen.caption, 
+                tag: chosen.tag,
+                isFavourite: chosen.isFavourite,
+                title: chosen.title,
+                mediaType: chosen.mediaType,
+                chosen
+        });
         }
     }
 
@@ -113,17 +133,24 @@ class Media extends Component {
     }
 
     preloadMusicPlay() {
-        console.log('im in preload music play!');
-        const { title, album, artist } = this.state;
-        console.log(title);
-        console.log(album);
-        console.log(artist);
-                MusicPlayerController.preloadMusic([title, album, 227.004, artist], (metadata) => {
+        const { title, album, artist, uri } = this.state;
+        if (this.state.mediaType === 'Music'){
+            MusicPlayerController.preloadMusic([title, album, 227.004, artist], (metadata) => {
                     console.log('I found the music! Its:');
                     console.log(metadata);
                 }, () => {
                     console.log('I didnt find it :(');
                 });
+        }
+        if (this.state.mediaType === 'MusicAnd') {
+            MusicPlayerController.preloadMusic(uri, (metadata) => {
+                    console.log('I found the music! Its:');
+                    console.log(metadata);
+                }, () => {
+                    console.log('I didnt find it :(');
+                });
+        }
+                
     }
     onHomeReturn() {
         if (this.state.mediaType === 'Photo') {
@@ -174,7 +201,7 @@ class Media extends Component {
             mymedia[locatio].isFavourite = this.state.isFavourite;
             AsyncStorage.setItem('Media', JSON.stringify(mymedia));
         }
-        if (this.state.mediaType === 'Music') {
+        if (this.state.mediaType === 'Music' || this.state.mediaType === 'MusicAnd') {
             const myaudios = this.state.audios;
             const locat = myaudios.findIndex((element, index, array) => {
                 if (element.title === this.state.title && element.album === this.state.album && element.artist === this.state.artist) {
@@ -332,8 +359,8 @@ class Media extends Component {
         }
         //Note: this is configured only for ios at the moment
             
-            }
-            if (this.state.mediaType === 'Music') {
+        }
+            if (this.state.mediaType === 'Music' || this.state.mediaType === 'MusicAnd') {
                 console.log('Im in the first if!');
                 if (this.state.album !== null && this.state.title !== null && this.state.artist !== null){
                     console.log(this.state.media);
@@ -345,7 +372,7 @@ class Media extends Component {
                             <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}>
                             <Button 
                             onPress={() => {
-                                this.preloadMusicPlay();
+                                //this.preloadMusicPlay();
                                 MusicPlayerController.playMusic(() => {
                                     console.log('I playin!');
                                 // Successfully playing

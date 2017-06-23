@@ -92,6 +92,33 @@ class PictureTile extends Component {
             </TouchableOpacity>
             );
         }
+        if (this.props.data.mediaType === 'MusicAnd') {
+            return (
+            <TouchableOpacity 
+            onPress={() => {
+                AsyncStorage.setItem('isSelected', JSON.stringify(
+                {
+                uri: this.props.data.uri,
+                title: this.props.data.title,
+                album: this.props.data.album,
+                artist: this.props.data.artist,
+                caption: this.props.data.caption, 
+                tag: this.props.data.group,
+                isFavourite: this.props.data.isFavourite,
+                mediaType: 'MusicAnd'
+                }));
+                Actions.Media();
+            }
+            }
+            >
+                <Image source={require('./musicalbumart.png')} style={this.props.style}>
+                    <View style={{ justifyContent: 'flex-end', alignItems: 'center' }}>  
+                        <Text style={{ backgroundColor: 'transparent', color: 'white', marginTop: 10, fontFamily: 'Roboto-Light', fontSize: 20 }}>{this.props.data.title}</Text>
+                    </View>
+                </Image>
+            </TouchableOpacity>
+            );
+        }
         }
     }
 }
