@@ -5,13 +5,14 @@ import RadioForm from 'react-native-simple-radio-button';
 import { Actions } from 'react-native-router-flux';
 
 class Settings extends Component {
-    state = { name: '', stage: null, isFirst: false, acheivement: null };
+    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null };
     async componentWillMount() {
         if (await AsyncStorage.getItem('name') !== null) {
             this.setState({ 
                 name: await AsyncStorage.getItem('name'), 
                 stage: await AsyncStorage.getItem('stage'),
-                acheivement: await AsyncStorage.getItem('Acheivement') 
+                acheivement: await AsyncStorage.getItem('Acheivement'),
+                preset: await AsyncStorage.getItem('Preset')
             });
         }
         if (await AsyncStorage.getItem('name') === null) {
@@ -123,7 +124,8 @@ class Settings extends Component {
                 <CardSection>
                     <Button onPress={this.onAudioButtonPress.bind(this)}>Audio</Button>
                 </CardSection>
-                <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30, fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>View Media by...</Text>
+                <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>Preferences</Text>
+                <Text style={{ marginTop: 10, fontSize: 23, alignSelf: 'center', marginBottom: 30, fontFamily: 'UltimaPDac-UltraLight' }}> Currently Loaded Preference: {this.state.preset} </Text>
                 <CardSection>
                     <Button 
                     onPress={() => {

@@ -340,7 +340,7 @@ class Media extends Component {
                             <View style={{ height: 400, backgroundColor: '#a4c0e5' }}>
                                 <ScrollView>
                                     <View>
-                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', backgroundColor: '#b7d6ff', marginTop: 10, marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
+                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', backgroundColor: '#b7d6ff', marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
                                         <Text style={styles.textHeaderStyle}>Caption</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                         <Text style={styles.textHeaderStyle}>Tag</Text>
@@ -366,9 +366,9 @@ class Media extends Component {
                     console.log(this.state.media);
                     this.preloadMusicPlay();
                     return (
-                    <View style={{ height: this.state.scheight, backgroundColor: '#a4c0e5', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ height: this.state.scheight, backgroundColor: '#a4c0e5', flexDirection: 'row', alignItems: 'center' }}>
                         <View>
-                            <Image source={require('../Images/musicalbumart.png')} style={{ height: 400, width: 400 }} />
+                            <Image source={require('../Images/musicalbumart.png')} style={{ height: 400, width: 400, marginLeft: 50, marginRight: 30 }} />
                             <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}>
                             <Button 
                             onPress={() => {
@@ -403,7 +403,7 @@ class Media extends Component {
                         </View>
                             <ScrollView>
                                     <View>
-                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', backgroundColor: '#b7d6ff', marginTop: 10, marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
+                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', backgroundColor: '#b7d6ff', marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
                                         <Text style={styles.textHeaderStyle}>Album</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.album}</Text>
                                         <Text style={styles.textHeaderStyle}>Artist</Text>
