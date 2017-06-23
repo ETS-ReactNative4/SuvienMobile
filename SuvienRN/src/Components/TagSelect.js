@@ -63,4 +63,4 @@ renderList() {
 }
 }
 
-export default TagSelect;
+export { TagSelect };

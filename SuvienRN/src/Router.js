@@ -7,20 +7,14 @@ import {
     Home,
     AddPhoto,
     VideoPageTest,
-    AddVideo,
     AddAudio,
-    MainMenuFlexBox,
-    YouTubeVideoScreen
+    AddVideo,
+    Media,
+    MediaExplorer,
+    FirstLanding,
+    TagSelect,
+    AddAudioAnd
 } from './Components';
-import Media from './Components/Media';
-import MediaExplorer from './Components/MediaExplorer';
-import FirstLanding from './Components/FirstLanding';
-import CameraRollTest from './Components/CameraRollTest';
-import TimerTest from './Components/TimerTest';
-import TakePhoto from './Components/TakePhoto';
-import Test from './Components/Test';
-import TagSelect from './Components/TagSelect';
-import AddVideoYoutube from './Components/AddVideoYoutube';
 
 const RouterComponent = () => (
         <Router
@@ -93,7 +87,7 @@ const RouterComponent = () => (
 
             <Scene
             key="AddVideo"
-            component={AddVideoYoutube}
+            component={AddVideo}
             hideNavBar={false}
             title="Add Video"
             titleStyle={styles.titleStyles}
@@ -102,6 +96,14 @@ const RouterComponent = () => (
             <Scene
             key="AddAudio"
             component={AddAudio}
+            hideNavBar={false}
+            title="Add Audio"
+            titleStyle={styles.titleStyles}
+            />
+
+            <Scene
+            key="AddAudioAnd"
+            component={AddAudioAnd}
             hideNavBar={false}
             title="Add Audio"
             titleStyle={styles.titleStyles}

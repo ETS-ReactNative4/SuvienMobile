@@ -8,6 +8,11 @@ class MainMenu extends Component {
     state = { isFirst: null }
     async componentDidMount() {
         Orientation.lockToLandscape();
+        //AsyncStorage.setItem('Audio', JSON.stringify([]));
+        /*
+        const audios = JSON.parse(await AsyncStorage.getItem('Media'));
+        audios.splice(11, 1);
+        AsyncStorage.setItem('Media', JSON.stringify(audios));
         /*
         AsyncStorage.setItem('Preset', 'None');
         AsyncStorage.setItem('Acheivement', 'INCOM');

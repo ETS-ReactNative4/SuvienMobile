@@ -4,33 +4,45 @@ import { View, AsyncStorage, Image, Text, ScrollView } from 'react-native';
 import { CardSection, Button, Input } from './common';
 import { Actions } from 'react-native-router-flux';
 
-class AddAudio extends Component {
-    state = { information: null, caption: null, group: null }
+class AddAudioAnd extends Component {
+    state = { title: null, artist: null, album: null, uri: null, caption: null, group: null }
+    async onRecordAudioPress() {
+       MusicPlayerController.playMusic(() => {
+            console.log('I playin!');
+    // Successfully playing
+}, () => {
+    console.log('I failed Nooooo');
+    // Failed to play
+});
+    //console.log(JSON.parse(await AsyncStorage.getItem('samplemusic')));
+}
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async onSaveItemPress() {
-        const { information, caption, group } = this.state;
+        const { title, caption, group, artist, album, uri } = this.state;
         const audios = JSON.parse(await AsyncStorage.getItem('Audio'));
         const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
         const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
         const gen = JSON.parse(await AsyncStorage.getItem('Media'));
         audios.push({
-            title: information[0],
-            album: information[1],
-            artist: information[3],
+            uri,
+            title,
+            album,
+            artist,
             caption,
             group,
             isFavourite: false,
-            mediaType: 'Music'
+            mediaType: 'MusicAnd'
         });
         gen.push({
             uniqueID: objec.uniqueID,
-            title: information[0],
-            album: information[1],
-            artist: information[3],
+            uri,
+            title,
+            album,
+            artist,
             caption,
             group,
             isFavourite: false,
-            mediaType: 'Music'
+            mediaType: 'MusicAnd'
         });
         const findTags = mytags.find((tag) => tag === this.state.group);
         if (findTags === undefined) {
@@ -44,7 +56,7 @@ class AddAudio extends Component {
     }
     
     onAudioSelect() {
-        if (this.state.information === null) {
+        if (this.state.title === null || this.state.album === null || this.state.artist === null) {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
@@ -98,7 +110,7 @@ class AddAudio extends Component {
                 </View>
             );
         }
-        if (this.state.information !== null) {
+        if (this.state.title !== null && this.state.album !== null && this.state.artist !== null) {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
@@ -107,19 +119,19 @@ class AddAudio extends Component {
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Title</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[0]}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.title}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Album</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[1]}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.album}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Artist</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[3]}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.artist}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
@@ -159,7 +171,7 @@ class AddAudio extends Component {
         //console.log(metadata[0].uri);
         //this.setState({ audiopath: metadata[0].uri });
         console.log(metadata[0]);
-        this.setState({ information: [metadata[0].title, metadata[0].albumTitle, metadata[0].playbackDuration, metadata[0].artist] });
+        this.setState({ title: metadata[0].title, artist: metadata[0].artist, album: metadata[0].album, uri: metadata[0].uri });
     }, () => {
         console.log('Cancel');
     });
@@ -192,6 +204,11 @@ class AddAudio extends Component {
             <View style={{ marginTop: 60, flex: 1 }}>
                 <ScrollView>
                     <CardSection>
+                        <Button onPress={this.onRecordAudioPress.bind(this)}>
+                            Record Audio
+                        </Button>
+                    </CardSection>
+                    <CardSection>
                         <Button onPress={this.onChooseMusicPress.bind(this)}>
                             Choose from Music Library
                         </Button>
@@ -208,4 +225,4 @@ class AddAudio extends Component {
     }
 }
 
-export { AddAudio };
+export { AddAudioAnd };
