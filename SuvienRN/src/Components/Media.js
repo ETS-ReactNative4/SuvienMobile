@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Button, CardSection } from './common';
 import YouTube from 'react-native-youtube';
 import Orientation from 'react-native-orientation';
+import MusicPlayerController from 'react-native-musicplayercontroller';
 
 class Media extends Component {
     state = { 
@@ -28,7 +29,10 @@ class Media extends Component {
         error: null,
         currentTime: null,
         duration: null,
-        chosen: null 
+        chosen: null,
+        audios: null,
+        album: null,
+        artist: null
     }
     async componentWillMount() {
         //Note. The orientation issue only persists on android, not ios
@@ -80,6 +84,25 @@ class Media extends Component {
             chosen
         });
     }
+        if (chosen.mediaType === 'Music') {
+            this.setState({ audios: JSON.parse(await AsyncStorage.getItem('Audio')), media: JSON.parse(await AsyncStorage.getItem('Media')) });
+            if (chosen.isFavourite === false) {
+                this.setState({ imagerend: require('../Images/favouritenot.png') });
+            }
+            if (chosen.isFavourite === true) {
+                this.setState({ imagerend: require('../Images/favourite.png') });
+            }
+            this.setState({
+                album: chosen.album,
+                artist: chosen.artist,
+                caption: chosen.caption, 
+                tag: chosen.tag,
+                isFavourite: chosen.isFavourite,
+                title: chosen.title,
+                mediaType: chosen.mediaType,
+                chosen
+        });
+        }
     }
 
     componentDidMount() {
@@ -89,6 +112,19 @@ class Media extends Component {
         });
     }
 
+    preloadMusicPlay() {
+        console.log('im in preload music play!');
+        const { title, album, artist } = this.state;
+        console.log(title);
+        console.log(album);
+        console.log(artist);
+                MusicPlayerController.preloadMusic([title, album, 227.004, artist], (metadata) => {
+                    console.log('I found the music! Its:');
+                    console.log(metadata);
+                }, () => {
+                    console.log('I didnt find it :(');
+                });
+    }
     onHomeReturn() {
         if (this.state.mediaType === 'Photo') {
             const myimages = this.state.pictures;
@@ -129,6 +165,30 @@ class Media extends Component {
             const mymedia = this.state.media;
             const locatio = mymedia.findIndex(((element, index, array) => {
                 if (element.videouri === this.state.uri) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }));
+            mymedia[locatio].isFavourite = this.state.isFavourite;
+            AsyncStorage.setItem('Media', JSON.stringify(mymedia));
+        }
+        if (this.state.mediaType === 'Music') {
+            const myaudios = this.state.audios;
+            const locat = myaudios.findIndex((element, index, array) => {
+                if (element.title === this.state.title && element.album === this.state.album && element.artist === this.state.artist) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            });
+            myaudios[locat].isFavourite = this.state.isFavourite;
+            AsyncStorage.setItem('Audio', JSON.stringify(myaudios));
+            const mymedia = this.state.media;
+            const locatio = mymedia.findIndex(((element, index, array) => {
+                if (element.title === this.state.title && element.album === this.state.album && element.artist === this.state.artist) {
                     return true;
                 }
                 else {
@@ -269,10 +329,81 @@ class Media extends Component {
                             </View>
                     </View>
             );
+        }
+        //Note: this is configured only for ios at the moment
+            
+            }
+            if (this.state.mediaType === 'Music') {
+                console.log('Im in the first if!');
+                if (this.state.album !== null && this.state.title !== null && this.state.artist !== null){
+                    console.log(this.state.media);
+                    this.preloadMusicPlay();
+                    return (
+                    <View style={{ height: this.state.scheight, backgroundColor: '#a4c0e5', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                        <View>
+                            <Image source={require('../Images/musicalbumart.png')} style={{ height: 400, width: 400 }} />
+                            <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}>
+                            <Button 
+                            onPress={() => {
+                                this.preloadMusicPlay();
+                                MusicPlayerController.playMusic(() => {
+                                    console.log('I playin!');
+                                // Successfully playing
+                                }, () => {
+                                    console.log('I failed Nooooo');
+                                // Failed to play
+                                });
+                                }}
+                            >
+                                Play
+                            </Button>
+                            </CardSection>
+                            <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}>
+                            <Button 
+                            onPress={() => {
+                                MusicPlayerController.pauseMusic(() => {
+                                    console.log('I stoppin!');
+                                // Successfully playing
+                                }, () => {
+                                    console.log('I failed Nooooo');
+                                // Failed to play
+                                });
+                                }}
+                            >
+                                Pause
+                            </Button>
+                            </CardSection>
+                        </View>
+                            <ScrollView>
+                                    <View>
+                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', backgroundColor: '#b7d6ff', marginTop: 10, marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
+                                        <Text style={styles.textHeaderStyle}>Album</Text>
+                                        <Text style={styles.textBodyStyle}>{this.state.album}</Text>
+                                        <Text style={styles.textHeaderStyle}>Artist</Text>
+                                        <Text style={styles.textBodyStyle}>{this.state.artist}</Text>
+                                        <Text style={styles.textHeaderStyle}>Caption</Text>
+                                        <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
+                                        <Text style={styles.textHeaderStyle}>Tag</Text>
+                                        <Text style={styles.textBodyStyle}>{this.state.tag}</Text>
+                                        <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                            <Image source={this.state.imagerend} style={{ height: 60, width: 60 }} />
+                                        </TouchableWithoutFeedback>
+                                        <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                            <Button onPress={this.onHomeReturn.bind(this)}>Return to Home</Button>
+                                        </CardSection>
+                                    </View>
+                                </ScrollView>
+                            </View>
+                );
+            } 
+            if (this.state.album === null || this.state.title === null || this.state.artist === null) {
+                    return (
+                        <Text> Loading </Text>
+                    );
+                }
             }
         }
         }
-    }
     
     let newHeight;
     let paddingheight;

@@ -51,7 +51,7 @@ class AddVideoYoutube extends Component {
         }
         AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
         AsyncStorage.setItem('Media', JSON.stringify(gen));
-        console.log(videoobj);
+        Actions.Home();
     }
 
     onSaveURLPress() {
