@@ -105,16 +105,16 @@ class AddPhoto extends Component {
     onPressPhotos() {
             CameraRoll.getPhotos({
                 first: 10000, //Quick and dirty fix. Will update to a more friendly fix in later versions
-                assetType: 'All'
+                assetType: 'Photos'
             })
             .then(r => this.setState({ photos: r.edges, imageuri: { uri: r.edges[0].node.image.uri } }));
     }
 
     onChoosePhotoPress() {
-        this.setState({modalVisible: true });
+        this.setState({ modalVisible: true });
         CameraRoll.getPhotos({
                 first: 10000, //Quick and dirty fix. Will update to a more friendly fix in later versions
-                assetType: 'All'
+                assetType: 'Photos'
             })
             .then(r => this.setState({ photos: r.edges }));
     }
@@ -258,6 +258,7 @@ class AddPhoto extends Component {
     }
 
     render() {
+        console.log(this.state.photos);
         if (this.state.isRecording === false) {
             if (this.state.photos === null) {
             return (
