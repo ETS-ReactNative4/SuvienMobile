@@ -290,10 +290,10 @@ class Media extends Component {
                                         <Text style={styles.textHeaderStyle}>Tag</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.tag}</Text>
                                     <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
-                                        <Image source={imagerend} style={{ height: 60, width: 60 }} />
+                                        <span className="glyphicons glyphicons-heart-empty" />
                                     </TouchableWithoutFeedback>
                                     <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={this.onHomeReturn.bind(this)}>Return to Home</Button>
+                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>Return to Home</Button>
                                     </CardSection>
                                 </View>
                             </View>
