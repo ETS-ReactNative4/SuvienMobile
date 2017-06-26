@@ -15,6 +15,7 @@ import {
     TagSelect,
     AddAudioAnd
 } from './Components';
+import VideoTest from './Components/VideoTest';
 
 const RouterComponent = () => (
         <Router
