@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null, modalVisible: true, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    state = { imageuri: null, caption: null, group: null, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
     componentWillMount() {
         this.setState({ 
             heightc: Dimensions.get('window').height,
@@ -111,6 +111,7 @@ class AddPhoto extends Component {
     }
 
     onChoosePhotoPress() {
+        this.setState({modalVisible: true });
         CameraRoll.getPhotos({
                 first: 10000, //Quick and dirty fix. Will update to a more friendly fix in later versions
                 assetType: 'All'
@@ -258,7 +259,7 @@ class AddPhoto extends Component {
 
     render() {
         if (this.state.isRecording === false) {
-            if (this.state.photos === null || this.state.modalVisible === false) {
+            if (this.state.photos === null) {
             return (
                 <View style={{ flex: 1 }}>
                 <Header style={{ height: 80 }}>
@@ -290,21 +291,22 @@ class AddPhoto extends Component {
                 </ScrollView>
                 </View>
         );
+            
     }
-        if (this.state.photos !== null && this.state.modalVisible === true) {
+        if (this.state.photos !== null) {
             return (
-                <View>
+                <View style={{ flex: 1 }}>
                     <Modal
                         animationType={'fade'}
                         transparent
                         visible={this.state.modalVisible}
                         onRequestClose={() => {}}
                     >
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-                                <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Text style={{ fontSize: 27 }}>Select Photo</Text>
+                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                                <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
+                                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Camera Roll</Text>
                                 </View>
-                                <View style={{ height: 590, width: 910, backgroundColor: '#EFEFEF', position: 'relative', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'row' }}>
+                                <View style={{ height: 590, width: 910, backgroundColor: '#EFEFEF', position: 'relative', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'row', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                                     <ScrollView>
                                         <View style={{ marginLeft: 20, flexDirection: 'row', flexWrap: 'wrap' }}>
                                             {this.renderPhotos()}
@@ -313,9 +315,36 @@ class AddPhoto extends Component {
                                 </View>
                             </View>
                         </Modal>
+                <Header style={{ height: 80 }}>
+                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Add Photo</Text>
+                </Header>
+                <ScrollView>
+                    <View style={{ marginTop: 5, marginLeft: 80, marginRight: 80, flex: 1 }}>
+                        <CardSection>
+                            <Button onPress={this.onTakePhotoPress.bind(this)}>
+                                Take Photo
+                                <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
+                            </Button>
+                        </CardSection>
+                        <CardSection>
+                            <Button onPress={this.onChoosePhotoPress.bind(this)}>
+                                Choose from Photo Library
+                                <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
+                            </Button>
+                        </CardSection>
+                        <CardSection>
+                            <Button onPress={this.onAddWebPhotoPress.bind(this)}>
+                                Add from web using Image URL
+                                <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
+                            </Button>
+                        </CardSection>
+                        {this.renderWeb()}
+                        {this.onPhotoSelect()}
                     </View>
-        );
-    }
+                </ScrollView>
+                </View>
+            );
+        }
         }
         if (this.state.isRecording === true) {
             return (

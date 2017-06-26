@@ -45,7 +45,7 @@ class Media extends Component {
         
         */
         const chosen = JSON.parse(await AsyncStorage.getItem('isSelected'));
-        if (chosen.mediaType === 'Photo'){
+        if (chosen.mediaType === 'Photo') {
         this.setState({ 
             pictures: JSON.parse(await AsyncStorage.getItem('Pictures')),
             media: JSON.parse(await AsyncStorage.getItem('Media')),
@@ -238,6 +238,7 @@ class Media extends Component {
     }
 
     render() {
+        console.log(this.state.mediaType);
         if (this.state.mediaType === null){
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -254,6 +255,7 @@ class Media extends Component {
                 </View>  
             );
         }
+            console.log(imagerend);
             if (scheight !== null && width !== null && imagerend !== null) {
             if (height >= scheight) {
                 const heightRatio = parseFloat(scheight) / parseFloat(height);
@@ -267,7 +269,7 @@ class Media extends Component {
                 const paddingheight = (scheight - newHeight) / 2;
 
                 return (
-                <View style={{ flex: 1, height: null, width: null, backgroundColor: '#d5deea' }}>
+                <View style={{ flex: 1, height: null, width: null, backgroundColor: '#e3edf9' }}>
                     <View 
                     style={{
                         backgroundColor: '#d5deea', 
@@ -281,8 +283,8 @@ class Media extends Component {
                         <View style={{ flexDirection: 'row', height: scheight, backgroundColor: 'transparent', justifyContent: 'center' }}>
                             <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: paddingheight, backgroundColor: '#c7d0db' }}>
                                 <Image source={{ uri: this.state.uri }} style={{ height: newHeight, width: newWidth }} />
-                                <View style={{ height: newHeight, width: (scwidth - newWidth), backgroundColor: '#d5deea' }}>
-                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', backgroundColor: '#c7d0db', marginTop: 10, marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
+                                <View style={{ height: newHeight, width: 400, backgroundColor: '#e3edf9', marginLeft: 10, marginRight: 10 }}>
+                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
                                         <Text style={styles.textHeaderStyle}>Caption</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                         <Text style={styles.textHeaderStyle}>Tag</Text>
@@ -439,11 +441,14 @@ class Media extends Component {
     const styles = {
         textHeaderStyle: {
             fontSize: 25, 
-            fontFamily: 'Roboto-Light', 
+            fontFamily: 'Roboto-Thin', 
             marginTop: 10, 
-            backgroundColor: '#c7d0db', 
+            backgroundColor: '#e3edf9', 
             marginLeft: 5, 
-            marginRight: 5, 
+            marginRight: 10, 
+            borderBottomWidth: 1,
+            borderColor: '#ced6e0',
+            width: 400
             //borderTopLeftRadius: 10, 
             //borderTopRightRadius: 10
         },
@@ -451,11 +456,11 @@ class Media extends Component {
             fontSize: 20, 
             fontFamily: 'Roboto-Thin', 
             marginBottom: 10, 
-            backgroundColor: '#e3edf9', 
+            backgroundColor: '#edf5ff', 
             marginLeft: 5, 
-            marginRight: 5,
-            //borderBottomLeftRadius: 10, 
-            //borderBottomRightRadius: 10
+            width: 395,
+            borderBottomLeftRadius: 7, 
+            borderBottomRightRadius: 7
         },
         imageContainerStyle: {
             backgroundColor: 'black', 

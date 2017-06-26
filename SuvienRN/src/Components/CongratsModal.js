@@ -13,7 +13,7 @@ class CongratsModal extends Component {
     render() {
         return (
             <Modal
-                animationType={"slide"}
+                animationType={"fade"}
                 transparent
                 visible={this.state.modalVisible}
                 onRequestClose={() => {}}
