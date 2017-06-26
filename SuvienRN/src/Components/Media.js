@@ -255,7 +255,6 @@ class Media extends Component {
     }
 
     render() {
-        console.log(this.state.mediaType);
         if (this.state.mediaType === null){
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -272,7 +271,6 @@ class Media extends Component {
                 </View>  
             );
         }
-            console.log(imagerend);
             if (scheight !== null && width !== null && imagerend !== null) {
             if (height >= scheight) {
                 const heightRatio = parseFloat(scheight) / parseFloat(height);
@@ -301,14 +299,19 @@ class Media extends Component {
                             <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: paddingheight, backgroundColor: '#c7d0db' }}>
                                 <Image source={{ uri: this.state.uri }} style={{ height: newHeight, width: newWidth }} />
                                 <View style={{ height: newHeight, width: 400, backgroundColor: '#e3edf9', marginLeft: 10, marginRight: 10 }}>
-                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
-                                        <Text style={styles.textHeaderStyle}>Caption</Text>
+                                    <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
+                                            {this.state.title}
+                                        </Text>
+                                        <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                            <Image source={imagerend} style={{ height: 40, width: 40 }} />
+                                        </TouchableWithoutFeedback>
+                                    </View>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
-                                        <Text style={styles.textHeaderStyle}>Tag</Text>
-                                        <Text style={styles.textBodyStyle}>{this.state.tag}</Text>
-                                    <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
-                                        <span className="glyphicons glyphicons-heart-empty" />
-                                    </TouchableWithoutFeedback>
+                                        <Text style={styles.textBodyStyle}>
+                                            <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
+                                            {this.state.tag}
+                                        </Text>
                                     <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
                                         <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>Return to Home</Button>
                                     </CardSection>
@@ -362,8 +365,7 @@ class Media extends Component {
                                         <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', backgroundColor: '#b7d6ff', marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
                                         <Text style={styles.textHeaderStyle}>Caption</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
-                                        <Text style={styles.textHeaderStyle}>Tag</Text>
-                                        <Text style={styles.textBodyStyle}>{this.state.tag}</Text>
+                                        <Text style={styles.textBodyStyle}>Catagory: {this.state.tag}</Text>
                                         <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                             <Image source={imagerend} style={{ height: 60, width: 60 }} />
                                         </TouchableWithoutFeedback>
@@ -485,8 +487,7 @@ class Media extends Component {
                                         <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
                                         <Text style={styles.textHeaderStyle}>Caption</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
-                                        <Text style={styles.textHeaderStyle}>Tag</Text>
-                                        <Text style={styles.textBodyStyle}>{this.state.tag}</Text>
+                                        <Text style={styles.textBodyStyle}>Catagory: {this.state.tag}</Text>
                                     <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                         <Image source={this.state.imagerend} style={{ height: 60, width: 60 }} />
                                     </TouchableWithoutFeedback>
@@ -515,22 +516,19 @@ class Media extends Component {
             marginTop: 10, 
             backgroundColor: '#e3edf9', 
             marginLeft: 5, 
-            marginRight: 10, 
-            borderBottomWidth: 1,
-            borderColor: '#ced6e0',
+            marginRight: 10,
             width: 400
             //borderTopLeftRadius: 10, 
             //borderTopRightRadius: 10
         },
         textBodyStyle: {
             fontSize: 20, 
-            fontFamily: 'Roboto-Thin', 
-            marginBottom: 10, 
-            backgroundColor: '#edf5ff', 
+            fontFamily: 'Roboto-Thin',  
+            backgroundColor: '#e3edf9', //#edf5ff
             marginLeft: 5, 
             width: 395,
-            borderBottomLeftRadius: 7, 
-            borderBottomRightRadius: 7
+            marginTop: 5,
+            marginBottom: 5
         },
         imageContainerStyle: {
             backgroundColor: 'black', 
