@@ -5,6 +5,7 @@ import { Button, CardSection } from './common';
 import YouTube from 'react-native-youtube';
 import Orientation from 'react-native-orientation';
 import MusicPlayerController from 'react-native-musicplayercontroller';
+import Video from 'react-native-video';
 
 class Media extends Component {
     state = { 
@@ -122,7 +123,23 @@ class Media extends Component {
                 mediaType: chosen.mediaType,
                 chosen
         });
+    }
+    if (chosen.mediaType === 'Video') {
+        this.setState({ 
+            uri: chosen.uri, 
+            caption: chosen.caption, 
+            tag: chosen.tag,
+            isFavourite: chosen.isFavourite,
+            title: chosen.title,
+            mediaType: chosen.mediaType
+        });
+        if (chosen.isFavourite === false) {
+            this.setState({ imagerend: require('../Images/favouritenot.png') });
         }
+        if (chosen.isFavourite === true) {
+            this.setState({ imagerend: require('../Images/favourite.png') });
+        }
+    }
     }
 
     componentDidMount() {
@@ -429,6 +446,59 @@ class Media extends Component {
                     return (
                         <Text> Loading </Text>
                     );
+                }
+            }
+            if (this.state.mediaType === 'Video'){
+                if (this.state.uri !== null && this.state.caption !== null && this.state.tag !== null && this.state.title !== null) {
+                return (
+                <View style={{ flex: 1, height: null, width: null, backgroundColor: '#e3edf9' }}>
+                    <View 
+                    style={{
+                        backgroundColor: '#d5deea', 
+                        height: (newHeight + 100), 
+                        flexDirection: 'row', 
+                        marginTop: (paddingheight - 50), 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        }}
+                    >
+                        <View style={{ flexDirection: 'row', height: scheight, backgroundColor: 'transparent', justifyContent: 'center' }}>
+                            <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: paddingheight, backgroundColor: '#c7d0db' }}>
+                                <Video 
+                                source={{ uri: this.state.uri }}   // Can be a URL or a local file.
+                                ref={(ref) => {
+                                    this.player = ref;
+                                }}                                      // Store reference
+                                rate={1.0}                              // 0 is paused, 1 is normal.
+                                volume={1.0}                            // 0 is muted, 1 is normal.
+                                muted={false}                           // Mutes the audio entirely.
+                                paused={false}                          // Pauses playback entirely.
+                                resizeMode="cover"                      // Fill the whole screen at aspect ratio.*
+                                repeat                         // Repeat forever.
+                                playInBackground={false}                // Audio continues to play when app entering background.
+                                playWhenInactive={false}                // [iOS] Video continues to play when control or notification center are shown.
+                                ignoreSilentSwitch={"ignore"}           // [iOS] ignore | obey - When 'ignore', audio will still play with the iOS hard silent switch set to silent. When 'obey', audio will toggle with the switch. When not specified, will inherit audio settings as usual.
+                                progressUpdateInterval={250.0}          // [iOS] Interval to fire onProgress (default to ~250ms)
+                                style={{ height: this.state.scheight, width: (this.state.scwidth - 400) }} 
+                                />
+                                <View style={{ height: newHeight, width: 400, backgroundColor: '#e3edf9', marginLeft: 10, marginRight: 10 }}>
+                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>
+                                        <Text style={styles.textHeaderStyle}>Caption</Text>
+                                        <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
+                                        <Text style={styles.textHeaderStyle}>Tag</Text>
+                                        <Text style={styles.textBodyStyle}>{this.state.tag}</Text>
+                                    <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                        <Image source={this.state.imagerend} style={{ height: 60, width: 60 }} />
+                                    </TouchableWithoutFeedback>
+                                    <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>Return to Home</Button>
+                                    </CardSection>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            );
                 }
             }
         }

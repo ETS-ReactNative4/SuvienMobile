@@ -28,7 +28,7 @@ startRecording() {
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}
-          captureMode={Camera.constants.CaptureMode.still}
+          captureMode={Camera.constants.CaptureMode.video}
           onFocusChanged={() => {}}
           onZoomChanged={() => {}}
         >

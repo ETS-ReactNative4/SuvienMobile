@@ -119,6 +119,26 @@ class PictureTile extends Component {
             </TouchableOpacity>
             );
         }
+        if (this.props.data.mediaType === 'Video') {
+            return (
+            <TouchableOpacity 
+            onPress={() => {
+                AsyncStorage.setItem('isSelected', JSON.stringify(
+                { uri: this.props.data.uri,
+                title: this.props.data.title, 
+                caption: this.props.data.caption, 
+                tag: this.props.data.group,
+                isFavourite: this.props.data.isFavourite,
+                mediaType: 'Video'
+                }));
+                Actions.Media();
+            }
+            }
+            >
+                <Image source={{ uri: this.props.data.uri }} style={this.props.style} />
+            </TouchableOpacity>
+        );
+        }
         }
     }
 }
