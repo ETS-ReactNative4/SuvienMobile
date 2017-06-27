@@ -8,6 +8,29 @@ class MainMenu extends Component {
     state = { isFirst: null }
     async componentDidMount() {
         Orientation.lockToLandscape();
+        //console.log(await AsyncStorage.getItem('Messages'));
+        //AsyncStorage.setItem('Messages', JSON.stringify([]));
+        /*
+        AsyncStorage.setItem('Messages', JSON.stringify(
+            [
+                {
+                    day: 'Monday',
+                    startHour: 14,
+                    startMinute: 30,
+                    endHour: 14,
+                    endMinute: 35,
+                    message: 'I am a message!'
+                },
+                {
+                    day: 'Tuesday',
+                    startHour: 14,
+                    startMinute: 30,
+                    endHour: 14,
+                    endMinute: 35,
+                    message: 'You shouldnt see me!'
+                }
+            ]
+        ));
         //AsyncStorage.setItem('Audio', JSON.stringify([]));
         /*
         const audios = JSON.parse(await AsyncStorage.getItem('Media'));
