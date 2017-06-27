@@ -16,6 +16,7 @@ import {
     AddAudioAnd
 } from './Components';
 import VideoTest from './Components/VideoTest';
+import AddMessage from './Components/AddMessage';
 
 const RouterComponent = () => (
         <Router
@@ -26,6 +27,18 @@ const RouterComponent = () => (
             component={MainMenu}
             hideNavBar
             initial 
+            />
+
+            <Scene
+            key="AddMessage"
+            component={AddMessage}
+            hideNavBar
+            />
+
+            <Scene
+            key="VideoTest"
+            component={VideoTest}
+            hideNavBar
             />
 
             <Scene
