@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, AsyncStorage } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import Video from 'react-native-video';
 
 class VideoTest extends Component {
+    state = { uri: null }
+    async componentWillMount() {
+        this.setState({ uri: await AsyncStorage.getItem('currentVideoMsg') });
+    }
     render() {
-        return (
+        if (this.state.uri === null) {
+            return (
+                <View />
+            );
+        }
+        if (this.state.uri !== null) {
+            return (
             <Video 
-            source={{ uri: 'assets-library://asset/asset.MOV?id=C5000A74-BBE3-4F55-9D41-BB52D79CD507&ext=MOV' }}   // Can be a URL or a local file.
+            source={{ uri: this.state.uri }}   // Can be a URL or a local file.
             ref={(ref) => {
                 this.player = ref;
             }}                                      // Store reference
@@ -15,7 +26,8 @@ class VideoTest extends Component {
             muted={false}                           // Mutes the audio entirely.
             paused={false}                          // Pauses playback entirely.
             resizeMode="cover"                      // Fill the whole screen at aspect ratio.*
-            repeat                         // Repeat forever.
+            repeat={false}
+            onEnd={() => Actions.Home()}                        // Repeat forever.
             playInBackground={false}                // Audio continues to play when app entering background.
             playWhenInactive={false}                // [iOS] Video continues to play when control or notification center are shown.
             ignoreSilentSwitch={"ignore"}           // [iOS] ignore | obey - When 'ignore', audio will still play with the iOS hard silent switch set to silent. When 'obey', audio will toggle with the switch. When not specified, will inherit audio settings as usual.
@@ -23,6 +35,7 @@ class VideoTest extends Component {
             style={styles.backgroundVideo} 
             />
             );
+        }
     }
 }
 
