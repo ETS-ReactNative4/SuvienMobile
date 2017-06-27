@@ -129,6 +129,9 @@ class Settings extends Component {
                 <CardSection>
                     <Button onPress={this.onAudioButtonPress.bind(this)}>Audio</Button>
                 </CardSection>
+                <CardSection>
+                    <Button onPress={() => Actions.AddMessage()}>Message</Button>
+                </CardSection>
                 <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>Preferences</Text>
                 <Text style={{ marginTop: 10, fontSize: 23, alignSelf: 'center', marginBottom: 30, fontFamily: 'UltimaPDac-UltraLight' }}> Currently Loaded Preference: {this.state.preset} </Text>
                 <CardSection>
@@ -194,7 +197,7 @@ class Settings extends Component {
                         Save and Continue
                     </Button>
                 </CardSection>
-                <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30, fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>Upload a new...</Text>
                     <Image source={require('../Images/multimedia.png')} style={{ marginLeft: 5, height: 30, width: 90 }} />
                 </View>
@@ -206,6 +209,9 @@ class Settings extends Component {
                 </CardSection>
                 <CardSection>
                     <Button onPress={this.onAudioButtonPress.bind(this)}>Audio</Button>
+                </CardSection>
+                <CardSection>
+                    <Button onPress={() => Actions.AddMessage()}>Message</Button>
                 </CardSection>
                 </View>
                 </ScrollView>
