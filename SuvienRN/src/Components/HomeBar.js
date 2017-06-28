@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Button } from './common';
 
 class HomeBar extends Component {
-    state = { greeting: null, name: null, section: null, width: null, aorp: null, hour: null, minute: null, currentDate: null, sizes: null, sizes2: null, dayFilter: null, messages: null, icon: false, messageType: null }
+    state = { greeting: null, name: null, section: null, width: null, aorp: null, hour: null, minute: null, currentDate: null, sizes: null, sizes2: null, dayFilter: null, messages: null, icon: null, messageType: null, color: null }
     componentWillMount() {
         this.setState({ width: Dimensions.get('window').width });
         this.getInfo();
@@ -12,37 +12,52 @@ class HomeBar extends Component {
 
     componentDidMount() {
         this.clockUpdate();
+        this.flashTitle();
     }
 
+    flashTitle() {
+        setInterval(() => {
+            if (this.state.icon === true || this.state.icon === null) {
+                if (this.state.color === null || this.state.color === 'black') {
+                    this.setState({ color: '#86a6e0' });
+                }
+                if (this.state.color === '#86a6e0') {
+                    setTimeout(() => this.setState({ color: 'black' }), 1000);
+                }
+            if (this.state.icon === false) {
+                this.setState({ color: null });
+            }
+            }
+        }, 2000);
+    }
     clockUpdate() {
         setInterval(() => {
             const dd = new Date();
             this.setState({ hour: this.parseHour(dd.getHours()), minute: this.addZero(dd.getMinutes()) });
-            if (this.state.dayFilter !== null) {
+            if (this.state.dayFilter !== null && this.state.dayFilter.length !== 0) {
                 const finalmessage = this.state.dayFilter.filter((day) => (day.startHour <= dd.getHours() && day.startMinute <= dd.getMinutes() && day.endHour >= dd.getHours() && day.endMinute > dd.getMinutes())); 
-                //console.log(finalmessage.length);
-                if ((finalmessage !== undefined && finalmessage.length !== 0) && dd.getHours() < 12) {
-                    if (dd.getMinutes() === finalmessage[0].startMinute) {
+                if ((finalmessage !== undefined && finalmessage.length !== 0) && dd.getHours() < 12) { //this works on the time and after
+                    if (dd.getMinutes() === finalmessage[0].startMinute && dd.getSeconds() <= 6) {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'am', section: require('../Images/morning.png'), icon: true, messageType: finalmessage[0].messageType });
                     } else {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'am', section: require('../Images/morning.png'), icon: false, messageType: finalmessage[0].messageType });
                     }
                 }
-                if ((finalmessage !== undefined && finalmessage.length !== 0) && (dd.getHours() >= 12 && dd.getHours() < 17)) {
+                if ((finalmessage !== undefined && finalmessage.length !== 0) && (dd.getHours() >= 12 && dd.getHours() < 17)) { //this works on time and after
                     if (dd.getMinutes() === finalmessage[0].startMinute) {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/afternoon.png'), icon: true, messageType: finalmessage[0].messageType });
                     } else {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/afternoon.png'), icon: false, messageType: finalmessage[0].messageType });
                     }
                 } 
-                if (finalmessage !== undefined && (dd.getHours() >= 17 && dd.getHours() < 21)) {
+                if ((finalmessage !== undefined && finalmessage.length !== 0) && (dd.getHours() >= 17 && dd.getHours() < 21)) { //this works on the time and after??? why
                     if (dd.getMinutes() === finalmessage[0].startMinute) {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/evening.png'), icon: true, messageType: finalmessage[0].messageType });
                     } else {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/evening.png'), icon: false, messageType: finalmessage[0].messageType });
                     }
                 }
-                if (finalmessage !== undefined && (dd.getHours() >= 22)) {
+                if ((finalmessage !== undefined && finalmessage.length !== 0) && (dd.getHours() >= 21)) {
                     if (dd.getMinutes() === finalmessage[0].startMinute) {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/night.png'), icon: true, messageType: finalmessage[0].messageType });
                     } else {
@@ -51,7 +66,7 @@ class HomeBar extends Component {
                 }
                 if (finalmessage === undefined || finalmessage.length === 0) {
                     if (dd.getHours() < 12) {
-                        this.setState({ greeting: `It's a lovely morning, ${this.state.name}!`, aorp: 'am', section: require('../Images/morning.png'), icon: false });
+                        this.setState({ greeting: `It's a lovely morning, ${this.state.name}!`, aorp: 'am', section: require('../Images/morning.png'), messageType: null });
                         }
                     if (dd.getHours() >= 12 && dd.getHours() < 17) {
             this.setState({ greeting: `It's a lovely afternoon, ${this.state.name}!`, aorp: 'pm', section: require('../Images/afternoon.png'), icon: false });
@@ -64,7 +79,7 @@ class HomeBar extends Component {
         }
                 }
             }
-            if (this.state.dayFilter === null) {
+            if (this.state.dayFilter === null || this.state.dayFilter.length === 0) {
             if (dd.getHours() < 12) {
             this.setState({ greeting: `It's a lovely morning, ${this.state.name}!`, aorp: 'am', section: require('../Images/morning.png'), icon: false });
             }
@@ -94,7 +109,6 @@ class HomeBar extends Component {
 
     async getInfo() {
         const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
-        console.log(messages);
         this.setState({ name: await AsyncStorage.getItem('name'), messages });
         const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -107,16 +121,16 @@ class HomeBar extends Component {
         const dayFilter = messages.filter((message) => message.day.find((da) => da === weekday[numbDay]) !== undefined);
         this.setState({ name: await AsyncStorage.getItem('name'), messages, dayFilter });
         if (currentHour < 12) {
-            this.setState({ greeting: `It's a lovely morning, ${this.state.name}!`, section: require('../Images/morning.png'), icon: false });
+            this.setState({ greeting: `It's a lovely morning, ${this.state.name}!`, section: require('../Images/morning.png') });
         }
         if (currentHour >= 12 && currentHour < 17) {
-            this.setState({ greeting: `It's a lovely afternoon, ${this.state.name}!`, section: require('../Images/afternoon.png'), icon: false });
+            this.setState({ greeting: `It's a lovely afternoon, ${this.state.name}!`, section: require('../Images/afternoon.png') });
         }
         if (currentHour >= 18 && currentHour < 21) {
-            this.setState({ greeting: `It's a lovely evening, ${this.state.name}!`, section: require('../Images/evening.png'), icon: false });
+            this.setState({ greeting: `It's a lovely evening, ${this.state.name}!`, section: require('../Images/evening.png') });
         }
         if (currentHour >= 22) {
-            this.setState({ greeting: `It's a lovely night, ${this.state.name}!`, section: require('../Images/night.png'), icon: false });
+            this.setState({ greeting: `It's a lovely night, ${this.state.name}!`, section: require('../Images/night.png') });
         }
         this.setState({ currentDate: `${weekday[numbDay]}, ${months[month]} ${numbDate}, ${numbYear}` });
     }
@@ -125,9 +139,8 @@ class HomeBar extends Component {
         //console.log(aorp);
         //console.log(this.state.sizes);
         if (this.state.sizes !== null && hour !== null && minute !== null) {
-            if (this.state.icon === false) {
                 const finalsize = Math.trunc((width - sizes) / 2);
-                if (this.state.messageType === 'Msg' || this.state.messageType === null) {
+                if (this.state.messageType === null) {
                     return (
             <View style={{ flexDirection: 'row', paddingTop: 15 }}>
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
@@ -136,6 +149,25 @@ class HomeBar extends Component {
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
                     <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{greeting}</Text>
+                    <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
+                </View>
+                <View style={{ alignItems: 'flex-end', width: finalsize }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
+                        <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80, marginRight: 30 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </View>
+        ); 
+                }
+                if (this.state.messageType === 'Msg') {
+                    return (
+            <View style={{ flexDirection: 'row', paddingTop: 15 }}>
+                <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
+                    <Image source={this.state.section} style={{ height: 80, width: 80 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
+                </View>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
+                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>{greeting}</Text>
                     <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
                 </View>
                 <View style={{ alignItems: 'flex-end', width: finalsize }}>
@@ -157,7 +189,7 @@ class HomeBar extends Component {
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>There is a new video message. </Text>
+                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>There is a new video message. </Text>
                         <TouchableOpacity 
                         onPress={() => {
                         AsyncStorage.setItem('currentVideoMsg', finalmessage[0].uri);
@@ -165,7 +197,7 @@ class HomeBar extends Component {
                         Actions.VideoTest(); 
                         }}
                         >
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Click me to watch!</Text>
+                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>Click me to watch!</Text>
                         </TouchableOpacity>
                     </View>
                     <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
@@ -178,64 +210,6 @@ class HomeBar extends Component {
             </View>
         );
                 }
-        
-            }
-            if (this.state.icon === true && this.state.messageType === 'Msg') {
-                const finalsize = Math.trunc((width - sizes) / 2);
-        return (
-            <View style={{ flexDirection: 'row', paddingTop: 15 }}>
-                <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
-                    <Image source={this.state.section} style={{ height: 80, width: 80 }} />
-                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
-                </View>
-                <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
-                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{greeting}
-                        <Image source={require('../Images/messagealert.png')} style={{ marginLeft: 10, height: 40, width: 40 }} />
-                    </Text>
-                    <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
-                </View>
-                <View style={{ alignItems: 'flex-end', width: finalsize }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
-                        <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80, marginRight: 30 }} />
-                    </TouchableWithoutFeedback>
-                </View>
-            </View>
-        );
-            }
-            if (this.state.icon === true && this.state.messageType === 'VideoMsg') {
-                const finalsize = Math.trunc((width - sizes) / 2);
-               const dd = new Date();
-                    const finalmessage = this.state.dayFilter.filter((day) => (day.startHour <= dd.getHours() && day.startMinute <= dd.getMinutes() && day.endHour >= dd.getHours() && day.endMinute > dd.getMinutes()));
-                    return (
-            <View style={{ flexDirection: 'row', paddingTop: 15 }}>
-                <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
-                    <Image source={this.state.section} style={{ height: 80, width: 80 }} />
-                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
-                </View>
-                <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>There is a new video message. </Text>
-                        <TouchableOpacity 
-                        onPress={() => {
-                        AsyncStorage.setItem('currentVideoMsg', finalmessage[0].uri);
-                        console.log(AsyncStorage.getItem('currentVideoMsg'));
-                        Actions.VideoTest(); 
-                        }}
-                        >
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Click me to watch!</Text>
-                        </TouchableOpacity>
-                        <Image source={require('../Images/messagealert.png')} style={{ marginLeft: 10, height: 40, width: 40 }} />
-                    </View>
-                    <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
-                </View>
-                <View style={{ alignItems: 'flex-end', width: finalsize }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
-                        <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80, marginRight: 30 }} />
-                    </TouchableWithoutFeedback>
-                </View>
-            </View> 
-                    );
-            }
             }
     return (
         <View>
