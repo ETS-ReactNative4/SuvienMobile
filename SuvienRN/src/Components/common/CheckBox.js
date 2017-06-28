@@ -3,6 +3,16 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 class CheckBox extends Component {
     state = { checked: false, image: require('./unchecked.png') }
+    componentWillMount() {
+        if (this.props.value !== null) {
+            console.log(this.props.value);
+            const det = this.props.value.find((val) => val === this.props.label);
+            if (det !== undefined) {
+                this.setState({ checked: true, image: require('./checked.png') });
+            }
+        }
+    }
+
     checkBox() {
         if (this.state.checked === false) {
             this.setState({ checked: true, image: require('./checked.png') });

@@ -44,21 +44,21 @@ class HomeBar extends Component {
                     }
                 }
                 if ((finalmessage !== undefined && finalmessage.length !== 0) && (dd.getHours() >= 12 && dd.getHours() < 17)) { //this works on time and after
-                    if (dd.getMinutes() === finalmessage[0].startMinute) {
+                    if (dd.getMinutes() === finalmessage[0].startMinute && dd.getSeconds() <= 6) {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/afternoon.png'), icon: true, messageType: finalmessage[0].messageType });
                     } else {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/afternoon.png'), icon: false, messageType: finalmessage[0].messageType });
                     }
                 } 
                 if ((finalmessage !== undefined && finalmessage.length !== 0) && (dd.getHours() >= 17 && dd.getHours() < 21)) { //this works on the time and after??? why
-                    if (dd.getMinutes() === finalmessage[0].startMinute) {
+                    if (dd.getMinutes() === finalmessage[0].startMinute && dd.getSeconds() <= 6) {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/evening.png'), icon: true, messageType: finalmessage[0].messageType });
                     } else {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/evening.png'), icon: false, messageType: finalmessage[0].messageType });
                     }
                 }
                 if ((finalmessage !== undefined && finalmessage.length !== 0) && (dd.getHours() >= 21)) {
-                    if (dd.getMinutes() === finalmessage[0].startMinute) {
+                    if (dd.getMinutes() === finalmessage[0].startMinute && dd.getSeconds() <= 6) {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/night.png'), icon: true, messageType: finalmessage[0].messageType });
                     } else {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/night.png'), icon: false, messageType: finalmessage[0].messageType });
@@ -69,13 +69,13 @@ class HomeBar extends Component {
                         this.setState({ greeting: `It's a lovely morning, ${this.state.name}!`, aorp: 'am', section: require('../Images/morning.png'), messageType: null });
                         }
                     if (dd.getHours() >= 12 && dd.getHours() < 17) {
-            this.setState({ greeting: `It's a lovely afternoon, ${this.state.name}!`, aorp: 'pm', section: require('../Images/afternoon.png'), icon: false });
+            this.setState({ greeting: `It's a lovely afternoon, ${this.state.name}!`, aorp: 'pm', section: require('../Images/afternoon.png'), messageType: null });
             }
             if (dd.getHours() >= 17 && dd.getHours() < 21) {
-            this.setState({ greeting: `It's a lovely evening, ${this.state.name}!`, aorp: 'pm', section: require('../Images/evening.png'), icon: false });
+            this.setState({ greeting: `It's a lovely evening, ${this.state.name}!`, aorp: 'pm', section: require('../Images/evening.png'), messageType: null });
             }
             if (dd.getHours() >= 22) {
-            this.setState({ greeting: `It's a lovely night, ${this.state.name}!`, aorp: 'pm', section: require('../Images/night.png'), icon: false });
+            this.setState({ greeting: `It's a lovely night, ${this.state.name}!`, aorp: 'pm', section: require('../Images/night.png'), messageType: null });
         }
                 }
             }
