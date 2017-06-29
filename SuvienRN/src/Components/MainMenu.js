@@ -5,7 +5,7 @@ import { Button, CardSection } from './common';
 import Orientation from 'react-native-orientation';
 
 class MainMenu extends Component {
-    state = { isFirst: null }
+    state = { isFirst: null, isComp: null, stage: null }
     async componentDidMount() {
         Orientation.lockToLandscape();
         //console.log(await AsyncStorage.getItem('Messages'));
@@ -100,7 +100,7 @@ class MainMenu extends Component {
     }
 
     async getFirst() {
-        if (await AsyncStorage.getItem('name') === null && await AsyncStorage.getItem('stage') === null){
+        if (await AsyncStorage.getItem('name') === null && await AsyncStorage.getItem('stage') === null) {
             this.setState({ isFirst: true });
             AsyncStorage.setItem('Videos', JSON.stringify([]));
             AsyncStorage.setItem('Tags', JSON.stringify([]));
@@ -108,7 +108,7 @@ class MainMenu extends Component {
             AsyncStorage.setItem('Pictures', JSON.stringify([]));
             AsyncStorage.setItem('Favourites', JSON.stringify([]));
         } else {
-        this.setState({ isFirst: false });
+        this.setState({ isFirst: false, stage: await AsyncStorage.getItem('stage'), isComp: await AsyncStorage.getItem('Achievement') });
     }
     }
 
@@ -121,7 +121,8 @@ class MainMenu extends Component {
             );
         }
         if (this.state.isFirst === false) {
-            return (
+            if (this.state.stage === '1' || this.state.acheivement === 'INCOM') {
+                return (
                 <Image resizeMode="stretch" source={require('../Images/suviensplash.png')} style={styles.canvas}>
                     <View style={{ backgroundColor: 'transparent', flexDirection: 'row', flex: 1, position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, height: null, width: null }}>
                         <View style={styles.leftContainer}>
@@ -150,6 +151,48 @@ class MainMenu extends Component {
                     </View>
                 </Image>
             );
+        } else {
+            return (
+                <Image resizeMode="stretch" source={require('../Images/suviensplash.png')} style={styles.canvas}>
+                    <View style={{ backgroundColor: 'transparent', flexDirection: 'row', flex: 1, position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, height: null, width: null }}>
+                        <View style={styles.leftContainer}>
+                            <CardSection style={{ borderBottomWidth: 0, flex: 251, backgroundColor: 'transparent', position: 'relative' }} />
+                            <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
+                                    <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
+                                        Start
+                                    </Button>
+                            </CardSection>
+                            <CardSection style={{ flex: 50, justifyContent: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
+                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>Have questions? Visit our help page!</Text>
+                            </CardSection>
+                            <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
+                                <View style={{ flex: 150 }}>
+                                    <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
+                                        Help
+                                    </Button>
+                                </View>
+                                <View style={{ flex: 100 }} />
+                            </CardSection>
+                            <CardSection style={{ flex: 50, justifyContent: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
+                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>Test your memory while having fun!</Text>
+                            </CardSection>
+                            <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
+                                <View style={{ flex: 150 }}>
+                                    <Button style={styles.buttonContainer} onPress={() => Actions.MemoryGame()}>
+                                        Play
+                                    </Button>
+                                </View>
+                                <View style={{ flex: 100 }} />
+                            </CardSection>
+                            <CardSection style={{ borderBottomWidth: 0, flex: 100, backgroundColor: 'transparent', position: 'relative' }} />
+                        </View>
+                        <View style={styles.rightContainer}>
+                            <CardSection style={{ borderBottomWidth: 0, flex: 456, backgroundColor: 'transparent', flexDirection: 'column', position: 'relative' }} />
+                        </View>
+                    </View>
+                </Image>
+            );
+        }
         }
 
         if (this.state.isFirst === true) {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, AsyncStorage, TouchableOpacity, Dimensions } from 'react-native';
 import GameTile from './common/GameTile';
-import ClockBar from './ClockBar';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Button, Header } from './common';
 
@@ -141,7 +140,6 @@ class MemoryGame extends Component {
                     {this.renderTiles()}
                 </View>
                 <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }}>
-                <ClockBar />
                 </View>
                 </View>
             );
@@ -168,7 +166,6 @@ class MemoryGame extends Component {
                         No
                     </Button>
                 </CardSection>
-                <ClockBar />
                 </View>
                 </View>
             );
@@ -186,7 +183,6 @@ class MemoryGame extends Component {
                 </View>
                 <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30, backgroundColor: 'grey' }}>
                 <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin' }}>{this.state.card1.caption}</Text>
-                <ClockBar />
                 </View>
                 </View>
             );
