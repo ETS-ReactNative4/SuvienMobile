@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Picker, AsyncStorage, Dimensions, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
-import { CardSection, Button, Input, Header } from './common';
+import { CardSection, Button, Input, Header, CheckBox } from './common';
 import { Actions } from 'react-native-router-flux';
-import CheckBox from './common/CheckBox';
 import Camera from 'react-native-camera';
 
 class AddMessage extends Component {
@@ -1327,4 +1326,4 @@ const styles = {
   }
 };
 
-export default AddMessage;
+export { AddMessage };

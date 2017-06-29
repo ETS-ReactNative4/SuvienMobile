@@ -8,6 +8,17 @@ class MainMenu extends Component {
     state = { isFirst: null, isComp: null, stage: null }
     async componentDidMount() {
         Orientation.lockToLandscape();
+        /*
+       const tags = JSON.parse(await AsyncStorage.getItem('Tags'));
+       tags.splice(5, 1);
+       AsyncStorage.setItem('Tags', JSON.stringify(tags));
+       console.log(JSON.parse(await AsyncStorage.getItem('Tags')));
+
+        /*
+        const media = JSON.parse(await AsyncStorage.getItem('Media'));
+        media.splice(9, 1);
+        AsyncStorage.setItem('Media', JSON.stringify(media));
+        console.log(await AsyncStorage.getItem('Media'));
         //console.log(await AsyncStorage.getItem('Messages'));
         //AsyncStorage.setItem('Messages', JSON.stringify([]));
         /*
