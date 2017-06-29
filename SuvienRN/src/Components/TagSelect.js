@@ -10,6 +10,17 @@ class TagSelect extends Component {
         this.fetchData();
     }
 
+    //add number of items
+    async ridUselessTags(tags) {
+        const media = JSON.parse(await AsyncStorage.getItem('Media'));
+        const uselesstags = [];
+        for (let i = 0; i < tags.length; i++) {
+            const filter = media.filter((medi) => medi.group === tags[i]);
+            if (filter.length === 0 || filter === undefined) {
+                uselesstags.push()
+            }
+        } 
+    }
     componentDidMount() {
         this.setState({ 
             height: Dimensions.get('window').height,
@@ -17,7 +28,8 @@ class TagSelect extends Component {
         });
     }
     async fetchData() {
-        this.setState({ tags: JSON.parse(await AsyncStorage.getItem('Tags')) });
+        const tags = JSON.parse(await AsyncStorage.getItem('Tags'));
+        this.setState({ tags });
     }
 renderList() {
     if (this.state.tags !== null) {
