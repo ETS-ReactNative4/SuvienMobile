@@ -36,15 +36,7 @@ class Media extends Component {
         artist: null
     }
     async componentWillMount() {
-        //Note. The orientation issue only persists on android, not ios
-        /*
-        if (this.state.isReady === null) {
-            Orientation.lockToPortrait();
-            Orientation.unlockAllOrientations();
-            Orientation.lockToLandscape();
-        }
-        
-        */
+        //Note. The orientation issue only persists on android, not ioss
         const chosen = JSON.parse(await AsyncStorage.getItem('isSelected'));
         if (chosen.mediaType === 'Photo') {
         this.setState({ 
@@ -255,7 +247,10 @@ class Media extends Component {
     }
 
     render() {
-        if (this.state.mediaType === null){
+        Orientation.lockToPortrait();
+            Orientation.unlockAllOrientations();
+            Orientation.lockToLandscape();
+        if (this.state.mediaType === null) {
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <Text>Loading</Text>
@@ -359,7 +354,7 @@ class Media extends Component {
 
                             style={{ alignSelf: 'stretch', height: 400, backgroundColor: 'black' }}
                             />
-                            <View style={{ height: 400, backgroundColor: '#a4c0e5' }}>
+                            <View style={{ height: 300, backgroundColor: '#a4c0e5' }}>
                                 <ScrollView>
                                     <View>
                                         <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', backgroundColor: '#b7d6ff', marginLeft: 5, marginRight: 5 }}>{this.state.title}</Text>

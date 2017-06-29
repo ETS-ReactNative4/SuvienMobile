@@ -132,6 +132,9 @@ class Settings extends Component {
                 <CardSection>
                     <Button onPress={() => Actions.AddMessage()}>Message</Button>
                 </CardSection>
+                <CardSection>
+                    <Button onPress={() => Actions.ContentExplorer()}>Edit Existing</Button>
+                </CardSection>
                 <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>Preferences</Text>
                 <Text style={{ marginTop: 10, fontSize: 23, alignSelf: 'center', marginBottom: 30, fontFamily: 'UltimaPDac-UltraLight' }}> Currently Loaded Preference: {this.state.preset} </Text>
                 <CardSection>
@@ -212,6 +215,9 @@ class Settings extends Component {
                 </CardSection>
                 <CardSection>
                     <Button onPress={() => Actions.AddMessage()}>Message</Button>
+                </CardSection>
+                <CardSection>
+                    <Button onPress={() => Actions.ContentExplorer()}>Edit Existing</Button>
                 </CardSection>
                 </View>
                 </ScrollView>
