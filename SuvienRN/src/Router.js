@@ -17,6 +17,7 @@ import {
 } from './Components';
 import VideoTest from './Components/VideoTest';
 import AddMessage from './Components/AddMessage';
+import MemoryGame from './Components/MemoryGame';
 
 const RouterComponent = () => (
         <Router
@@ -24,9 +25,15 @@ const RouterComponent = () => (
         >
             <Scene 
             key="MainMenu"
-            component={MainMenu}
+            component={MemoryGame}
             hideNavBar
             initial 
+            />
+
+            <Scene
+            key="MemoryGame"
+            component={MemoryGame}
+            hideNavBar
             />
 
             <Scene
