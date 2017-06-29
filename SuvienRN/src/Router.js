@@ -13,11 +13,12 @@ import {
     MediaExplorer,
     FirstLanding,
     TagSelect,
-    AddAudioAnd
+    AddAudioAnd,
+    VideoTest,
+    AddMessage,
+    MemoryGame
 } from './Components';
-import VideoTest from './Components/VideoTest';
-import AddMessage from './Components/AddMessage';
-import MemoryGame from './Components/MemoryGame';
+import ContentExplorer from './Components/ContentExplorer';
 
 const RouterComponent = () => (
         <Router
@@ -36,6 +37,12 @@ const RouterComponent = () => (
             hideNavBar
             />
 
+            <Scene
+            key="ContentExplorer"
+            component={ContentExplorer}
+            hideNavBar
+            />
+            
             <Scene
             key="AddMessage"
             component={AddMessage}

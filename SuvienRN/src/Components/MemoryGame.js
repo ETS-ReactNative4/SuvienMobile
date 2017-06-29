@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, AsyncStorage, TouchableOpacity, Dimensions } from 'react-native';
-import GameTile from './common/GameTile';
 import { Actions } from 'react-native-router-flux';
-import { CardSection, Button, Header } from './common';
+import { CardSection, Button, Header, GameTile } from './common';
 
 class MemoryGame extends Component {
     state = { tiles: null, card1: null, overrideKey: null, card2: null, cards: null, showCaption: false, width: null, seconds: 0, minutes: 0 }
@@ -193,4 +192,4 @@ class MemoryGame extends Component {
     }
 }
 
-export default MemoryGame;
+export { MemoryGame };

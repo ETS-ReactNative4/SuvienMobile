@@ -127,4 +127,4 @@ class GameTile extends Component {
     }
 }
 
-export default GameTile;
+export { GameTile };
