@@ -25,7 +25,7 @@ const RouterComponent = () => (
         >
             <Scene 
             key="MainMenu"
-            component={MemoryGame}
+            component={MainMenu}
             hideNavBar
             initial 
             />
