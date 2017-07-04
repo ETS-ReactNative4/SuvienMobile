@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MusicPlayerController from 'react-native-musicplayercontroller';
-import { View, AsyncStorage, Image, Text, ScrollView } from 'react-native';
-import { CardSection, Button, Input } from './common';
+import { View, AsyncStorage, Image, Text, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { CardSection, Button, Input, Header } from './common';
 import { Actions } from 'react-native-router-flux';
 
 class AddAudioAnd extends Component {
@@ -54,6 +54,44 @@ class AddAudioAnd extends Component {
         console.log(await AsyncStorage.getItem('Audio'));
         Actions.Home();
     }
+
+    async createNew() {
+        const { title, caption, group, artist, album, uri } = this.state;
+        const audios = JSON.parse(await AsyncStorage.getItem('Audio'));
+        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
+        audios.push({
+            uri,
+            title,
+            album,
+            artist,
+            caption,
+            group,
+            isFavourite: false,
+            mediaType: 'MusicAnd'
+        });
+        gen.push({
+            uniqueID: objec.uniqueID,
+            uri,
+            title,
+            album,
+            artist,
+            caption,
+            group,
+            isFavourite: false,
+            mediaType: 'MusicAnd'
+        });
+        const findTags = mytags.find((tag) => tag === this.state.group);
+        if (findTags === undefined) {
+            mytags.push(this.state.group);
+            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+        }
+        AsyncStorage.setItem('Media', JSON.stringify(gen));
+        AsyncStorage.setItem('Audio', JSON.stringify(audios));
+        console.log(await AsyncStorage.getItem('Audio'));
+        this.setState({ title: null, artist: null, album: null, uri: null, caption: null, group: null });
+    }
     
     onAudioSelect() {
         if (this.state.title === null || this.state.album === null || this.state.artist === null) {
@@ -96,17 +134,19 @@ class AddAudioAnd extends Component {
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
-                    <CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Continue
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 40 }} />
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={() => Actions.Home()}>
-                            Return to Home
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
                 </View>
             );
         }
@@ -150,17 +190,19 @@ class AddAudioAnd extends Component {
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
-                    <CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Continue
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 40 }} />
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={() => Actions.Home()}>
-                            Return to Home
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
                 </View>
             );
         }
@@ -201,9 +243,22 @@ class AddAudioAnd extends Component {
     
     render() {
         return (
-            <View style={{ marginTop: 60, flex: 1 }}>
+            <View style={{ flex: 1 }}>
+                <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Audio</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                 <ScrollView>
-                    <CardSection>
+                    <CardSection style={{ marginTop: 10 }}>
                         <Button onPress={this.onRecordAudioPress.bind(this)}>
                             Record Audio
                         </Button>

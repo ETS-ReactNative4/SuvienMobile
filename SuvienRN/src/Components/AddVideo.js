@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image, AsyncStorage, ScrollView, CameraRoll, Modal, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { CardSection, Button, Input } from './common';
+import { CardSection, Button, Input, Header } from './common';
 import Camera from 'react-native-camera';
 
 class AddVideo extends Component {
@@ -112,6 +112,78 @@ class AddVideo extends Component {
         this.setState({ videoID: secondsplit[0], thumbnail: `https://img.youtube.com/vi/${secondsplit[0]}/hqdefault.jpg`, mediaType: 'Youtube' });
     }
 
+    async createNew() {
+        if (this.state.mediaType === 'Youtube') {
+        const { mediaType, videoID, thumbnail, title, caption, group } = this.state;
+        const videoobj = JSON.parse(await AsyncStorage.getItem('Videos'));
+        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
+        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+        videoobj.push(
+            { 
+                mediaType,
+                videouri: videoID,
+                imageuri: thumbnail,
+                title,
+                caption,
+                group,
+                isFavourite: false
+            }
+        );
+        gen.push({
+            uniqueID: objec.uniqueID, 
+            title,
+            videouri: videoID,
+            imageuri: thumbnail, 
+            caption, 
+            group,
+            isFavourite: false,
+            mediaType 
+        });
+        const findTags = mytags.find((tag) => tag === this.state.group);
+        if (findTags === undefined) {
+            mytags.push(this.state.group);
+            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+        }
+        AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
+        AsyncStorage.setItem('Media', JSON.stringify(gen));
+        Actions.Home();
+    }
+        if (this.state.mediaType === 'Video') {
+            const { mediaType, uri, title, caption, group } = this.state;
+        const videoobj = JSON.parse(await AsyncStorage.getItem('Videos'));
+        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
+        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+        videoobj.push(
+            { 
+                mediaType,
+                uri,
+                title,
+                caption,
+                group,
+                isFavourite: false,
+            }
+        );
+        gen.push({
+            uniqueID: objec.uniqueID, 
+            mediaType,
+            uri,
+            title,
+            caption,
+            group,
+            isFavourite: false,
+        });
+        const findTags = mytags.find((tag) => tag === this.state.group);
+        if (findTags === undefined) {
+            mytags.push(this.state.group);
+            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+        }
+        AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
+        AsyncStorage.setItem('Media', JSON.stringify(gen));
+        this.setState({ thumbnail: null, videosrc: null, height: null, width: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null });
+        }
+    }
     onRenderExplorer() {
         if (this.state.videoID === null && this.state.uri === null) {
             return (
@@ -144,17 +216,19 @@ class AddVideo extends Component {
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
-                    <CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Continue
-                            <Image source={require('../Images/saveicon.jpg')} style={{ height: 30, width: 40 }} />
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={() => Actions.Home()}>
-                            Return to Home
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
                 </View>
                 </ScrollView>
             );
@@ -190,17 +264,19 @@ class AddVideo extends Component {
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
-                    <CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Continue
-                            <Image source={require('../Images/saveicon.jpg')} style={{ height: 30, width: 40 }} />
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={() => Actions.Home()}>
-                            Return to Home
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
                 </View>
                 </ScrollView>
             );
@@ -236,17 +312,19 @@ class AddVideo extends Component {
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
-                    <CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Continue
-                            <Image source={require('../Images/saveicon.jpg')} style={{ height: 30, width: 40 }} />
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={() => Actions.Home()}>
-                            Return to Home
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
                 </View>
                 </ScrollView>
             );
@@ -323,8 +401,22 @@ class AddVideo extends Component {
         if (this.state.isLaunchCam === false) {
             if (this.state.videos !== null) {
         return (
+            <View style={{ flex: 1 }}>
+            <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Video</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
             <ScrollView>
-                <View style={{ marginTop: 60, flex: 1 }}>
+                <View style={{ marginTop: 10, flex: 1 }}>
                     <Modal
                         animationType={'fade'}
                         transparent
@@ -363,12 +455,27 @@ class AddVideo extends Component {
                     {this.onRenderExplorer()}
                 </View>
             </ScrollView>
+            </View>
         );
     }
     if (this.state.videos === null) {
         return (
+            <View style={{ flex: 1 }}>
+            <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Video</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
             <ScrollView>
-                <View style={{ marginTop: 60, flex: 1 }}>
+                <View style={{ marginTop: 10, flex: 1 }}>
                     <CardSection>
                         <Button onPress={this.onTakeVideoPress.bind(this)}>
                             Record Video
@@ -388,6 +495,7 @@ class AddVideo extends Component {
                     {this.onRenderExplorer()}
                 </View>
             </ScrollView>
+            </View>
         );
     }
         }

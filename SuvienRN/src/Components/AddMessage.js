@@ -92,6 +92,83 @@ class AddMessage extends Component {
         }
     }
 
+    async createNew() {
+        const dd = new Date();
+        const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
+        if (this.state.currentMessage === null) {
+            const { message, day, startHour, startMinute, endHour, endMinute, messageType, uri, title } = this.state;
+        if (messageType === 'Msg') {
+            messages.push({
+            day: JSON.parse(day),
+            message,
+            startHour,
+            startMinute,
+            endHour,
+            endMinute,
+            messageType,
+            messageID: dd.getTime()
+        }); 
+        }
+        if (messageType === 'VideoMsg') {
+            messages.push({
+            day: JSON.parse(day),
+            message: title,
+            startHour,
+            startMinute,
+            endHour,
+            endMinute,
+            uri,
+            messageType,
+            messageID: dd.getTime()
+        });
+        }
+       AsyncStorage.setItem('Messages', JSON.stringify(messages));
+       console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+       this.setState({ message: null, day: '[]', startHour: 0, startMinute: 0, endHour: 0, endMinute: 0, title: null, messages: JSON.parse(await AsyncStorage.getItem('Messages')), messageType: null, isLaunchCam: false, deletedMessage: null, uri: null, cameraType: 'back', currentMessage: null });
+        } 
+        if (this.state.currentMessage !== null) {
+            const selected = JSON.parse(this.state.currentMessage);
+            const searc = messages.findIndex((element, index, array) => {
+                if (element.messageID === selected.messageID) {
+                    return true;
+                } else {
+                    return false;
+                }});
+            if (selected.messageType === 'Msg') {
+                const { day, message, startHour, startMinute, endHour, endMinute, messageID } = selected;
+            messages[searc] = {
+                day,
+                message,
+                startHour,
+                startMinute,
+                endHour,
+                endMinute,
+                messageType: 'Msg',
+                messageID
+            };
+            AsyncStorage.setItem('Messages', JSON.stringify(messages));
+            console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+            Actions.Home();
+        }
+            if (selected.messageType === 'VideoMsg') {
+                const { day, message, uri, startHour, startMinute, endHour, endMinute, messageID } = selected;
+            messages[searc] = {
+                day,
+                message,
+                startHour,
+                startMinute,
+                endHour,
+                endMinute,
+                uri,
+                messageType: 'VideoMsg',
+                messageID
+            };
+            AsyncStorage.setItem('Messages', JSON.stringify(messages));
+            console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+            Actions.Home();
+            }
+        }
+    }
     addZero(p) {
         if (p < 10) {
             p = `0${p}`;
@@ -210,11 +287,22 @@ class AddMessage extends Component {
         if (this.state.isLaunchCam === false) {
             if (this.state.messageType === null) {
             return (
-                <ScrollView>
+                <View style={{ flex: 1 }}>
+                <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Message</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
+            <ScrollView>
                 <View>
-                    <Header style={{ height: 80 }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Add Messages</Text>
-                    </Header>
                             <View style={{ marginTop: 10, marginBottom: 10, marginLeft: 30 }}>
                                 <Text style={{ fontSize: 30, fontFamily: 'UltimaPDac-UltraLight' }}>I would like to add a...</Text>
                             </View>
@@ -231,20 +319,32 @@ class AddMessage extends Component {
                         <View style={{ marginTop: 10, marginBottom: 10, marginLeft: 30 }}>
                             <Text style={{ fontSize: 30, fontFamily: 'UltimaPDac-UltraLight' }}>Active Messages</Text>
                         </View>
+                        
                         <CardSection style={{ flexDirection: 'column' }}>
                             {this.renderMessageList()}
                         </CardSection>
-                        </View>                        
-            </ScrollView>
+                        </View>
+                        </ScrollView>
+            </View>
             );
         }
         if (this.state.messageType === 'Msg') {
             if (this.state.currentMessage === null) {
                 return (
             <View>
-                <Header style={{ height: 80 }}>
-                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Add Messages</Text>
-                </Header>
+                <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Message</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                 <CardSection style={{ marginLeft: 0 }}>
                     <Input
                         placeholder="It's time to check your email!"
@@ -423,11 +523,19 @@ class AddMessage extends Component {
                     </Picker>
                     </View>
                 </CardSection>
-                <CardSection>
-                    <Button onPress={this.onSaveMessagePress.bind(this)}>
-                        Save and Return
-                    </Button>
-                </CardSection>
+                <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                        <Button onPress={this.onSaveMessagePress.bind(this)}>
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
             </View>
         );
             }
@@ -436,9 +544,19 @@ class AddMessage extends Component {
                 console.log('im not null!');
                     return (
             <View>
-                <Header style={{ height: 80 }}>
-                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Add Messages</Text>
-                </Header>
+                <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Message</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                 <CardSection style={{ marginLeft: 0 }}>
                     <Input
                         placeholder="It's time to check your email!"
@@ -646,11 +764,19 @@ class AddMessage extends Component {
                     </Picker>
                     </View>
                 </CardSection>
-                <CardSection>
-                    <Button onPress={this.onSaveMessagePress.bind(this)}>
-                        Save and Return
-                    </Button>
-                </CardSection>
+                <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                        <Button onPress={this.onSaveMessagePress.bind(this)}>
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
             </View>
         );
         }
@@ -660,9 +786,19 @@ class AddMessage extends Component {
                 const selected = JSON.parse(this.state.currentMessage);
                 return (
             <View>
-                <Header style={{ height: 80 }}>
-                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Add Messages</Text>
-                </Header>
+                <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Message</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                 <CardSection style={{ marginLeft: 0 }}>
                     <Image source={{ uri: selected.uri }} style={{ height: 300, width: 400 }} />
                 </CardSection>
@@ -873,11 +1009,19 @@ class AddMessage extends Component {
                     </Picker>
                     </View>
                 </CardSection>
-                <CardSection>
-                    <Button onPress={this.onSaveMessagePress.bind(this)}>
-                        Save and Return
-                    </Button>
-                </CardSection>
+                <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                        <Button onPress={this.onSaveMessagePress.bind(this)}>
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
             </View>
         );
             }
@@ -885,9 +1029,19 @@ class AddMessage extends Component {
                 if (this.state.uri === null) {
                 return (
             <View>
-                <Header style={{ height: 80 }}>
-                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Add Messages</Text>
-                </Header>
+                <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Message</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                 <CardSection style={{ marginLeft: 0 }}>
                     <Button onPress={() => this.setState({ isLaunchCam: true })}>
                         Record Video
@@ -1062,20 +1216,38 @@ class AddMessage extends Component {
                     </Picker>
                     </View>
                 </CardSection>
-                <CardSection>
-                    <Button onPress={this.onSaveMessagePress.bind(this)}>
-                        Save and Return
-                    </Button>
-                </CardSection>
+                <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                        <Button onPress={this.onSaveMessagePress.bind(this)}>
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
             </View>
         );
             }
             if (this.state.uri !== null) {
                 return (
             <View>
-                <Header style={{ height: 80 }}>
-                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Add Messages</Text>
-                </Header>
+                <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Message</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                 <CardSection style={{ marginLeft: 0 }}>
                     <Image source={{ uri: this.state.uri }} style={{ height: 300, width: 400 }} />
                 </CardSection>
@@ -1257,11 +1429,19 @@ class AddMessage extends Component {
                     </Picker>
                     </View>
                 </CardSection>
-                <CardSection>
-                    <Button onPress={this.onSaveMessagePress.bind(this)}>
-                        Save and Return
-                    </Button>
-                </CardSection>
+                <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                        <Button onPress={this.onSaveMessagePress.bind(this)}>
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
             </View>
         );
             }
