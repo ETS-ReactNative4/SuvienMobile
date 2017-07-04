@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
-import { Image, View, AsyncStorage, Text } from 'react-native';
+import { Image, View, AsyncStorage, Text, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button, CardSection } from './common';
 import Orientation from 'react-native-orientation';
 
 class MainMenu extends Component {
-    state = { isFirst: null, isComp: null, stage: null }
+    state = { isFirst: null, isComp: null, stage: null, preferences: null }
     async componentDidMount() {
         Orientation.lockToLandscape();
+        AsyncStorage.setItem('Height', Dimensions.get('window').height.toString());
+        AsyncStorage.setItem('Width', Dimensions.get('window').width.toString());
+        this.setState({ preferences: JSON.parse(await AsyncStorage.getItem('Preferences')) });
         /*
+        AsyncStorage.setItem('Preferences', JSON.stringify({
+            'Display Date': true,
+            'Messages Enabled': true,
+            'Display Clock': true,
+            'Display Greeting': true,
+            'Memory Game Enabled': true,
+            'Admin-User Mode Enabled': false
+        }));
        const tags = JSON.parse(await AsyncStorage.getItem('Tags'));
        tags.splice(5, 1);
        AsyncStorage.setItem('Tags', JSON.stringify(tags));
@@ -132,7 +143,7 @@ class MainMenu extends Component {
             );
         }
         if (this.state.isFirst === false) {
-            if (this.state.stage === '1' || this.state.acheivement === 'INCOM') {
+            if (this.state.stage === '1' || this.state.acheivement === 'INCOM' || this.state.preferences['Memory Game Enabled'] === false) {
                 return (
                 <Image resizeMode="stretch" source={require('../Images/suviensplash.png')} style={styles.canvas}>
                     <View style={{ backgroundColor: 'transparent', flexDirection: 'row', flex: 1, position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, height: null, width: null }}>
