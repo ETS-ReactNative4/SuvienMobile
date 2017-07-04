@@ -27,6 +27,16 @@ class PictureTile extends Component {
             return (
             <TouchableOpacity 
             onPress={() => {
+                this.props.onChangePress({ uri: this.props.data.imageuri,
+                title: this.props.data.title, 
+                caption: this.props.data.caption, 
+                tag: this.props.data.group,
+                height: this.props.data.height,
+                width: this.props.data.width,
+                isFavourite: this.props.data.isFavourite,
+                mediaType: 'Photo'
+                });
+                /*
                 AsyncStorage.setItem('isSelected', JSON.stringify(
                 { uri: this.props.data.imageuri,
                 title: this.props.data.title, 
@@ -36,8 +46,8 @@ class PictureTile extends Component {
                 width: this.props.data.width,
                 isFavourite: this.props.data.isFavourite,
                 mediaType: 'Photo'
-                }));
-                Actions.Media();
+                }));*/
+                //Actions.Media();
             }
             }
             >
@@ -49,6 +59,15 @@ class PictureTile extends Component {
         return (
         <TouchableOpacity 
             onPress={() => {
+                this.props.onChangePress({ uri: this.props.data.videouri,
+                title: this.props.data.title,
+                imageuri: this.props.imageuri, 
+                caption: this.props.data.caption, 
+                tag: this.props.data.group,
+                isFavourite: this.props.data.isFavourite,
+                mediaType: 'Youtube'
+                });
+                /*
                 AsyncStorage.setItem('isSelected', JSON.stringify(
                 { uri: this.props.data.videouri,
                 title: this.props.data.title,
@@ -57,8 +76,8 @@ class PictureTile extends Component {
                 tag: this.props.data.group,
                 isFavourite: this.props.data.isFavourite,
                 mediaType: 'Youtube'
-                }));
-                Actions.Media();
+                }));*/
+                //Actions.Media();
             }
             }
         >
@@ -70,8 +89,7 @@ class PictureTile extends Component {
             return (
             <TouchableOpacity 
             onPress={() => {
-                AsyncStorage.setItem('isSelected', JSON.stringify(
-                {
+                this.props.onChangePress({
                 title: this.props.data.title,
                 album: this.props.data.album,
                 artist: this.props.data.artist,
@@ -79,8 +97,12 @@ class PictureTile extends Component {
                 tag: this.props.data.group,
                 isFavourite: this.props.data.isFavourite,
                 mediaType: 'Music'
-                }));
+                });
+                /*
+                AsyncStorage.setItem('isSelected', JSON.stringify(
+                ));
                 Actions.Media();
+                */
             }
             }
             >
@@ -96,8 +118,7 @@ class PictureTile extends Component {
             return (
             <TouchableOpacity 
             onPress={() => {
-                AsyncStorage.setItem('isSelected', JSON.stringify(
-                {
+                this.props.onChangePress({
                 uri: this.props.data.uri,
                 title: this.props.data.title,
                 album: this.props.data.album,
@@ -106,8 +127,7 @@ class PictureTile extends Component {
                 tag: this.props.data.group,
                 isFavourite: this.props.data.isFavourite,
                 mediaType: 'MusicAnd'
-                }));
-                Actions.Media();
+                });
             }
             }
             >
@@ -123,15 +143,18 @@ class PictureTile extends Component {
             return (
             <TouchableOpacity 
             onPress={() => {
-                AsyncStorage.setItem('isSelected', JSON.stringify(
-                { uri: this.props.data.uri,
+                this.props.onChangePress({ uri: this.props.data.uri,
                 title: this.props.data.title, 
                 caption: this.props.data.caption, 
                 tag: this.props.data.group,
                 isFavourite: this.props.data.isFavourite,
                 mediaType: 'Video'
-                }));
+                });
+                /*
+                AsyncStorage.setItem('isSelected', JSON.stringify(
+                ));
                 Actions.Media();
+                */
             }
             }
             >
