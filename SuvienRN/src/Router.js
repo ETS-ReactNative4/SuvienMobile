@@ -19,6 +19,7 @@ import {
     MemoryGame
 } from './Components';
 import ContentExplorer from './Components/ContentExplorer';
+import AdvancedSettings from './Components/AdvancedSettings';
 
 const RouterComponent = () => (
         <Router
@@ -61,6 +62,13 @@ const RouterComponent = () => (
             hideNavBar
             />
 
+            <Scene
+            key="Advanced"
+            component={AdvancedSettings}
+            hideNavBar
+            //initial
+            />
+
             <Scene 
             key="MediaExplorer"
             component={MediaExplorer}
@@ -77,12 +85,15 @@ const RouterComponent = () => (
             <Scene
             key="Settings"
             component={Settings}
-            hideNavBar={false}
+            hideNavBar
+            //initial
+            /*
             title="Settings"
             titleStyle={styles.titleStyles}
             onLeft={() => {}}
             renderBackButton={() => <Image source={require('./Images/placeholderphoto.png')} style={{ marginLeft: 30, marginBottom: 10, height: 29, width: 100 }} />}
             //LeftButtonImage={require('./Images/placeholderphoto.png')}
+            */
             />
 
             <Scene
@@ -116,7 +127,7 @@ const RouterComponent = () => (
             <Scene
             key="AddVideo"
             component={AddVideo}
-            hideNavBar={false}
+            hideNavBar
             title="Add Video"
             titleStyle={styles.titleStyles}
             />
@@ -124,7 +135,7 @@ const RouterComponent = () => (
             <Scene
             key="AddAudio"
             component={AddAudio}
-            hideNavBar={false}
+            hideNavBar
             title="Add Audio"
             titleStyle={styles.titleStyles}
             />
@@ -132,7 +143,7 @@ const RouterComponent = () => (
             <Scene
             key="AddAudioAnd"
             component={AddAudioAnd}
-            hideNavBar={false}
+            hideNavBar
             title="Add Audio"
             titleStyle={styles.titleStyles}
             />
