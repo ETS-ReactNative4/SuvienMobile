@@ -4,9 +4,9 @@ import { Actions } from 'react-native-router-flux';
 import { Button } from './common';
 
 class HomeBar extends Component {
-    state = { greeting: null, name: null, section: null, width: null, aorp: null, hour: null, minute: null, currentDate: null, sizes: null, sizes2: null, dayFilter: null, messages: null, icon: null, messageType: null, color: null }
-    componentWillMount() {
-        this.setState({ width: Dimensions.get('window').width });
+    state = { greeting: null, name: null, section: null, width: null, aorp: null, hour: null, minute: null, currentDate: null, preferences: null, sizes: null, sizes2: null, dayFilter: null, messages: null, icon: null, messageType: null, color: null }
+    async componentWillMount() {
+        this.setState({ width: Dimensions.get('window').width, preferences: JSON.parse(await AsyncStorage.getItem('Preferences')) });
         this.getInfo();
     }
 
@@ -50,14 +50,14 @@ class HomeBar extends Component {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/afternoon.png'), icon: false, messageType: finalmessage[0].messageType });
                     }
                 } 
-                if ((finalmessage !== undefined && finalmessage.length !== 0) && (dd.getHours() >= 17 && dd.getHours() < 21)) { //this works on the time and after??? why
+                if ((finalmessage !== undefined && finalmessage.length !== 0) && (dd.getHours() >= 17 && dd.getHours() < 21)) { //this works on time and after
                     if (dd.getMinutes() === finalmessage[0].startMinute && dd.getSeconds() <= 6) {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/evening.png'), icon: true, messageType: finalmessage[0].messageType });
                     } else {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/evening.png'), icon: false, messageType: finalmessage[0].messageType });
                     }
                 }
-                if ((finalmessage !== undefined && finalmessage.length !== 0) && (dd.getHours() >= 21)) {
+                if ((finalmessage !== undefined && finalmessage.length !== 0) && (dd.getHours() >= 21)) { //this works on time and after
                     if (dd.getMinutes() === finalmessage[0].startMinute && dd.getSeconds() <= 6) {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'pm', section: require('../Images/night.png'), icon: true, messageType: finalmessage[0].messageType });
                     } else {
@@ -107,6 +107,67 @@ class HomeBar extends Component {
         return p;
     }
 
+    renderHeaderClock() {
+        const { width, sizes, preferences } = this.state;
+        const finalsize = Math.trunc((width - sizes) / 2);
+        if (preferences['Display Clock'] === false) {
+            return (
+                <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }} />
+            );
+        }
+        if (preferences['Display Clock'] === true) {
+            return (
+                <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
+                    <Image source={this.state.section} style={{ height: 80, width: 80 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
+                </View>
+            );
+        }
+        /*
+        const proparray = ['Display Clock', 'Display Greeting', 'Display Date'];
+        const truearray = [<View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
+                    <Image source={this.state.section} style={{ height: 80, width: 80 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
+                </View>,
+                <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
+                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{ greeting }</Text>,
+                <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
+                </View>
+                ];
+        const falsearray = [<View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }} />,
+                <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>,
+                </View>
+                ];
+        for (let i = 0; i < 3; i++) {
+            if (preferences[proparray[i]] === true) {
+                authArray.push(truearray[i]);
+            }
+            if (preferences[proparray[i]] === false) {
+                authArray.push(falsearray[i]);
+            }
+        }*/
+    }
+    renderHeaderGreeting() {
+        const { greeting, currentDate, preferences } = this.state;
+        const authArray = [];
+        const proparray = ['Display Greeting', 'Display Date'];
+        const truearray = [
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{ greeting }</Text>,
+                <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
+                ];
+        for (let i = 0; i < 3; i++) {
+            if (preferences[proparray[i]] === true) {
+                authArray.push(truearray[i]);
+            }
+            if (preferences[proparray[i]] === false) {
+                authArray.push(<View />);
+            }
+        }
+        return (
+            [...authArray]
+        );
+    }
+
     async getInfo() {
         const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
         this.setState({ name: await AsyncStorage.getItem('name'), messages });
@@ -138,18 +199,16 @@ class HomeBar extends Component {
         const { currentDate, greeting, width, sizes, hour, minute } = this.state;
         //console.log(aorp);
         //console.log(this.state.sizes);
-        if (this.state.sizes !== null && hour !== null && minute !== null) {
+        if (this.state.sizes !== null && hour !== null && minute !== null && currentDate !== null) {
                 const finalsize = Math.trunc((width - sizes) / 2);
                 if (this.state.messageType === null) {
                     return (
             <View style={{ flexDirection: 'row', paddingTop: 15 }}>
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
-                    <Image source={this.state.section} style={{ height: 80, width: 80 }} />
-                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
+                    {this.renderHeaderClock()}
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
-                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{greeting}</Text>
-                    <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
+                    {this.renderHeaderGreeting()}
                 </View>
                 <View style={{ alignItems: 'flex-end', width: finalsize }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
@@ -193,7 +252,7 @@ class HomeBar extends Component {
                         <TouchableOpacity 
                         onPress={() => {
                         AsyncStorage.setItem('currentVideoMsg', finalmessage[0].uri);
-                        console.log(AsyncStorage.getItem('currentVideoMsg'));
+                        //console.log(AsyncStorage.getItem('currentVideoMsg'));
                         Actions.VideoTest(); 
                         }}
                         >
