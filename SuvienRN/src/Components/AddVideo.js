@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, AsyncStorage, ScrollView, CameraRoll, Modal, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableOpacity, Image, AsyncStorage, ScrollView, CameraRoll, Modal, Dimensions, TouchableWithoutFeedback, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Button, Input, Header } from './common';
 import Camera from 'react-native-camera';
@@ -190,7 +190,7 @@ class AddVideo extends Component {
                 <ScrollView>
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/nocontent.jpg')} style={{ height: 300, width: 300 }} />
+                        <Image source={require('../Images/novideo.png')} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
@@ -398,7 +398,8 @@ class AddVideo extends Component {
     }
 
     render() {
-        if (this.state.isLaunchCam === false) {
+        if (Platform.OS === 'ios') {
+            if (this.state.isLaunchCam === false) {
             if (this.state.videos !== null) {
         return (
             <View style={{ flex: 1 }}>
@@ -533,6 +534,135 @@ class AddVideo extends Component {
         </Camera>
       </View>
     );
+    }
+        }
+    if (Platform.OS === 'android') {
+        if (this.state.isLaunchCam === false) {
+            if (this.state.videos !== null) {
+        return (
+            <View style={{ flex: 1 }}>
+            <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Video</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
+            <ScrollView>
+                <View style={{ marginTop: 10, flex: 1 }}>
+                    <Modal
+                        animationType={'fade'}
+                        transparent
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => {}}
+                    >
+                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                                <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
+                                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Camera Roll</Text>
+                                </View>
+                                <View style={{ height: 590, width: 910, backgroundColor: '#EFEFEF', position: 'relative', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'row', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
+                                    <ScrollView>
+                                        <View style={{ marginLeft: 20, flexDirection: 'row', flexWrap: 'wrap' }}>
+                                            {this.renderVideos()}
+                                        </View>
+                                    </ScrollView>
+                                </View>
+                            </View>
+                        </Modal>
+                    <CardSection>
+                        <Button onPress={this.onTakeVideoPress.bind(this)}>
+                            Record Video
+                        </Button>
+                    </CardSection>
+                    <CardSection>
+                        <Button onPress={this.onAddWebVideoPress.bind(this)}>
+                            Add from web using Youtube
+                        </Button>
+                    </CardSection>
+                    {this.onRenderYoutube()}
+                    {this.onRenderExplorer()}
+                </View>
+            </ScrollView>
+            </View>
+        );
+    }
+    if (this.state.videos === null) {
+        return (
+            <View style={{ flex: 1 }}>
+            <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Video</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
+            <ScrollView>
+                <View style={{ marginTop: 10, flex: 1 }}>
+                    <CardSection>
+                        <Button onPress={this.onTakeVideoPress.bind(this)}>
+                            Record Video
+                        </Button>
+                    </CardSection>
+                    <CardSection>
+                        <Button onPress={this.onAddWebVideoPress.bind(this)}>
+                            Add from web using Youtube
+                        </Button>
+                    </CardSection>
+                    {this.onRenderYoutube()}
+                    {this.onRenderExplorer()}
+                </View>
+            </ScrollView>
+            </View>
+        );
+    }
+        }
+    if (this.state.isLaunchCam === true) {
+        return (
+                <View style={styles.container}>
+                    <Camera
+                    ref={(cam) => {
+                    this.camera = cam;
+                    }}
+                    style={styles.preview}
+                    playSoundOnCapture={false}
+                    aspect={Camera.constants.Aspect.fill}
+                    captureMode={Camera.constants.CaptureMode.video}
+                    onFocusChanged={() => {}}
+                    onZoomChanged={() => {}}
+                    type={this.state.cameraType}
+                    >
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
+                            <TouchableWithoutFeedback onPress={this.startRecording.bind(this)}>
+                                <Image source={require('../Images/cameracapture.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={this.stopRecording.bind(this)}>
+                                <Image source={require('../Images/cameracapture.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
+                                <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                                <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
+                        </View>
+                </View>
+        </Camera>
+      </View>
+    );
+    }
     }
     }
 }
