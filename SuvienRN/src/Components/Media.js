@@ -471,9 +471,9 @@ class Media extends Component {
                     //console.log(this.state.media);
                     this.preloadMusicPlay();
                     return (
-                    <View style={{ height: 400, backgroundColor: '#e3edf9', flexDirection: 'row', alignItems: 'center', width: 800 }}>
-                        <View>
-                            <Image source={require('../Images/musicalbumart.png')} style={{ height: 400, width: 400, marginLeft: 50, marginRight: 30 }} />
+                    <View style={{ height: 500, backgroundColor: '#e3edf9', flexDirection: 'row', width: 800 }}>
+                        <View style={{ marginTop: 20 }}>
+                            <Image source={require('../Images/musicalbumart.png')} style={{ height: 300, width: 300, marginLeft: 50, marginRight: 30 }} />
                             <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}>
                             <Button 
                             onPress={() => {
@@ -507,28 +507,25 @@ class Media extends Component {
                             </CardSection>
                         </View>
                         <View>
-                            <ScrollView>
-                                    <View style={{ height: scheight, width: 400, backgroundColor: '#e3edf9', marginLeft: 10, marginRight: 10, justifyContent: 'center' }}>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                            {this.state.title}
-                                        </Text>
-                                        <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
-                                            <Image source={this.state.imagerend} style={{ height: 40, width: 40 }} />
-                                        </TouchableWithoutFeedback>
+                            <View style={{ height: scheight, width: 400, backgroundColor: '#e3edf9', marginLeft: 5, marginRight: 10, justifyContent: 'center' }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
+                                        {this.state.title}
+                                    </Text>
+                                    <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                        <Image source={this.state.imagerend} style={{ height: 40, width: 40 }} />
+                                    </TouchableWithoutFeedback>
                                     </View>
-                                        <Text style={styles.textBodyStyle}>{this.state.artist}</Text>
-                                        <Text style={styles.textBodyStyle}>{this.state.album}</Text>
+                                        <Text style={styles.textBodyStyle}>{this.state.artist} - {this.state.album}</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                         <Text style={styles.textBodyStyle}>
                                             <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
                                             {this.state.tag}
                                         </Text>
-                                    <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                    <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0, width: 400 }}>
                                         <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>Return to Home</Button>
                                     </CardSection>
                                 </View>
-                                </ScrollView>
                             </View>
                             </View>
                 );
@@ -542,19 +539,8 @@ class Media extends Component {
             if (this.state.mediaType === 'Video'){
                 if (this.state.uri !== null && this.state.caption !== null && this.state.tag !== null && this.state.title !== null) {
                 return (
-                <View style={{ flex: 1, height: null, width: null, backgroundColor: '#e3edf9' }}>
-                    <View 
-                    style={{
-                        backgroundColor: '#d5deea', 
-                        height: (newHeight + 100), 
-                        flexDirection: 'row', 
-                        marginTop: (paddingheight - 50), 
-                        alignItems: 'center', 
-                        justifyContent: 'center',
-                        }}
-                    >
-                        <View style={{ flexDirection: 'row', height: scheight, backgroundColor: 'transparent', justifyContent: 'center' }}>
-                            <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: paddingheight, backgroundColor: '#c7d0db' }}>
+                <View>
+                        <View style={{ flexDirection: 'column', height: 800, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center' }}>
                                 <Video 
                                 source={{ uri: this.state.uri }}   // Can be a URL or a local file.
                                 ref={(ref) => {
@@ -570,9 +556,9 @@ class Media extends Component {
                                 playWhenInactive={false}                // [iOS] Video continues to play when control or notification center are shown.
                                 ignoreSilentSwitch={"ignore"}           // [iOS] ignore | obey - When 'ignore', audio will still play with the iOS hard silent switch set to silent. When 'obey', audio will toggle with the switch. When not specified, will inherit audio settings as usual.
                                 progressUpdateInterval={250.0}          // [iOS] Interval to fire onProgress (default to ~250ms)
-                                style={{ height: this.state.scheight, width: (this.state.scwidth - 400) }} 
+                                style={{ height: 450, width: 800 }} 
                                 />
-                                <View style={{ height: newHeight, width: 400, backgroundColor: '#e3edf9', marginLeft: 10, marginRight: 10 }}>
+                                <View style={{ height: 250, width: 800, backgroundColor: '#e3edf9', marginLeft: 10, marginRight: 10 }}>
                                     <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
                                         <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
                                             {this.state.title}
@@ -591,8 +577,6 @@ class Media extends Component {
                                     </CardSection>
                                 </View>
                             </View>
-                        </View>
-                    </View>
                 </View>
             );
                 }

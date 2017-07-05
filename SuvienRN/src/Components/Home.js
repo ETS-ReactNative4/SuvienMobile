@@ -283,7 +283,7 @@ class Home extends Component {
                 visible
                 onRequestClose={() => {}}
                 >
-                <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.85)' }}>
+                <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', alignItems: 'center', justifyContent: 'center' }}>
                     <Media
                     obj={this.state.medias}
                     onInvisible={async (flag) => {
