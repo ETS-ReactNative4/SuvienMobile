@@ -86,6 +86,48 @@ class Settings extends Component {
         AsyncStorage.setItem('Videos', JSON.stringify(content));
         AsyncStorage.setItem('Media', JSON.stringify(media));
         this.setState({ mediaArray: media, media: content, selectedItem: null });
+    }
+        if (selected.mediaType === 'Music') {
+        const media = this.state.mediaArray;
+        const content = this.state.media;
+        const searchContent = this.state.media.findIndex((element, index, array) => {
+                if (element.title === selected.title && element.artist === selected.artist && element.album === selected.album) { //If we set something to change photos, we need to make a unique ID
+                    return true;
+                } else {
+                    return false;
+        }});
+        const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+                if (element.title === selected.title && element.artist === selected.artist && element.album === selected.album) {
+                    return true;
+                } else {
+                    return false;
+        }});
+        media.splice(searchMedia, 1);
+        content.splice(searchContent, 1);
+        AsyncStorage.setItem('Audio', JSON.stringify(content));
+        AsyncStorage.setItem('Media', JSON.stringify(media));
+        this.setState({ mediaArray: media, media: content, selectedItem: null });
+        }
+        if (selected.mediaType === 'MusicAnd') {
+            const media = this.state.mediaArray;
+        const content = this.state.media;
+        const searchContent = this.state.media.findIndex((element, index, array) => {
+                if (element.uri === selected.uri) { //If we set something to change photos, we need to make a unique ID
+                    return true;
+                } else {
+                    return false;
+        }});
+        const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+                if (element.uri === selected.uri) {
+                    return true;
+                } else {
+                    return false;
+        }});
+        media.splice(searchMedia, 1);
+        content.splice(searchContent, 1);
+        AsyncStorage.setItem('Audio', JSON.stringify(content));
+        AsyncStorage.setItem('Media', JSON.stringify(media));
+        this.setState({ mediaArray: media, media: content, selectedItem: null });
         }
     }
 
@@ -224,10 +266,101 @@ class Settings extends Component {
         this.setState({ mediaArray: media, media: content, selectedItem: null });
             }
         }
+        if (this.state.mediaType === 'Audio') {
+            if (selected.mediaType === 'Music') {
+                const searchContent = this.state.media.findIndex((element, index, array) => {
+                if (element.title === selected.title && element.album === selected.album && element.artist === selected.artist) { //If we set something to change photos, we need to make a unique ID
+                    return true;
+                } else {
+                    return false;
+                }});
+            const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+                if (element.title === selected.title && element.album === selected.album && element.artist === selected.artist) {
+                    return true;
+                } else {
+                    return false;
+                }});
+            const { caption, title, group, mediaType, isFavourite, artist, album } = selected;
+            const media = this.state.mediaArray;
+            const content = this.state.media;
+            media[searchMedia] = {
+                caption,
+                title,
+                album,
+                artist,
+                group,
+                mediaType,
+                isFavourite
+            };
+            content[searchContent] = {
+                caption,
+                album,
+                artist,
+                title,
+                group,
+                mediaType,
+                isFavourite
+            };
+            AsyncStorage.setItem('Audio', JSON.stringify(content));
+            AsyncStorage.setItem('Media', JSON.stringify(media));
+            const findTags = mytags.find((tag) => tag === selected.group);
+            if (findTags === undefined) {
+            mytags.push(selected.group);
+            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+        }
+        this.setState({ mediaArray: media, media: content, selectedItem: null });
+            }
+            if (selected.mediaType === 'MusicAnd') {
+                const searchContent = this.state.media.findIndex((element, index, array) => {
+                if (element.uri === selected.uri) { //If we set something to change photos, we need to make a unique ID
+                    return true;
+                } else {
+                    return false;
+                }});
+            const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+                if (element.uri === selected.uri) {
+                    return true;
+                } else {
+                    return false;
+                }});
+            const { uri, caption, title, group, mediaType, isFavourite, album, artist } = selected;
+            const media = this.state.mediaArray;
+            const content = this.state.media;
+            media[searchMedia] = {
+                uri,
+                album,
+                artist,
+                caption,
+                title,
+                group,
+                mediaType,
+                isFavourite
+            };
+            content[searchContent] = {
+                uri,
+                album,
+                artist,
+                caption,
+                title,
+                group,
+                mediaType,
+                isFavourite
+            };
+            AsyncStorage.setItem('Audio', JSON.stringify(content));
+            AsyncStorage.setItem('Media', JSON.stringify(media));
+            const findTags = mytags.find((tag) => tag === selected.group);
+            if (findTags === undefined) {
+            mytags.push(selected.group);
+            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+        }
+        this.setState({ mediaArray: media, media: content, selectedItem: null });
+            }
+        }
     }
     
     renderExplorer() {
-        const explorerArray = [<CardSection style={{ borderTopWidth: 1 }}>
+        if (this.state.selectedItem.mediaType === 'Pictures' || this.state.selectedItem.mediaType === 'Videos') {
+            const explorerArray = [<CardSection style={{ borderTopWidth: 1 }}>
                         <Input
                         placeholder="At the Beach"
                         label="Title"
@@ -278,9 +411,71 @@ class Settings extends Component {
                             Return to Settings
                         </Button>
                     </CardSection>];
-        return (
+                    return (
             [...explorerArray]
         );
+    }
+        if (this.state.selectedItem.mediaType === 'Music' || this.state.selectedItem.mediaType === 'MusicAnd') {
+            const explorerArray = [<CardSection style={{ borderTopWidth: 1 }}>
+                        <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Title</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.title}</Text>
+                        </View>
+                    </CardSection>,
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Album</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.album}</Text>
+                        </View>
+                    </CardSection>,
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Artist</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.artist}</Text>
+                        </View>
+                    </CardSection>,
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="Family vacation to Hawaii"
+                        label="Caption"
+                        value={this.state.selectedItem.caption}
+                        onChangeText={(caption) => {
+                            const selectedItem = this.state.selectedItem;
+                            selectedItem.caption = caption;
+                            this.setState({ selectedItem });
+                            }
+                            }
+                        />
+                    </CardSection>,
+                    <CardSection>
+                        <Input
+                        placeholder="SummerVacation2017"
+                        label="Tag"
+                        value={this.state.selectedItem.group}
+                        onChangeText={(group) => {
+                            const selectedItem = this.state.selectedItem;
+                            selectedItem.group = group;
+                            this.setState({ selectedItem });
+                            }
+                            }
+                        />
+                    </CardSection>,
+                    <CardSection style={{ flexDirection: 'row' }}>
+                        <Button onPress={this.onSaveItemPress.bind(this)}>
+                            Save and Continue
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => this.setState({ selectedItem: null })}>
+                            Go Back
+                        </Button>
+                        <Button onPress={() => this.setState({ selectedItem: null, mediaType: null })}>
+                            Return to Settings
+                        </Button>
+                    </CardSection>];
+                    return (
+            [...explorerArray]
+        );
+        }
     }
 
     renderPhotos() {
@@ -364,8 +559,30 @@ class Settings extends Component {
             );
         }
         if (this.state.mediaType === 'Audio') {
+            const allphotos = this.state.media.map((photo) => {
+                return (
+                <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={require('../Images/musicalbumart.png')}>
+                    <View style={{ backgroundColor: 'transparent', height: 200 }} />
+                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                        <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                        <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                            <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
+                                <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback 
+                            onPress={() => {
+                                this.onDelete(photo);
+                                }}
+                            >
+                                <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
+                            </TouchableWithoutFeedback>
+                        </View>
+                    </View>
+                </Image>
+                );
+            });
             return (
-                <View />
+                [...allphotos]
             );
         }
     }
@@ -439,6 +656,7 @@ class Settings extends Component {
     }
 
     render() {
+        console.log(this.state.selectedItem);
         if (this.state.isFirst === false) {
             if (this.state.acheivement === 'COMP') {
                 if (this.state.mediaType === null) {
@@ -639,6 +857,31 @@ class Settings extends Component {
                 </View>
             );
                     }
+                }
+                if (this.state.selectedItem.mediaType === 'Music' || this.state.selectedItem.mediaType === 'MusicAnd') {
+                    return (
+                        <View>
+                        <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Edit Content</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
+                        <View style={{ alignItems: 'center' }}>
+                    <CardSection style={{ borderBottomWidth: 0 }}>
+                        <Image source={require('../Images/musicalbumart.png')} style={{ height: 300, width: 300 }} />
+                    </CardSection>
+                    {this.renderExplorer()}
+                </View>
+                </View>
+            );
                 }
             }
         }
