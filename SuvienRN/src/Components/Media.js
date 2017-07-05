@@ -297,6 +297,13 @@ class Media extends Component {
             }));
             mymedia[locatio].isFavourite = this.state.isFavourite;
             AsyncStorage.setItem('Media', JSON.stringify(mymedia));
+            MusicPlayerController.stopMusic(() => {
+                                    //console.log('I stoppin!');
+                                // Successfully playing
+                                }, () => {
+                                    //console.log('I failed Nooooo');
+                                // Failed to play
+                                });
         }
         this.props.onInvisible(true);
     }
