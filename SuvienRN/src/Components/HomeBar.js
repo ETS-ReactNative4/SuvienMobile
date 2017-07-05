@@ -152,16 +152,20 @@ class HomeBar extends Component {
         const authArray = [];
         const proparray = ['Display Greeting', 'Display Date'];
         const truearray = [
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{ greeting }</Text>,
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>{ greeting }</Text>,
                 <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
                 ];
-        for (let i = 0; i < 3; i++) {
+        if (preferences['Display Greeting'] === false && preferences['Display Date'] === false) {
+            authArray.push(<Image source={require('../Images/placeholderphoto.png')} style={{ height: 70, width: 200 }} />);
+        } else {
+            for (let i = 0; i < 3; i++) {
             if (preferences[proparray[i]] === true) {
                 authArray.push(truearray[i]);
             }
             if (preferences[proparray[i]] === false) {
                 authArray.push(<View />);
             }
+        }
         }
         return (
             [...authArray]
@@ -222,12 +226,10 @@ class HomeBar extends Component {
                     return (
             <View style={{ flexDirection: 'row', paddingTop: 15 }}>
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
-                    <Image source={this.state.section} style={{ height: 80, width: 80 }} />
-                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
+                    {this.renderHeaderClock()}
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
-                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>{greeting}</Text>
-                    <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
+                    {this.renderHeaderGreeting()}
                 </View>
                 <View style={{ alignItems: 'flex-end', width: finalsize }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
@@ -243,8 +245,7 @@ class HomeBar extends Component {
                     return (
             <View style={{ flexDirection: 'row', paddingTop: 15 }}>
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
-                    <Image source={this.state.section} style={{ height: 80, width: 80 }} />
-                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
+                    {this.renderHeaderClock()}
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
                     <View style={{ flexDirection: 'row' }}>
