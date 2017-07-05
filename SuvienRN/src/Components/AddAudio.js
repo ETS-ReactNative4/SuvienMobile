@@ -84,7 +84,7 @@ class AddAudio extends Component {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/noimage.jpg')} style={{ height: 300, width: 300 }} />
+                        <Image source={require('../Images/noaudio.png')} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
@@ -204,28 +204,6 @@ class AddAudio extends Component {
         console.log('Cancel');
     });
     }
-
-    async onAddWebAudioPress() {
-        //AsyncStorage.setItem('samplemusic', JSON.stringify(this.state.audiopath));
-        //this.setState({ audiopath: JSON.parse(await AsyncStorage.getItem('samplemusic')) });
-        //To add later: an actual link to async storage through state
-        //const title = this.state.audiopath.toString();
-        /*MusicPlayerController.preloadMusic(this.state.audiopath, (metadata) => {
-            console.log('I found the music! Its:');
-            console.log(metadata);
-        }, () => {
-            console.log('I didnt find it :(');
-        });*/
-        //This is currently all configured for ios
-        MusicPlayerController.preloadMusic(['It Wasn\'t Me', 'Hot Shot', 227.004, 'Ricardo "RikRok" Ducent/Shaggy'], (metadata) => {
-            console.log('I found the music! Its:');
-            console.log(metadata);
-        }, () => {
-            console.log('I didnt find it :(');
-        });
-        console.log('I preloaded the music!');
-        //AsyncStorage.setItem('samplemusic', JSON.stringify(this.state.audiopath));
-    }
     
     render() {
         return (
@@ -247,11 +225,6 @@ class AddAudio extends Component {
                     <CardSection style={{ marginTop: 10 }}>
                         <Button onPress={this.onChooseMusicPress.bind(this)}>
                             Choose from Music Library
-                        </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={this.onAddWebAudioPress.bind(this)}>
-                            Add from Youtube using URL
                         </Button>
                     </CardSection>
                     {this.onAudioSelect()}

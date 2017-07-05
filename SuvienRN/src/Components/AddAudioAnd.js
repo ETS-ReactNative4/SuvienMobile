@@ -6,16 +6,7 @@ import { Actions } from 'react-native-router-flux';
 
 class AddAudioAnd extends Component {
     state = { title: null, artist: null, album: null, uri: null, caption: null, group: null }
-    async onRecordAudioPress() {
-       MusicPlayerController.playMusic(() => {
-            console.log('I playin!');
-    // Successfully playing
-}, () => {
-    console.log('I failed Nooooo');
-    // Failed to play
-});
     //console.log(JSON.parse(await AsyncStorage.getItem('samplemusic')));
-}
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async onSaveItemPress() {
         const { title, caption, group, artist, album, uri } = this.state;
@@ -98,7 +89,7 @@ class AddAudioAnd extends Component {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/noimage.jpg')} style={{ height: 300, width: 300 }} />
+                        <Image source={require('../Images/noaudio.png')} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
@@ -218,28 +209,6 @@ class AddAudioAnd extends Component {
         console.log('Cancel');
     });
     }
-
-    async onAddWebAudioPress() {
-        //AsyncStorage.setItem('samplemusic', JSON.stringify(this.state.audiopath));
-        //this.setState({ audiopath: JSON.parse(await AsyncStorage.getItem('samplemusic')) });
-        //To add later: an actual link to async storage through state
-        //const title = this.state.audiopath.toString();
-        /*MusicPlayerController.preloadMusic(this.state.audiopath, (metadata) => {
-            console.log('I found the music! Its:');
-            console.log(metadata);
-        }, () => {
-            console.log('I didnt find it :(');
-        });*/
-        //This is currently all configured for ios
-        MusicPlayerController.preloadMusic(['It Wasn\'t Me', 'Hot Shot', 227.004, 'Ricardo "RikRok" Ducent/Shaggy'], (metadata) => {
-            console.log('I found the music! Its:');
-            console.log(metadata);
-        }, () => {
-            console.log('I didnt find it :(');
-        });
-        console.log('I preloaded the music!');
-        //AsyncStorage.setItem('samplemusic', JSON.stringify(this.state.audiopath));
-    }
     
     render() {
         return (
@@ -259,18 +228,8 @@ class AddAudioAnd extends Component {
             </Header>
                 <ScrollView>
                     <CardSection style={{ marginTop: 10 }}>
-                        <Button onPress={this.onRecordAudioPress.bind(this)}>
-                            Record Audio
-                        </Button>
-                    </CardSection>
-                    <CardSection>
                         <Button onPress={this.onChooseMusicPress.bind(this)}>
                             Choose from Music Library
-                        </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={this.onAddWebAudioPress.bind(this)}>
-                            Add from Youtube using URL
                         </Button>
                     </CardSection>
                     {this.onAudioSelect()}
