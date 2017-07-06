@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
+import Languages from '../Languages/Languages.json';
 import { Image, View, AsyncStorage, Text, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button, CardSection } from './common';
 import Orientation from 'react-native-orientation';
 
 class MainMenu extends Component {
-    state = { isFirst: null, isComp: null, stage: null, preferences: null }
+    state = { isFirst: null, isComp: null, stage: null, preferences: null, language: null }
     async componentDidMount() {
+        AsyncStorage.setItem('Height', Dimensions.get('window').height.toString());
+        AsyncStorage.setItem('Width', Dimensions.get('window').width.toString());
+        AsyncStorage.setItem('Language', 'FRE');
+        console.log(Languages.ENG['000']);
         Orientation.lockToLandscape();
          if (await AsyncStorage.getItem('name') !== null && await AsyncStorage.getItem('stage') !== null) {
-             this.setState({ isComp: await AsyncStorage.getItem('Acheivement'), preferences: JSON.parse(await AsyncStorage.getItem('Preferences')), stage: await AsyncStorage.getItem('Stage') });
+             this.setState({ isComp: await AsyncStorage.getItem('Acheivement'), language: await AsyncStorage.getItem('Language'), preferences: JSON.parse(await AsyncStorage.getItem('Preferences')), stage: await AsyncStorage.getItem('Stage'), media: JSON.parse(await AsyncStorage.getItem('Pictures')), acheivement: await AsyncStorage.getItem('Acheivement') });
          }
         this.getFirst();
     }
@@ -51,7 +56,8 @@ class MainMenu extends Component {
     }
 
     render() {
-        if (this.state.isFirst === null) {
+        console.log(this.state.acheivement);
+        if (this.state.isFirst === null || this.state.language === null) {
             return (
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
@@ -97,27 +103,27 @@ class MainMenu extends Component {
                             <CardSection style={{ borderBottomWidth: 0, flex: 251, backgroundColor: 'transparent', position: 'relative' }} />
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
                                     <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
-                                        Start
+                                        {Languages[this.state.language]['001']}
                                     </Button>
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
-                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>Have questions? Visit our help page!</Text>
+                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>{Languages[this.state.language]['002']}</Text>
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
                                 <View style={{ flex: 150 }}>
                                     <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
-                                        Help
+                                        {Languages[this.state.language]['003']}
                                     </Button>
                                 </View>
                                 <View style={{ flex: 100 }} />
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
-                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>Test your memory while having fun!</Text>
+                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>{Languages[this.state.language]['004']}</Text>
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
                                 <View style={{ flex: 150 }}>
                                     <Button style={styles.buttonContainer} onPress={() => Actions.MemoryGame()}>
-                                        Play
+                                        {Languages[this.state.language]['005']}
                                     </Button>
                                 </View>
                                 <View style={{ flex: 100 }} />
