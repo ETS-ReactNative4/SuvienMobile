@@ -17,14 +17,14 @@ class HomeBar extends Component {
 
     flashTitle() {
         setInterval(() => {
-            if (this.state.icon === true || this.state.icon === null) {
+            if (this.state.icon === true) {
                 if (this.state.color === null || this.state.color === 'black') {
                     this.setState({ color: '#86a6e0' });
                 }
                 if (this.state.color === '#86a6e0') {
                     setTimeout(() => this.setState({ color: 'black' }), 1000);
                 }
-            if (this.state.icon === false) {
+            if (this.state.icon === false || this.state.icon === null) {
                 this.setState({ color: null });
             }
             }
@@ -249,7 +249,6 @@ class HomeBar extends Component {
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>There is a new video message. </Text>
                         <TouchableOpacity 
                         onPress={() => {
                         AsyncStorage.setItem('currentVideoMsg', finalmessage[0].uri);
@@ -257,7 +256,7 @@ class HomeBar extends Component {
                         Actions.VideoTest(); 
                         }}
                         >
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>Click me to watch!</Text>
+                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>There is a new video message. Click me to watch!</Text>
                         </TouchableOpacity>
                     </View>
                     <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
