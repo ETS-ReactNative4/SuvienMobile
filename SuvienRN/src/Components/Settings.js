@@ -969,7 +969,7 @@ class Settings extends Component {
             </Header>
             <View style={{ marginTop: 10, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'ClementePDae-Light' }}>Edit Information</Text>
+                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>Edit Information</Text>
                     <Image source={require('../Images/infoicon.png')} style={{ marginLeft: 10, height: 30, width: 30 }} />
                 </View>
                 <CardSection>
