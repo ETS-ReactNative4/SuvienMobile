@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, AsyncStorage, Image, Dimensions, TouchableWithoutFeedback, ScrollView, WebView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button, CardSection } from './common';
+import Languages from '../Languages/Languages.json';
 import YouTube from 'react-native-youtube';
 import Orientation from 'react-native-orientation';
 import MusicPlayerController from 'react-native-musicplayercontroller';
@@ -33,11 +34,13 @@ class Media extends Component {
         chosen: null,
         audios: null,
         album: null,
-        artist: null
+        artist: null,
+        languages: null
     }
     async componentWillMount() {
         //Note. The orientation issue only persists on android, not ioss
         const chosen = this.props.obj;
+        this.setState({ languages: await AsyncStorage.getItem('Language') }); 
         console.log(chosen);
         if (chosen.mediaType === 'Photo') {
         this.setState({ 
@@ -138,7 +141,7 @@ class Media extends Component {
     componentDidMount() {
         this.setState({ 
             scheight: Dimensions.get('window').height,
-            scwidth: Dimensions.get('window').width 
+            scwidth: Dimensions.get('window').width,
         });
     }
 
@@ -342,7 +345,7 @@ class Media extends Component {
     }
 
     render() {
-        if (this.state.mediaType === null) {
+        if (this.state.mediaType === null || this.state.languages === null) {
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <Text>Loading</Text>
@@ -395,7 +398,7 @@ class Media extends Component {
                                             {this.state.tag}
                                         </Text>
                                     <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>Return to Home</Button>
+                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
                                     </CardSection>
                                     </View>
                                 </ScrollView>
@@ -439,7 +442,7 @@ class Media extends Component {
                                             {this.state.tag}
                                         </Text>
                                     <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>Return to Home</Button>
+                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
                                     </CardSection>
                                     </View>
                                 </ScrollView>
@@ -482,7 +485,7 @@ class Media extends Component {
                                             {this.state.tag}
                                         </Text>
                                     <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>Return to Home</Button>
+                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
                                     </CardSection>
                                     </View>
                                 </ScrollView>
@@ -516,7 +519,7 @@ class Media extends Component {
                                 });
                                 }}
                             >
-                                Play
+                                {Languages[this.state.languages]['018']}
                             </Button>
                             </CardSection>
                             <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}>
@@ -531,7 +534,7 @@ class Media extends Component {
                                 });
                                 }}
                             >
-                                Pause
+                                {Languages[this.state.languages]['019']}
                             </Button>
                             </CardSection>
                         </View>
@@ -552,7 +555,7 @@ class Media extends Component {
                                             {this.state.tag}
                                         </Text>
                                     <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0, width: 400 }}>
-                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>Return to Home</Button>
+                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
                                     </CardSection>
                                 </View>
                             </View>
@@ -602,7 +605,7 @@ class Media extends Component {
                                             {this.state.tag}
                                         </Text>
                                     <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>Return to Home</Button>
+                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
                                     </CardSection>
                                 </View>
                             </View>

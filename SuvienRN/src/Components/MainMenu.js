@@ -11,7 +11,6 @@ class MainMenu extends Component {
         AsyncStorage.setItem('Height', Dimensions.get('window').height.toString());
         AsyncStorage.setItem('Width', Dimensions.get('window').width.toString());
         AsyncStorage.setItem('Language', 'FRE');
-        console.log(Languages.ENG['000']);
         Orientation.lockToLandscape();
          if (await AsyncStorage.getItem('name') !== null && await AsyncStorage.getItem('stage') !== null) {
              this.setState({ isComp: await AsyncStorage.getItem('Acheivement'), language: await AsyncStorage.getItem('Language'), preferences: JSON.parse(await AsyncStorage.getItem('Preferences')), stage: await AsyncStorage.getItem('Stage'), media: JSON.parse(await AsyncStorage.getItem('Pictures')), acheivement: await AsyncStorage.getItem('Acheivement') });
@@ -56,8 +55,9 @@ class MainMenu extends Component {
     }
 
     render() {
+        const { language } = this.state;
         console.log(this.state.acheivement);
-        if (this.state.isFirst === null || this.state.language === null) {
+        if (this.state.isFirst === null || language === null) {
             return (
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
@@ -73,16 +73,16 @@ class MainMenu extends Component {
                             <CardSection style={{ borderBottomWidth: 0, flex: 251, backgroundColor: 'transparent', position: 'relative' }} />
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
                                     <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
-                                        Start
+                                        {Languages[language]['001']}
                                     </Button>
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
-                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>Have questions? Visit our help page!</Text>
+                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>{Languages[language]['002']}</Text>
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
                                 <View style={{ flex: 150 }}>
                                     <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
-                                        Help
+                                        {Languages[language]['003']}
                                     </Button>
                                 </View>
                                 <View style={{ flex: 100 }} />
@@ -103,27 +103,27 @@ class MainMenu extends Component {
                             <CardSection style={{ borderBottomWidth: 0, flex: 251, backgroundColor: 'transparent', position: 'relative' }} />
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
                                     <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
-                                        {Languages[this.state.language]['001']}
+                                        {Languages[language]['001']}
                                     </Button>
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
-                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>{Languages[this.state.language]['002']}</Text>
+                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>{Languages[language]['002']}</Text>
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
                                 <View style={{ flex: 150 }}>
                                     <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
-                                        {Languages[this.state.language]['003']}
+                                        {Languages[language]['003']}
                                     </Button>
                                 </View>
                                 <View style={{ flex: 100 }} />
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
-                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>{Languages[this.state.language]['004']}</Text>
+                                <Text style={{ fontSize: 23, fontFamily: 'Roboto-Light' }}>{Languages[language]['004']}</Text>
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
                                 <View style={{ flex: 150 }}>
                                     <Button style={styles.buttonContainer} onPress={() => Actions.MemoryGame()}>
-                                        {Languages[this.state.language]['005']}
+                                        {Languages[language]['005']}
                                     </Button>
                                 </View>
                                 <View style={{ flex: 100 }} />
@@ -147,7 +147,7 @@ class MainMenu extends Component {
                             <CardSection style={{ borderBottomWidth: 0, flex: 251, backgroundColor: 'transparent', position: 'relative' }} />
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative' }}>
                                 <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
-                                    Get Started
+                                    {Languages[language]['000']}
                                 </Button>
                             </CardSection>
                             <CardSection style={{ borderBottomWidth: 0, flex: 270, backgroundColor: 'transparent', position: 'relative' }} />

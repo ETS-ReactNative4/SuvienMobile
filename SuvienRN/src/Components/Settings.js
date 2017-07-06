@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Text, View, AsyncStorage, Image, ScrollView, Platform, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { CardSection, Input, Button, Header } from './common';
+import Languages from '../Languages/Languages.json';
 import RadioForm from 'react-native-simple-radio-button';
 import { Actions } from 'react-native-router-flux';
 
 class Settings extends Component {
-    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, mediaType: null, media: null, mediaArray: null, selectedItem: null, width: null };
+    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, languages: null, mediaType: null, media: null, mediaArray: null, selectedItem: null, width: null };
     async componentWillMount() {
         if (await AsyncStorage.getItem('name') !== null) {
             this.setState({ 
@@ -14,12 +15,14 @@ class Settings extends Component {
                 acheivement: await AsyncStorage.getItem('Acheivement'),
                 preset: await AsyncStorage.getItem('Preset'),
                 mediaArray: JSON.parse(await AsyncStorage.getItem('Media')),
-                width: parseInt(await AsyncStorage.getItem('Width'))
+                width: parseInt(await AsyncStorage.getItem('Width')),
+                languages: await AsyncStorage.getItem('Language')
             });
         }
         if (await AsyncStorage.getItem('name') === null) {
             this.setState({
-                isFirst: true
+                isFirst: true,
+                languages: await AsyncStorage.getItem('Language')
             });
         }
     }
@@ -359,11 +362,11 @@ class Settings extends Component {
     }
     
     renderExplorer() {
-        if (this.state.mediaType === 'Pictures' || this.state.mediaTypex === 'Videos') {
+        if (this.state.mediaType === 'Pictures' || this.state.mediaType === 'Videos') {
             const explorerArray = [<CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="At the Beach"
-                        label="Title"
+                        placeholder={Languages[this.state.languages]['061']}
+                        label={Languages[this.state.languages]['058']}
                         value={this.state.selectedItem.title}
                         onChangeText={(title) => {
                             const selectedItem = this.state.selectedItem;
@@ -375,8 +378,8 @@ class Settings extends Component {
                     </CardSection>,
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
+                        placeholder={Languages[this.state.languages]['062']}
+                        label={Languages[this.state.languages]['059']}
                         value={this.state.selectedItem.caption}
                         onChangeText={(caption) => {
                             const selectedItem = this.state.selectedItem;
@@ -388,8 +391,8 @@ class Settings extends Component {
                     </CardSection>,
                     <CardSection>
                         <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
                         value={this.state.selectedItem.group}
                         onChangeText={(group) => {
                             const selectedItem = this.state.selectedItem;
@@ -401,14 +404,14 @@ class Settings extends Component {
                     </CardSection>,
                     <CardSection style={{ flexDirection: 'row' }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Continue
+                            {Languages[this.state.languages]['077']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => this.setState({ selectedItem: null })}>
-                            Go Back
+                            {Languages[this.state.languages]['070']}
                         </Button>
                         <Button onPress={() => this.setState({ selectedItem: null, mediaType: null })}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </CardSection>];
                     return (
@@ -418,26 +421,26 @@ class Settings extends Component {
         if (this.state.selectedItem.mediaType === 'Music' || this.state.selectedItem.mediaType === 'MusicAnd') {
             const explorerArray = [<CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Title</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.title}</Text>
                         </View>
                     </CardSection>,
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Album</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.album}</Text>
                         </View>
                     </CardSection>,
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Artist</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.artist}</Text>
                         </View>
                     </CardSection>,
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
+                        placeholder={Languages[this.state.languages]['062']}
+                        label={Languages[this.state.languages]['059']}
                         value={this.state.selectedItem.caption}
                         onChangeText={(caption) => {
                             const selectedItem = this.state.selectedItem;
@@ -449,8 +452,8 @@ class Settings extends Component {
                     </CardSection>,
                     <CardSection>
                         <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
                         value={this.state.selectedItem.group}
                         onChangeText={(group) => {
                             const selectedItem = this.state.selectedItem;
@@ -462,14 +465,14 @@ class Settings extends Component {
                     </CardSection>,
                     <CardSection style={{ flexDirection: 'row' }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Continue
+                            {Languages[this.state.languages]['077']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => this.setState({ selectedItem: null })}>
-                            Go Back
+                            {Languages[this.state.languages]['070']}
                         </Button>
                         <Button onPress={() => this.setState({ selectedItem: null, mediaType: null })}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </CardSection>];
                     return (
@@ -608,10 +611,14 @@ class Settings extends Component {
         Actions.Home();
 }
     renderRadioButton() {
+        const radioProps = [
+  { label: Languages[this.state.languages]['025'], value: 0 },
+  { label: Languages[this.state.languages]['026'], value: 1 }
+];
         if (this.state.stage !== null) {
             return (
             <CardSection>
-                <Text style={styles.radioTextStyle}>Stage</Text>
+                <Text style={styles.radioTextStyle}>{Languages[this.state.languages]['024']}</Text>
                 <RadioForm
                         radio_props={radioProps}
                         initial={parseInt(this.state.stage)}
@@ -625,7 +632,7 @@ class Settings extends Component {
         if (this.state.stage === null && this.state.isFirst) {
             return (
                 <CardSection>
-                <Text style={styles.radioTextStyle}>Stage</Text>
+                <Text style={styles.radioTextStyle}>{Languages[this.state.languages]['024']}</Text>
                 <RadioForm
                         radio_props={radioProps}
                         initial={0}
@@ -667,7 +674,7 @@ class Settings extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Settings</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['021']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -678,13 +685,13 @@ class Settings extends Component {
             <ScrollView>
             <View style={{ marginTop: 10, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>Edit Information</Text>
+                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>{Languages[this.state.languages]['022']}</Text>
                     <Image source={require('../Images/infoicon.png')} style={{ marginLeft: 10, height: 30, width: 30 }} />
                 </View>
                 <CardSection>
                     <Input
                     placeholder="Lance McClain"
-                    label="Name"
+                    label={Languages[this.state.languages]['023']}
                     value={this.state.name}
                     onChangeText={(name) => this.setState({ name })}
                     />
@@ -694,57 +701,57 @@ class Settings extends Component {
 
                 <CardSection style={{ flexDirection: 'row' }}>
                     <Button onPress={this.onButtonPress.bind(this)}>
-                        Save Information
+                        {Languages[this.state.languages]['027']}
                     </Button>
                     <Button onPress={() => Actions.Advanced()}>
-                        Advanced Settings
+                        {Languages[this.state.languages]['028']}
                     </Button>
                 </CardSection>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ marginTop: 20, fontSize: 30, alignSelf: 'center', marginBottom: 20, fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>Upload a new...</Text>
+                    <Text style={{ marginTop: 20, fontSize: 30, alignSelf: 'center', marginBottom: 20, fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>{Languages[this.state.languages]['040']}</Text>
                     <Image source={require('../Images/multimedia.png')} style={{ marginLeft: 5, height: 30, width: 90 }} />
                 </View>
                 <View style={{ flexDirection: 'row', width: null }}>
-                    <Button onPress={this.onPhotoButtonPress.bind(this)}>Photo</Button>
-                    <Button onPress={this.onVideoButtonPress.bind(this)}>Video</Button>
-                    <Button onPress={this.onAudioButtonPress.bind(this)}>Audio</Button>
-                    <Button onPress={() => Actions.AddMessage()}>Message</Button>
+                    <Button onPress={this.onPhotoButtonPress.bind(this)}>{Languages[this.state.languages]['036']}</Button>
+                    <Button onPress={this.onVideoButtonPress.bind(this)}>{Languages[this.state.languages]['037']}</Button>
+                    <Button onPress={this.onAudioButtonPress.bind(this)}>{Languages[this.state.languages]['038']}</Button>
+                    <Button onPress={() => Actions.AddMessage()}>{Languages[this.state.languages]['039']}</Button>
                 </View>
-                <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300', marginBottom: 20 }}>Edit Existing...</Text>
+                <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300', marginBottom: 20 }}>{Languages[this.state.languages]['041']}</Text>
                 <View style={{ flexDirection: 'row', width: null }}>
-                    <Button onPress={async () => this.setState({ mediaType: 'Pictures', media: JSON.parse(await AsyncStorage.getItem('Pictures')) })}>Photo</Button>
-                    <Button onPress={async () => this.setState({ mediaType: 'Videos', media: JSON.parse(await AsyncStorage.getItem('Videos')) })}>Video</Button>
-                    <Button onPress={async () => this.setState({ mediaType: 'Audio', media: JSON.parse(await AsyncStorage.getItem('Audio')) })}>Audio</Button>
+                    <Button onPress={async () => this.setState({ mediaType: 'Pictures', media: JSON.parse(await AsyncStorage.getItem('Pictures')) })}>{Languages[this.state.languages]['036']}</Button>
+                    <Button onPress={async () => this.setState({ mediaType: 'Videos', media: JSON.parse(await AsyncStorage.getItem('Videos')) })}>{Languages[this.state.languages]['037']}</Button>
+                    <Button onPress={async () => this.setState({ mediaType: 'Audio', media: JSON.parse(await AsyncStorage.getItem('Audio')) })}>{Languages[this.state.languages]['038']}</Button>
                 </View>
-                <Text style={{ marginTop: 20, fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>Sort by...</Text>
-                <Text style={{ marginTop: 10, fontSize: 23, alignSelf: 'center', marginBottom: 20, fontFamily: 'UltimaPDac-UltraLight' }}> Currently Sorting By: {this.state.preset} </Text>
+                <Text style={{ marginTop: 20, fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>{Languages[this.state.languages]['042']}</Text>
+                <Text style={{ marginTop: 10, fontSize: 23, alignSelf: 'center', marginBottom: 20, fontFamily: 'UltimaPDac-UltraLight' }}> {Languages[this.state.languages]['043']} {this.state.preset} </Text>
                 <View style={{ flexDirection: 'row', marginBottom: 30 }}>
                     <Button 
                     onPress={() => {
                         AsyncStorage.setItem('Preset', 'Date');
                         Actions.Home();
                         }}
-                    >Date
+                    >{Languages[this.state.languages]['044']}
                     </Button>
                     <Button 
                     onPress={() => {
                         Actions.TagSelect();
                         }}
-                    >Tag
+                    >{Languages[this.state.languages]['045']}
                     </Button>
                     <Button 
                     onPress={() => {
                         AsyncStorage.setItem('Preset', 'Favourites');
                         Actions.Home();
                         }}
-                    >Favourites
+                    >{Languages[this.state.languages]['046']}
                     </Button>
                     <Button 
                     onPress={() => {
                         AsyncStorage.setItem('Preset', 'Random');
                         Actions.Home();
                         }}
-                    >Random
+                    >{Languages[this.state.languages]['047']}
                     </Button>
                 </View>
             </View>
@@ -761,7 +768,7 @@ class Settings extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Edit Content</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['076']}</Text>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
                     <TouchableWithoutFeedback onPress={() => this.setState({ mediaType: null })}>
@@ -789,7 +796,7 @@ class Settings extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Edit Content</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['076']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -815,7 +822,7 @@ class Settings extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Edit Content</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['076']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -840,7 +847,7 @@ class Settings extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Edit Content</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['076']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -866,7 +873,7 @@ class Settings extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Edit Content</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['076']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -894,7 +901,7 @@ class Settings extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Edit Content</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['021']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -905,13 +912,13 @@ class Settings extends Component {
             <ScrollView>
             <View style={{ marginTop: 10, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>Edit Information</Text>
+                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>{Languages[this.state.languages]['022']}</Text>
                     <Image source={require('../Images/infoicon.png')} style={{ marginLeft: 10, height: 30, width: 30 }} />
                 </View>
                 <CardSection>
                     <Input
                     placeholder="Lance McClain"
-                    label="Name"
+                    label={Languages[this.state.languages]['023']}
                     value={this.state.name}
                     onChangeText={(name) => this.setState({ name })}
                     />
@@ -921,24 +928,24 @@ class Settings extends Component {
 
                 <CardSection>
                     <Button onPress={this.onButtonPress.bind(this)}>
-                        Save and Continue
+                        {Languages[this.state.languages]['077']}
                     </Button>
                 </CardSection>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30, fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>Upload a new...</Text>
+                    <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30, fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>{Languages[this.state.languages]['040']}</Text>
                     <Image source={require('../Images/multimedia.png')} style={{ marginLeft: 5, height: 30, width: 90 }} />
                 </View>
                 <CardSection>
-                    <Button onPress={this.onPhotoButtonPress.bind(this)}>Photo</Button>
+                    <Button onPress={this.onPhotoButtonPress.bind(this)}>{Languages[this.state.languages]['036']}</Button>
                 </CardSection>
                 <CardSection>
-                    <Button onPress={this.onVideoButtonPress.bind(this)}>Video</Button>
+                    <Button onPress={this.onVideoButtonPress.bind(this)}>{Languages[this.state.languages]['037']}</Button>
                 </CardSection>
                 <CardSection>
-                    <Button onPress={this.onAudioButtonPress.bind(this)}>Audio</Button>
+                    <Button onPress={this.onAudioButtonPress.bind(this)}>{Languages[this.state.languages]['038']}</Button>
                 </CardSection>
                 <CardSection>
-                    <Button onPress={() => Actions.AddMessage()}>Message</Button>
+                    <Button onPress={() => Actions.AddMessage()}>{Languages[this.state.languages]['039']}</Button>
                 </CardSection>
                 </View>
                 </ScrollView>
@@ -959,7 +966,7 @@ class Settings extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Edit Content</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['021']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -969,13 +976,13 @@ class Settings extends Component {
             </Header>
             <View style={{ marginTop: 10, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>Edit Information</Text>
+                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>{Languages[this.state.languages]['022']}</Text>
                     <Image source={require('../Images/infoicon.png')} style={{ marginLeft: 10, height: 30, width: 30 }} />
                 </View>
                 <CardSection>
                     <Input
                     placeholder="Lance McClain"
-                    label="Name"
+                    label={Languages[this.state.languages]['023']}
                     value={this.state.name}
                     onChangeText={(name) => this.setState({ name })}
                     />
@@ -985,7 +992,7 @@ class Settings extends Component {
 
                 <CardSection>
                     <Button onPress={this.onButtonPress.bind(this)}>
-                        Save and Continue
+                        {Languages[this.state.languages]['077']}
                     </Button>
                 </CardSection>
             </View>
@@ -994,11 +1001,6 @@ class Settings extends Component {
     }
     }
 }
-
-const radioProps = [
-  { label: 'Early', value: 0 },
-  { label: 'Late', value: 1 }
-];
 
 const styles = {
     radioTextStyle: {

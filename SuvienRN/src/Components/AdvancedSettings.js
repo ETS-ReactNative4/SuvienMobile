@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, AsyncStorage, Image, TouchableWithoutFeedback } from 'react-native';
+import Languages from '../Languages/Languages.json';
 import { CardSection, Button, CheckBox, Header } from './common';
 import { Actions } from 'react-native-router-flux';
 
 class AdvancedSettings extends Component {
-    state = { preferences: null }
+    state = { preferences: null, languages: null }
     async componentWillMount() {
-        this.setState({ preferences: JSON.parse(await AsyncStorage.getItem('Preferences')) });
+        this.setState({ preferences: JSON.parse(await AsyncStorage.getItem('Preferences')), languages: await AsyncStorage.getItem('Language') });
     }
 
     async onSavePrefPress() {
@@ -14,7 +15,7 @@ class AdvancedSettings extends Component {
         Actions.Settings();
     }
     render() {
-        if (this.state.preferences !== null) {
+        if (this.state.preferences !== null && this.state.languages !== null) {
              return (
             <View>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
@@ -22,7 +23,7 @@ class AdvancedSettings extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Advanced Settings</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['028']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -34,7 +35,7 @@ class AdvancedSettings extends Component {
             <View>
             <CheckBox
             checkType="Preferences"
-            label="Display Date"
+            label={Languages[this.state.languages]['029']}
             value={this.state.preferences}
             onChangeItem={(checked) => {
                 if ((checked.substr(checked.length - 1)) !== '*') {
@@ -51,7 +52,7 @@ class AdvancedSettings extends Component {
             />
             <CheckBox
             checkType="Preferences"
-            label="Messages Enabled"
+            label={Languages[this.state.languages]['030']}
             value={this.state.preferences}
             onChangeItem={(checked) => {
                 if ((checked.substr(checked.length - 1)) !== '*') {
@@ -68,7 +69,7 @@ class AdvancedSettings extends Component {
             />
             <CheckBox
             checkType="Preferences"
-            label="Display Clock"
+            label={Languages[this.state.languages]['031']}
             value={this.state.preferences}
             onChangeItem={(checked) => {
                 if ((checked.substr(checked.length - 1)) !== '*') {
@@ -85,7 +86,7 @@ class AdvancedSettings extends Component {
             />
             <CheckBox
             checkType="Preferences"
-            label="Display Greeting"
+            label={Languages[this.state.languages]['032']}
             value={this.state.preferences}
             onChangeItem={(checked) => {
                 if ((checked.substr(checked.length - 1)) !== '*') {
@@ -102,24 +103,7 @@ class AdvancedSettings extends Component {
             />
             <CheckBox
             checkType="Preferences"
-            label="Memory Game Enabled"
-            value={this.state.preferences}
-            onChangeItem={(checked) => {
-                if ((checked.substr(checked.length - 1)) !== '*') {
-                    const pref = this.state.preferences;
-                    pref[checked] = true;
-                    this.setState({ preferences: pref });
-                }
-                if ((checked.substr(checked.length - 1)) === '*') {
-                    const pref = this.state.preferences;
-                    pref[checked.substr(0, (checked.length - 1))] = false;
-                    this.setState({ preferences: pref });
-                }
-                }}
-            />
-            <CheckBox
-            checkType="Preferences"
-            label="Admin-User Mode Enabled"
+            label={Languages[this.state.languages]['033']}
             value={this.state.preferences}
             onChangeItem={(checked) => {
                 if ((checked.substr(checked.length - 1)) !== '*') {
@@ -138,12 +122,12 @@ class AdvancedSettings extends Component {
             </View>
             <CardSection>
                 <Button onPress={this.onSavePrefPress.bind(this)}>
-                    Save and Return
+                   {Languages[this.state.languages]['067']}
                 </Button>
             </CardSection>
             <CardSection>
                 <Button onPress={() => Actions.Settings()}>
-                    Return Without Saving
+                    {Languages[this.state.languages]['035']}
                 </Button>
             </CardSection>
             </View>
