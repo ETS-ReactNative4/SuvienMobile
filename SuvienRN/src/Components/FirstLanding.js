@@ -1,36 +1,52 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
-import { Button, CardSection } from './common';
+import { View, Text, AsyncStorage, Image, TouchableWithoutFeedback } from 'react-native';
+import { Button, CardSection, Header } from './common';
 import { Actions } from 'react-native-router-flux';
+import Languages from '../Languages/Languages.json';
 
 class FirstLanding extends Component {
-    async setInitialDatas() {
-        AsyncStorage.setItem('Tags', JSON.stringify(['General']));
-        AsyncStorage.setItem('Pictures', JSON.stringify([]));
+    state = { languages: null }
+    async componentWillMount() {
+        this.setState({ languages: await AsyncStorage.getItem('Language') });
     }
     render() {
-        this.setInitialDatas();
-        return (
-            <View style={{ marginLeft: 80, marginRight: 80, marginTop: 60, flexWrap: 'wrap' }}>
+        if (this.state.languages !== null) {
+            return (
+                <View>
+                <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['081']}</Text>
+                </View>
+                <View style={{ flex: 1 }} />
+            </Header>
+            <View style={{ marginLeft: 80, marginRight: 80, marginTop: 15, flexWrap: 'wrap' }}>
                 <View style={{ marginLeft: 30, marginRight: 30 }}>
-                    <Text style={{ fontSize: 27, fontFamily: 'ClementePDag-Book', marginBottom: 50, marginTop: 50 }}>Hello there! 
-                        Welcome to Suvien, the app that takes you on a journey down memory lane. 
-                        We notice this is your first time opening the app on this device.
-                        Would you like to read the tutorial first?
+                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginBottom: 50, marginTop: 50 }}>
+                        {Languages[this.state.languages]['078']}
                     </Text>
                 </View>
                 <CardSection>
                     <Button onPress={() => console.log('Tutorial Rquest')}>
-                        Yes, I wish to see the tutorial
+                        {Languages[this.state.languages]['079']}
                     </Button>
                 </CardSection>
                 <CardSection>
                     <Button onPress={() => Actions.Settings()}>
-                        No, I've used Suvien before
+                        {Languages[this.state.languages]['080']}
                     </Button>
                 </CardSection>
             </View>
+            </View>
         );
+    }
+        if (this.state.languages === null) {
+            return (
+                <View />
+            );
+        }
     }
 }
 

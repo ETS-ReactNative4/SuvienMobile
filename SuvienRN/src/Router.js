@@ -106,11 +106,12 @@ const RouterComponent = () => (
             <Scene
             key="FirstLanding"
             component={FirstLanding}
-            hideNavBar={false}
-            title="Welcome!"
-            titleStyle={styles.titleStyles}
-            onLeft={() => {}}
-            renderBackButton={() => <Image source={require('./Images/placeholderphoto.png')} style={{ marginLeft: 30, marginBottom: 10, height: 29, width: 100 }} />}
+            hideNavBar
+            //title="Welcome!"
+            //titleStyle={styles.titleStyles}
+            //onLeft={() => {}}
+            //renderBackButton={() => <Image source={require('./Images/placeholderphoto.png')} style={{ marginLeft: 30, marginBottom: 10, height: 29, width: 100 }} />}
+            //initial
             />
 
             <Scene
