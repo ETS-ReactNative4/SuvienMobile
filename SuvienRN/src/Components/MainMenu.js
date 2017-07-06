@@ -8,108 +8,9 @@ class MainMenu extends Component {
     state = { isFirst: null, isComp: null, stage: null, preferences: null }
     async componentDidMount() {
         Orientation.lockToLandscape();
-        AsyncStorage.setItem('Height', Dimensions.get('window').height.toString());
-        AsyncStorage.setItem('Width', Dimensions.get('window').width.toString());
-        this.setState({ preferences: JSON.parse(await AsyncStorage.getItem('Preferences')) });
-        /*
-        AsyncStorage.setItem('Preferences', JSON.stringify({
-            'Display Date': true,
-            'Messages Enabled': true,
-            'Display Clock': true,
-            'Display Greeting': true,
-            'Memory Game Enabled': true,
-            'Admin-User Mode Enabled': false
-        }));
-       const tags = JSON.parse(await AsyncStorage.getItem('Tags'));
-       tags.splice(5, 1);
-       AsyncStorage.setItem('Tags', JSON.stringify(tags));
-       console.log(JSON.parse(await AsyncStorage.getItem('Tags')));
-
-        /*
-        const media = JSON.parse(await AsyncStorage.getItem('Media'));
-        media.splice(9, 1);
-        AsyncStorage.setItem('Media', JSON.stringify(media));
-        console.log(await AsyncStorage.getItem('Media'));
-        //console.log(await AsyncStorage.getItem('Messages'));
-        //AsyncStorage.setItem('Messages', JSON.stringify([]));
-        /*
-        AsyncStorage.setItem('Messages', JSON.stringify(
-            [
-                {
-                    day: 'Monday',
-                    startHour: 14,
-                    startMinute: 30,
-                    endHour: 14,
-                    endMinute: 35,
-                    message: 'I am a message!'
-                },
-                {
-                    day: 'Tuesday',
-                    startHour: 14,
-                    startMinute: 30,
-                    endHour: 14,
-                    endMinute: 35,
-                    message: 'You shouldnt see me!'
-                }
-            ]
-        ));
-        //AsyncStorage.setItem('Audio', JSON.stringify([]));
-        /*
-        const audios = JSON.parse(await AsyncStorage.getItem('Media'));
-        audios.splice(11, 1);
-        AsyncStorage.setItem('Media', JSON.stringify(audios));
-        /*
-        AsyncStorage.setItem('Preset', 'None');
-        AsyncStorage.setItem('Acheivement', 'INCOM');
-        const media = JSON.parse(await AsyncStorage.getItem('Media'));
-        const pictures = JSON.parse(await AsyncStorage.getItem('Pictures'));
-        media.splice(7, 1);
-        media.splice(6, 1);
-        pictures.splice(7, 1);
-        pictures.splice(6, 1);
-        AsyncStorage.setItem('Media', JSON.stringify(media));
-        AsyncStorage.setItem('Pictures', JSON.stringify(pictures));
-        */
-        /*
-        
-        */
-        /*
-        AsyncStorage.setItem('Acheivement', 'INCOM');
-        AsyncStorage.multiRemove(['Pictures', 'Presets', 'temp', 'Tags', 'Videos', 'isSelected']);
-        AsyncStorage.setItem('Videos', JSON.stringify([]));
-        AsyncStorage.setItem('Tags', JSON.stringify([]));
-        AsyncStorage.setItem('Media', JSON.stringify([]));
-        AsyncStorage.setItem('Pictures', JSON.stringify([]));
-        AsyncStorage.setItem('Favourites', JSON.stringify([]));
-        AsyncStorage.setItem('Preset', 'None');
-        AsyncStorage.multiRemove(['Pictures', 'Presets', 'temp', 'Tags', 'Videos', 'isSelected']);
-        AsyncStorage.setItem('Videos', JSON.stringify([]));
-        AsyncStorage.setItem('Tags', JSON.stringify([]));
-        AsyncStorage.setItem('Media', JSON.stringify([]));
-        AsyncStorage.setItem('Pictures', JSON.stringify([]));
-        AsyncStorage.setItem('Favourites', JSON.stringify([]));
-        AsyncStorage.setItem('Preset', 'None');
-        /*
-        AsyncStorage.multiRemove(['Pictures', 'Presets', 'temp', 'Tags', 'Videos', 'isSelected']);
-        AsyncStorage.setItem('Videos', JSON.stringify([]));
-        AsyncStorage.setItem('Tags', JSON.stringify([]));
-        AsyncStorage.setItem('Media', JSON.stringify([]));
-        AsyncStorage.setItem('Pictures', JSON.stringify([]));
-        AsyncStorage.setItem('Favourites', JSON.stringify([]));
-        AsyncStorage.setItem('Preset', 'None');
-        */
-        /*
-        /*
-        /*
-        AsyncStorage.setItem('Videos', JSON.stringify([]));
-        AsyncStorage.setItem('Tags', JSON.stringify(['General']));
-        AsyncStorage.setItem('Presets', JSON.stringify(
-                [{ name: 'general', content: [] }]
-        ));
-        AsyncStorage.setItem('Pictures', JSON.stringify([]));
-        */
-        //
-        //console.log(AsyncStorage.getAllKeys());
+         if (await AsyncStorage.getItem('name') !== null && await AsyncStorage.getItem('stage') !== null) {
+             this.setState({ isComp: await AsyncStorage.getItem('Acheivement'), preferences: JSON.parse(await AsyncStorage.getItem('Preferences')), stage: await AsyncStorage.getItem('Stage') });
+         }
         this.getFirst();
     }
     onButtonPress() {
@@ -129,6 +30,21 @@ class MainMenu extends Component {
             AsyncStorage.setItem('Media', JSON.stringify([]));
             AsyncStorage.setItem('Pictures', JSON.stringify([]));
             AsyncStorage.setItem('Favourites', JSON.stringify([]));
+            AsyncStorage.setItem('Height', Dimensions.get('window').height.toString());
+            AsyncStorage.setItem('Width', Dimensions.get('window').width.toString());
+            AsyncStorage.setItem('Audio', JSON.stringify([]));
+            AsyncStorage.setItem('Messages', JSON.stringify([]));
+            AsyncStorage.setItem('Acheivement', 'INCOM');
+            AsyncStorage.setItem('Cards', JSON.stringify([]));
+            AsyncStorage.setItem('Preset', 'None');
+            AsyncStorage.setItem('Preferences', JSON.stringify({
+            'Display Date': true,
+            'Messages Enabled': true,
+            'Display Clock': true,
+            'Display Greeting': true,
+            'Memory Game Enabled': true,
+            'Admin-User Mode Enabled': false
+        }));
         } else {
         this.setState({ isFirst: false, stage: await AsyncStorage.getItem('stage'), isComp: await AsyncStorage.getItem('Achievement') });
     }
