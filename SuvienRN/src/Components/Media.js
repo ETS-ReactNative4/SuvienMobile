@@ -249,6 +249,30 @@ class Media extends Component {
             mymedia[locati].isFavourite = this.state.isFavourite;
             AsyncStorage.setItem('Media', JSON.stringify(mymedia));
         }
+        if (this.state.mediaType === 'Video') {
+            const myimages = this.state.videos;
+            const loca = myimages.findIndex((element, index, array) => {
+                if (element.uri === this.state.uri) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            });
+            myimages[loca].isFavourite = this.state.isFavourite;
+            AsyncStorage.setItem('Videos', JSON.stringify(myimages));
+            const mymedia = this.state.media;
+            const locati = mymedia.findIndex(((element, index, array) => {
+                if (element.uri === this.state.uri) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }));
+            mymedia[locati].isFavourite = this.state.isFavourite;
+            AsyncStorage.setItem('Media', JSON.stringify(mymedia));
+        }
         if (this.state.mediaType === 'Youtube') {
             console.log('im here!');
             const myvideos = this.state.videos;
@@ -466,14 +490,15 @@ class Media extends Component {
                     </View>
             );
         }
-        //Note: this is configured only for ios at the moment
-            
+        //Note: this is configured only for ios at the moment       
         }
             if (this.state.mediaType === 'Music' || this.state.mediaType === 'MusicAnd') {
                 //console.log('Im in the first if!');
                 if (this.state.album !== null && this.state.title !== null && this.state.artist !== null){
-                    //console.log(this.state.media);
-                    this.preloadMusicPlay();
+                    MusicPlayerController.isPlaying(() => {
+                    }, () => {
+                        this.preloadMusicPlay();
+                    });
                     return (
                     <View style={{ height: 500, backgroundColor: '#e3edf9', flexDirection: 'row', width: 800 }}>
                         <View style={{ marginTop: 20 }}>
