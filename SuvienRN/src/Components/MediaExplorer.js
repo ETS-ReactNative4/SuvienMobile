@@ -16,20 +16,7 @@ class MediaExplorer extends Component {
     render() {
         return (
             <View>
-            <Header style={{ height: 60, flexDirection: 'row' }}>
-                <View style={{ flex: 1 }}>
-                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Settings</Text>
-                </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
-            </Header>
-            <View style={{ flexDirection: 'column', paddingTop: 15, backgroundColor: '#f9f7f7', height: this.state.height, width: this.state.width, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ flexDirection: 'column', backgroundColor: '#f9f7f7', height: this.state.height, width: this.state.width, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginBottom: 10 }}> Upload a new...</Text>
                     <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0, width: (this.state.width - 100) }}>
                         <Button onPress={() => Actions.AddPhoto()}>
