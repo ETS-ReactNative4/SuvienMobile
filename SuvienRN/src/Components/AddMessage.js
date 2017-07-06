@@ -799,7 +799,7 @@ class AddMessage extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
-                <CardSection style={{ marginLeft: 0 }}>
+                <CardSection style={{ marginLeft: 0, alignItems: 'center', justifyContent: 'center' }}>
                     <Image source={{ uri: selected.uri }} style={{ height: 300, width: 400 }} />
                 </CardSection>
                 <CardSection style={{ marginLeft: 0 }}>
@@ -1076,7 +1076,7 @@ class AddMessage extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
-                <CardSection style={{ marginLeft: 0 }}>
+                <CardSection style={{ marginLeft: 0, alignItems: 'center', justifyContent: 'center' }}>
                     <Image source={{ uri: this.state.uri }} style={{ height: 300, width: 400 }} />
                 </CardSection>
                 <CardSection style={{ marginLeft: 0 }}>
