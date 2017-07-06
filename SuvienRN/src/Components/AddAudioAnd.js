@@ -9,7 +9,7 @@ class AddAudioAnd extends Component {
     //console.log(JSON.parse(await AsyncStorage.getItem('samplemusic')));
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async componentWillMount() {
-        this.setState({ acheivement: await AsyncStorage.setItem('Acheivement') });
+        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement') });
     }
     async onSaveItemPress() {
         const { title, caption, group, artist, album, uri } = this.state;
@@ -88,6 +88,7 @@ class AddAudioAnd extends Component {
     }
     
     onAudioSelect() {
+        console.log(this.state.acheivement);
         if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
             if (this.state.title === null || this.state.album === null || this.state.artist === null) {
             return (

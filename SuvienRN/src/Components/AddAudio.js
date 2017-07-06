@@ -8,7 +8,7 @@ class AddAudio extends Component {
     state = { information: null, caption: null, group: null, acheivement: null }
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async componentWillMount() {
-        this.setState({ acheivement: await AsyncStorage.setItem('Acheivement') });
+        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement') });
     }
     async onSaveItemPress() {
         const { information, caption, group } = this.state;
