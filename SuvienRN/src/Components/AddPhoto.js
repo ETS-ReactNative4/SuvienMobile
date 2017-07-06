@@ -8,11 +8,12 @@ import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
-    componentWillMount() {
+    state = { imageuri: null, caption: null, group: null, acheivement: null, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    async componentWillMount() {
         this.setState({ 
             heightc: Dimensions.get('window').height,
-            widthc: Dimensions.get('window').width 
+            widthc: Dimensions.get('window').width,
+            acheivement: await AsyncStorage.getItem('Acheivement')
         });
     }
     async onSaveItemPress() {
@@ -128,7 +129,8 @@ class AddPhoto extends Component {
 
     onPhotoSelect() {
         //1496411711468
-        if (this.state.imageuri === null) {
+        if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
+            if (this.state.imageuri === null) {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
@@ -219,6 +221,93 @@ class AddPhoto extends Component {
                     </View>
                 </View>
             );
+        }
+    }
+        if (this.state.acheivement === null || this.state.acheivement === 'INCOM') {
+            if (this.state.imageuri === null) {
+            return (
+                <View style={{ alignItems: 'center' }}>
+                    <CardSection style={{ borderBottomWidth: 0 }}>
+                        <Image source={require('../Images/noimage.png')} style={{ height: 300, width: 300 }} />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="At the Beach"
+                        label="Title"
+                        value={this.state.title}
+                        onChangeText={(title) => this.setState({ title })}
+                        />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="Family vacation to Hawaii"
+                        label="Caption"
+                        value={this.state.caption}
+                        onChangeText={(caption) => this.setState({ caption })}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                        placeholder="SummerVacation2017"
+                        label="Tag"
+                        value={this.state.group}
+                        onChangeText={(group) => this.setState({ group })}
+                        />
+                    </CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                        <Button onPress={this.onSaveItemPress.bind(this)}>
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
+                </View>
+            );
+        }
+        if (this.state.imageuri !== null) {
+            return (
+                <View style={{ alignItems: 'center' }}>
+                    <CardSection style={{ borderBottomWidth: 0 }}>
+                        <Image source={{ uri: this.state.imageuri }} style={{ height: 300, width: 300 }} />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="At the Beach"
+                        label="Title"
+                        value={this.state.title}
+                        onChangeText={(title) => this.setState({ title })}
+                        />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="Family vacation to Hawaii"
+                        label="Caption"
+                        value={this.state.caption}
+                        onChangeText={(caption) => this.setState({ caption })}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                        placeholder="SummerVacation2017"
+                        label="Tag"
+                        value={this.state.group}
+                        onChangeText={(group) => this.setState({ group })}
+                        />
+                    </CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                        <Button onPress={this.onSaveItemPress.bind(this)}>
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
+                </View>
+            );
+        }
         }
     }
     

@@ -5,11 +5,12 @@ import { CardSection, Button, Input, Header } from './common';
 import Camera from 'react-native-camera';
 
 class AddVideo extends Component {
-    state = { thumbnail: null, videosrc: null, height: null, width: null, heightc: null, widthc: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
-    componentWillMount() {
+    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, heightc: null, widthc: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
+    async componentWillMount() {
         this.setState({ 
             heightc: Dimensions.get('window').height,
-            widthc: Dimensions.get('window').width 
+            widthc: Dimensions.get('window').width,
+            acheivement: await AsyncStorage.getItem('Acheivement')
         });
     }
     onAddWebVideoPress() {
@@ -185,7 +186,8 @@ class AddVideo extends Component {
         }
     }
     onRenderExplorer() {
-        if (this.state.videoID === null && this.state.uri === null) {
+        if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
+            if (this.state.videoID === null && this.state.uri === null) {
             return (
                 <ScrollView>
                 <View style={{ alignItems: 'center' }}>
@@ -328,6 +330,145 @@ class AddVideo extends Component {
                 </View>
                 </ScrollView>
             );
+        }
+    }
+        if (this.state.acheivement === null || this.state.acheivement === 'INCOM') {
+            if (this.state.videoID === null && this.state.uri === null) {
+            return (
+                <ScrollView>
+                <View style={{ alignItems: 'center' }}>
+                    <CardSection style={{ borderBottomWidth: 0 }}>
+                        <Image source={require('../Images/novideo.png')} style={{ height: 300, width: 300 }} />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="At the Beach"
+                        label="Title"
+                        value={this.state.title}
+                        onChangeText={(title) => this.setState({ title })}
+                        />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="Family vacation to Hawaii"
+                        label="Caption"
+                        value={this.state.caption}
+                        onChangeText={(caption) => this.setState({ caption })}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                        placeholder="SummerVacation2017"
+                        label="Tag"
+                        value={this.state.group}
+                        onChangeText={(group) => this.setState({ group })}
+                        />
+                    </CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                        <Button onPress={this.onSaveItemPress.bind(this)}>
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
+                </View>
+                </ScrollView>
+            );
+        }
+        if (this.state.videoID !== null && this.state.thumbnail !== null){
+            return (
+                <ScrollView>
+                <View style={{ alignItems: 'center' }}>
+                    <CardSection style={{ borderBottomWidth: 0 }}>
+                        <Image source={{ uri: this.state.thumbnail }} style={{ height: 360, width: 480 }} />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="At the Beach"
+                        label="Title"
+                        value={this.state.title}
+                        onChangeText={(title) => this.setState({ title })}
+                        />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="Family vacation to Hawaii"
+                        label="Caption"
+                        value={this.state.caption}
+                        onChangeText={(caption) => this.setState({ caption })}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                        placeholder="SummerVacation2017"
+                        label="Tag"
+                        value={this.state.group}
+                        onChangeText={(group) => this.setState({ group })}
+                        />
+                    </CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                        <Button onPress={this.onSaveItemPress.bind(this)}>
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
+                </View>
+                </ScrollView>
+            );
+        }
+        if (this.state.uri !== null) {
+            return (
+                <ScrollView>
+                <View style={{ alignItems: 'center' }}>
+                    <CardSection style={{ borderBottomWidth: 0 }}>
+                        <Image source={{ uri: this.state.uri }} style={{ height: 360, width: 480 }} />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="At the Beach"
+                        label="Title"
+                        value={this.state.title}
+                        onChangeText={(title) => this.setState({ title })}
+                        />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="Family vacation to Hawaii"
+                        label="Caption"
+                        value={this.state.caption}
+                        onChangeText={(caption) => this.setState({ caption })}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                        placeholder="SummerVacation2017"
+                        label="Tag"
+                        value={this.state.group}
+                        onChangeText={(group) => this.setState({ group })}
+                        />
+                    </CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                        <Button onPress={this.onSaveItemPress.bind(this)}>
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
+                </View>
+                </ScrollView>
+            );
+        }
         }
     }
 
