@@ -1,25 +1,27 @@
+//Get everything on one page
+//Dimension fix: need to input the dimensions in async
 import React, { Component } from 'react';
-import { View, AsyncStorage, Text, Dimensions, ScrollView } from 'react-native';
+import { View, AsyncStorage, Text, Dimensions, ScrollView, Modal } from 'react-native';
+import Orientation from 'react-native-orientation';
 import { Header, PictureTile, Button, CardSection } from './common';
 import { Actions } from 'react-native-router-flux';
 import HomeBar from './HomeBar';
 import CongratsModal from './CongratsModal';
+import { Media } from './';
 
 class Home extends Component {
-    state = { dim: null, media: null, preset: null, tags: null, width: null, acheivement: null }
+    state = { dim: null, media: null, preset: null, tags: null, width: null, acheivement: null, medias: null }
     async componentWillMount() {
-        this.setState({ width: Dimensions.get('window').width });
+        this.setState({ width: parseInt(await AsyncStorage.getItem('Width')) });
+        this.doMath();
+        Orientation.lockToLandscape();
         //console.log('Im in componentwillmount!');
         this.getData();
     }
 
-    componentDidMount() {
-        //console.log('Im in componentdidmount!');
-        this.doMath();
-    }
-
     doMath() {
         const ourWidth = this.state.width;
+        //console.log(ourWidth);
         const pictureDim = Math.trunc(((ourWidth - 55) / 4));
         this.setState({ dim: pictureDim });
     }
@@ -60,7 +62,7 @@ class Home extends Component {
     renderTiles() {
         if (this.state.media !== null) {
             if (this.state.preset === 'Date') {
-            const newMedia = this.state.media.reverse();
+            let newMedia = this.state.media.reverse();
             let j;
             for (j = 0; j < newMedia.length; j++) {
                 newMedia[j].uniqueID = j;
@@ -76,16 +78,19 @@ class Home extends Component {
                 }
                 if (isFound !== undefined) {
                     allTiles.push(
-                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} />
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} onChangePress={(obj) => {
+                        this.setState({ medias: obj });
+                        }} />
                 );
                 }
             }
+            newMedia = newMedia.reverse();
             return (
                 [...allTiles]
             );
         }
         if (this.state.tags.find((tag) => this.state.preset === tag) !== undefined) {
-            const newMedia = this.state.media.reverse();
+            let newMedia = this.state.media.reverse();
             const filterTags = newMedia.filter((imagep) => imagep.group === this.state.preset);
             let j;
             for (j = 0; j < filterTags.length; j++) {
@@ -102,10 +107,13 @@ class Home extends Component {
                 }
                 if (isFound !== undefined) {
                     allTiles.push(
-                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} />
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} onChangePress={(obj) => {
+                        this.setState({ medias: obj });
+                        }} />
                 );
                 }
             }
+            newMedia = newMedia.reverse();
             return (
                 [...allTiles]
             );
@@ -128,7 +136,9 @@ class Home extends Component {
                 }
                 if (isFound !== undefined) {
                     allTiles.push(
-                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} />
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} onChangePress={(obj) => {
+                        this.setState({ medias: obj})
+                        }} />
                 );
                 }
             }
@@ -160,7 +170,10 @@ class Home extends Component {
                 }
                 if (isFound !== undefined) {
                     allTiles.push(
-                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} />
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} onChangePress={(obj) => {
+                        this.setState({ medias: obj });
+                        }} 
+                        />
                 );
                 }
             }
@@ -186,7 +199,10 @@ class Home extends Component {
                     }
                     if (isFound !== undefined) {
                     allTiles.push(
-                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} />
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} onChangePress={(obj) => {
+                        this.setState({ medias: obj });
+                        }} 
+                    />
                     );
                     }
                 }
@@ -226,14 +242,25 @@ class Home extends Component {
         return p;
     }
     render() {
-        console.log(this.state.acheivement);
+        //console.log(this.state.acheivement);
         //console.log('Im rendering!');
         //console.log(this.state.minute);;
         //console.log(aorp);
         //console.log(this.state.sizes);
         if ((this.state.media !== null || this.state.media === []) && this.state.acheivement !== null && this.state.acheivement ) {
-        return (
+            if (this.state.medias === null) {
+                 return (
             <View style={{ flex: 1 }}>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={false}
+                onRequestClose={() => {}}
+                >
+                <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)' }}>
+                    <View />
+                </View>
+                </Modal>
                 <CongratsModal />
                 <Header>
                     <HomeBar />
@@ -245,6 +272,40 @@ class Home extends Component {
                 </ScrollView>
             </View>
         );
+            }
+        if (this.state.medias !== null) {
+            console.log(this.state.medias);
+             return (
+            <View style={{ flex: 1 }}>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible
+                onRequestClose={() => {}}
+                >
+                <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', alignItems: 'center', justifyContent: 'center' }}>
+                    <Media
+                    obj={this.state.medias}
+                    onInvisible={async (flag) => {
+                        if (flag === true) {
+                            this.setState({ medias: null, media: JSON.parse(await AsyncStorage.getItem('Media')) });
+                        }
+                    }}
+                    />
+                </View>
+                </Modal>
+                <CongratsModal />
+                <Header>
+                    <HomeBar />
+                </Header>
+                <ScrollView>
+                    <View style={{ marginLeft: 15, flexDirection: 'row', flexWrap: 'wrap', flex: 1, paddingTop: 10 }}>
+                        {this.renderTiles()}
+                    </View>
+                </ScrollView>
+            </View>
+        );
+        }
     }
         if (this.state.media === null && this.state.media !== []) {
             return (

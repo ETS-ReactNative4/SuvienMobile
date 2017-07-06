@@ -1,3 +1,6 @@
+//Add save and create new to photos.
+//Add save and return to settings
+//Return to home.
 import React, { Component } from 'react';
 import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import { CardSection, Button, Input, Header } from './common';
@@ -5,11 +8,12 @@ import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
-    componentWillMount() {
+    state = { imageuri: null, caption: null, group: null, acheivement: null, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    async componentWillMount() {
         this.setState({ 
             heightc: Dimensions.get('window').height,
-            widthc: Dimensions.get('window').width 
+            widthc: Dimensions.get('window').width,
+            acheivement: await AsyncStorage.getItem('Acheivement')
         });
     }
     async onSaveItemPress() {
@@ -105,16 +109,16 @@ class AddPhoto extends Component {
     onPressPhotos() {
             CameraRoll.getPhotos({
                 first: 10000, //Quick and dirty fix. Will update to a more friendly fix in later versions
-                assetType: 'All'
+                assetType: 'Photos'
             })
             .then(r => this.setState({ photos: r.edges, imageuri: { uri: r.edges[0].node.image.uri } }));
     }
 
     onChoosePhotoPress() {
-        this.setState({modalVisible: true });
+        this.setState({ modalVisible: true });
         CameraRoll.getPhotos({
                 first: 10000, //Quick and dirty fix. Will update to a more friendly fix in later versions
-                assetType: 'All'
+                assetType: 'Photos'
             })
             .then(r => this.setState({ photos: r.edges }));
     }
@@ -125,11 +129,12 @@ class AddPhoto extends Component {
 
     onPhotoSelect() {
         //1496411711468
-        if (this.state.imageuri === null) {
+        if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
+            if (this.state.imageuri === null) {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/noimage.jpg')} style={{ height: 300, width: 300 }} />
+                        <Image source={require('../Images/noimage.png')} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
@@ -155,17 +160,19 @@ class AddPhoto extends Component {
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
-                    <CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Continue
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 40 }} />
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={() => Actions.Home()}>
-                            Return to Home
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
                 </View>
             );
         }
@@ -199,19 +206,108 @@ class AddPhoto extends Component {
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
-                    <CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Continue
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 40 }} />
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={() => Actions.Home()}>
-                            Return to Home
+                        <Button onPress={this.createNew.bind(this)}>
+                            Save and Create New
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                    </CardSection>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
                 </View>
             );
+        }
+    }
+        if (this.state.acheivement === null || this.state.acheivement === 'INCOM') {
+            if (this.state.imageuri === null) {
+            return (
+                <View style={{ alignItems: 'center' }}>
+                    <CardSection style={{ borderBottomWidth: 0 }}>
+                        <Image source={require('../Images/noimage.png')} style={{ height: 300, width: 300 }} />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="At the Beach"
+                        label="Title"
+                        value={this.state.title}
+                        onChangeText={(title) => this.setState({ title })}
+                        />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="Family vacation to Hawaii"
+                        label="Caption"
+                        value={this.state.caption}
+                        onChangeText={(caption) => this.setState({ caption })}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                        placeholder="SummerVacation2017"
+                        label="Tag"
+                        value={this.state.group}
+                        onChangeText={(group) => this.setState({ group })}
+                        />
+                    </CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                        <Button onPress={this.onSaveItemPress.bind(this)}>
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
+                </View>
+            );
+        }
+        if (this.state.imageuri !== null) {
+            return (
+                <View style={{ alignItems: 'center' }}>
+                    <CardSection style={{ borderBottomWidth: 0 }}>
+                        <Image source={{ uri: this.state.imageuri }} style={{ height: 300, width: 300 }} />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="At the Beach"
+                        label="Title"
+                        value={this.state.title}
+                        onChangeText={(title) => this.setState({ title })}
+                        />
+                    </CardSection>
+                    <CardSection style={{ borderTopWidth: 1 }}>
+                        <Input
+                        placeholder="Family vacation to Hawaii"
+                        label="Caption"
+                        value={this.state.caption}
+                        onChangeText={(caption) => this.setState({ caption })}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                        placeholder="SummerVacation2017"
+                        label="Tag"
+                        value={this.state.group}
+                        onChangeText={(group) => this.setState({ group })}
+                        />
+                    </CardSection>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                        <Button onPress={this.onSaveItemPress.bind(this)}>
+                            Save and Return
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            Return to Settings
+                        </Button>
+                    </View>
+                </View>
+            );
+        }
         }
     }
     
@@ -257,14 +353,70 @@ class AddPhoto extends Component {
             );
     }
 
+    async createNew() {
+        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
+        const photos = JSON.parse(await AsyncStorage.getItem('Pictures'));
+        photos.push({
+            title: this.state.title,
+            imageuri: this.state.imageuri, 
+            caption: this.state.caption, 
+            group: this.state.group,
+            height: this.state.height,
+            width: this.state.width,
+            isFavourite: this.state.isFavourite,
+            mediaType: 'Photo'
+        });
+        gen.push({
+            uniqueID: objec.uniqueID, 
+            title: this.state.title,
+            imageuri: this.state.imageuri, 
+            caption: this.state.caption, 
+            group: this.state.group,
+            height: this.state.height,
+            width: this.state.width,
+            isFavourite: this.state.isFavourite,
+            mediaType: 'Photo'
+        });
+        objec.uri = this.state.imageuri;
+        objec.title = this.state.title;
+        objec.caption = this.state.caption;
+        objec.group = this.state.group;
+        objec.height = this.state.height;
+        objec.width = this.state.width;
+        objec.isFavourite = this.state.isFavourite;
+        objec.mediaType = 'Photo';
+        const findTags = mytags.find((tag) => tag === this.state.group);
+        if (findTags === undefined) {
+            mytags.push(this.state.group);
+            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+        }
+        AsyncStorage.setItem('uniqueID', JSON.stringify(objec));
+        AsyncStorage.setItem('Media', JSON.stringify(gen));
+        AsyncStorage.setItem('Pictures', JSON.stringify(photos));
+        this.setState({ imageuri: null, caption: null, group: null, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, cameraType: 'back', webphoto: null, imgsrc: null });
+    }
+
     render() {
+        console.log(this.state.photos);
         if (this.state.isRecording === false) {
             if (this.state.photos === null) {
             return (
                 <View style={{ flex: 1 }}>
-                <Header style={{ height: 80 }}>
-                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Add Photo</Text>
-                </Header>
+                <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Photo</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                 <ScrollView>
                     <View style={{ marginTop: 5, marginLeft: 80, marginRight: 80, flex: 1 }}>
                         <CardSection>
@@ -290,8 +442,7 @@ class AddPhoto extends Component {
                     </View>
                 </ScrollView>
                 </View>
-        );
-            
+        );        
     }
         if (this.state.photos !== null) {
             return (
@@ -315,9 +466,19 @@ class AddPhoto extends Component {
                                 </View>
                             </View>
                         </Modal>
-                <Header style={{ height: 80 }}>
-                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Add Photo</Text>
-                </Header>
+                <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Photo</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                 <ScrollView>
                     <View style={{ marginTop: 5, marginLeft: 80, marginRight: 80, flex: 1 }}>
                         <CardSection>

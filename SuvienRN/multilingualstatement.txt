@@ -1,0 +1,121 @@
+Main Menu:
+Get Started : Démarrer 
+Start : Commencer |
+Help : Obtenir de l'aide |
+Play : Jouer |
+Out of the corner. Into the conversation : 
+Have Questions? Visit our help page! : est-ce que vous devez l'aide? Vous devriez visiter notre page d'aide! |
+Test your memory while having fun! : Testez votre mémoire tout en s'amusant! |
+Home:
+Loading : chargement |
+It is a lovely morning : C'est un beau matin |
+It is a lovely afternoon : C'est un bel après-midi |
+It is a lovely evening : C'est un beau soir |
+It is a lovely night : C'est une belle nuit |
+It is {the date. All days of the week and months of the year}
+C'est
+Days:
+Dimache
+Lundi
+Mardi
+mercredi
+Jeudi
+Vendredi
+Samedi
+Months:
+Janvier
+F(accent agu e)vrier
+Mars
+Avril
+Mai
+Juin
+Juillet
+Aout
+Septembre
+Octombre
+Novombre
+Decembre
+Return to Home : Retourner à la page d'accueil |
+No Content Selected, click me to add some! : Il n'y a pas de contenu choisi. Pour ajouter du contenu, cliquez-moi! |
+There is a new video message, click me to watch! : Il y a un nouveau message vidéo. Pour regarder, cliquez-moi! |
+Congrats! You've uploaded your first 8 images! You can now chose different filters for the main screen. :
+Félicitations! Vous avez ajouté huit images! Vous pouvez choisir filtres différents pour la page d'accueil. |
+Go to Settings : Aller à le menu des paramètres |
+Pause : Pause |
+
+Settings: Paramètres |
+Display Date : présenter le date |
+Display Clock : présenter l'horloge |
+Display Greeting : présenter la salutation |
+Memory Game Enabled : Jeu Mémorisation est activée |
+Admin-user mode enabled : administration-et-utilisateur moyen est activée
+Return Without Saving : Retourner sans sauvegardant |
+Edit Information : Modifier l'information |
+Name : Nom |
+Stage : étape |
+Early : étape précoce
+Late : étape avancée
+Save Information : Sauvegarder l'information
+Advanced Settings : Paramètres Avancés
+Photo : Image
+Video : Vidéo
+Audio : Fichier Audio
+Message : Message
+Upload a New: Ajouter un nouveau...
+Edit Existing: Modifier un...
+Sort By: Trier contenu par
+Currently Sorting By : triant actuellement par
+Date : Date
+Tag : Tag
+Favourites : Favoris
+Random : Contenu Aléatoire
+Select a Tag : Choisir un tag
+
+Content Pages:
+Take Photo : Prendre une photo
+Record Video : Enregistrer une Vidéo
+Album: Album
+Artist: Artiste
+Choose from photo, video, music library : Choisir de la bibliothèque musicale, bibliothèque d'images, vidéothèque
+CameraRoll: Bibliothèque d'images
+Add from web using url, youtube : Ajouter à partir d'Internet utilisant l'adresse URL , Ajouter à partir d'Internet utilisant YouTube |
+Title: Le titre
+Caption : Le sous-titre
+Tag : Le Tag
+No Image Selected : Il n'y a pas de la image choisi |
+No Video Selected : Il n'y a pas de la vidéo choisi |
+No Audio Selected : Il n'y a pas du fichier audio choisi |
+Save and Return : Sauvegarder et retourner |
+Save and create new : Sauvegarder et créer nouveau contenu
+Return to settings : Retourner à le menu des paramètres |
+Go back : Retourner |
+No Content Selected : Il n'y a pas du contenu choisi |
+I would like to add a... : J'aimerais ajouter un... |
+Day : Jour
+Start Time: Heure de début
+End Time: Heure de fin
+
+Alert Message : message écrit |
+Video MEssage : message vidéo |
+Active Messages : messages actifs |
+Add Message, Photo, Video, Audio : Ajouter une image, une vidéo, un fichier audio |
+Edit Content : Modifier contenu |
+Save and continue : Sauvegarder et continuer |
+Recording... : Enregistrement en cours... |
+Go Back to Messages : Retourner a les messages |
+
+Memory Game:
+Congrats! You've completed the game. Would you like to play again? : Félicitations ! Tu as fini le jeu. Voulez-vous jouer encore ? |
+Yes : Oui |
+No : Non |
+
+First Landing:
+Hello there! 
+Welcome to Suvien, the app that takes you on a journey down memory lane. 
+We notice this is your first time opening the app on this device.
+Would you like to read the tutorial first? :
+Bonjour ! Bienvenue sur Suvien, l'application qui emmenez-vous dans un pèlerinage sur les lieux du passé. Nous remarquons que vous n'avez pas ouvert l'application avant. Voulez-vous lire le tutoriel avant vous continuez ?
+
+Yes, I wish to see the tutorial : Oui, J'aimerais lire le tutoriel. |
+No, I've used Suvien before : Non, j'ai utilisé Suvien avant. |
+

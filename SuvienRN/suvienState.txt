@@ -1,0 +1,107 @@
+0
+:
+"Acheivement"
+
+COMP
+
+1
+:
+"Audio"
+
+[{"uri":"content://media/external/audio/media/18","title":"Over the Horizon","album":"Brand Music","artist":"Samsung","caption":"New song!","group":"Tunes","isFavourite":false,"mediaType":"MusicAnd"}]
+
+2
+:
+"Cards"
+
+[]
+
+3
+:
+"Favourites"
+
+[]
+
+4
+:
+"Height"
+
+800
+
+5
+:
+"Media"
+
+[{"imageuri":"content://media/external/images/media/285","caption":"uedijejftfcghgdsxvj","title":"Lon Capa Edit","group":"Working","mediaType":"Photo","height":1280,"width":800,"isFavourite":false},{"imageuri":"content://media/external/images/media/1220","caption":"Phone","title":"Desk Edit","group":"Stuff","mediaType":"Photo","height":1932,"width":2576,"isFavourite":false},{"uniqueID":3,"title":"Mac","imageuri":"content://media/external/images/media/1211","caption":"idfjjvrjerfer","group":"Working","height":1440,"width":2560,"isFavourite":false,"mediaType":"Photo"},{"uniqueID":5,"title":"Screenshot","imageuri":"content://media/external/images/media/1207","caption":"JEIFJIEFCE","group":"Working","height":1440,"width":2560,"isFavourite":false,"mediaType":"Photo"},{"uniqueID":2,"title":"shot of screen","imageuri":"content://media/external/images/media/1221","caption":"jshfhchsx","group":"Working","height":800,"width":1280,"isFavourite":true,"mediaType":"Photo"},{"uniqueID":4,"title":"Markers","imageuri":"content://media/external/images/media/1219","caption":"ejdnshdkds","group":"Working","height":1932,"width":2576,"isFavourite":false,"mediaType":"Photo"},{"uniqueID":4,"title":"title","imageuri":"content://media/external/images/media/1215","caption":"ihnj","group":"Working","height":1440,"width":2560,"isFavourite":false,"mediaType":"Photo"},{"imageuri":"https://img.youtube.com/vi/KVZ-P-ZI6W4/hqdefault.jpg","videouri":"KVZ-P-ZI6W4","caption":"A reqct native conference. Im writing a super long caption in hopes that I can see it sorrad out a bit on the end. Bye!","title":"React Native ","group":"React Native","mediaType":"Youtube","isFavourite":true},{"uniqueID":4,"title":null,"imageuri":null,"caption":null,"group":null,"height":null,"width":null,"isFavourite":false,"mediaType":"Photo"},{"uniqueID":4,"title":"Outside","imageuri":"file:///storage/emulated/0/DCIM/IMG_20170704_093203.jpg","caption":"View outside","group":"Working","height":800,"width":1280,"isFavourite":false,"mediaType":"Photo"},{"uniqueID":4,"title":"Phonee","imageuri":"file:///storage/emulated/0/DCIM/IMG_20170704_093236.jpg","caption":"A phone","group":"Working","height":800,"width":1280,"isFavourite":false,"mediaType":"Photo"},{"uniqueID":4,"mediaType":"Video","uri":"file:///storage/emulated/0/DCIM/VID_20170704_094421.mp4","title":"Video","caption":"My vid","group":"Working","isFavourite":false},{"uniqueID":4,"mediaType":"Video","uri":"file:///storage/emulated/0/DCIM/VID_20170704_094445.mp4","title":"Pan","caption":"Pan","group":"Working","isFavourite":false},{"uniqueID":4,"title":"Titlee","imageuri":"file:///storage/emulated/0/DCIM/IMG_20170704_131516.jpg","caption":"cal","group":"Working","height":800,"width":1280,"isFavourite":false,"mediaType":"Photo"},{"uniqueID":4,"title":"New","imageuri":"content://media/external/images/media/34","caption":"Faulty photo","group":"Space","height":712,"width":1280,"isFavourite":true,"mediaType":"Photo"},{"uniqueID":4,"uri":"content://media/external/audio/media/18","title":"Over the Horizon","album":"Brand Music","artist":"Samsung","caption":"New song!","group":"Tunes","isFavourite":false,"mediaType":"MusicAnd"}]
+
+6
+:
+"Messages"
+
+[{"day":["Monday"],"message":"Video","startHour":19,"startMinute":0,"endHour":19,"endMinute":3,"uri":"file:///storage/emulated/0/DCIM/VID_20170628_125920.mp4","messageType":"VideoMsg","messageID":1498669185690},{"day":["Wednesday"],"message":"I am a mesage!","startHour":17,"startMinute":12,"endHour":17,"endMinute":13,"messageType":"Msg","messageID":1498671347467},{"day":["Sunday","Monday","Tuesday"],"message":"Title","startHour":18,"startMinute":50,"endHour":19,"endMinute":0,"uri":"file:///storage/emulated/0/DCIM/VID_20170703_184657.mp4","messageType":"VideoMsg","messageID":1499122055533},{"day":["Monday","Tuesday"],"message":"Message","startHour":15,"startMinute":53,"endHour":15,"endMinute":55,"uri":"file:///storage/emulated/0/DCIM/VID_20170703_155220.mp4","messageType":"VideoMsg","messageID":1499111578310},{"day":["Wednesday"],"message":"New message","startHour":7,"startMinute":10,"endHour":8,"endMinute":6,"messageType":"Msg","messageID":1499177327866}]
+
+7
+:
+"Pictures"
+
+[{"imageuri":"content://media/external/images/media/377","caption":"jecinjfrejinrefniue","title":"1p03","group":"School","mediaType":"Photo","height":2048,"width":1536,"isFavourite":false},{"imageuri":"content://media/external/images/media/285","caption":"uedijejftfcghgdsxvj","title":"Lon Capa Edit","group":"Working","mediaType":"Photo","height":1280,"width":800,"isFavourite":false},{"imageuri":"content://media/external/images/media/1220","caption":"Phone","title":"Desk Edit","group":"Stuff","mediaType":"Photo","height":1932,"width":2576,"isFavourite":false},{"title":"Mac","imageuri":"content://media/external/images/media/1211","caption":"idfjjvrjerfer","group":"Working","height":1440,"width":2560,"isFavourite":false,"mediaType":"Photo"},{"title":"Screenshot","imageuri":"content://media/external/images/media/1207","caption":"JEIFJIEFCE","group":"Working","height":1440,"width":2560,"isFavourite":false,"mediaType":"Photo"},{"title":"shot of screen","imageuri":"content://media/external/images/media/1221","caption":"jshfhchsx","group":"Working","height":800,"width":1280,"isFavourite":true,"mediaType":"Photo"},{"title":"Markers","imageuri":"content://media/external/images/media/1219","caption":"ejdnshdkds","group":"Working","height":1932,"width":2576,"isFavourite":false,"mediaType":"Photo"},{"title":"title","imageuri":"content://media/external/images/media/1215","caption":"ihnj","group":"Working","height":1440,"width":2560,"isFavourite":false,"mediaType":"Photo"},{"title":null,"imageuri":null,"caption":null,"group":null,"height":null,"width":null,"isFavourite":false,"mediaType":"Photo"},{"title":"Outside","imageuri":"file:///storage/emulated/0/DCIM/IMG_20170704_093203.jpg","caption":"View outside","group":"Working","height":800,"width":1280,"isFavourite":false,"mediaType":"Photo"},{"title":"Phonee","imageuri":"file:///storage/emulated/0/DCIM/IMG_20170704_093236.jpg","caption":"A phone","group":"Working","height":800,"width":1280,"isFavourite":false,"mediaType":"Photo"},{"title":"Titlee","imageuri":"file:///storage/emulated/0/DCIM/IMG_20170704_131516.jpg","caption":"cal","group":"Working","height":800,"width":1280,"isFavourite":false,"mediaType":"Photo"},{"title":"New","imageuri":"content://media/external/images/media/34","caption":"Faulty photo","group":"Space","height":712,"width":1280,"isFavourite":true,"mediaType":"Photo"}]
+
+8
+:
+"Preferences"
+
+{"Display Date":true,"Messages Enabled":true,"Display Clock":true,"Display Greeting":true,"Memory Game Enabled":true,"Admin-User Mode Enabled":false}
+
+9
+:
+"Preset"
+
+Date
+
+10
+:
+"Tags"
+
+["Working","React Native","Space","Tunes"]
+
+11
+:
+"Videos"
+
+[{"imageuri":"https://img.youtube.com/vi/KVZ-P-ZI6W4/hqdefault.jpg","videouri":"KVZ-P-ZI6W4","caption":"A reqct native conference. Im writing a super long caption in hopes that I can see it sorrad out a bit on the end. Bye!","title":"React Native ","group":"React Native","mediaType":"Youtube","isFavourite":true},{"mediaType":"Video","uri":"file:///storage/emulated/0/DCIM/VID_20170704_094421.mp4","title":"Video","caption":"My vid","group":"Working","isFavourite":false},{"mediaType":"Video","uri":"file:///storage/emulated/0/DCIM/VID_20170704_094445.mp4","title":"Pan","caption":"Pan","group":"Working","isFavourite":false}]
+
+12
+:
+"Width"
+
+1280
+
+13
+:
+"currentVideoMsg"
+
+file:///storage/emulated/0/DCIM/VID_20170628_125920.mp4
+
+14
+:
+"isSelected"
+
+{"uri":"content://media/external/audio/media/18","title":"Over the Horizon","album":"Brand Music","artist":"Samsung","caption":"Fave Song","tag":"Tunes","isFavourite":true,"mediaType":"MusicAnd"}
+
+15
+:
+"name"
+
+Maria
+
+16
+:
+"stage"
+
+0
+
+17
+:
+"uniqueID"
+
+{"uniqueID":4,"uri":"content://media/external/images/media/230","title":"Me","caption":"My selfie","group":"Me","height":640,"width":640,"isFavourite":false,"mediaType":"Photo"}

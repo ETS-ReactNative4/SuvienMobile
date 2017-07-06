@@ -10,3 +10,6 @@ export * from './MediaExplorer';
 export * from './FirstLanding';
 export * from './TagSelect';
 export * from './AddAudioAnd';
+export * from './VideoTest';
+export * from './AddMessage';
+export * from './MemoryGame';

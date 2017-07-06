@@ -5,20 +5,36 @@ import { Actions } from 'react-native-router-flux';
 
 class TagSelect extends Component {
     state = { tags: null, height: null, width: null }
-    componentWillMount() {
+    async componentWillMount() {
         //console.log('Im in compwillmount');
-        this.fetchData();
+        this.ridUselessTags(JSON.parse(await AsyncStorage.getItem('Tags')));
     }
 
+    //add number of items
+    async ridUselessTags(tags) {
+        const media = JSON.parse(await AsyncStorage.getItem('Media'));
+        const uselesstags = [];
+        for (let i = 0; i < tags.length; i++) {
+            const filter = media.filter((medi) => medi.group === tags[i]);
+            if (filter.length === 0 || filter === undefined || tags[i] === null || tags[i] === undefined || tags[i] === '') {
+                uselesstags.push(tags[i]);
+            }
+        }
+        if (uselesstags.length > 0) {
+            for (let j = 0; j < uselesstags.length; j++) {
+            tags.splice(tags.indexOf(uselesstags[j]), 1);
+        }
+        }
+        AsyncStorage.setItem('Tags', JSON.stringify(tags));
+        this.setState({ tags });
+    }
     componentDidMount() {
         this.setState({ 
             height: Dimensions.get('window').height,
             width: Dimensions.get('window').width 
         });
     }
-    async fetchData() {
-        this.setState({ tags: JSON.parse(await AsyncStorage.getItem('Tags')) });
-    }
+
 renderList() {
     if (this.state.tags !== null) {
         const tagged = this.state.tags;
