@@ -207,7 +207,7 @@ class HomeBar extends Component {
                 const finalsize = Math.trunc((width - sizes) / 2);
                 if (this.state.messageType === null) {
                     return (
-            <View style={{ flexDirection: 'row', paddingTop: 15 }}>
+            <View style={{ flexDirection: 'row' }}>
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
                     {this.renderHeaderClock()}
                 </View>
@@ -224,7 +224,7 @@ class HomeBar extends Component {
                 }
                 if (this.state.messageType === 'Msg') {
                     return (
-            <View style={{ flexDirection: 'row', paddingTop: 15 }}>
+            <View style={{ flexDirection: 'row' }}>
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
                     {this.renderHeaderClock()}
                 </View>
@@ -243,7 +243,7 @@ class HomeBar extends Component {
                     const dd = new Date();
                     const finalmessage = this.state.dayFilter.filter((day) => (day.startHour <= dd.getHours() && day.startMinute <= dd.getMinutes() && day.endHour >= dd.getHours() && day.endMinute > dd.getMinutes()));
                     return (
-            <View style={{ flexDirection: 'row', paddingTop: 15 }}>
+            <View style={{ flexDirection: 'row' }}>
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
                     {this.renderHeaderClock()}
                 </View>

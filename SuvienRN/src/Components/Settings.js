@@ -359,7 +359,7 @@ class Settings extends Component {
     }
     
     renderExplorer() {
-        if (this.state.selectedItem.mediaType === 'Pictures' || this.state.selectedItem.mediaType === 'Videos') {
+        if (this.state.mediaType === 'Pictures' || this.state.mediaTypex === 'Videos') {
             const explorerArray = [<CardSection style={{ borderTopWidth: 1 }}>
                         <Input
                         placeholder="At the Beach"

@@ -426,9 +426,6 @@ class Media extends Component {
         }
     }
         if (this.state.mediaType === 'Youtube') {
-            Orientation.lockToPortrait();
-            Orientation.unlockAllOrientations();
-            Orientation.lockToLandscape();
             const { uri, caption, tag, isFavourite, imageuri, imagerend } = this.state;
             if (uri === null || caption === null || tag === null || isFavourite === null || imageuri === null || imagerend === null) {
             return (

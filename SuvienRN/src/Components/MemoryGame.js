@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, AsyncStorage, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, Image, AsyncStorage, TouchableOpacity, Dimensions, Modal } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Button, Header, GameTile } from './common';
 
@@ -147,6 +147,36 @@ class MemoryGame extends Component {
                 if (this.state.cards.length === 8) {
                    return (
                 <View style={{ flex: 1, flexDirection: 'column' }}>
+                    <Modal
+                animationType={"fade"}
+                transparent
+                visible
+                onRequestClose={() => {}}
+                >
+                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                        <View style={{ height: 400, width: 600, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                            <Image source={require('../Images/trophy.png')} style={{ height: 200, width: 200 }} />
+                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>Congrats!</Text>
+                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>You've completed the game. Would you like to play again?</Text>
+                            <CardSection style={{ height: 50, width: 200, backgroundColor: 'transparent', borderBottomWidth: 0 }}>
+                    <Button onPress={this.createNewGame.bind(this)} textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}>
+                        Yes
+                    </Button>
+                    </CardSection>
+                    <CardSection style={{ height: 50, width: 200, backgroundColor: 'transparent', borderBottomWidth: 0 }}>
+                    <Button 
+                    onPress={() => {
+                        this.setState({ showCaption: false });
+                        Actions.MainMenu();
+                        }}
+                    textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}
+                    >
+                        No
+                    </Button>
+                </CardSection>
+                        </View>
+                    </View>
+                </Modal>
                     <View style={{ flex: 1 }}>
                     <Header style={{ height: 60 }}>
                         <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Memory Game</Text>
@@ -155,23 +185,42 @@ class MemoryGame extends Component {
                 <View style={{ flex: 10, flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center' }}>
                     {this.renderTiles()}
                 </View>
-                <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), backgroundColor: 'grey' }}>
-                <Text style={{ fontSize: 20, fontFamily: 'Roboto-Thin' }}>Congrats! You've completed the game. Would you like to play again?</Text>
-                <CardSection style={{ height: 40, width: 100, backgroundColor: 'transparent' }}>
-                    <Button onPress={this.createNewGame.bind(this)} textsStyle={{ fontSize: 20, paddingTop: 2 }}>
-                        Yes
-                    </Button>
-                    <Button onPress={() => Actions.MainMenu()} textsStyle={{ fontSize: 20, paddingTop: 2 }}>
-                        No
-                    </Button>
-                </CardSection>
-                </View>
                 </View>
             );
                 }
                 if (this.state.cards.length !== 8) {
                     return (
                 <View style={{ flex: 1, flexDirection: 'column' }}>
+                    <Modal
+                animationType={"fade"}
+                transparent
+                visible
+                onRequestClose={() => {}}
+                >
+                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                        <View style={{ height: 400, width: 600, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                            <Image source={require('../Images/trophy.png')} style={{ height: 200, width: 200 }} />
+                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>Congrats!</Text>
+                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>You've completed the game. Would you like to play again?</Text>
+                            <CardSection style={{ height: 50, width: 200, backgroundColor: 'transparent', borderBottomWidth: 0 }}>
+                    <Button onPress={this.createNewGame.bind(this)} textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}>
+                        Yes
+                    </Button>
+                    </CardSection>
+                    <CardSection style={{ height: 50, width: 200, backgroundColor: 'transparent', borderBottomWidth: 0 }}>
+                    <Button 
+                    onPress={() => {
+                        this.setState({ showCaption: false });
+                        Actions.MainMenu();
+                        }}
+                    textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}
+                    >
+                        No
+                    </Button>
+                </CardSection>
+                        </View>
+                    </View>
+                </Modal>
                     <View style={{ flex: 1 }}>
                     <Header style={{ height: 60 }}>
                         <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Memory Game</Text>

@@ -16,7 +16,7 @@ class TagSelect extends Component {
         const uselesstags = [];
         for (let i = 0; i < tags.length; i++) {
             const filter = media.filter((medi) => medi.group === tags[i]);
-            if (filter.length === 0 || filter === undefined || tags[i] === null) {
+            if (filter.length === 0 || filter === undefined || tags[i] === null || tags[i] === undefined || tags[i] === '') {
                 uselesstags.push(tags[i]);
             }
         }
