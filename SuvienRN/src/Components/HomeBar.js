@@ -209,6 +209,9 @@ class HomeBar extends Component {
         if (this.state.languages === 'ENG') {
             this.setState({ currentDate: `${weekday[numbDay]}, ${months[month]} ${numbDate}, ${numbYear}` });
         }
+        if (this.state.languages === 'ESP') {
+            this.setState({ currentDate: `${weekday[numbDay]}, ${numbDate} ${months[month]} de ${numbYear}` });
+        }
     }
     render() {
         const { currentDate, greeting, width, sizes, hour, minute } = this.state;

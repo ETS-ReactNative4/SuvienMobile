@@ -8,7 +8,7 @@ import { Actions } from 'react-native-router-flux';
 class AdvancedSettings extends Component {
     state = { preferences: null, languages: null, selected: null, ask: null }
     async componentWillMount() {
-        const transarray = ['ENG', 'FRE'];
+        const transarray = ['ENG', 'FRE', 'ESP'];
         this.setState({ ask: JSON.parse(await AsyncStorage.getItem('Ask')), preferences: JSON.parse(await AsyncStorage.getItem('Preferences')), languages: await AsyncStorage.getItem('Language'), selected: transarray.indexOf(await AsyncStorage.getItem('Language')) });
     }
 
@@ -16,12 +16,12 @@ class AdvancedSettings extends Component {
         this.onSaveLangPress();
         AsyncStorage.setItem('Preferences', JSON.stringify(this.state.preferences));
         AsyncStorage.setItem('Ask', JSON.stringify(this.state.ask));
-        AsyncStorage.setItem('Language', 'FRE');
         Actions.Settings();
     }
 
     async onSaveLangPress() {
-        const transarray = ['ENG', 'FRE'];
+        const transarray = ['ENG', 'FRE', 'ESP'];
+        console.log(this.state.selected);
         const presetarray = Languages[this.state.languages]['094'];
         const preferencearray = Languages[this.state.languages]['029'];
         const preset = await AsyncStorage.getItem('Preset');
@@ -38,14 +38,15 @@ class AdvancedSettings extends Component {
     }
 
     renderRadioButton() {
-        const transarray = ['ENG', 'FRE'];
+        const transarray = ['ENG', 'FRE', 'ESP'];
         const radioProps = [
         { label: 'English', value: 0 },
-        { label: 'Français', value: 1 }
+        { label: 'Français', value: 1 },
+        { label: 'Español', value: 2 }
         ];
         if (this.state.languages !== null) {
             return (
-            <View style={{ height: 90, width: null }}>
+            <View style={{ height: 120, width: null }}>
                 <RadioForm
                         radio_props={radioProps}
                         initial={transarray.indexOf(this.state.languages)}
