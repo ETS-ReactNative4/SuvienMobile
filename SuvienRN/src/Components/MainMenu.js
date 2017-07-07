@@ -92,7 +92,7 @@ class MainMenu extends Component {
                             const preferencearray = Languages[await AsyncStorage.getItem('Language')]['029'];
                             const preset = await AsyncStorage.getItem('Preset');
                             const preferences = this.state.preferences;
-                            const newpreset = (Languages[await AsyncStorage.getItem('Language')]['094'])[presetarray.indexOf(preset)];
+                            const newpreset = (Languages.ENG['094'])[presetarray.indexOf(preset)];
                             let newpreferences = {};
                             for (let i = 0; i < 5; i++) {
                                 newpreferences[(Languages.ENG['029'])[i]] = preferences[preferencearray[i]];
@@ -129,7 +129,7 @@ class MainMenu extends Component {
                             const preferencearray = Languages[await AsyncStorage.getItem('Language')]['029'];
                             const preset = await AsyncStorage.getItem('Preset');
                             const preferences = this.state.preferences;
-                            const newpreset = (Languages[await AsyncStorage.getItem('Language')]['094'])[presetarray.indexOf(preset)];
+                            const newpreset = (Languages.FRE['094'])[presetarray.indexOf(preset)];
                             let newpreferences = {};
                             for (let i = 0; i < 5; i++) {
                                 newpreferences[(Languages.FRE['029'])[i]] = preferences[preferencearray[i]];
@@ -156,6 +156,43 @@ class MainMenu extends Component {
                         }}
                     >
                         Français
+                    </Button>
+                </CardSection>
+                <CardSection>
+                    <Button 
+                    onPress={async () => {
+                        if (this.state.isFirst === false) {
+                            const presetarray = Languages[await AsyncStorage.getItem('Language')]['094'];
+                            const preferencearray = Languages[await AsyncStorage.getItem('Language')]['029'];
+                            const preset = await AsyncStorage.getItem('Preset');
+                            const preferences = this.state.preferences;
+                            const newpreset = (Languages.ESP['094'])[presetarray.indexOf(preset)];
+                            let newpreferences = {};
+                            for (let i = 0; i < 5; i++) {
+                                newpreferences[(Languages.ESP['029'])[i]] = preferences[preferencearray[i]];
+                             }
+                             AsyncStorage.setItem('Language', 'ESP');
+                            AsyncStorage.setItem('Preferences', JSON.stringify(newpreferences));
+                            AsyncStorage.setItem('Preset', newpreset);
+                            AsyncStorage.setItem('Ask', JSON.stringify(this.state.ask));
+                            this.setState({ lang: false, language: 'ESP' });
+                        }
+                        if (this.state.isFirst === true) {
+                            const array = Languages[await AsyncStorage.getItem('Language')]['029'];
+                            const prefobj = {};
+                            prefobj[array[0]] = true;
+                            prefobj[array[1]] = true;
+                            prefobj[array[2]] = true;
+                            prefobj[array[3]] = true;
+                            prefobj[array[4]] = false;
+                            AsyncStorage.setItem('Language', 'ESP');
+                            AsyncStorage.setItem('Preferences', JSON.stringify(prefobj));
+                            AsyncStorage.setItem('Ask', JSON.stringify(this.state.ask));
+                            this.setState({ lang: false, language: 'ESP' });
+                        }
+                        }}
+                    >
+                        Español
                     </Button>
                 </CardSection>
                 <View style={{ marginTop: 20, alignItems: 'center', justifyContent: 'center' }}>
