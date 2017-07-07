@@ -113,14 +113,14 @@ class HomeBar extends Component {
     }
 
     renderHeaderClock() {
-        const { width, sizes, preferences } = this.state;
+        const { width, sizes, preferences, languages } = this.state;
         const finalsize = Math.trunc((width - sizes) / 2);
-        if (preferences['Display Clock'] === false) {
+        if (preferences[Languages[languages]['030']] === false) {
             return (
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }} />
             );
         }
-        if (preferences['Display Clock'] === true) {
+        if (preferences[Languages[languages]['030']] === true) {
             return (
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
                     <Image source={this.state.section} style={{ height: 80, width: 80 }} />
@@ -155,12 +155,12 @@ class HomeBar extends Component {
     renderHeaderGreeting() {
         const { greeting, currentDate, preferences, languages } = this.state;
         const authArray = [];
-        const proparray = ['Display Greeting', 'Display Date'];
+        const proparray = [Languages[languages]['031'], (Languages[languages]['029'])[0]];
         const truearray = [
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>{ greeting }</Text>,
                 <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['011']} { currentDate }</Text>
                 ];
-        if (preferences['Display Greeting'] === false && preferences['Display Date'] === false) {
+        if (preferences[Languages[languages]['031']] === false && preferences[(Languages[languages]['029'])[0]] === false) {
             authArray.push(<Image source={require('../Images/placeholderphoto.png')} style={{ height: 70, width: 200 }} />);
         } else {
             for (let i = 0; i < 3; i++) {
@@ -214,11 +214,10 @@ class HomeBar extends Component {
         const { currentDate, greeting, width, sizes, hour, minute } = this.state;
         if (greeting !== null) {
             const last = greeting.slice(-6);
-            console.log(last);
         }
         //console.log(aorp);
         //console.log(this.state.sizes);
-        if (this.state.sizes !== null && hour !== null && minute !== null && currentDate !== null && (greeting !== null && greeting.slice(-6) !== ' null!')) {
+        if (this.state.sizes !== null && hour !== null && minute !== null && currentDate !== null && (greeting !== null && greeting.slice(-6) !== ' null!') && this.state.languages !== null) {
                 const finalsize = Math.trunc((width - sizes) / 2);
                 if (this.state.messageType === null) {
                     return (

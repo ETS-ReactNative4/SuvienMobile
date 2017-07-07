@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image, AsyncStorage, ScrollView, CameraRoll, Modal, Dimensions, TouchableWithoutFeedback, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Languages from '../Languages/Languages.json';
 import { CardSection, Button, Input, Header } from './common';
 import Camera from 'react-native-camera';
 
 class AddVideo extends Component {
-    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, heightc: null, widthc: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
+    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, languages: null, heightc: null, widthc: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
     async componentWillMount() {
         this.setState({ 
             heightc: Dimensions.get('window').height,
             widthc: Dimensions.get('window').width,
-            acheivement: await AsyncStorage.getItem('Acheivement')
+            acheivement: await AsyncStorage.getItem('Acheivement'),
+            languages: await AsyncStorage.getItem('Language')
         });
     }
     onAddWebVideoPress() {
@@ -186,7 +188,8 @@ class AddVideo extends Component {
         }
     }
     onRenderExplorer() {
-        if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
+        if (this.state.languages !== null) {
+            if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
             if (this.state.videoID === null && this.state.uri === null) {
             return (
                 <ScrollView>
@@ -196,39 +199,39 @@ class AddVideo extends Component {
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="At the Beach"
-                        label="Title"
+                        placeholder={Languages[this.state.languages]['061']}
+                        label={Languages[this.state.languages]['058']}
                         value={this.state.title}
                         onChangeText={(title) => this.setState({ title })}
                         />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
+                        placeholder={Languages[this.state.languages]['062']}
+                        label={Languages[this.state.languages]['059']}
                         value={this.state.caption}
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
                     <CardSection>
                         <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
                     <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            Save and Create New
+                            {Languages[this.state.languages]['068']}
                             <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
                 </View>
@@ -244,39 +247,39 @@ class AddVideo extends Component {
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="At the Beach"
-                        label="Title"
+                        placeholder={Languages[this.state.languages]['061']}
+                        label={Languages[this.state.languages]['058']}
                         value={this.state.title}
                         onChangeText={(title) => this.setState({ title })}
                         />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
+                        placeholder={Languages[this.state.languages]['062']}
+                        label={Languages[this.state.languages]['059']}
                         value={this.state.caption}
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
                     <CardSection>
                         <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
                     <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            Save and Create New
+                            {Languages[this.state.languages]['068']}
                             <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
                 </View>
@@ -292,39 +295,39 @@ class AddVideo extends Component {
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="At the Beach"
-                        label="Title"
+                        placeholder={Languages[this.state.languages]['061']}
+                        label={Languages[this.state.languages]['058']}
                         value={this.state.title}
                         onChangeText={(title) => this.setState({ title })}
                         />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
+                        placeholder={Languages[this.state.languages]['062']}
+                        label={Languages[this.state.languages]['059']}
                         value={this.state.caption}
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
                     <CardSection>
                         <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
                     <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            Save and Create New
+                            {Languages[this.state.languages]['068']}
                             <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
                 </View>
@@ -342,39 +345,35 @@ class AddVideo extends Component {
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="At the Beach"
-                        label="Title"
+                        placeholder={Languages[this.state.languages]['061']}
+                        label={Languages[this.state.languages]['058']}
                         value={this.state.title}
                         onChangeText={(title) => this.setState({ title })}
                         />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
+                        placeholder={Languages[this.state.languages]['062']}
+                        label={Languages[this.state.languages]['059']}
                         value={this.state.caption}
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
                     <CardSection>
                         <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
                     <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
-                        <Button onPress={this.createNew.bind(this)}>
-                            Save and Create New
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
                 </View>
@@ -390,35 +389,35 @@ class AddVideo extends Component {
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="At the Beach"
-                        label="Title"
+                        placeholder={Languages[this.state.languages]['061']}
+                        label={Languages[this.state.languages]['058']}
                         value={this.state.title}
                         onChangeText={(title) => this.setState({ title })}
                         />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
+                        placeholder={Languages[this.state.languages]['062']}
+                        label={Languages[this.state.languages]['059']}
                         value={this.state.caption}
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
                     <CardSection>
                         <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
                     <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
                 </View>
@@ -434,41 +433,47 @@ class AddVideo extends Component {
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="At the Beach"
-                        label="Title"
+                        placeholder={Languages[this.state.languages]['061']}
+                        label={Languages[this.state.languages]['058']}
                         value={this.state.title}
                         onChangeText={(title) => this.setState({ title })}
                         />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
+                        placeholder={Languages[this.state.languages]['062']}
+                        label={Languages[this.state.languages]['059']}
                         value={this.state.caption}
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
                     <CardSection>
                         <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
                     <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
                 </View>
                 </ScrollView>
             );
         }
+        }
+        }
+        if (this.state.languages === null) {
+            return (
+                <View />
+            );
         }
     }
 
@@ -493,7 +498,7 @@ class AddVideo extends Component {
     }
 
     onRenderYoutube() {
-        if (this.state.webvid === true) {
+        if (this.state.webvid === true && this.state.languages !== null) {
             return (
                 <View>
                     <CardSection style={{ borderTopWidth: 1 }}>
@@ -506,7 +511,7 @@ class AddVideo extends Component {
                     </CardSection>
                     <CardSection>
                         <Button onPress={this.onSaveURLPress.bind(this)}>
-                            Save
+                            {Languages[this.state.languages]['083']}
                         </Button>
                     </CardSection>
                 </View>
@@ -539,7 +544,8 @@ class AddVideo extends Component {
     }
 
     render() {
-        if (Platform.OS === 'ios') {
+        if (this.state.languages !== null) {
+            if (Platform.OS === 'ios') {
             if (this.state.isLaunchCam === false) {
             if (this.state.videos !== null) {
         return (
@@ -549,7 +555,7 @@ class AddVideo extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Video</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['085']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -567,7 +573,7 @@ class AddVideo extends Component {
                     >
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: 'rgba(0,0,0,0.5)' }}>
                                 <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
-                                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Camera Roll</Text>
+                                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
                                 </View>
                                 <View style={{ height: 590, width: 910, backgroundColor: '#EFEFEF', position: 'relative', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'row', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                                     <ScrollView>
@@ -580,17 +586,17 @@ class AddVideo extends Component {
                         </Modal>
                     <CardSection>
                         <Button onPress={this.onTakeVideoPress.bind(this)}>
-                            Record Video
+                            {Languages[this.state.languages]['050']}
                         </Button>
                     </CardSection>
                     <CardSection>
                         <Button onPress={this.onChooseVideoPress.bind(this)}>
-                            Choose from Video Library
+                            {Languages[this.state.languages]['054']}
                         </Button>
                     </CardSection>
                     <CardSection>
                         <Button onPress={this.onAddWebVideoPress.bind(this)}>
-                            Add from web using Youtube
+                            {Languages[this.state.languages]['057']}
                         </Button>
                     </CardSection>
                     {this.onRenderYoutube()}
@@ -608,7 +614,7 @@ class AddVideo extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Video</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['085']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -620,17 +626,17 @@ class AddVideo extends Component {
                 <View style={{ marginTop: 10, flex: 1 }}>
                     <CardSection>
                         <Button onPress={this.onTakeVideoPress.bind(this)}>
-                            Record Video
+                            {Languages[this.state.languages]['050']}
                         </Button>
                     </CardSection>
                     <CardSection>
                         <Button onPress={this.onChooseVideoPress.bind(this)}>
-                            Choose from Video Library
+                            {Languages[this.state.languages]['054']}
                         </Button>
                     </CardSection>
                     <CardSection>
                         <Button onPress={this.onAddWebVideoPress.bind(this)}>
-                            Add from web using Youtube
+                            {Languages[this.state.languages]['057']}
                         </Button>
                     </CardSection>
                     {this.onRenderYoutube()}
@@ -687,7 +693,7 @@ class AddVideo extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Video</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['085']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -705,7 +711,7 @@ class AddVideo extends Component {
                     >
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: 'rgba(0,0,0,0.5)' }}>
                                 <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
-                                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Camera Roll</Text>
+                                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
                                 </View>
                                 <View style={{ height: 590, width: 910, backgroundColor: '#EFEFEF', position: 'relative', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'row', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                                     <ScrollView>
@@ -718,12 +724,12 @@ class AddVideo extends Component {
                         </Modal>
                     <CardSection>
                         <Button onPress={this.onTakeVideoPress.bind(this)}>
-                            Record Video
+                            {Languages[this.state.languages]['050']}
                         </Button>
                     </CardSection>
                     <CardSection>
                         <Button onPress={this.onAddWebVideoPress.bind(this)}>
-                            Add from web using Youtube
+                            {Languages[this.state.languages]['057']}
                         </Button>
                     </CardSection>
                     {this.onRenderYoutube()}
@@ -741,7 +747,7 @@ class AddVideo extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Video</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['085']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -753,12 +759,12 @@ class AddVideo extends Component {
                 <View style={{ marginTop: 10, flex: 1 }}>
                     <CardSection>
                         <Button onPress={this.onTakeVideoPress.bind(this)}>
-                            Record Video
+                            {Languages[this.state.languages]['050']}
                         </Button>
                     </CardSection>
                     <CardSection>
                         <Button onPress={this.onAddWebVideoPress.bind(this)}>
-                            Add from web using Youtube
+                            {Languages[this.state.languages]['057']}
                         </Button>
                     </CardSection>
                     {this.onRenderYoutube()}
@@ -805,6 +811,12 @@ class AddVideo extends Component {
     );
     }
     }
+        }
+        if (this.state.languages === null) {
+            return (
+                <View />
+            );
+        }
     }
 }
 const styles = {
