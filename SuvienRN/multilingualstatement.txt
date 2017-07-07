@@ -94,7 +94,7 @@ I would like to add a... : J'aimerais ajouter un... |
 Day : Jour
 Start Time: Heure de début
 End Time: Heure de fin
-
+Fuera de la esquina, en la conversación.
 Alert Message : message écrit |
 Video MEssage : message vidéo |
 Active Messages : messages actifs |
@@ -105,7 +105,7 @@ Recording... : Enregistrement en cours... |
 Go Back to Messages : Retourner a les messages |
 
 Memory Game:
-Congrats! You've completed the game. Would you like to play again? : Félicitations ! Tu as fini le jeu. Voulez-vous jouer encore ? |
+Congrats! You've completed the game. Would you like to play again? : Félicitations ! Vous avez fini le jeu. Voulez-vous jouer encore ? |
 Yes : Oui |
 No : Non |
 
