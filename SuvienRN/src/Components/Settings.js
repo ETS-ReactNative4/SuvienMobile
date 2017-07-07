@@ -728,7 +728,7 @@ class Settings extends Component {
                 <View style={{ flexDirection: 'row', marginBottom: 30 }}>
                     <Button 
                     onPress={() => {
-                        AsyncStorage.setItem('Preset', 'Date');
+                        AsyncStorage.setItem('Preset', (Languages[this.state.languages]['094'])[0]);
                         Actions.Home();
                         }}
                     >{Languages[this.state.languages]['044']}
@@ -741,14 +741,14 @@ class Settings extends Component {
                     </Button>
                     <Button 
                     onPress={() => {
-                        AsyncStorage.setItem('Preset', 'Favourites');
+                        AsyncStorage.setItem('Preset', (Languages[this.state.languages]['094'])[1]);
                         Actions.Home();
                         }}
                     >{Languages[this.state.languages]['046']}
                     </Button>
                     <Button 
                     onPress={() => {
-                        AsyncStorage.setItem('Preset', 'Random');
+                        AsyncStorage.setItem('Preset', (Languages[this.state.languages]['094'])[2]);
                         Actions.Home();
                         }}
                     >{Languages[this.state.languages]['047']}
