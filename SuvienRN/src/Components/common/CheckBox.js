@@ -13,6 +13,15 @@ class CheckBox extends Component {
                     this.setState({ checked: false, image: require('./unchecked.png') });
                 }
             }
+        } else if (this.props.checkType === 'Ask') {
+            if (this.props.value !== null) {
+                if (this.props.value === true) {
+                    this.setState({ checked: true, image: require('./checked.png') });
+                }
+                if (this.props.value === false) {
+                    this.setState({ checked: false, image: require('./unchecked.png') });
+                }
+            } 
         } else {
             if (this.props.value !== null) {
             console.log(this.props.value);
@@ -25,6 +34,16 @@ class CheckBox extends Component {
     }
 
     checkBox() {
+        if (this.props.checkType === 'Ask') {
+          if (this.state.checked === false) {
+            this.setState({ checked: true, image: require('./checked.png') });
+            this.props.onChangeItem(true);
+        }
+        if (this.state.checked === true) {
+            this.setState({ checked: false, image: require('./unchecked.png')});
+            this.props.onChangeItem(false);
+        }  
+    } else {
         if (this.state.checked === false) {
             this.setState({ checked: true, image: require('./checked.png') });
             this.props.onChangeItem(this.props.label);
@@ -32,6 +51,7 @@ class CheckBox extends Component {
         if (this.state.checked === true) {
             this.setState({ checked: false, image: require('./unchecked.png')});
             this.props.onChangeItem(`${this.props.label}*`);
+        }
         }
     }
     render() {
