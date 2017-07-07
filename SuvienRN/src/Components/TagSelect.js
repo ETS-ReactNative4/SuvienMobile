@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Image, Text, View, AsyncStorage, Dimensions } from 'react-native';
 import { CardSection } from './common';
+import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 
 class TagSelect extends Component {
-    state = { tags: null, height: null, width: null }
+    state = { tags: null, height: null, width: null, languages: null }
     async componentWillMount() {
         //console.log('Im in compwillmount');
+        this.setState({ languages: await AsyncStorage.getItem('Language') });
         this.ridUselessTags(JSON.parse(await AsyncStorage.getItem('Tags')));
     }
 
@@ -64,11 +66,17 @@ renderList() {
     }
     }
     render() {
-        return (
+        if (this.state.languages === null) {
+            return (
+                <View />
+            );
+        }
+        if (this.state.languages !== null) {
+            return (
             <View style={{ flexDirection: 'row', paddingTop: 15, backgroundColor: '#f9f7f7', height: this.state.height, width: this.state.width }}>
                 <View style={{ flex: 1, alignItems: 'center' }}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginLeft: 10, marginTop: 10, marginBottom: 10 }}>Select a Tag</Text>
+                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginLeft: 10, marginTop: 10, marginBottom: 10 }}>{Languages[this.state.languages]['048']}</Text>
                     </View>
                     <View style={{ backgroundColor: 'white', borderRadius: 20, marginLeft: 5, width: (this.state.width - 70) }}>
                         {this.renderList()}
@@ -76,6 +84,7 @@ renderList() {
                 </View>
             </View>
         );
+        }
 }
 }
 
