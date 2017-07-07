@@ -3,7 +3,9 @@ Get Started : Démarrer
 Start : Commencer |
 Help : Obtenir de l'aide |
 Play : Jouer |
-Out of the corner. Into the conversation : Hors du coin. Dans la conversation.
+Out of the corner. Into the conversation : 
+Hors du coin. Dans la conversation.
+Fuera de la esquina, en la conversación.
 Have Questions? Visit our help page! : est-ce que vous devez l'aide? Vous devriez visiter notre page d'aide! |
 Test your memory while having fun! : Testez votre mémoire tout en s'amusant! |
 Home:
