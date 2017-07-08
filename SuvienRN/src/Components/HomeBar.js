@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { View, Image, Text, TouchableWithoutFeedback, AsyncStorage, Dimensions, TouchableOpacity } from 'react-native';
+import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import { Button } from './common';
 
 class HomeBar extends Component {
-    state = { greeting: null, name: null, section: null, width: null, aorp: null, hour: null, minute: null, currentDate: null, preferences: null, sizes: null, sizes2: null, dayFilter: null, messages: null, icon: null, messageType: null, color: null }
+    state = { greeting: null, name: null, languages: null, section: null, width: null, aorp: null, hour: null, minute: null, currentDate: null, preferences: null, sizes: null, sizes2: null, dayFilter: null, messages: null, icon: null, messageType: null, color: null }
     async componentWillMount() {
-        this.setState({ width: Dimensions.get('window').width, preferences: JSON.parse(await AsyncStorage.getItem('Preferences')) });
+        this.setState({ width: Dimensions.get('window').width, preferences: JSON.parse(await AsyncStorage.getItem('Preferences')), languages: await AsyncStorage.getItem('Language') });
         this.getInfo();
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        this.setState({ languages: await AsyncStorage.getItem('Language') });
         this.clockUpdate();
         this.flashTitle();
     }
@@ -66,31 +68,34 @@ class HomeBar extends Component {
                 }
                 if (finalmessage === undefined || finalmessage.length === 0) {
                     if (dd.getHours() < 12) {
-                        this.setState({ greeting: `It's a lovely morning, ${this.state.name}!`, aorp: 'am', section: require('../Images/morning.png'), messageType: null });
-                        }
+                        const { languages } = this.state;
+                        this.setState({ greeting: `${Languages[this.state.languages]['007']}, ${this.state.name}!`, aorp: 'am', section: require('../Images/morning.png'), messageType: null });
+                    }
+                    const { languages } = this.state;
                     if (dd.getHours() >= 12 && dd.getHours() < 17) {
-            this.setState({ greeting: `It's a lovely afternoon, ${this.state.name}!`, aorp: 'pm', section: require('../Images/afternoon.png'), messageType: null });
+            this.setState({ greeting: `${Languages[this.state.languages]['008']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/afternoon.png'), messageType: null });
             }
             if (dd.getHours() >= 17 && dd.getHours() < 21) {
-            this.setState({ greeting: `It's a lovely evening, ${this.state.name}!`, aorp: 'pm', section: require('../Images/evening.png'), messageType: null });
+            this.setState({ greeting: `${Languages[this.state.languages]['009']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/evening.png'), messageType: null });
             }
             if (dd.getHours() >= 22) {
-            this.setState({ greeting: `It's a lovely night, ${this.state.name}!`, aorp: 'pm', section: require('../Images/night.png'), messageType: null });
+            this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/night.png'), messageType: null });
         }
                 }
             }
             if (this.state.dayFilter === null || this.state.dayFilter.length === 0) {
+                const { languages } = this.state;
             if (dd.getHours() < 12) {
-            this.setState({ greeting: `It's a lovely morning, ${this.state.name}!`, aorp: 'am', section: require('../Images/morning.png'), icon: false });
+            this.setState({ greeting: `${Languages[this.state.languages]['007']}, ${this.state.name}!`, aorp: 'am', section: require('../Images/morning.png'), icon: false });
             }
             if (dd.getHours() >= 12 && dd.getHours() < 17) {
-            this.setState({ greeting: `It's a lovely afternoon, ${this.state.name}!`, aorp: 'pm', section: require('../Images/afternoon.png'), icon: false });
+            this.setState({ greeting: `${Languages[this.state.languages]['008']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/afternoon.png'), icon: false });
             }
             if (dd.getHours() >= 17 && dd.getHours() < 21) {
-            this.setState({ greeting: `It's a lovely evening, ${this.state.name}!`, aorp: 'pm', section: require('../Images/evening.png'), icon: false });
+            this.setState({ greeting: `${Languages[this.state.languages]['009']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/evening.png'), icon: false });
             }
             if (dd.getHours() >= 22) {
-            this.setState({ greeting: `It's a lovely night, ${this.state.name}!`, aorp: 'pm', section: require('../Images/night.png'), icon: false });
+            this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/night.png'), icon: false });
         }
             }
             }, 1000);
@@ -108,14 +113,14 @@ class HomeBar extends Component {
     }
 
     renderHeaderClock() {
-        const { width, sizes, preferences } = this.state;
+        const { width, sizes, preferences, languages } = this.state;
         const finalsize = Math.trunc((width - sizes) / 2);
-        if (preferences['Display Clock'] === false) {
+        if (preferences[Languages[languages]['030']] === false) {
             return (
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }} />
             );
         }
-        if (preferences['Display Clock'] === true) {
+        if (preferences[Languages[languages]['030']] === true) {
             return (
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
                     <Image source={this.state.section} style={{ height: 80, width: 80 }} />
@@ -148,14 +153,14 @@ class HomeBar extends Component {
         }*/
     }
     renderHeaderGreeting() {
-        const { greeting, currentDate, preferences } = this.state;
+        const { greeting, currentDate, preferences, languages } = this.state;
         const authArray = [];
-        const proparray = ['Display Greeting', 'Display Date'];
+        const proparray = [Languages[languages]['031'], (Languages[languages]['029'])[0]];
         const truearray = [
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>{ greeting }</Text>,
-                <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
+                <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['011']} { currentDate }</Text>
                 ];
-        if (preferences['Display Greeting'] === false && preferences['Display Date'] === false) {
+        if (preferences[Languages[languages]['031']] === false && preferences[(Languages[languages]['029'])[0]] === false) {
             authArray.push(<Image source={require('../Images/placeholderphoto.png')} style={{ height: 70, width: 200 }} />);
         } else {
             for (let i = 0; i < 3; i++) {
@@ -173,10 +178,11 @@ class HomeBar extends Component {
     }
 
     async getInfo() {
+        const { languages } = this.state;
         const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
         this.setState({ name: await AsyncStorage.getItem('name'), messages });
-        const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const weekday = Languages[languages]['012'];
+        const months = Languages[languages]['013'];
         const d = new Date();
         const numbDay = d.getDay();
         const numbDate = d.getDate();
@@ -186,24 +192,35 @@ class HomeBar extends Component {
         const dayFilter = messages.filter((message) => message.day.find((da) => da === weekday[numbDay]) !== undefined);
         this.setState({ name: await AsyncStorage.getItem('name'), messages, dayFilter });
         if (currentHour < 12) {
-            this.setState({ greeting: `It's a lovely morning, ${this.state.name}!`, section: require('../Images/morning.png') });
+            this.setState({ greeting: `${Languages[this.state.languages]['007']}, ${this.state.name}!`, section: require('../Images/morning.png') });
         }
         if (currentHour >= 12 && currentHour < 17) {
-            this.setState({ greeting: `It's a lovely afternoon, ${this.state.name}!`, section: require('../Images/afternoon.png') });
+            this.setState({ greeting: `${Languages[this.state.languages]['008']}, ${this.state.name}!`, section: require('../Images/afternoon.png') });
         }
         if (currentHour >= 18 && currentHour < 21) {
-            this.setState({ greeting: `It's a lovely evening, ${this.state.name}!`, section: require('../Images/evening.png') });
+            this.setState({ greeting: `${Languages[this.state.languages]['009']}, ${this.state.name}!`, section: require('../Images/evening.png') });
         }
         if (currentHour >= 22) {
-            this.setState({ greeting: `It's a lovely night, ${this.state.name}!`, section: require('../Images/night.png') });
+            this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, section: require('../Images/night.png') });
         }
-        this.setState({ currentDate: `${weekday[numbDay]}, ${months[month]} ${numbDate}, ${numbYear}` });
+        if (this.state.languages === 'FRE') {
+            this.setState({ currentDate: `${weekday[numbDay]}, le ${numbDate} ${months[month]} ${numbYear}` });
+        }
+        if (this.state.languages === 'ENG') {
+            this.setState({ currentDate: `${weekday[numbDay]}, ${months[month]} ${numbDate}, ${numbYear}` });
+        }
+        if (this.state.languages === 'ESP') {
+            this.setState({ currentDate: `${weekday[numbDay]}, ${numbDate} ${months[month]} de ${numbYear}` });
+        }
     }
     render() {
         const { currentDate, greeting, width, sizes, hour, minute } = this.state;
+        if (greeting !== null) {
+            const last = greeting.slice(-6);
+        }
         //console.log(aorp);
         //console.log(this.state.sizes);
-        if (this.state.sizes !== null && hour !== null && minute !== null && currentDate !== null) {
+        if (this.state.sizes !== null && hour !== null && minute !== null && currentDate !== null && (greeting !== null && greeting.slice(-6) !== ' null!') && this.state.languages !== null) {
                 const finalsize = Math.trunc((width - sizes) / 2);
                 if (this.state.messageType === null) {
                     return (
@@ -256,10 +273,10 @@ class HomeBar extends Component {
                         Actions.VideoTest(); 
                         }}
                         >
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>There is a new video message. Click me to watch!</Text>
+                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>{Languages[this.state.languages]['015']}</Text>
                         </TouchableOpacity>
                     </View>
-                    <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
+                    <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['011']} { currentDate }</Text>
                 </View>
                 <View style={{ alignItems: 'flex-end', width: finalsize }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
@@ -281,7 +298,7 @@ class HomeBar extends Component {
             <View style={{ flexDirection: 'row' }}>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width }); }}>
                     <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{greeting}</Text>
-                    <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>It is { currentDate }</Text>
+                    <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}> { currentDate }</Text>
                 </View>
                 <View style={{ alignItems: 'flex-end' }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>

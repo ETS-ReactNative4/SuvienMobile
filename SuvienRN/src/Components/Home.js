@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { View, AsyncStorage, Text, Dimensions, ScrollView, Modal } from 'react-native';
 import Orientation from 'react-native-orientation';
+import Languages from '../Languages/Languages.json';
 import { Header, PictureTile, Button, CardSection } from './common';
 import { Actions } from 'react-native-router-flux';
 import HomeBar from './HomeBar';
@@ -10,9 +11,10 @@ import CongratsModal from './CongratsModal';
 import { Media } from './';
 
 class Home extends Component {
-    state = { dim: null, media: null, preset: null, tags: null, width: null, acheivement: null, medias: null }
+    state = { dim: null, media: null, preset: null, tags: null, width: null, acheivement: null, medias: null, languages: null }
     async componentWillMount() {
-        this.setState({ width: parseInt(await AsyncStorage.getItem('Width')) });
+        this.setState({ width: parseInt(await AsyncStorage.getItem('Width')), languages: await AsyncStorage.getItem('Language') });
+        console.log(await AsyncStorage.getItem('Preferences'));
         this.doMath();
         Orientation.lockToLandscape();
         //console.log('Im in componentwillmount!');
@@ -60,8 +62,14 @@ class Home extends Component {
     }
 
     renderTiles() {
-        if (this.state.media !== null) {
-            if (this.state.preset === 'Date') {
+        if (this.state.languages === null) {
+            return (
+                <View />
+            );
+        }
+        if (this.state.languages !== null) {
+             if (this.state.media !== null) {
+            if (this.state.preset === (Languages[this.state.languages]['094'])[0]) {
             let newMedia = this.state.media.reverse();
             let j;
             for (j = 0; j < newMedia.length; j++) {
@@ -118,7 +126,7 @@ class Home extends Component {
                 [...allTiles]
             );
         }
-        if (this.state.preset === 'Favourites') {
+        if (this.state.preset === (Languages[this.state.languages]['094'])[1]) {
             const newMedia = this.state.media.reverse();
             const filterTags = newMedia.filter((imagep) => imagep.isFavourite === true);
             let j;
@@ -137,7 +145,7 @@ class Home extends Component {
                 if (isFound !== undefined) {
                     allTiles.push(
                     <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={isFound} unique={i} key={`${i}p`} onChangePress={(obj) => {
-                        this.setState({ medias: obj})
+                        this.setState({ medias: obj })
                         }} />
                 );
                 }
@@ -147,7 +155,7 @@ class Home extends Component {
             );
         }
 
-        if (this.state.preset === 'Random') {
+        if (this.state.preset === (Languages[this.state.languages]['094'])[2]) {
             const newMedia = this.state.media;
             const numbarray = [];
             let k;
@@ -184,7 +192,7 @@ class Home extends Component {
         
         }
 
-        if (this.state.preset === 'None') {
+        if (this.state.preset === (Languages[this.state.languages]['094'])[3]) {
             //console.logconsole.log('Im in preset!');
             if (this.state.media !== null) {
                 //console.log('Im in media not null')
@@ -228,6 +236,7 @@ class Home extends Component {
             return (
                 <View />
             );
+        }
         }
     }
     

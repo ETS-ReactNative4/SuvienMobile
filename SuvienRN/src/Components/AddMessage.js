@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, Picker, AsyncStorage, Dimensions, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
 import { CardSection, Button, Input, Header, CheckBox } from './common';
+import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
 class AddMessage extends Component {
-    state = { message: null, day: '[]', startHour: 0, startMinute: 0, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
+    state = { message: null, day: '[]', startHour: 0, startMinute: 0, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
     async componentWillMount() {
         this.setState({ 
             heightc: Dimensions.get('window').height,
             widthc: Dimensions.get('window').width,
-            messages: JSON.parse(await AsyncStorage.getItem('Messages'))
+            messages: JSON.parse(await AsyncStorage.getItem('Messages')),
+            languages: await AsyncStorage.getItem('Language')
         });
     }
 
@@ -266,7 +268,13 @@ class AddMessage extends Component {
             );
         }
         render() {
-        let j;
+        if (this.state.languages === null) {
+            return (
+                <View />
+            );
+        }
+        if (this.state.languages !== null) {
+            let j;
         const hours = [];
         for (j = 0; j < 24; j++) {
             if (j < 10) {
@@ -293,7 +301,7 @@ class AddMessage extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Message</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -304,20 +312,20 @@ class AddMessage extends Component {
             <ScrollView>
                 <View>
                             <View style={{ marginTop: 10, marginBottom: 10, marginLeft: 30 }}>
-                                <Text style={{ fontSize: 30, fontFamily: 'UltimaPDac-UltraLight' }}>I would like to add a...</Text>
+                                <Text style={{ fontSize: 30, fontFamily: 'UltimaPDac-UltraLight' }}>{Languages[this.state.languages]['072']}</Text>
                             </View>
                             <CardSection>
                                 <Button onPress={() => this.setState({ messageType: 'Msg' })}>
-                                    Alert Message
+                                    {Languages[this.state.languages]['073']}
                                 </Button>
                             </CardSection>
                             <CardSection>
                                 <Button onPress={() => this.setState({ messageType: 'VideoMsg' })}>
-                                    Video Message
+                                    {Languages[this.state.languages]['074']}
                                 </Button>
                             </CardSection>
                         <View style={{ marginTop: 10, marginBottom: 10, marginLeft: 30 }}>
-                            <Text style={{ fontSize: 30, fontFamily: 'UltimaPDac-UltraLight' }}>Active Messages</Text>
+                            <Text style={{ fontSize: 30, fontFamily: 'UltimaPDac-UltraLight' }}>{Languages[this.state.languages]['075']}</Text>
                         </View>
                         
                         <CardSection style={{ flexDirection: 'column' }}>
@@ -337,7 +345,7 @@ class AddMessage extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Message</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -347,18 +355,18 @@ class AddMessage extends Component {
             </Header>
                 <CardSection style={{ marginLeft: 0 }}>
                     <Input
-                        placeholder="It's time to check your email!"
-                        label="Message"
+                        placeholder={Languages[this.state.languages]['089']}
+                        label={Languages[this.state.languages]['039']}
                         value={this.state.message}
                         onChangeText={(message) => this.setState({ message })}
                         labelstyle={{ marginLeft: 40 }}
                     />
                 </CardSection>
                 <CardSection style={{ flexDirection: 'column', height: 70 }}>
-                    <Text style={{ fontSize: 18, paddingLeft: 20, marginBottom: 5 }}>Day</Text>
+                    <Text style={{ fontSize: 18, paddingLeft: 20, marginBottom: 5 }}>{Languages[this.state.languages]['090']}</Text>
                     <View style={{ flexDirection: 'row' }}>
                     <CheckBox 
-                    label="Sunday"
+                    label={(Languages[this.state.languages]['012'])[0]}
                     value={null} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -376,7 +384,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Monday" 
+                    label={(Languages[this.state.languages]['012'])[1]} 
                     value={null} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -394,7 +402,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Tuesday"
+                    label={(Languages[this.state.languages]['012'])[2]}
                     value={null}  
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -412,7 +420,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Wednesday"
+                    label={(Languages[this.state.languages]['012'])[3]}
                     value={null}  
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -430,7 +438,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Thursday"
+                    label={(Languages[this.state.languages]['012'])[4]}
                     value={null}  
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -448,7 +456,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Friday"
+                    label={(Languages[this.state.languages]['012'])[5]}
                     value={null}  
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -466,7 +474,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Saturday"
+                    label={(Languages[this.state.languages]['012'])[6]}
                     value={null}  
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -486,7 +494,7 @@ class AddMessage extends Component {
                     </View>
                 </CardSection>
                     <CardSection style={{ height: 70, flexDirection: 'column' }}>
-                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>Start Time</Text>
+                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
                     style={{ width: 300 }}
@@ -505,7 +513,7 @@ class AddMessage extends Component {
                     </View>
                 </CardSection>
                 <CardSection style={{ height: 70, flexDirection: 'column' }}>
-                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>End Time</Text>
+                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
                     style={{ width: 300 }}
@@ -525,15 +533,15 @@ class AddMessage extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            Save and Create New
+                            {Languages[this.state.languages]['068']}
                             <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
             </View>
@@ -549,7 +557,7 @@ class AddMessage extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Message</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -559,8 +567,8 @@ class AddMessage extends Component {
             </Header>
                 <CardSection style={{ marginLeft: 0 }}>
                     <Input
-                        placeholder="It's time to check your email!"
-                        label="Message"
+                        placeholder={Languages[this.state.languages]['089']}
+                        label={Languages[this.state.languages]['039']}
                         value={selected.message}
                         onChangeText={(message) => {
                             selected.message = message;
@@ -570,10 +578,10 @@ class AddMessage extends Component {
                     />
                 </CardSection>
                 <CardSection style={{ flexDirection: 'column', height: 70 }}>
-                    <Text style={{ fontSize: 18, paddingLeft: 20, marginBottom: 5 }}>Day</Text>
+                    <Text style={{ fontSize: 18, paddingLeft: 20, marginBottom: 5 }}>{Languages[this.state.languages]['090']}</Text>
                     <View style={{ flexDirection: 'row' }}>
                     <CheckBox 
-                    label="Sunday" 
+                    label={(Languages[this.state.languages]['012'])[0]} 
                     value={selected.day}
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -593,7 +601,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Monday"
+                    label={(Languages[this.state.languages]['012'])[1]}
                     value={selected.day} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -613,7 +621,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Tuesday"
+                    label={(Languages[this.state.languages]['012'])[2]}
                     value={selected.day} 
                    onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -633,7 +641,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Wednesday" 
+                    label={(Languages[this.state.languages]['012'])[3]} 
                     value={selected.day}
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -653,7 +661,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Thursday" 
+                    label={(Languages[this.state.languages]['012'])[4]}
                     value={selected.day}
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -673,7 +681,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Friday"
+                    label={(Languages[this.state.languages]['012'])[5]}
                     value={selected.day} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -693,7 +701,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Saturday"
+                    label={(Languages[this.state.languages]['012'])[6]}
                     value={selected.day} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -715,7 +723,7 @@ class AddMessage extends Component {
                     </View>
                 </CardSection>
                     <CardSection style={{ height: 70, flexDirection: 'column' }}>
-                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>Start Time</Text>
+                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
                     style={{ width: 300 }}
@@ -740,7 +748,7 @@ class AddMessage extends Component {
                     </View>
                 </CardSection>
                 <CardSection style={{ height: 70, flexDirection: 'column' }}>
-                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>End Time</Text>
+                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
                     style={{ width: 300 }}
@@ -766,15 +774,15 @@ class AddMessage extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            Save and Create New
+                            {Languages[this.state.languages]['068']}
                             <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
             </View>
@@ -791,7 +799,7 @@ class AddMessage extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Message</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -804,8 +812,8 @@ class AddMessage extends Component {
                 </CardSection>
                 <CardSection style={{ marginLeft: 0 }}>
                     <Input
-                        placeholder="Medication Reminder"
-                        label="Title"
+                        placeholder={Languages[this.state.languages]['093']}
+                        label={Languages[this.state.languages]['058']}
                         value={selected.message}
                         onChangeText={(message) => {
                             selected.message = message;
@@ -815,10 +823,10 @@ class AddMessage extends Component {
                     />
                 </CardSection>
                 <CardSection style={{ flexDirection: 'column', height: 70 }}>
-                    <Text style={{ fontSize: 18, paddingLeft: 20, marginBottom: 5 }}>Day</Text>
+                    <Text style={{ fontSize: 18, paddingLeft: 20, marginBottom: 5 }}>{Languages[this.state.languages]['090']}</Text>
                     <View style={{ flexDirection: 'row' }}>
                     <CheckBox 
-                    label="Sunday" 
+                    label={(Languages[this.state.languages]['012'])[0]}
                     value={selected.day}
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -838,7 +846,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Monday"
+                    label={(Languages[this.state.languages]['012'])[1]}
                     value={selected.day} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -858,7 +866,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Tuesday"
+                    label={(Languages[this.state.languages]['012'])[2]}
                     value={selected.day} 
                    onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -878,7 +886,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Wednesday" 
+                    label={(Languages[this.state.languages]['012'])[3]} 
                     value={selected.day}
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -898,7 +906,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Thursday" 
+                    label={(Languages[this.state.languages]['012'])[4]} 
                     value={selected.day}
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -918,7 +926,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Friday"
+                    label={(Languages[this.state.languages]['012'])[5]}
                     value={selected.day} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -938,7 +946,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Saturday"
+                    label={(Languages[this.state.languages]['012'])[6]}
                     value={selected.day} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -960,7 +968,7 @@ class AddMessage extends Component {
                     </View>
                 </CardSection>
                     <CardSection style={{ height: 70, flexDirection: 'column' }}>
-                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>Start Time</Text>
+                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
                     style={{ width: 300 }}
@@ -985,7 +993,7 @@ class AddMessage extends Component {
                     </View>
                 </CardSection>
                 <CardSection style={{ height: 70, flexDirection: 'column' }}>
-                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>End Time</Text>
+                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
                     style={{ width: 300 }}
@@ -1034,7 +1042,7 @@ class AddMessage extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Message</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -1044,17 +1052,17 @@ class AddMessage extends Component {
             </Header>
                 <CardSection style={{ marginLeft: 0 }}>
                     <Button onPress={() => this.setState({ isLaunchCam: true })}>
-                        Record Video
+                        {Languages[this.state.languages]['050']}
                     </Button>
                 </CardSection>
                 <CardSection>
                     <Button onPress={() => this.setState({ messageType: null })}>
-                            Go back to Messages
+                            {Languages[this.state.languages]['070']}
                     </Button>
                 </CardSection>
                 <CardSection>
                     <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                     </Button>
                 </CardSection>
             </View>
@@ -1068,7 +1076,7 @@ class AddMessage extends Component {
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Message</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -1081,18 +1089,18 @@ class AddMessage extends Component {
                 </CardSection>
                 <CardSection style={{ marginLeft: 0 }}>
                     <Input
-                        placeholder="Medication Reminder"
-                        label="Title"
+                        placeholder={Languages[this.state.languages]['093']}
+                        label={Languages[this.state.languages]['058']}
                         value={this.state.title}
                         onChangeText={(title) => this.setState({ title })}
                         labelstyle={{ marginLeft: 40 }}
                     />
                 </CardSection>
                 <CardSection style={{ flexDirection: 'column', height: 70 }}>
-                    <Text style={{ fontSize: 18, paddingLeft: 20, marginBottom: 5 }}>Day</Text>
+                    <Text style={{ fontSize: 18, paddingLeft: 20, marginBottom: 5 }}>{Languages[this.state.languages]['090']}</Text>
                     <View style={{ flexDirection: 'row' }}>
                     <CheckBox 
-                    label="Sunday"
+                    label={(Languages[this.state.languages]['012'])[0]}
                     value={null} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -1110,7 +1118,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Monday"
+                    label={(Languages[this.state.languages]['012'])[1]}
                     value={null} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -1128,7 +1136,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Tuesday"
+                    label={(Languages[this.state.languages]['012'])[2]}
                     value={null} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -1146,7 +1154,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Wednesday"
+                    label={(Languages[this.state.languages]['012'])[3]}
                     value={null} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -1164,7 +1172,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Thursday"
+                    label={(Languages[this.state.languages]['012'])[4]}
                     value={null} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -1182,7 +1190,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Friday"
+                    label={(Languages[this.state.languages]['012'])[5]}
                     value={null} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -1200,7 +1208,7 @@ class AddMessage extends Component {
                         }}
                     />
                     <CheckBox 
-                    label="Saturday"
+                    label={(Languages[this.state.languages]['012'])[6]}
                     value={null} 
                     onChangeItem={(day) => {
                         if ((day.substr(day.length - 1)) !== '*') {
@@ -1220,7 +1228,7 @@ class AddMessage extends Component {
                     </View>
                 </CardSection>
                     <CardSection style={{ height: 70, flexDirection: 'column' }}>
-                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>Start Time</Text>
+                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
                     style={{ width: 300 }}
@@ -1239,7 +1247,7 @@ class AddMessage extends Component {
                     </View>
                 </CardSection>
                 <CardSection style={{ height: 70, flexDirection: 'column' }}>
-                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>End Time</Text>
+                        <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
                     style={{ width: 300 }}
@@ -1259,15 +1267,15 @@ class AddMessage extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            Save and Create New
+                            {Languages[this.state.languages]['068']}
                             <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
             </View>
@@ -1312,7 +1320,8 @@ class AddMessage extends Component {
     );
 }
     }
-}
+        }
+        }
 
 const styles = {
   container: {

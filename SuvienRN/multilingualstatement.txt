@@ -4,6 +4,8 @@ Start : Commencer |
 Help : Obtenir de l'aide |
 Play : Jouer |
 Out of the corner. Into the conversation : 
+Hors du coin. Dans la conversation.
+Fuera de la esquina, en la conversación.
 Have Questions? Visit our help page! : est-ce que vous devez l'aide? Vous devriez visiter notre page d'aide! |
 Test your memory while having fun! : Testez votre mémoire tout en s'amusant! |
 Home:
@@ -79,7 +81,7 @@ Artist: Artiste
 Choose from photo, video, music library : Choisir de la bibliothèque musicale, bibliothèque d'images, vidéothèque
 CameraRoll: Bibliothèque d'images
 Add from web using url, youtube : Ajouter à partir d'Internet utilisant l'adresse URL , Ajouter à partir d'Internet utilisant YouTube |
-Title: Le titre
+Title: Le Titre
 Caption : Le sous-titre
 Tag : Le Tag
 No Image Selected : Il n'y a pas de la image choisi |
@@ -94,7 +96,7 @@ I would like to add a... : J'aimerais ajouter un... |
 Day : Jour
 Start Time: Heure de début
 End Time: Heure de fin
-
+Fuera de la esquina, en la conversación.
 Alert Message : message écrit |
 Video MEssage : message vidéo |
 Active Messages : messages actifs |
@@ -105,7 +107,7 @@ Recording... : Enregistrement en cours... |
 Go Back to Messages : Retourner a les messages |
 
 Memory Game:
-Congrats! You've completed the game. Would you like to play again? : Félicitations ! Tu as fini le jeu. Voulez-vous jouer encore ? |
+Congrats! You've completed the game. Would you like to play again? : Félicitations ! Vous avez fini le jeu. Voulez-vous jouer encore ? |
 Yes : Oui |
 No : Non |
 

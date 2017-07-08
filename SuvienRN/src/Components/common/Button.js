@@ -22,7 +22,8 @@ const styles = {
     fontWeight: '100',
     fontFamily: 'Roboto-Light',
     paddingTop: 10, //Issues with padding for ios. Is 10 for android
-    paddingBottom: 10
+    paddingBottom: 10,
+    alignItems: 'flex-end'
   },
   buttonStyle: {
     flex: 1,
@@ -32,7 +33,10 @@ const styles = {
     borderWidth: 1,
     borderColor: '#7ba4d9',
     marginLeft: 5,
-    marginRight: 5
+    marginRight: 5,
+    alignItems: 'center',
+    justifyContent: 'center', 
+    flexWrap: 'wrap'
   }
 };
 

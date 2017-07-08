@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Image, AsyncStorage, TouchableOpacity, Dimensions, Modal } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import Languages from '../Languages/Languages.json';
 import { CardSection, Button, Header, GameTile } from './common';
 
 class MemoryGame extends Component {
-    state = { tiles: null, card1: null, overrideKey: null, card2: null, cards: null, showCaption: false, width: null, height: null, seconds: 0, minutes: 0 }
+    state = { tiles: null, card1: null, overrideKey: null, card2: null, languages: null, cards: null, showCaption: false, width: null, height: null, seconds: 0, minutes: 0 }
     componentWillMount() {
         this.createNewGame();
     }
@@ -21,7 +22,7 @@ class MemoryGame extends Component {
         const newNumbArray = this.generateNumArray(8);
         const newRandArray = this.shuffle(newNumbArray);
         const allTilesShuffle = this.shuffleTiles(allTiles, newRandArray);
-        this.setState({ tiles: [...allTilesShuffle], width: parseInt(await AsyncStorage.getItem('Width')), height: parseInt(await AsyncStorage.getItem('Height')), showCaption: false, card1: null, card2: null, overrideKey: null, cards: null });
+        this.setState({ tiles: [...allTilesShuffle], width: parseInt(await AsyncStorage.getItem('Width')), height: parseInt(await AsyncStorage.getItem('Height')), showCaption: false, card1: null, card2: null, overrideKey: null, cards: null, languages: await AsyncStorage.getItem('Language') });
         AsyncStorage.setItem('Cards', JSON.stringify([]));  
     }
 
@@ -114,8 +115,13 @@ class MemoryGame extends Component {
     }
 
     render() {
-        console.log(this.state);
-        if (this.state.width === null) {
+        if (this.state.languages === null) {
+            return (
+                <View />
+            );
+        }
+        if (this.state.languages !== null) {
+            if (this.state.width === null) {
             return (
                 <Text>Loading</Text>
             );
@@ -132,14 +138,13 @@ class MemoryGame extends Component {
                 <View style={{ flex: 1, flexDirection: 'column' }}>
                     <View style={{ flex: 1 }}>
                     <Header style={{ height: 60 }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Memory Game</Text>
+                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
                     </Header>
                     </View>
                 <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center' }}>
                     {this.renderTiles()}
                 </View>
-                <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }}>
-                </View>
+                <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }} />
                 </View>
             );
             }
@@ -156,11 +161,11 @@ class MemoryGame extends Component {
                     <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 400, width: 600, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                             <Image source={require('../Images/trophy.png')} style={{ height: 200, width: 200 }} />
-                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>Congrats!</Text>
-                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>You've completed the game. Would you like to play again?</Text>
+                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['082']}</Text>
+                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['095']}</Text>
                             <CardSection style={{ height: 50, width: 200, backgroundColor: 'transparent', borderBottomWidth: 0 }}>
                     <Button onPress={this.createNewGame.bind(this)} textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}>
-                        Yes
+                        {Languages[this.state.languages]['096']}
                     </Button>
                     </CardSection>
                     <CardSection style={{ height: 50, width: 200, backgroundColor: 'transparent', borderBottomWidth: 0 }}>
@@ -171,7 +176,7 @@ class MemoryGame extends Component {
                         }}
                     textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}
                     >
-                        No
+                        {Languages[this.state.languages]['097']}
                     </Button>
                 </CardSection>
                         </View>
@@ -179,7 +184,7 @@ class MemoryGame extends Component {
                 </Modal>
                     <View style={{ flex: 1 }}>
                     <Header style={{ height: 60 }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Memory Game</Text>
+                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
                     </Header>
                     </View>
                 <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center' }}>
@@ -220,14 +225,14 @@ class MemoryGame extends Component {
         }}
         >{this.state.card1.caption}</Text>
                                     <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={() => this.setState({ card1: null, card2: null, showCaption: false })} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>Dismiss</Button>
+                                        <Button onPress={() => this.setState({ card1: null, card2: null, showCaption: false })} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['098']}</Button>
                                     </CardSection>
                                     </View>
                     </View>
                 </Modal>
                     <View style={{ flex: 1 }}>
                     <Header style={{ height: 60 }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Memory Game</Text>
+                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
                     </Header>
                     </View>
                 <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center' }}>
@@ -270,14 +275,14 @@ class MemoryGame extends Component {
         }}
         >{this.state.card1.caption}</Text>
                                     <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={() => this.setState({ card1: null, card2: null, showCaption: false })} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>Dismiss</Button>
+                                        <Button onPress={() => this.setState({ card1: null, card2: null, showCaption: false })} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['098']}</Button>
                                     </CardSection>
                                     </View>
                     </View>
                 </Modal>
                     <View style={{ flex: 1 }}>
                     <Header style={{ height: 60 }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>Memory Game</Text>
+                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
                     </Header>
                     </View>
                 <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center' }}>
@@ -288,6 +293,7 @@ class MemoryGame extends Component {
                 }
                 }
             }
+        }
         }
         }
     }

@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import MusicPlayerController from 'react-native-musicplayercontroller';
 import { View, AsyncStorage, Image, Text, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { CardSection, Button, Input, Header } from './common';
+import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 
 class AddAudio extends Component {
-    state = { information: null, caption: null, group: null, acheivement: null }
+    state = { information: null, caption: null, group: null, acheivement: null, languages: null }
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async componentWillMount() {
-        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement') });
+        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language') });
     }
     async onSaveItemPress() {
         const { information, caption, group } = this.state;
@@ -83,7 +84,13 @@ class AddAudio extends Component {
     }
     
     onAudioSelect() {
-        if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
+        if (this.state.languages === null) {
+            return (
+                <View />
+            );
+        }
+        if (this.state.languages !== null) {
+            if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
             if (this.state.information === null) {
             return (
                 <View style={{ alignItems: 'center' }}>
@@ -92,49 +99,49 @@ class AddAudio extends Component {
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Title</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>None</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['029'])[3]}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Album</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>None</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['029'])[3]}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Artist</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>None</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['029'])[3]}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
+                        placeholder={Languages[this.state.languages]['062']}
+                        label={Languages[this.state.languages]['059']}
                         value={this.state.caption}
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
                     <CardSection>
                         <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
                     <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            Save and Create New
+                            {Languages[this.state.languages]['068']}
                             <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
                 </View>
@@ -148,49 +155,49 @@ class AddAudio extends Component {
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Title</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[0]}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Album</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[1]}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Artist</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[3]}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
+                        placeholder={Languages[this.state.languages]['062']}
+                        label={Languages[this.state.languages]['059']}
                         value={this.state.caption}
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
                     <CardSection>
                         <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
                     <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            Save and Create New
+                            {Languages[this.state.languages]['068']}
                             <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
                 </View>
@@ -206,45 +213,45 @@ class AddAudio extends Component {
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Title</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>None</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['029'])[3]}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Album</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>None</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['029'])[3]}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Artist</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>None</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['029'])[3]}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
+                        placeholder={Languages[this.state.languages]['062']}
+                        label={Languages[this.state.languages]['059']}
                         value={this.state.caption}
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
                     <CardSection>
                         <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
                     <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
                 </View>
@@ -258,49 +265,50 @@ class AddAudio extends Component {
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Title</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[0]}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Album</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[1]}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>Artist</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[3]}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
-                        placeholder="Family vacation to Hawaii"
-                        label="Caption"
+                        placeholder={Languages[this.state.languages]['062']}
+                        label={Languages[this.state.languages]['059']}
                         value={this.state.caption}
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
                     <CardSection>
                         <Input
-                        placeholder="SummerVacation2017"
-                        label="Tag"
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
                         />
                     </CardSection>
                     <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
                 </View>
             );
+        }
         }
         }
     }
@@ -317,14 +325,20 @@ class AddAudio extends Component {
     }
     
     render() {
-        return (
+        if (this.state.languages === null) {
+            return (
+                <View />
+            );
+        }
+        if (this.state.languages !== null) {
+            return (
             <View style={{ flex: 1 }}>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>Add Audio</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['086']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
@@ -335,13 +349,14 @@ class AddAudio extends Component {
                 <ScrollView>
                     <CardSection style={{ marginTop: 10 }}>
                         <Button onPress={this.onChooseMusicPress.bind(this)}>
-                            Choose from Music Library
+                            {Languages[this.state.languages]['055']}
                         </Button>
                     </CardSection>
                     {this.onAudioSelect()}
                 </ScrollView>
             </View>
         );
+        }
     }
 }
 
