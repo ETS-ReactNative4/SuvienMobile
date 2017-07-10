@@ -100,7 +100,7 @@ class AddAudioAnd extends Component {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/noaudio.png')} style={{ height: 300, width: 300 }} />
+                        <Image source={{ uri: Languages[this.state.languages]['066'] }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
@@ -214,7 +214,7 @@ class AddAudioAnd extends Component {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/noaudio.png')} style={{ height: 300, width: 300 }} />
+                        <Image source={{ uri: Languages[this.state.languages]['066'] }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>

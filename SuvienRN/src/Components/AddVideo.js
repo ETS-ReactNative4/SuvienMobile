@@ -195,7 +195,7 @@ class AddVideo extends Component {
                 <ScrollView>
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/novideo.png')} style={{ height: 300, width: 300 }} />
+                        <Image source={{ uri: Languages[this.state.languages]['065'] }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
@@ -341,7 +341,7 @@ class AddVideo extends Component {
                 <ScrollView>
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/novideo.png')} style={{ height: 300, width: 300 }} />
+                        <Image source={{ uri: Languages[this.state.languages]['064'] }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
@@ -665,10 +665,10 @@ class AddVideo extends Component {
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
                         <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
                             <TouchableWithoutFeedback onPress={this.startRecording.bind(this)}>
-                                <Image source={require('../Images/cameracapture.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                <Image source={require('../Images/startrecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback onPress={this.stopRecording.bind(this)}>
-                                <Image source={require('../Images/cameracapture.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                <Image source={require('../Images/stoprecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
                                 <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
@@ -793,10 +793,10 @@ class AddVideo extends Component {
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
                         <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
                             <TouchableWithoutFeedback onPress={this.startRecording.bind(this)}>
-                                <Image source={require('../Images/cameracapture.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                <Image source={require('../Images/startrecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback onPress={this.stopRecording.bind(this)}>
-                                <Image source={require('../Images/cameracapture.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                <Image source={require('../Images/stoprecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
                                 <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />

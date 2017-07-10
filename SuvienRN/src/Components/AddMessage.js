@@ -1302,10 +1302,10 @@ class AddMessage extends Component {
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
                         <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
                             <TouchableWithoutFeedback onPress={this.startRecording.bind(this)}>
-                                <Image source={require('../Images/cameracapture.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                <Image source={require('../Images/startrecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback onPress={this.stopRecording.bind(this)}>
-                                <Image source={require('../Images/cameracapture.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                <Image source={require('../Images/stoprecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
                                 <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />

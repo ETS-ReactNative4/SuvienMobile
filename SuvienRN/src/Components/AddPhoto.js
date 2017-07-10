@@ -11,6 +11,7 @@ import Camera from 'react-native-camera';
 class AddPhoto extends Component {
     state = { imageuri: null, caption: null, group: null, languages: null, acheivement: null, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
     async componentWillMount() {
+        console.log(await AsyncStorage.getItem('Language'));
         this.setState({ 
             heightc: Dimensions.get('window').height,
             widthc: Dimensions.get('window').width,
@@ -130,6 +131,8 @@ class AddPhoto extends Component {
     }
 
     onPhotoSelect() {
+        console.log(this.state.languages);
+        console.log(this.state.acheivement)
         //1496411711468
         if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
             if (this.state.languages !== null) {
@@ -137,7 +140,7 @@ class AddPhoto extends Component {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/noimage.png')} style={{ height: 300, width: 300 }} />
+                        <Image source={{ uri: Languages[this.state.languages]['064'] }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
@@ -226,12 +229,13 @@ class AddPhoto extends Component {
             );
         }
     }
-        if (this.state.acheivement === null || this.state.acheivement === 'INCOM') {
+}
+    if (this.state.acheivement === null || this.state.acheivement === 'INCOM') {
             if (this.state.imageuri === null) {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/noimage.png')} style={{ height: 300, width: 300 }} />
+                        <Image source={{ uri: Languages[this.state.languages]['064'] }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
@@ -310,7 +314,6 @@ class AddPhoto extends Component {
                     </View>
                 </View>
             );
-        }
         }
             }
             if (this.state.languages === null) {
