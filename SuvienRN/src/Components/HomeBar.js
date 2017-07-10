@@ -231,7 +231,10 @@ class HomeBar extends Component {
                 <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
                     {this.renderHeaderGreeting()}
                 </View>
-                <View style={{ alignItems: 'flex-end', width: finalsize }}>
+                <View style={{ justifyContent: 'flex-end', alignItems: 'center', width: finalsize, flexDirection: 'row' }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                        <Image source={require('../Images/mainmenu.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
+                    </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
                         <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80, marginRight: 30 }} />
                     </TouchableWithoutFeedback>
