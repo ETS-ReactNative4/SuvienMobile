@@ -13,3 +13,5 @@ export * from './AddAudioAnd';
 export * from './VideoTest';
 export * from './AddMessage';
 export * from './MemoryGame';
+export * from './ContentExplorer';
+export * from './AdvancedSettings';

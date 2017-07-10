@@ -16,10 +16,10 @@ import {
     AddAudioAnd,
     VideoTest,
     AddMessage,
-    MemoryGame
+    MemoryGame,
+    ContentExplorer,
+    AdvancedSettings
 } from './Components';
-import ContentExplorer from './Components/ContentExplorer';
-import AdvancedSettings from './Components/AdvancedSettings';
 
 const RouterComponent = () => (
         <Router

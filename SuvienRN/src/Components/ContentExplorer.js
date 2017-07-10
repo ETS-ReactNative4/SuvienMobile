@@ -469,4 +469,4 @@ class ContentExplorer extends Component {
     }
 }
 
-export default ContentExplorer;
+export { ContentExplorer };
