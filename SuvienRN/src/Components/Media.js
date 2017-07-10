@@ -81,6 +81,24 @@ class Media extends Component {
             chosen
         });
     }
+        if (chosen.mediaType === 'Video') {
+            this.setState({ videos: JSON.parse(await AsyncStorage.getItem('Videos')), media: JSON.parse(await AsyncStorage.getItem('Media')) });
+        if (chosen.isFavourite === false) {
+            this.setState({ imagerend: require('../Images/favouritenot.png') });
+        }
+        if (chosen.isFavourite === true) {
+            this.setState({ imagerend: require('../Images/favourite.png') });
+        }
+        this.setState({ 
+            uri: chosen.uri, 
+            caption: chosen.caption, 
+            tag: chosen.tag,
+            isFavourite: chosen.isFavourite,
+            title: chosen.title,
+            mediaType: chosen.mediaType,
+            chosen
+        });
+        }
         if (chosen.mediaType === 'Music') {
             this.setState({ audios: JSON.parse(await AsyncStorage.getItem('Audio')), media: JSON.parse(await AsyncStorage.getItem('Media')) });
             if (chosen.isFavourite === false) {
