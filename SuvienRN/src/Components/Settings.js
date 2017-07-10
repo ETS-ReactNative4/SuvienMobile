@@ -935,18 +935,6 @@ class Settings extends Component {
                     <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30, fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>{Languages[this.state.languages]['040']}</Text>
                     <Image source={require('../Images/multimedia.png')} style={{ marginLeft: 5, height: 30, width: 90 }} />
                 </View>
-                <CardSection>
-                    <Button onPress={this.onPhotoButtonPress.bind(this)}>{Languages[this.state.languages]['036']}</Button>
-                </CardSection>
-                <CardSection>
-                    <Button onPress={this.onVideoButtonPress.bind(this)}>{Languages[this.state.languages]['037']}</Button>
-                </CardSection>
-                <CardSection>
-                    <Button onPress={this.onAudioButtonPress.bind(this)}>{Languages[this.state.languages]['038']}</Button>
-                </CardSection>
-                <CardSection>
-                    <Button onPress={() => Actions.AddMessage()}>{Languages[this.state.languages]['039']}</Button>
-                </CardSection>
                 </View>
                 </ScrollView>
                 </View>
