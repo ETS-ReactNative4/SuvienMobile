@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, Image, AsyncStorage, View, Modal } from 'react-native';
+import Languages from './Languages.json';
 import { CardSection } from './CardSection';
 import { Actions } from 'react-native-router-flux';
 
 class PictureTile extends Component {
-    state = { imageuri: null, caption: null, tag: null, isNull: true }
+    state = { imageuri: null, caption: null, tag: null, isNull: true, languages: null }
 
+    async componentWillMount() {
+        this.setState({ languages: await AsyncStorage.getItem('Language') });
+    }
     render() {
-        if (this.props.data === null) {
+        if (this.state.languages !== null) {
+             if (this.props.data === null) {
             return (
             <TouchableOpacity 
             onPress={() => {
@@ -162,6 +167,12 @@ class PictureTile extends Component {
             </TouchableOpacity>
         );
         }
+        }
+    }
+        if (this.state.languages === null) {
+            return (
+                <View />
+            );
         }
     }
 }
