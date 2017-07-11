@@ -15,3 +15,5 @@ export * from './AddMessage';
 export * from './MemoryGame';
 export * from './ContentExplorer';
 export * from './AdvancedSettings';
+export * from './CaptionGame';
+export * from './Games';
