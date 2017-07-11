@@ -18,7 +18,9 @@ import {
     AddMessage,
     MemoryGame,
     ContentExplorer,
-    AdvancedSettings
+    AdvancedSettings,
+    CaptionGame,
+    Games
 } from './Components';
 
 const RouterComponent = () => (
@@ -30,6 +32,18 @@ const RouterComponent = () => (
             component={MainMenu}
             hideNavBar
             initial 
+            />
+
+            <Scene
+            key="Games"
+            component={Games}
+            hideNavBar
+            />
+            
+            <Scene
+            key="CaptionGame"
+            component={CaptionGame}
+            hideNavBar
             />
 
             <Scene
