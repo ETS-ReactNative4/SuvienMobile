@@ -195,7 +195,7 @@ class AddVideo extends Component {
                 <ScrollView>
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: Languages[this.state.languages]['065'] }} style={{ height: 300, width: 300 }} />
+                        <Image source={{ uri: `${Languages[this.state.languages]['065']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
@@ -341,7 +341,7 @@ class AddVideo extends Component {
                 <ScrollView>
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: Languages[this.state.languages]['064'] }} style={{ height: 300, width: 300 }} />
+                        <Image source={{ uri: `${Languages[this.state.languages]['065']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input

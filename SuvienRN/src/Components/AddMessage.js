@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, AsyncStorage, Dimensions, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
+import { View, Text, Picker, AsyncStorage, Dimensions, Platform, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
 import { CardSection, Button, Input, Header, CheckBox } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
 class AddMessage extends Component {
-    state = { message: null, day: '[]', startHour: 0, startMinute: 0, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
+    state = { secheight: null, secwidth: null, message: null, day: '[]', startHour: 0, startMinute: 0, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
     async componentWillMount() {
+        if (Platform.OS === 'ios') {
+            this.setState({ secheight: 200, secwidth: 100 });
+        }
+        if (Platform.OS === 'android') {
+            this.setState({ secheight: 70, secwidth: 300 });
+        }
         this.setState({ 
             heightc: Dimensions.get('window').height,
             widthc: Dimensions.get('window').width,
@@ -212,9 +218,9 @@ class AddMessage extends Component {
                         </View>
                         <View>
                         <Text style={{ fontFamily: 'Roboto-Light', fontSize: 20 }}>
-                            <Image source={require('../Images/calendar.png')} style={{ height: 20, width: 20, marginLeft: 10, alignSelf: 'center' }} /> {message.day.toString()} </Text>
+                            <Image source={require('../Images/calendar.png')} style={{ height: 20, width: 20, marginLeft: 10, marginRight: 5, alignSelf: 'center' }} />   {message.day.toString()} </Text>
                         <Text style={{ fontFamily: 'Roboto-Light', fontSize: 20 }}>
-                            <Image source={require('../Images/clock.png')} style={{ height: 20, width: 20, marginLeft: 10, alignSelf: 'center' }} /> {message.startHour}:{this.addZero(message.startMinute)} - {message.endHour}:{this.addZero(message.endMinute)}</Text>
+                            <Image source={require('../Images/clock.png')} style={{ height: 20, width: 20, marginLeft: 10, marginRight: 5, alignSelf: 'center' }} />   {message.startHour}:{this.addZero(message.startMinute)} - {message.endHour}:{this.addZero(message.endMinute)}</Text>
                         </View>
                     </CardSection>
                 );
@@ -493,18 +499,18 @@ class AddMessage extends Component {
                     />
                     </View>
                 </CardSection>
-                    <CardSection style={{ height: 70, flexDirection: 'column' }}>
+                    <CardSection style={{ height: this.state.scheight, flexDirection: 'column' }}>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
-                    style={{ width: 300 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={this.state.startHour}
                     onValueChange={startHour => this.setState({ startHour })}
                     >
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ flex: 1 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={this.state.startMinute}
                     onValueChange={startMinute => this.setState({ startMinute })}
                     >
@@ -512,18 +518,18 @@ class AddMessage extends Component {
                     </Picker>
                     </View>
                 </CardSection>
-                <CardSection style={{ height: 70, flexDirection: 'column' }}>
+                <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
-                    style={{ width: 300 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={this.state.endHour}
                     onValueChange={endHour => this.setState({ endHour })}
                     >
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ flex: 1 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={this.state.endMinute}
                     onValueChange={endMinute => this.setState({ endMinute })}
                     >
@@ -722,11 +728,11 @@ class AddMessage extends Component {
                     />
                     </View>
                 </CardSection>
-                    <CardSection style={{ height: 70, flexDirection: 'column' }}>
+                    <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
-                    style={{ width: 300 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={selected.startHour}
                     onValueChange={startHour => {
                         selected.startHour = startHour;
@@ -736,7 +742,7 @@ class AddMessage extends Component {
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ flex: 1 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={selected.startMinute}
                     onValueChange={startMinute => {
                         selected.startMinute = startMinute;
@@ -747,11 +753,11 @@ class AddMessage extends Component {
                     </Picker>
                     </View>
                 </CardSection>
-                <CardSection style={{ height: 70, flexDirection: 'column' }}>
+                <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
-                    style={{ width: 300 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={selected.endHour}
                     onValueChange={endHour => {
                         selected.endHour = endHour;
@@ -761,7 +767,7 @@ class AddMessage extends Component {
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ flex: 1 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={selected.endMinute}
                     onValueChange={endMinute => {
                         selected.endMinute = endMinute;
@@ -807,6 +813,8 @@ class AddMessage extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
+            <ScrollView>
+                <View style={{ flex: 1 }}>
                 <CardSection style={{ marginLeft: 0, alignItems: 'center', justifyContent: 'center' }}>
                     <Image source={{ uri: selected.uri }} style={{ height: 300, width: 400 }} />
                 </CardSection>
@@ -967,11 +975,11 @@ class AddMessage extends Component {
                     />
                     </View>
                 </CardSection>
-                    <CardSection style={{ height: 70, flexDirection: 'column' }}>
+                    <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
-                    style={{ width: 300 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={selected.startHour}
                     onValueChange={startHour => {
                         selected.startHour = startHour;
@@ -981,7 +989,7 @@ class AddMessage extends Component {
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ flex: 1 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={selected.startMinute}
                     onValueChange={startMinute => {
                         selected.startMinute = startMinute;
@@ -992,11 +1000,11 @@ class AddMessage extends Component {
                     </Picker>
                     </View>
                 </CardSection>
-                <CardSection style={{ height: 70, flexDirection: 'column' }}>
+                <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
-                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flexDirection: 'row', height: 100 }}>
                     <Picker
-                    style={{ width: 300 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={selected.endHour}
                     onValueChange={endHour => {
                         selected.endHour = endHour;
@@ -1006,7 +1014,7 @@ class AddMessage extends Component {
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ flex: 1 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={selected.endMinute}
                     onValueChange={endMinute => {
                         selected.endMinute = endMinute;
@@ -1019,17 +1027,19 @@ class AddMessage extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
-                            Save and Return
+                            {Languages[this.state.languages]['067']}
                             <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            Save and Create New
+                            {Languages[this.state.languages]['068']}
                             <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
-                            Return to Settings
+                            {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
+                    </View>
+                    </ScrollView>
             </View>
         );
             }
@@ -1084,6 +1094,8 @@ class AddMessage extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
+            <ScrollView>
+                <View style={{ flex: 1 }}>
                 <CardSection style={{ marginLeft: 0, alignItems: 'center', justifyContent: 'center' }}>
                     <Image source={{ uri: this.state.uri }} style={{ height: 300, width: 400 }} />
                 </CardSection>
@@ -1227,18 +1239,18 @@ class AddMessage extends Component {
                     />
                     </View>
                 </CardSection>
-                    <CardSection style={{ height: 70, flexDirection: 'column' }}>
+                    <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
-                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flexDirection: 'row', height: 100 }}>
                     <Picker
-                    style={{ width: 300 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={this.state.startHour}
                     onValueChange={startHour => this.setState({ startHour })}
                     >
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ flex: 1 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={this.state.startMinute}
                     onValueChange={startMinute => this.setState({ startMinute })}
                     >
@@ -1246,18 +1258,18 @@ class AddMessage extends Component {
                     </Picker>
                     </View>
                 </CardSection>
-                <CardSection style={{ height: 70, flexDirection: 'column' }}>
+                <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
-                        <View style={{ flexDirection: 'row' }}>
+                        <View style={{ flexDirection: 'row', height: 100 }}>
                     <Picker
-                    style={{ width: 300 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={this.state.endHour}
                     onValueChange={endHour => this.setState({ endHour })}
                     >
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ flex: 1 }}
+                    style={{ width: this.state.secwidth }}
                     selectedValue={this.state.endMinute}
                     onValueChange={endMinute => this.setState({ endMinute })}
                     >
@@ -1278,6 +1290,8 @@ class AddMessage extends Component {
                             {Languages[this.state.languages]['069']}
                         </Button>
                     </View>
+                    </View>
+                    </ScrollView>
             </View>
         );
             }

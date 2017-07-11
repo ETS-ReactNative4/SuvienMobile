@@ -2,7 +2,7 @@
 //Add save and return to settings
 //Return to home.
 import React, { Component } from 'react';
-import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity, TouchableWithoutFeedback, Dimensions } from 'react-native';
+import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity, TouchableWithoutFeedback, Platform, Dimensions } from 'react-native';
 import { CardSection, Button, Input, Header } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
@@ -140,7 +140,7 @@ class AddPhoto extends Component {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: Languages[this.state.languages]['064'] }} style={{ height: 300, width: 300 }} />
+                        <Image source={{ uri: `${Languages[this.state.languages]['064']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
@@ -235,7 +235,7 @@ class AddPhoto extends Component {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: Languages[this.state.languages]['064'] }} style={{ height: 300, width: 300 }} />
+                        <Image source={{ uri: `${Languages[this.state.languages]['064']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
