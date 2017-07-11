@@ -252,6 +252,9 @@ class HomeBar extends Component {
                     {this.renderHeaderGreeting()}
                 </View>
                 <View style={{ alignItems: 'flex-end', width: finalsize }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                        <Image source={require('../Images/mainmenu.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
+                    </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
                         <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80, marginRight: 30 }} />
                     </TouchableWithoutFeedback>
@@ -282,6 +285,9 @@ class HomeBar extends Component {
                     <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['011']} { currentDate }</Text>
                 </View>
                 <View style={{ alignItems: 'flex-end', width: finalsize }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                        <Image source={require('../Images/mainmenu.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
+                    </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
                         <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80, marginRight: 30 }} />
                     </TouchableWithoutFeedback>
@@ -304,6 +310,9 @@ class HomeBar extends Component {
                     <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}> { currentDate }</Text>
                 </View>
                 <View style={{ alignItems: 'flex-end' }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                        <Image source={require('../Images/mainmenu.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
+                    </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
                         <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80 }} />
                     </TouchableWithoutFeedback>
