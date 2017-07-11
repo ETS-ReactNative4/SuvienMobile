@@ -931,10 +931,6 @@ class Settings extends Component {
                         {Languages[this.state.languages]['077']}
                     </Button>
                 </CardSection>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', marginBottom: 30, fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300' }}>{Languages[this.state.languages]['040']}</Text>
-                    <Image source={require('../Images/multimedia.png')} style={{ marginLeft: 5, height: 30, width: 90 }} />
-                </View>
                 </View>
                 </ScrollView>
                 </View>
