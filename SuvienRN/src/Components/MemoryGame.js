@@ -123,7 +123,7 @@ class MemoryGame extends Component {
         if (this.state.languages !== null) {
             if (this.state.width === null) {
             return (
-                <Text>Loading</Text>
+                <Text style={{ marginTop: 30 }}>Loading</Text>
             );
         }
         if (this.state.width !== null) {

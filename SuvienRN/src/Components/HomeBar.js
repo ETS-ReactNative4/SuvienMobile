@@ -294,7 +294,7 @@ class HomeBar extends Component {
         <View>
             <View>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Loading</Text>
+                    <Text style={{ marginTop: 30 }}>Loading</Text>
                 </View>
             </View>
             <View style={{ opacity: 0 }}>

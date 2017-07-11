@@ -230,7 +230,7 @@ class MainMenu extends Component {
             if (this.state.isFirst === null || this.state.language === null) {
             return (
                 <View style={styles.loadingContainer}>
-                    <Image source={require('../Images/loading.gif')} style={{ height: 400, width: 400 }} />
+                    <Text style={{ marginTop: 30 }}>Loading</Text>
                 </View>
             );
         } else {
