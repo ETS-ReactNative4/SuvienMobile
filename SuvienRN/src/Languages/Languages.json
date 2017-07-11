@@ -122,7 +122,7 @@
         "012" : ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
         "013" : ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
         "014" : "nocontentfre",
-        "015" : "Il y a un nouveau message vidéo. Pour regarder, cliquez-moi!",
+        "015" : "Il y a un message vidéo. Pour regarder, cliquez-moi!",
         "016" : "Vous avez ajouté huit éléments! Vous pouvez choisir filtres différents pour la page d'accueil.",
         "017" : "Aller à le menu des paramètres",
         "018" : "Jouer",
