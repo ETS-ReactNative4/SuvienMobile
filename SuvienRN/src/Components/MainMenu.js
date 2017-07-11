@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Languages from '../Languages/Languages.json';
-import { Image, View, AsyncStorage, Text, Dimensions } from 'react-native';
+import { Image, View, AsyncStorage, Text, Dimensions, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button, CardSection, Header, CheckBox } from './common';
 import Orientation from 'react-native-orientation';
 
 class MainMenu extends Component {
-    state = { isFirst: null, isComp: null, stage: null, preferences: null, language: null, lang: null, ask: null, img: null }
+    state = { pictures: null, isFirst: null, isComp: null, stage: null, preferences: null, language: null, lang: null, ask: null, img: null }
     async componentDidMount() {
         Orientation.lockToLandscape();
          if (await AsyncStorage.getItem('name') !== null && await AsyncStorage.getItem('stage') !== null) {
@@ -42,7 +42,7 @@ class MainMenu extends Component {
                             ];
         }
         if (this.state.isFirst === false) {
-            if (this.state.stage === '1' || this.state.acheivement === 'INCOM' || this.state.preferences[Languages[this.state.language]['032']] === false) {
+            if (this.state.stage === '1' || (this.state.pictures !== null && this.state.pictures.length < 8) || this.state.acheivement === 'INCOM' || this.state.preferences[Languages[this.state.language]['032']] === false) {
                 section = [<View style={styles.leftContainer}>
                             <CardSection style={styles.titleContainer} />
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'column' }}>
@@ -149,6 +149,7 @@ class MainMenu extends Component {
     }
 
     async getFirst() {
+        this.setState({ pictures: JSON.parse(await AsyncStorage.getItem('Pictures')) });
         if (JSON.parse(await AsyncStorage.getItem('Ask')) === false || JSON.parse(await AsyncStorage.getItem('Ask')) === null) {
             console.log('im here!');
             if (await AsyncStorage.getItem('name') === null && await AsyncStorage.getItem('stage') === null) {
@@ -156,6 +157,9 @@ class MainMenu extends Component {
         } 
         if (await AsyncStorage.getItem('name') !== null && await AsyncStorage.getItem('stage') !== null && await AsyncStorage.getItem('Language') !== null) {
             this.setState({ isFirst: false, stage: await AsyncStorage.getItem('stage'), isComp: await AsyncStorage.getItem('Achievement'), img: Languages[await AsyncStorage.getItem('Language')]['103'], lang: true, ask: false });
+        }
+        if (await AsyncStorage.getItem('name') !== null && await AsyncStorage.getItem('stage') !== null && await AsyncStorage.getItem('Language') === null) {
+            this.setState({ isFirst: false, stage: await AsyncStorage.getItem('stage'), isComp: await AsyncStorage.getItem('Achievement'), lang: true, ask: false });
         }
         }
         if (JSON.parse(await AsyncStorage.getItem('Ask')) === true) {
@@ -192,7 +196,6 @@ class MainMenu extends Component {
             );
         }
         if (this.state.lang === true) {
-            console.log(this.state.ask);
             return (
                 <View>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
@@ -232,7 +235,7 @@ class MainMenu extends Component {
             );
         } else {
             return (
-                <Image resizeMode="stretch" source={{ uri: this.state.img }} style={styles.canvas}>
+                <Image resizeMode="stretch" source={{ uri: `${this.state.img}${Platform.OS === 'ios' ? '.png' : ''}` }} style={styles.canvas}>
                     <View style={styles.imageContainer}>
                         {this.onMenuStart()}
                     </View>
