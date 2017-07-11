@@ -92,7 +92,7 @@ class MainMenu extends Component {
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
                                 <View style={{ flex: 150 }}>
-                                    <Button style={styles.buttonContainer} onPress={() => Actions.MemoryGame()}>
+                                    <Button style={styles.buttonContainer} onPress={() => Actions.Games()}>
                                         {Languages[this.state.language]['005']}
                                     </Button>
                                 </View>
