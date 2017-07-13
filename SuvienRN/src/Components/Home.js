@@ -81,7 +81,7 @@ class Home extends Component {
                 let isFound = newMedia.find((medi) => medi.uniqueID === i);
                 if (isFound === undefined) {
                     allTiles.push(
-                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5, position: 'absolute', top: 0, left: 0, bottom: 0, right: 0 }} data={null} unique={i} key={`${i}p`} />
+                    <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={null} unique={i} key={`${i}p`} />
                 );  
                 }
                 if (isFound !== undefined) {
