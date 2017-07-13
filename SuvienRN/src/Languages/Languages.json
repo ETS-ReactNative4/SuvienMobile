@@ -109,7 +109,11 @@
         "106" : "Caption Game",
         "107" : "Congrats! You've found the photo!",
         "108" : "Games",
-        "109" : "Which game would you like to play?"
+        "109" : "Which game would you like to play?",
+        "110" : "nourl",
+        "111" : "Uh Oh! Looks like you left one/some of the fields blank!",
+        "112" : "Please fill in the missing field(s) to continue",
+        "113" : "Okay"
     },
     "FRE" : {
         "000" : "Démarrer",
@@ -221,7 +225,11 @@
         "106" : "Jeu de sous-titre",
         "107" : "Félicitations! Vous avez trouvé la photo!",
         "108" : "Jeux",
-        "109" : "Quel jou voulez-vous jouer?"
+        "109" : "Quel jou voulez-vous jouer?",
+        "110" : "nourl",
+        "111" : "Uh Oh! Looks like you left one/some of the fields blank!",
+        "112" : "Please fill in the missing field(s) to continue",
+        "113" : "Okay"
     },
     "ESP" : {
         "000" : "Empezar",
@@ -333,6 +341,10 @@
         "106" : "Juego de subtítulos",
         "107" : "¡Felicidades, Usted encontró la photo!",
         "108" : "Juegos",
-        "109" : "¿Qué juego le gustaría jugar?"
+        "109" : "¿Qué juego le gustaría jugar?",
+        "110" : "nourl",
+        "111" : "Uh Oh! Looks like you left one/some of the fields blank!",
+        "112" : "Please fill in the missing field(s) to continue",
+        "113" : "Okay"
     }
 }
