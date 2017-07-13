@@ -113,7 +113,8 @@
         "110" : "nourl",
         "111" : "Uh Oh! Looks like you left one/some of the fields blank!",
         "112" : "Please fill in the missing field(s) to continue",
-        "113" : "Okay"
+        "113" : "Okay",
+        "114" : "Are you sure you want to delete this?"
     },
     "FRE" : {
         "000" : "Démarrer",
@@ -229,7 +230,8 @@
         "110" : "nourl",
         "111" : "Uh Oh! Looks like you left one/some of the fields blank!",
         "112" : "Please fill in the missing field(s) to continue",
-        "113" : "Okay"
+        "113" : "Okay",
+        "114" : "Are you sure you want to delete this?"
     },
     "ESP" : {
         "000" : "Empezar",
@@ -345,6 +347,7 @@
         "110" : "nourl",
         "111" : "Uh Oh! Looks like you left one/some of the fields blank!",
         "112" : "Please fill in the missing field(s) to continue",
-        "113" : "Okay"
+        "113" : "Okay",
+        "114" : "Are you sure you want to delete this?"
     }
 }
