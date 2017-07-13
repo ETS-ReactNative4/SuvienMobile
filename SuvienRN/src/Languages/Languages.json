@@ -228,10 +228,10 @@
         "108" : "Jeux",
         "109" : "Quel jou voulez-vous jouer?",
         "110" : "nourl",
-        "111" : "Uh Oh! Looks like you left one/some of the fields blank!",
-        "112" : "Please fill in the missing field(s) to continue",
-        "113" : "Okay",
-        "114" : "Are you sure you want to delete this?"
+        "111" : "Oh, Oh! Vous n'avez rien inscrit dans un/quelques des champs textes!",
+        "112" : "Complétez le(s) champ(s) texte(s) vides au continuer, s'il vous plaît",
+        "113" : "D'accord.",
+        "114" : "Voulez-vous vraiment vous supprimez ce contenu?"
     },
     "ESP" : {
         "000" : "Empezar",
@@ -345,9 +345,9 @@
         "108" : "Juegos",
         "109" : "¿Qué juego le gustaría jugar?",
         "110" : "nourl",
-        "111" : "Uh Oh! Looks like you left one/some of the fields blank!",
-        "112" : "Please fill in the missing field(s) to continue",
-        "113" : "Okay",
-        "114" : "Are you sure you want to delete this?"
+        "111" : "Oh Oh! Usted dejó en blanco un/algunos de campos de textos!",
+        "112" : "Complete los campo(s) de textos vacíos para continuar, por favor.",
+        "113" : "De acuerdo",
+        "114" : "¿Está seguro de que desea borrar este?"
     }
 }
