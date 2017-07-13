@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fs')
     compile 'com.facebook.fresco:animated-base-support:0.14.1'
     compile 'com.facebook.fresco:animated-gif:0.14.1'
     compile project(':react-native-youtube')

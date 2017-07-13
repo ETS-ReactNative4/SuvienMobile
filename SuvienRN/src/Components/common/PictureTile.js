@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, Image, AsyncStorage, View, Platform } from 'react-native';
 import Languages from './Languages.json';
+import RNFS from 'react-native-fs';
 import { CardSection } from './CardSection';
 import { Actions } from 'react-native-router-flux';
 
@@ -28,11 +29,11 @@ class PictureTile extends Component {
         );
     }
     if (this.props.data !== null) {
+        RNFS.exists(this.props.data.imageuri).then((result) => console.log(result)).catch((result) => console.log(result));
         if (this.props.data.mediaType === 'Photo') {
             return (
             <TouchableOpacity 
             onPress={() => {
-                console.log(this.props.data.imageuri);
                 this.props.onChangePress({ uri: this.props.data.imageuri,
                 title: this.props.data.title, 
                 caption: this.props.data.caption, 
