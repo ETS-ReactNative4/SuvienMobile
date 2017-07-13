@@ -11,6 +11,7 @@ import Video from 'react-native-video';
 class Media extends Component {
     state = { 
         uri: null, 
+        loading: null,
         caption: null, 
         tag: null, 
         height: null, 
@@ -480,36 +481,74 @@ class Media extends Component {
             );
         }
             if (uri !== null && imageuri !== null) {
-            return (
-                <View style={{ height: (this.state.scheight - 100), alignItems: 'center', justifyContent: 'center', marginTop: 40 }}>
-                    <WebView
-                    style={{ height: 200, backgroundColor: 'black', width: 800 }}
-                    source={{ uri: `https://www.youtube.com/embed/${uri}?&autoplay=1` }}
-                    />
-                    <View style={{ height: 250, backgroundColor: '#e3edf9', width: 800 }}>
-                                <ScrollView>
-                                    <View>
-                                        <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                            {this.state.title}
-                                        </Text>
-                                        <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
-                                            <Image source={imagerend} style={{ height: 40, width: 40 }} />
-                                        </TouchableWithoutFeedback>
+                if (this.state.loading === false) {
+                    return (
+                        <View style={{ height: (this.state.scheight - 100), alignItems: 'center', justifyContent: 'center', marginTop: 40 }}>
+                            <WebView
+                            style={{ height: 200, backgroundColor: 'black', width: 800 }}
+                            source={{ uri: `https://www.youtube.com/embed/${uri}?&autoplay=1` }}
+                            />
+                            <View style={{ height: 250, backgroundColor: '#e3edf9', width: 800 }}>
+                                        <ScrollView>
+                                            <View>
+                                                <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                                <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
+                                                    {this.state.title}
+                                                </Text>
+                                                <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                    <Image source={imagerend} style={{ height: 40, width: 40 }} />
+                                                </TouchableWithoutFeedback>
+                                            </View>
+                                                <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
+                                                <Text style={styles.textBodyStyle}>
+                                                    <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
+                                                    {this.state.tag}
+                                                </Text>
+                                            <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                                <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
+                                            </CardSection>
+                                            </View>
+                                        </ScrollView>
                                     </View>
-                                        <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
-                                        <Text style={styles.textBodyStyle}>
-                                            <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
-                                            {this.state.tag}
-                                        </Text>
-                                    <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
-                                    </CardSection>
-                                    </View>
-                                </ScrollView>
                             </View>
-                    </View>
-            );
+                    );
+                }
+                if (this.state.loading === null) {
+                    return (
+                        <View style={{ height: (this.state.scheight - 100), alignItems: 'center', justifyContent: 'center', marginTop: 40 }}>
+                            <View style={{ height: 500, backgroundColor: 'white', width: 800 }}>
+                                <Text>Loading</Text>
+                            </View>
+                            <WebView
+                            style={{ height: 200, backgroundColor: 'black', width: 800, opacity: 0.5 }}
+                            source={{ uri: `https://www.youtube.com/embed/${uri}?&autoplay=1` }}
+                            onLoadEnd={() => this.setState({ loading: false })}
+                            />
+                            <View style={{ height: 250, backgroundColor: '#e3edf9', width: 800 }}>
+                                        <ScrollView>
+                                            <View>
+                                                <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                                <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
+                                                    {this.state.title}
+                                                </Text>
+                                                <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                    <Image source={imagerend} style={{ height: 40, width: 40 }} />
+                                                </TouchableWithoutFeedback>
+                                            </View>
+                                                <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
+                                                <Text style={styles.textBodyStyle}>
+                                                    <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
+                                                    {this.state.tag}
+                                                </Text>
+                                            <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                                <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
+                                            </CardSection>
+                                            </View>
+                                        </ScrollView>
+                                    </View>
+                            </View>
+                    );
+                }
         }
         //Note: this is configured only for ios at the moment       
         }
