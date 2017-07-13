@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, AsyncStorage, Dimensions, Platform, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
+import { View, Text, Picker, AsyncStorage, Dimensions, Platform, TouchableWithoutFeedback, Image, ScrollView, Modal } from 'react-native';
 import { CardSection, Button, Input, Header, CheckBox } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
 class AddMessage extends Component {
-    state = { secheight: null, secwidth: null, message: null, day: '[]', startHour: 0, startMinute: 0, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
+    state = { secheight: null, secwidth: null, message: null, day: '[]', startHour: 0, modalVisible: false, delete: null, startMinute: 0, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
     async componentWillMount() {
         if (Platform.OS === 'ios') {
             this.setState({ secheight: 200, secwidth: 100 });
@@ -193,24 +193,16 @@ class AddMessage extends Component {
                         <View style={{ flexDirection: 'row' }}>
                         <Text style={{ fontFamily: 'Roboto-Light', fontSize: 25, alignSelf: 'center' }}>{message.message} </Text>
                         <View style={{ flexDirection: 'row' }}>
-                            <TouchableWithoutFeedback onPress={() => {
+                            <TouchableWithoutFeedback 
+                            onPress={() => {
                             this.setState({ messageType: message.messageType, currentMessage: JSON.stringify(message) });
                             }}
                             >
                             <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20, marginRight: 10 }} />
                             </TouchableWithoutFeedback>
-                            <TouchableWithoutFeedback onPress={() => {
-                            const searc = currentmessages.findIndex((element, index, array) => {
-                                if (element.messageID === message.messageID) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }});
-                                currentmessages.splice(searc, 1);
-                                AsyncStorage.setItem('Messages', JSON.stringify(currentmessages));
-                                this.setState({ messages: currentmessages });
-                        }
-                        }
+                            <TouchableWithoutFeedback 
+                            onPress={() => this.setState({ modalVisible: true, delete: message })
+                                }
                         >
                                 <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center' }}/>
                             </TouchableWithoutFeedback>
@@ -302,6 +294,44 @@ class AddMessage extends Component {
             if (this.state.messageType === null) {
             return (
                 <View style={{ flex: 1 }}>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.modalVisible}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['114']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                            const messagess = this.state.messages;
+                            const searc = this.state.messages.findIndex((element, index, array) => {
+                                if (element.messageID === this.state.delete.messageID) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }});
+                                messagess.splice(searc, 1);
+                                this.setState({ messages: messagess, modalVisible: false, delete: null });
+                                AsyncStorage.setItem('Messages', JSON.stringify(messagess));
+                                }
+                                }
+                        >
+                    {Languages[this.state.languages]['096']}
+                        </Button>
+                    </CardSection>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => this.setState({ modalVisible: false, delete: null })}
+                        >
+                    {Languages[this.state.languages]['097']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />

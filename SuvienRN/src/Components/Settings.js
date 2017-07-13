@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Text, View, AsyncStorage, Image, ScrollView, Platform, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { Text, View, AsyncStorage, Image, ScrollView, Platform, TouchableOpacity, TouchableWithoutFeedback, Modal } from 'react-native';
 import { CardSection, Input, Button, Header } from './common';
 import Languages from '../Languages/Languages.json';
 import RadioForm from 'react-native-simple-radio-button';
 import { Actions } from 'react-native-router-flux';
 
 class Settings extends Component {
-    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, languages: null, mediaType: null, media: null, mediaArray: null, selectedItem: null, width: null };
+    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, languages: null, mediaType: null, media: null, mediaArray: null, selectedItem: null, width: null, modalVisible: false, delete: null };
     async componentWillMount() {
         if (await AsyncStorage.getItem('name') !== null) {
             this.setState({ 
@@ -46,7 +46,7 @@ class Settings extends Component {
         content.splice(searchContent, 1);
         AsyncStorage.setItem('Pictures', JSON.stringify(content));
         AsyncStorage.setItem('Media', JSON.stringify(media));
-        this.setState({ mediaArray: media, media: content, selectedItem: null });
+        this.setState({ mediaArray: media, media: content, selectedItem: null, modalVisible: false, delete: null });
     }
         if (selected.mediaType === 'Video') {
             const media = this.state.mediaArray;
@@ -67,7 +67,7 @@ class Settings extends Component {
         content.splice(searchContent, 1);
         AsyncStorage.setItem('Videos', JSON.stringify(content));
         AsyncStorage.setItem('Media', JSON.stringify(media));
-        this.setState({ mediaArray: media, media: content, selectedItem: null });
+        this.setState({ mediaArray: media, media: content, selectedItem: null, modalVisible: false, delete: null });
         }
         if (selected.mediaType === 'Youtube') {
             const media = this.state.mediaArray;
@@ -88,7 +88,7 @@ class Settings extends Component {
         content.splice(searchContent, 1);
         AsyncStorage.setItem('Videos', JSON.stringify(content));
         AsyncStorage.setItem('Media', JSON.stringify(media));
-        this.setState({ mediaArray: media, media: content, selectedItem: null });
+        this.setState({ mediaArray: media, media: content, selectedItem: null, modalVisible: false, delete: null });
     }
         if (selected.mediaType === 'Music') {
         const media = this.state.mediaArray;
@@ -109,7 +109,7 @@ class Settings extends Component {
         content.splice(searchContent, 1);
         AsyncStorage.setItem('Audio', JSON.stringify(content));
         AsyncStorage.setItem('Media', JSON.stringify(media));
-        this.setState({ mediaArray: media, media: content, selectedItem: null });
+        this.setState({ mediaArray: media, media: content, selectedItem: null, modalVisible: false, delete: null });
         }
         if (selected.mediaType === 'MusicAnd') {
             const media = this.state.mediaArray;
@@ -130,7 +130,7 @@ class Settings extends Component {
         content.splice(searchContent, 1);
         AsyncStorage.setItem('Audio', JSON.stringify(content));
         AsyncStorage.setItem('Media', JSON.stringify(media));
-        this.setState({ mediaArray: media, media: content, selectedItem: null });
+        this.setState({ mediaArray: media, media: content, selectedItem: null, modalVisible: false, delete: null });
         }
     }
 
@@ -496,7 +496,7 @@ class Settings extends Component {
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback 
                             onPress={() => {
-                                this.onDelete(photo);
+                                this.setState({ modalVisible: true, delete: photo });
                                 }}
                             >
                                 <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
@@ -524,7 +524,7 @@ class Settings extends Component {
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback 
                             onPress={() => {
-                                this.onDelete(photo);
+                                this.setState({ modalVisible: true, delete: photo });
                                 }}
                             >
                                 <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
@@ -546,7 +546,7 @@ class Settings extends Component {
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback 
                             onPress={() => {
-                                this.onDelete(photo);
+                                this.setState({ modalVisible: true, delete: photo });
                                 }}
                             >
                                 <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
@@ -574,7 +574,7 @@ class Settings extends Component {
                             </TouchableWithoutFeedback>
                             <TouchableWithoutFeedback 
                             onPress={() => {
-                                this.onDelete(photo);
+                                this.setState({ modalVisible: true, delete: photo });
                                 }}
                             >
                                 <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
@@ -763,6 +763,32 @@ class Settings extends Component {
             if (this.state.selectedItem === null) {
                 return (
                     <View style={{ flex: 1 }}>
+                        <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.modalVisible}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['114']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => this.onDelete(this.state.delete)}
+                        >
+                    {Languages[this.state.languages]['096']}
+                        </Button>
+                    </CardSection>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => this.setState({ modalVisible: false, delete: null })}
+                        >
+                    {Languages[this.state.languages]['097']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
                     <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
