@@ -134,6 +134,17 @@ class AddPhoto extends Component {
         this.setState({ webphoto: true });
     }
 
+    inputFocused(refName) {
+        setTimeout(() => {
+          let scrollResponder = this.refs.scrollView.getScrollResponder();
+          scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
+            React.findNodeHandle(this.refs[refName]),
+            110, //additionalOffset
+            true
+          );
+        }, 50);
+      }
+
     onPhotoSelect() {
         console.log(this.state.languages);
         console.log(this.state.acheivement)
@@ -168,6 +179,8 @@ class AddPhoto extends Component {
                         label={Languages[this.state.languages]['060']}
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
+                        ref='username'
+                        onFocus={this.inputFocused.bind(this, 'username')}
                         />
                     </CardSection>
                     <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
@@ -459,7 +472,7 @@ class AddPhoto extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
-                <ScrollView>
+                <ScrollView ref="scrollView">
                     <View style={{ marginTop: 5, marginLeft: 80, marginRight: 80, flex: 1 }}>
                         <CardSection>
                             <Button onPress={this.onTakePhotoPress.bind(this)}>
