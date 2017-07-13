@@ -25,7 +25,7 @@ class MediaExplorer extends Component {
             return (
             <View>
             <View style={{ flexDirection: 'column', backgroundColor: '#f9f7f7', height: this.state.height, width: this.state.width, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginBottom: 10 }}> {Languages[this.state.languages]['048']}</Text>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginBottom: 10 }}> {Languages[this.state.languages]['040']}</Text>
                     <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0, width: (this.state.width - 100) }}>
                         <Button onPress={() => Actions.AddPhoto()}>
                             {Languages[this.state.languages]['036']}

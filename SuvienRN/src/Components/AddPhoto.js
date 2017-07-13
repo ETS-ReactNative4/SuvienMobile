@@ -2,15 +2,16 @@
 //Add save and return to settings
 //Return to home.
 import React, { Component } from 'react';
-import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity, TouchableWithoutFeedback, Dimensions } from 'react-native';
+import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity, TouchableWithoutFeedback, Platform, Dimensions } from 'react-native';
 import { CardSection, Button, Input, Header } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null, languages: null, acheivement: null, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    state = { imageuri: null, caption: null, group: null, languages: null, acheivement: null, isNull: false, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
     async componentWillMount() {
+        console.log(await AsyncStorage.getItem('Language'));
         this.setState({ 
             heightc: Dimensions.get('window').height,
             widthc: Dimensions.get('window').width,
@@ -19,49 +20,53 @@ class AddPhoto extends Component {
         });
     }
     async onSaveItemPress() {
-        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
-        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
-        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
-        const photos = JSON.parse(await AsyncStorage.getItem('Pictures'));
-        photos.push({
-            title: this.state.title,
-            imageuri: this.state.imageuri, 
-            caption: this.state.caption, 
-            group: this.state.group,
-            height: this.state.height,
-            width: this.state.width,
-            isFavourite: this.state.isFavourite,
-            mediaType: 'Photo'
-        });
-        gen.push({
-            uniqueID: objec.uniqueID, 
-            title: this.state.title,
-            imageuri: this.state.imageuri, 
-            caption: this.state.caption, 
-            group: this.state.group,
-            height: this.state.height,
-            width: this.state.width,
-            isFavourite: this.state.isFavourite,
-            mediaType: 'Photo'
-        });
-        objec.uri = this.state.imageuri;
-        objec.title = this.state.title;
-        objec.caption = this.state.caption;
-        objec.group = this.state.group;
-        objec.height = this.state.height;
-        objec.width = this.state.width;
-        objec.isFavourite = this.state.isFavourite;
-        objec.mediaType = 'Photo';
-        const findTags = mytags.find((tag) => tag === this.state.group);
-        if (findTags === undefined) {
-            mytags.push(this.state.group);
-            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || (this.state.imgsrc === null && this.state.imageuri === null)) {
+            this.setState({ isNull: true });
+        } else {
+            const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+            const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+            const gen = JSON.parse(await AsyncStorage.getItem('Media'));
+            const photos = JSON.parse(await AsyncStorage.getItem('Pictures'));
+            photos.push({
+                title: this.state.title,
+                imageuri: this.state.imageuri, 
+                caption: this.state.caption, 
+                group: this.state.group,
+                height: this.state.height,
+                width: this.state.width,
+                isFavourite: this.state.isFavourite,
+                mediaType: 'Photo'
+            });
+            gen.push({
+                uniqueID: objec.uniqueID, 
+                title: this.state.title,
+                imageuri: this.state.imageuri, 
+                caption: this.state.caption, 
+                group: this.state.group,
+                height: this.state.height,
+                width: this.state.width,
+                isFavourite: this.state.isFavourite,
+                mediaType: 'Photo'
+            });
+            objec.uri = this.state.imageuri;
+            objec.title = this.state.title;
+            objec.caption = this.state.caption;
+            objec.group = this.state.group;
+            objec.height = this.state.height;
+            objec.width = this.state.width;
+            objec.isFavourite = this.state.isFavourite;
+            objec.mediaType = 'Photo';
+            const findTags = mytags.find((tag) => tag === this.state.group);
+            if (findTags === undefined) {
+                mytags.push(this.state.group);
+                AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+            }
+            AsyncStorage.setItem('uniqueID', JSON.stringify(objec));
+            AsyncStorage.setItem('Media', JSON.stringify(gen));
+            AsyncStorage.setItem('Pictures', JSON.stringify(photos));
+            //console.log(JSON.parse(await AsyncStorage.getItem(namefile)));
+            Actions.Home();
         }
-        AsyncStorage.setItem('uniqueID', JSON.stringify(objec));
-        AsyncStorage.setItem('Media', JSON.stringify(gen));
-        AsyncStorage.setItem('Pictures', JSON.stringify(photos));
-        //console.log(JSON.parse(await AsyncStorage.getItem(namefile)));
-        Actions.Home();
     }
 
     onSaveURLPress() {
@@ -130,6 +135,8 @@ class AddPhoto extends Component {
     }
 
     onPhotoSelect() {
+        console.log(this.state.languages);
+        console.log(this.state.acheivement)
         //1496411711468
         if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
             if (this.state.languages !== null) {
@@ -137,7 +144,7 @@ class AddPhoto extends Component {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/noimage.png')} style={{ height: 300, width: 300 }} />
+                        <Image source={{ uri: `${Languages[this.state.languages]['064']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
@@ -226,12 +233,13 @@ class AddPhoto extends Component {
             );
         }
     }
-        if (this.state.acheivement === null || this.state.acheivement === 'INCOM') {
+}
+    if (this.state.acheivement === null || this.state.acheivement === 'INCOM') {
             if (this.state.imageuri === null) {
             return (
                 <View style={{ alignItems: 'center' }}>
                     <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/noimage.png')} style={{ height: 300, width: 300 }} />
+                        <Image source={{ uri: `${Languages[this.state.languages]['064']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     <CardSection style={{ borderTopWidth: 1 }}>
                         <Input
@@ -310,7 +318,6 @@ class AddPhoto extends Component {
                     </View>
                 </View>
             );
-        }
         }
             }
             if (this.state.languages === null) {
@@ -363,7 +370,10 @@ class AddPhoto extends Component {
     }
 
     async createNew() {
-        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || (this.state.imgsrc === null && this.state.imageuri === null)) {
+            this.setState({ isNull: true });
+        } else {
+            const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
         const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
         const gen = JSON.parse(await AsyncStorage.getItem('Media'));
         const photos = JSON.parse(await AsyncStorage.getItem('Pictures'));
@@ -405,6 +415,7 @@ class AddPhoto extends Component {
         AsyncStorage.setItem('Media', JSON.stringify(gen));
         AsyncStorage.setItem('Pictures', JSON.stringify(photos));
         this.setState({ imageuri: null, caption: null, group: null, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, cameraType: 'back', webphoto: null, imgsrc: null });
+        }
     }
 
     render() {
@@ -413,6 +424,28 @@ class AddPhoto extends Component {
             if (this.state.photos === null) {
             return (
                 <View style={{ flex: 1 }}>
+                    <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
@@ -456,6 +489,28 @@ class AddPhoto extends Component {
         if (this.state.photos !== null) {
             return (
                 <View style={{ flex: 1 }}>
+                    <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
                     <Modal
                         animationType={'fade'}
                         transparent

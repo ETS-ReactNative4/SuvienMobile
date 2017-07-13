@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, Image, AsyncStorage, View, Modal } from 'react-native';
+import { Text, TouchableOpacity, Image, AsyncStorage, View, Platform } from 'react-native';
+import Languages from './Languages.json';
 import { CardSection } from './CardSection';
 import { Actions } from 'react-native-router-flux';
 
 class PictureTile extends Component {
-    state = { imageuri: null, caption: null, tag: null, isNull: true }
+    state = { imageuri: null, caption: null, tag: null, isNull: true, languages: null }
 
+    async componentWillMount() {
+        this.setState({ languages: await AsyncStorage.getItem('Language') });
+    }
     render() {
-        if (this.props.data === null) {
+        if (this.state.languages !== null) {
+             if (this.props.data === null) {
             return (
             <TouchableOpacity 
             onPress={() => {
@@ -18,15 +23,16 @@ class PictureTile extends Component {
                     }
                     }
             >
-                <Image source={require('./nocontent.png')} style={this.props.style} />
+                <Image source={{ uri: `${Languages[this.state.languages]['014']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={this.props.style} />
             </TouchableOpacity>
         );
     }
     if (this.props.data !== null) {
-        if (this.props.data.mediaType === 'Photo'){
+        if (this.props.data.mediaType === 'Photo') {
             return (
             <TouchableOpacity 
             onPress={() => {
+                console.log(this.props.data.imageuri);
                 this.props.onChangePress({ uri: this.props.data.imageuri,
                 title: this.props.data.title, 
                 caption: this.props.data.caption, 
@@ -51,7 +57,11 @@ class PictureTile extends Component {
             }
             }
             >
-                <Image source={{ uri: this.props.data.imageuri }} style={this.props.style} />
+                <Image source={{ uri: this.props.data.imageuri }} style={this.props.style}>
+                    <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end', width: this.props.style.height, height: this.props.style.height, paddingBottom: 10, paddingRight: 10 }}>
+                    <Image source={require('./photoimagebig.png')} style={{ height: 50, width: 50 }} />
+                    </View>
+                </Image>
             </TouchableOpacity>
         );
     }
@@ -81,7 +91,11 @@ class PictureTile extends Component {
             }
             }
         >
-                <Image source={{ uri: this.props.data.imageuri }} style={this.props.style} />
+                <Image source={{ uri: this.props.data.imageuri }} style={this.props.style}>
+                    <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end', width: this.props.style.height, height: this.props.style.height, paddingBottom: 10, paddingRight: 10 }}>
+                    <Image source={require('./videoicon.png')} style={{ height: 50, width: 50 }} />
+                    </View>
+                </Image>
             </TouchableOpacity>
         );
     }
@@ -158,10 +172,20 @@ class PictureTile extends Component {
             }
             }
             >
-                <Image source={{ uri: this.props.data.uri }} style={this.props.style} />
+                <Image source={{ uri: this.props.data.uri }} style={this.props.style}>
+                    <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end', width: this.props.style.height, height: this.props.style.height, paddingBottom: 10, paddingRight: 10 }}>
+                    <Image source={require('./videoicon.png')} style={{ height: 50, width: 50 }} />
+                    </View>
+                </Image>
             </TouchableOpacity>
         );
         }
+        }
+    }
+        if (this.state.languages === null) {
+            return (
+                <View />
+            );
         }
     }
 }

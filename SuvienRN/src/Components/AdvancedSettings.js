@@ -213,4 +213,4 @@ const styles = {
     }
 };
 
-export default AdvancedSettings;
+export { AdvancedSettings };

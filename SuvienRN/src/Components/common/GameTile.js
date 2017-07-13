@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
-import { Image, TouchableOpacity, AsyncStorage, View } from 'react-native';
+import { Image, TouchableOpacity, Platform, AsyncStorage, View } from 'react-native';
 
 class GameTile extends Component {
     state = { isTurned: false, isFlipped: null, dim: null }
      async componentWillMount() {
+         let newHeight;
+         let newWidth;
          const height = parseInt(JSON.parse(await AsyncStorage.getItem('Height')));
          const width = parseInt(JSON.parse(await AsyncStorage.getItem('Width')));
-         const newHeight = parseFloat((height - 80) / 2);
-         const newWidth = parseFloat((width - 20) / 4);
+         if (Platform.OS === 'android') {
+            newHeight = parseFloat((height - 80) / 2);
+            newWidth = parseFloat((width - 20) / 4);
+        }
+        if (Platform.OS === 'ios') {
+            newHeight = parseFloat((height - 20) / 2);
+            newWidth = parseFloat((width - 20) / 4);
+        }
          if (newWidth <= newHeight) {
              this.setState({ dim: newWidth });
          }

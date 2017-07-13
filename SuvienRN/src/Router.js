@@ -16,10 +16,12 @@ import {
     AddAudioAnd,
     VideoTest,
     AddMessage,
-    MemoryGame
+    MemoryGame,
+    ContentExplorer,
+    AdvancedSettings,
+    CaptionGame,
+    Games
 } from './Components';
-import ContentExplorer from './Components/ContentExplorer';
-import AdvancedSettings from './Components/AdvancedSettings';
 
 const RouterComponent = () => (
         <Router
@@ -30,6 +32,18 @@ const RouterComponent = () => (
             component={MainMenu}
             hideNavBar
             initial 
+            />
+
+            <Scene
+            key="Games"
+            component={Games}
+            hideNavBar
+            />
+            
+            <Scene
+            key="CaptionGame"
+            component={CaptionGame}
+            hideNavBar
             />
 
             <Scene

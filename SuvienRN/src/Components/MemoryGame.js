@@ -123,7 +123,7 @@ class MemoryGame extends Component {
         if (this.state.languages !== null) {
             if (this.state.width === null) {
             return (
-                <Text>Loading</Text>
+                <Text style={{ marginTop: 30 }}>Loading</Text>
             );
         }
         if (this.state.width !== null) {
@@ -141,7 +141,7 @@ class MemoryGame extends Component {
                         <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
                     </Header>
                     </View>
-                <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center' }}>
+                <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                     {this.renderTiles()}
                 </View>
                 <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }} />
@@ -187,7 +187,7 @@ class MemoryGame extends Component {
                         <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
                     </Header>
                     </View>
-                <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center' }}>
+                <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                     {this.renderTiles()}
                 </View>
                 </View>
@@ -235,7 +235,7 @@ class MemoryGame extends Component {
                         <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
                     </Header>
                     </View>
-                <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center' }}>
+                <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                     {this.renderTiles()}
                 </View>
                 <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30, backgroundColor: 'grey' }}>
@@ -285,7 +285,7 @@ class MemoryGame extends Component {
                         <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
                     </Header>
                     </View>
-                <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center' }}>
+                <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                     {this.renderTiles()}
                 </View>
                 </View>
