@@ -29,7 +29,6 @@ class PictureTile extends Component {
         );
     }
     if (this.props.data !== null) {
-        RNFS.exists(this.props.data.imageuri).then((result) => console.log(result)).catch((result) => console.log(result));
         if (this.props.data.mediaType === 'Photo') {
             return (
             <TouchableOpacity 
