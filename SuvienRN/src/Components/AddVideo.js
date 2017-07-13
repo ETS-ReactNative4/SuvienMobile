@@ -6,7 +6,7 @@ import { CardSection, Button, Input, Header } from './common';
 import Camera from 'react-native-camera';
 
 class AddVideo extends Component {
-    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, languages: null, heightc: null, widthc: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
+    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, isNull: false, languages: null, heightc: null, widthc: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
     async componentWillMount() {
         this.setState({ 
             heightc: Dimensions.get('window').height,
@@ -37,438 +37,501 @@ class AddVideo extends Component {
     }
 
     async onSaveItemPress() {
-        if (this.state.mediaType === 'Youtube') {
-        const { mediaType, videoID, thumbnail, title, caption, group } = this.state;
-        const videoobj = JSON.parse(await AsyncStorage.getItem('Videos'));
-        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
-        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
-        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
-        videoobj.push(
-            { 
-                mediaType,
-                videouri: videoID,
-                imageuri: thumbnail,
-                title,
-                caption,
-                group,
-                isFavourite: false
+        console.log(this.state.videouri);
+        console.log(this.state.uri);
+        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || (this.state.videoID === null && this.state.uri === null)) {
+            this.setState({ isNull: true });
+        } else {
+            if (this.state.mediaType === 'Youtube') {
+                const { mediaType, videoID, thumbnail, title, caption, group } = this.state;
+                const videoobj = JSON.parse(await AsyncStorage.getItem('Videos'));
+                const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+                const gen = JSON.parse(await AsyncStorage.getItem('Media'));
+                const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+                videoobj.push(
+                    { 
+                        mediaType,
+                        videouri: videoID,
+                        imageuri: thumbnail,
+                        title,
+                        caption,
+                        group,
+                        isFavourite: false
+                    }
+                );
+                gen.push({
+                    uniqueID: objec.uniqueID, 
+                    title,
+                    videouri: videoID,
+                    imageuri: thumbnail, 
+                    caption, 
+                    group,
+                    isFavourite: false,
+                    mediaType 
+                });
+                const findTags = mytags.find((tag) => tag === this.state.group);
+                if (findTags === undefined) {
+                    mytags.push(this.state.group);
+                    AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+                }
+                AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
+                AsyncStorage.setItem('Media', JSON.stringify(gen));
+                Actions.Home();
             }
-        );
-        gen.push({
-            uniqueID: objec.uniqueID, 
-            title,
-            videouri: videoID,
-            imageuri: thumbnail, 
-            caption, 
-            group,
-            isFavourite: false,
-            mediaType 
-        });
-        const findTags = mytags.find((tag) => tag === this.state.group);
-        if (findTags === undefined) {
-            mytags.push(this.state.group);
-            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
-        }
-        AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
-        AsyncStorage.setItem('Media', JSON.stringify(gen));
-        Actions.Home();
-    }
-        if (this.state.mediaType === 'Video') {
-            const { mediaType, uri, title, caption, group } = this.state;
-        const videoobj = JSON.parse(await AsyncStorage.getItem('Videos'));
-        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
-        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
-        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
-        videoobj.push(
-            { 
-                mediaType,
-                uri,
-                title,
-                caption,
-                group,
-                isFavourite: false,
-            }
-        );
-        gen.push({
-            uniqueID: objec.uniqueID, 
-            mediaType,
-            uri,
-            title,
-            caption,
-            group,
-            isFavourite: false,
-        });
-        const findTags = mytags.find((tag) => tag === this.state.group);
-        if (findTags === undefined) {
-            mytags.push(this.state.group);
-            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
-        }
-        AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
-        AsyncStorage.setItem('Media', JSON.stringify(gen));
-        Actions.Home();
+                if (this.state.mediaType === 'Video') {
+                    const { mediaType, uri, title, caption, group } = this.state;
+                const videoobj = JSON.parse(await AsyncStorage.getItem('Videos'));
+                const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+                const gen = JSON.parse(await AsyncStorage.getItem('Media'));
+                const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+                videoobj.push(
+                    { 
+                        mediaType,
+                        uri,
+                        title,
+                        caption,
+                        group,
+                        isFavourite: false,
+                    }
+                );
+                gen.push({
+                    uniqueID: objec.uniqueID, 
+                    mediaType,
+                    uri,
+                    title,
+                    caption,
+                    group,
+                    isFavourite: false,
+                });
+                const findTags = mytags.find((tag) => tag === this.state.group);
+                if (findTags === undefined) {
+                    mytags.push(this.state.group);
+                    AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+                }
+                AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
+                AsyncStorage.setItem('Media', JSON.stringify(gen));
+                Actions.Home();
+                }
         }
     }
 
     onSaveURLPress() {
-        const firstsplit = this.state.videosrc.split('=');
-        const secondsplit = firstsplit[1].split('&');
-        this.setState({ videoID: secondsplit[0], thumbnail: `https://img.youtube.com/vi/${secondsplit[0]}/hqdefault.jpg`, mediaType: 'Youtube' });
+        try {
+            const firstsplit = this.state.videosrc.split('=');
+            const secondsplit = firstsplit[1].split('&');
+            this.setState({ videoID: secondsplit[0], thumbnail: `https://img.youtube.com/vi/${secondsplit[0]}/hqdefault.jpg`, mediaType: 'Youtube' });
+        } catch (err) {
+            this.setState({ mediaType: 'Invalid' });
+        }
     }
 
     async createNew() {
-        if (this.state.mediaType === 'Youtube') {
-        const { mediaType, videoID, thumbnail, title, caption, group } = this.state;
-        const videoobj = JSON.parse(await AsyncStorage.getItem('Videos'));
-        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
-        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
-        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
-        videoobj.push(
-            { 
-                mediaType,
-                videouri: videoID,
-                imageuri: thumbnail,
-                title,
-                caption,
-                group,
-                isFavourite: false
+        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || (this.state.videoID === null && this.state.uri === null)) {
+            this.setState({ isNull: true });
+        } else {
+            if (this.state.mediaType === 'Youtube') {
+                const { mediaType, videoID, thumbnail, title, caption, group } = this.state;
+                const videoobj = JSON.parse(await AsyncStorage.getItem('Videos'));
+                const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+                const gen = JSON.parse(await AsyncStorage.getItem('Media'));
+                const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+                videoobj.push(
+                    { 
+                        mediaType,
+                        videouri: videoID,
+                        imageuri: thumbnail,
+                        title,
+                        caption,
+                        group,
+                        isFavourite: false
+                    }
+                );
+                gen.push({
+                    uniqueID: objec.uniqueID, 
+                    title,
+                    videouri: videoID,
+                    imageuri: thumbnail, 
+                    caption, 
+                    group,
+                    isFavourite: false,
+                    mediaType 
+                });
+                const findTags = mytags.find((tag) => tag === this.state.group);
+                if (findTags === undefined) {
+                    mytags.push(this.state.group);
+                    AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+                }
+                AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
+                AsyncStorage.setItem('Media', JSON.stringify(gen));
+                Actions.Home();
             }
-        );
-        gen.push({
-            uniqueID: objec.uniqueID, 
-            title,
-            videouri: videoID,
-            imageuri: thumbnail, 
-            caption, 
-            group,
-            isFavourite: false,
-            mediaType 
-        });
-        const findTags = mytags.find((tag) => tag === this.state.group);
-        if (findTags === undefined) {
-            mytags.push(this.state.group);
-            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
-        }
-        AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
-        AsyncStorage.setItem('Media', JSON.stringify(gen));
-        Actions.Home();
-    }
-        if (this.state.mediaType === 'Video') {
-            const { mediaType, uri, title, caption, group } = this.state;
-        const videoobj = JSON.parse(await AsyncStorage.getItem('Videos'));
-        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
-        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
-        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
-        videoobj.push(
-            { 
-                mediaType,
-                uri,
-                title,
-                caption,
-                group,
-                isFavourite: false,
-            }
-        );
-        gen.push({
-            uniqueID: objec.uniqueID, 
-            mediaType,
-            uri,
-            title,
-            caption,
-            group,
-            isFavourite: false,
-        });
-        const findTags = mytags.find((tag) => tag === this.state.group);
-        if (findTags === undefined) {
-            mytags.push(this.state.group);
-            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
-        }
-        AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
-        AsyncStorage.setItem('Media', JSON.stringify(gen));
-        this.setState({ thumbnail: null, videosrc: null, height: null, width: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null });
+                if (this.state.mediaType === 'Video') {
+                    const { mediaType, uri, title, caption, group } = this.state;
+                const videoobj = JSON.parse(await AsyncStorage.getItem('Videos'));
+                const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+                const gen = JSON.parse(await AsyncStorage.getItem('Media'));
+                const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+                videoobj.push(
+                    { 
+                        mediaType,
+                        uri,
+                        title,
+                        caption,
+                        group,
+                        isFavourite: false,
+                    }
+                );
+                gen.push({
+                    uniqueID: objec.uniqueID, 
+                    mediaType,
+                    uri,
+                    title,
+                    caption,
+                    group,
+                    isFavourite: false,
+                });
+                const findTags = mytags.find((tag) => tag === this.state.group);
+                if (findTags === undefined) {
+                    mytags.push(this.state.group);
+                    AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+                }
+                AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
+                AsyncStorage.setItem('Media', JSON.stringify(gen));
+                this.setState({ thumbnail: null, videosrc: null, height: null, width: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null });
+                }
         }
     }
     onRenderExplorer() {
         if (this.state.languages !== null) {
-            if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
-            if (this.state.videoID === null && this.state.uri === null) {
-            return (
-                <ScrollView>
-                <View style={{ alignItems: 'center' }}>
-                    <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: `${Languages[this.state.languages]['065']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['061']}
-                        label={Languages[this.state.languages]['058']}
-                        value={this.state.title}
-                        onChangeText={(title) => this.setState({ title })}
-                        />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['062']}
-                        label={Languages[this.state.languages]['059']}
-                        value={this.state.caption}
-                        onChangeText={(caption) => this.setState({ caption })}
-                        />
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        value={this.state.group}
-                        onChangeText={(group) => this.setState({ group })}
-                        />
-                    </CardSection>
-                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={() => Actions.Settings()}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
+            if (this.state.mediaType === 'Invalid') {
+                return (
+                    <ScrollView>
+                    <View style={{ alignItems: 'center' }}>
+                        <CardSection style={{ borderBottomWidth: 0 }}>
+                            <Image source={{ uri: `${Languages[this.state.languages]['110']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
+                        </CardSection>
+                        <CardSection style={{ borderTopWidth: 1 }}>
+                            <Input
+                            placeholder={Languages[this.state.languages]['061']}
+                            label={Languages[this.state.languages]['058']}
+                            value={this.state.title}
+                            onChangeText={(title) => this.setState({ title })}
+                            />
+                        </CardSection>
+                        <CardSection style={{ borderTopWidth: 1 }}>
+                            <Input
+                            placeholder={Languages[this.state.languages]['062']}
+                            label={Languages[this.state.languages]['059']}
+                            value={this.state.caption}
+                            onChangeText={(caption) => this.setState({ caption })}
+                            />
+                        </CardSection>
+                        <CardSection>
+                            <Input
+                            placeholder={Languages[this.state.languages]['063']}
+                            label={Languages[this.state.languages]['060']}
+                            value={this.state.group}
+                            onChangeText={(group) => this.setState({ group })}
+                            />
+                        </CardSection>
+                        <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                            <Button onPress={this.onSaveItemPress.bind(this)}>
+                                {Languages[this.state.languages]['067']}
+                                <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            </Button>
+                            <Button onPress={this.createNew.bind(this)}>
+                                {Languages[this.state.languages]['068']}
+                                <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                            </Button>
+                            <Button onPress={() => Actions.Settings()}>
+                                {Languages[this.state.languages]['069']}
+                            </Button>
+                        </View>
                     </View>
-                </View>
-                </ScrollView>
-            );
-        }
-        if (this.state.videoID !== null && this.state.thumbnail !== null){
-            return (
-                <ScrollView>
-                <View style={{ alignItems: 'center' }}>
-                    <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: this.state.thumbnail }} style={{ height: 360, width: 480 }} />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['061']}
-                        label={Languages[this.state.languages]['058']}
-                        value={this.state.title}
-                        onChangeText={(title) => this.setState({ title })}
-                        />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['062']}
-                        label={Languages[this.state.languages]['059']}
-                        value={this.state.caption}
-                        onChangeText={(caption) => this.setState({ caption })}
-                        />
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        value={this.state.group}
-                        onChangeText={(group) => this.setState({ group })}
-                        />
-                    </CardSection>
-                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={() => Actions.Settings()}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
-                    </View>
-                </View>
-                </ScrollView>
-            );
-        }
-        if (this.state.uri !== null) {
-            return (
-                <ScrollView>
-                <View style={{ alignItems: 'center' }}>
-                    <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: this.state.uri }} style={{ height: 360, width: 480 }} />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['061']}
-                        label={Languages[this.state.languages]['058']}
-                        value={this.state.title}
-                        onChangeText={(title) => this.setState({ title })}
-                        />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['062']}
-                        label={Languages[this.state.languages]['059']}
-                        value={this.state.caption}
-                        onChangeText={(caption) => this.setState({ caption })}
-                        />
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        value={this.state.group}
-                        onChangeText={(group) => this.setState({ group })}
-                        />
-                    </CardSection>
-                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={() => Actions.Settings()}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
-                    </View>
-                </View>
-                </ScrollView>
-            );
-        }
-    }
-        if (this.state.acheivement === null || this.state.acheivement === 'INCOM') {
-            if (this.state.videoID === null && this.state.uri === null) {
-            return (
-                <ScrollView>
-                <View style={{ alignItems: 'center' }}>
-                    <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: `${Languages[this.state.languages]['065']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['061']}
-                        label={Languages[this.state.languages]['058']}
-                        value={this.state.title}
-                        onChangeText={(title) => this.setState({ title })}
-                        />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['062']}
-                        label={Languages[this.state.languages]['059']}
-                        value={this.state.caption}
-                        onChangeText={(caption) => this.setState({ caption })}
-                        />
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        value={this.state.group}
-                        onChangeText={(group) => this.setState({ group })}
-                        />
-                    </CardSection>
-                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={() => Actions.Settings()}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
-                    </View>
-                </View>
-                </ScrollView>
-            );
-        }
-        if (this.state.videoID !== null && this.state.thumbnail !== null){
-            return (
-                <ScrollView>
-                <View style={{ alignItems: 'center' }}>
-                    <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: this.state.thumbnail }} style={{ height: 360, width: 480 }} />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['061']}
-                        label={Languages[this.state.languages]['058']}
-                        value={this.state.title}
-                        onChangeText={(title) => this.setState({ title })}
-                        />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['062']}
-                        label={Languages[this.state.languages]['059']}
-                        value={this.state.caption}
-                        onChangeText={(caption) => this.setState({ caption })}
-                        />
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        value={this.state.group}
-                        onChangeText={(group) => this.setState({ group })}
-                        />
-                    </CardSection>
-                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={() => Actions.Settings()}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
-                    </View>
-                </View>
-                </ScrollView>
-            );
-        }
-        if (this.state.uri !== null) {
-            return (
-                <ScrollView>
-                <View style={{ alignItems: 'center' }}>
-                    <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: this.state.uri }} style={{ height: 360, width: 480 }} />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['061']}
-                        label={Languages[this.state.languages]['058']}
-                        value={this.state.title}
-                        onChangeText={(title) => this.setState({ title })}
-                        />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['062']}
-                        label={Languages[this.state.languages]['059']}
-                        value={this.state.caption}
-                        onChangeText={(caption) => this.setState({ caption })}
-                        />
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        value={this.state.group}
-                        onChangeText={(group) => this.setState({ group })}
-                        />
-                    </CardSection>
-                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={() => Actions.Settings()}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
-                    </View>
-                </View>
-                </ScrollView>
-            );
-        }
-        }
+                    </ScrollView>
+                );
+            } else {
+                if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
+                    if (this.state.videoID === null && this.state.uri === null) {
+                    return (
+                        <ScrollView>
+                        <View style={{ alignItems: 'center' }}>
+                            <CardSection style={{ borderBottomWidth: 0 }}>
+                                <Image source={{ uri: `${Languages[this.state.languages]['065']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
+                            </CardSection>
+                            <CardSection style={{ borderTopWidth: 1 }}>
+                                <Input
+                                placeholder={Languages[this.state.languages]['061']}
+                                label={Languages[this.state.languages]['058']}
+                                value={this.state.title}
+                                onChangeText={(title) => this.setState({ title })}
+                                />
+                            </CardSection>
+                            <CardSection style={{ borderTopWidth: 1 }}>
+                                <Input
+                                placeholder={Languages[this.state.languages]['062']}
+                                label={Languages[this.state.languages]['059']}
+                                value={this.state.caption}
+                                onChangeText={(caption) => this.setState({ caption })}
+                                />
+                            </CardSection>
+                            <CardSection>
+                                <Input
+                                placeholder={Languages[this.state.languages]['063']}
+                                label={Languages[this.state.languages]['060']}
+                                value={this.state.group}
+                                onChangeText={(group) => this.setState({ group })}
+                                />
+                            </CardSection>
+                            <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                                <Button onPress={this.onSaveItemPress.bind(this)}>
+                                    {Languages[this.state.languages]['067']}
+                                    <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                                </Button>
+                                <Button onPress={this.createNew.bind(this)}>
+                                    {Languages[this.state.languages]['068']}
+                                    <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                                </Button>
+                                <Button onPress={() => Actions.Settings()}>
+                                    {Languages[this.state.languages]['069']}
+                                </Button>
+                            </View>
+                        </View>
+                        </ScrollView>
+                    );
+                }
+                if (this.state.videoID !== null && this.state.thumbnail !== null){
+                    return (
+                        <ScrollView>
+                        <View style={{ alignItems: 'center' }}>
+                            <CardSection style={{ borderBottomWidth: 0 }}>
+                                <Image source={{ uri: this.state.thumbnail }} style={{ height: 360, width: 480 }} />
+                            </CardSection>
+                            <CardSection style={{ borderTopWidth: 1 }}>
+                                <Input
+                                placeholder={Languages[this.state.languages]['061']}
+                                label={Languages[this.state.languages]['058']}
+                                value={this.state.title}
+                                onChangeText={(title) => this.setState({ title })}
+                                />
+                            </CardSection>
+                            <CardSection style={{ borderTopWidth: 1 }}>
+                                <Input
+                                placeholder={Languages[this.state.languages]['062']}
+                                label={Languages[this.state.languages]['059']}
+                                value={this.state.caption}
+                                onChangeText={(caption) => this.setState({ caption })}
+                                />
+                            </CardSection>
+                            <CardSection>
+                                <Input
+                                placeholder={Languages[this.state.languages]['063']}
+                                label={Languages[this.state.languages]['060']}
+                                value={this.state.group}
+                                onChangeText={(group) => this.setState({ group })}
+                                />
+                            </CardSection>
+                            <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                                <Button onPress={this.onSaveItemPress.bind(this)}>
+                                    {Languages[this.state.languages]['067']}
+                                    <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                                </Button>
+                                <Button onPress={this.createNew.bind(this)}>
+                                    {Languages[this.state.languages]['068']}
+                                    <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                                </Button>
+                                <Button onPress={() => Actions.Settings()}>
+                                    {Languages[this.state.languages]['069']}
+                                </Button>
+                            </View>
+                        </View>
+                        </ScrollView>
+                    );
+                }
+                if (this.state.uri !== null) {
+                    return (
+                        <ScrollView>
+                        <View style={{ alignItems: 'center' }}>
+                            <CardSection style={{ borderBottomWidth: 0 }}>
+                                <Image source={{ uri: this.state.uri }} style={{ height: 360, width: 480 }} />
+                            </CardSection>
+                            <CardSection style={{ borderTopWidth: 1 }}>
+                                <Input
+                                placeholder={Languages[this.state.languages]['061']}
+                                label={Languages[this.state.languages]['058']}
+                                value={this.state.title}
+                                onChangeText={(title) => this.setState({ title })}
+                                />
+                            </CardSection>
+                            <CardSection style={{ borderTopWidth: 1 }}>
+                                <Input
+                                placeholder={Languages[this.state.languages]['062']}
+                                label={Languages[this.state.languages]['059']}
+                                value={this.state.caption}
+                                onChangeText={(caption) => this.setState({ caption })}
+                                />
+                            </CardSection>
+                            <CardSection>
+                                <Input
+                                placeholder={Languages[this.state.languages]['063']}
+                                label={Languages[this.state.languages]['060']}
+                                value={this.state.group}
+                                onChangeText={(group) => this.setState({ group })}
+                                />
+                            </CardSection>
+                            <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                                <Button onPress={this.onSaveItemPress.bind(this)}>
+                                    {Languages[this.state.languages]['067']}
+                                    <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                                </Button>
+                                <Button onPress={this.createNew.bind(this)}>
+                                    {Languages[this.state.languages]['068']}
+                                    <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                                </Button>
+                                <Button onPress={() => Actions.Settings()}>
+                                    {Languages[this.state.languages]['069']}
+                                </Button>
+                            </View>
+                        </View>
+                        </ScrollView>
+                    );
+                }
+            }
+                if (this.state.acheivement === null || this.state.acheivement === 'INCOM') {
+                    if (this.state.videoID === null && this.state.uri === null) {
+                    return (
+                        <ScrollView>
+                        <View style={{ alignItems: 'center' }}>
+                            <CardSection style={{ borderBottomWidth: 0 }}>
+                                <Image source={{ uri: `${Languages[this.state.languages]['065']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
+                            </CardSection>
+                            <CardSection style={{ borderTopWidth: 1 }}>
+                                <Input
+                                placeholder={Languages[this.state.languages]['061']}
+                                label={Languages[this.state.languages]['058']}
+                                value={this.state.title}
+                                onChangeText={(title) => this.setState({ title })}
+                                />
+                            </CardSection>
+                            <CardSection style={{ borderTopWidth: 1 }}>
+                                <Input
+                                placeholder={Languages[this.state.languages]['062']}
+                                label={Languages[this.state.languages]['059']}
+                                value={this.state.caption}
+                                onChangeText={(caption) => this.setState({ caption })}
+                                />
+                            </CardSection>
+                            <CardSection>
+                                <Input
+                                placeholder={Languages[this.state.languages]['063']}
+                                label={Languages[this.state.languages]['060']}
+                                value={this.state.group}
+                                onChangeText={(group) => this.setState({ group })}
+                                />
+                            </CardSection>
+                            <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                                <Button onPress={this.onSaveItemPress.bind(this)}>
+                                    {Languages[this.state.languages]['067']}
+                                    <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                                </Button>
+                                <Button onPress={() => Actions.Settings()}>
+                                    {Languages[this.state.languages]['069']}
+                                </Button>
+                            </View>
+                        </View>
+                        </ScrollView>
+                    );
+                }
+                if (this.state.videoID !== null && this.state.thumbnail !== null){
+                    return (
+                        <ScrollView>
+                        <View style={{ alignItems: 'center' }}>
+                            <CardSection style={{ borderBottomWidth: 0 }}>
+                                <Image source={{ uri: this.state.thumbnail }} style={{ height: 360, width: 480 }} />
+                            </CardSection>
+                            <CardSection style={{ borderTopWidth: 1 }}>
+                                <Input
+                                placeholder={Languages[this.state.languages]['061']}
+                                label={Languages[this.state.languages]['058']}
+                                value={this.state.title}
+                                onChangeText={(title) => this.setState({ title })}
+                                />
+                            </CardSection>
+                            <CardSection style={{ borderTopWidth: 1 }}>
+                                <Input
+                                placeholder={Languages[this.state.languages]['062']}
+                                label={Languages[this.state.languages]['059']}
+                                value={this.state.caption}
+                                onChangeText={(caption) => this.setState({ caption })}
+                                />
+                            </CardSection>
+                            <CardSection>
+                                <Input
+                                placeholder={Languages[this.state.languages]['063']}
+                                label={Languages[this.state.languages]['060']}
+                                value={this.state.group}
+                                onChangeText={(group) => this.setState({ group })}
+                                />
+                            </CardSection>
+                            <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                                <Button onPress={this.onSaveItemPress.bind(this)}>
+                                    {Languages[this.state.languages]['067']}
+                                    <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                                </Button>
+                                <Button onPress={() => Actions.Settings()}>
+                                    {Languages[this.state.languages]['069']}
+                                </Button>
+                            </View>
+                        </View>
+                        </ScrollView>
+                    );
+                }
+                if (this.state.uri !== null) {
+                    return (
+                        <ScrollView>
+                        <View style={{ alignItems: 'center' }}>
+                            <CardSection style={{ borderBottomWidth: 0 }}>
+                                <Image source={{ uri: this.state.uri }} style={{ height: 360, width: 480 }} />
+                            </CardSection>
+                            <CardSection style={{ borderTopWidth: 1 }}>
+                                <Input
+                                placeholder={Languages[this.state.languages]['061']}
+                                label={Languages[this.state.languages]['058']}
+                                value={this.state.title}
+                                onChangeText={(title) => this.setState({ title })}
+                                />
+                            </CardSection>
+                            <CardSection style={{ borderTopWidth: 1 }}>
+                                <Input
+                                placeholder={Languages[this.state.languages]['062']}
+                                label={Languages[this.state.languages]['059']}
+                                value={this.state.caption}
+                                onChangeText={(caption) => this.setState({ caption })}
+                                />
+                            </CardSection>
+                            <CardSection>
+                                <Input
+                                placeholder={Languages[this.state.languages]['063']}
+                                label={Languages[this.state.languages]['060']}
+                                value={this.state.group}
+                                onChangeText={(group) => this.setState({ group })}
+                                />
+                            </CardSection>
+                            <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
+                                <Button onPress={this.onSaveItemPress.bind(this)}>
+                                    {Languages[this.state.languages]['067']}
+                                    <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                                </Button>
+                                <Button onPress={() => Actions.Settings()}>
+                                    {Languages[this.state.languages]['069']}
+                                </Button>
+                            </View>
+                        </View>
+                        </ScrollView>
+                    );
+                }
+                }
+            }
         }
         if (this.state.languages === null) {
             return (
@@ -550,6 +613,28 @@ class AddVideo extends Component {
             if (this.state.videos !== null) {
         return (
             <View style={{ flex: 1 }}>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
             <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
@@ -609,6 +694,28 @@ class AddVideo extends Component {
     if (this.state.videos === null) {
         return (
             <View style={{ flex: 1 }}>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
             <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
@@ -688,6 +795,28 @@ class AddVideo extends Component {
             if (this.state.videos !== null) {
         return (
             <View style={{ flex: 1 }}>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
             <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
@@ -742,6 +871,28 @@ class AddVideo extends Component {
     if (this.state.videos === null) {
         return (
             <View style={{ flex: 1 }}>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
             <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />

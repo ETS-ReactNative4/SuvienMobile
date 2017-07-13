@@ -1,87 +1,95 @@
 import React, { Component } from 'react';
 import MusicPlayerController from 'react-native-musicplayercontroller';
-import { View, AsyncStorage, Image, Text, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { View, AsyncStorage, Image, Text, ScrollView, TouchableWithoutFeedback, Modal } from 'react-native';
 import { CardSection, Button, Input, Header } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 
 class AddAudio extends Component {
-    state = { information: null, caption: null, group: null, acheivement: null, languages: null }
+    state = { information: null, caption: null, group: null, acheivement: null, languages: null, isNull: false }
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async componentWillMount() {
         this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language') });
     }
     async onSaveItemPress() {
-        const { information, caption, group } = this.state;
-        const audios = JSON.parse(await AsyncStorage.getItem('Audio'));
-        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
-        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
-        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
-        audios.push({
-            title: information[0],
-            album: information[1],
-            artist: information[3],
-            caption,
-            group,
-            isFavourite: false,
-            mediaType: 'Music'
-        });
-        gen.push({
-            uniqueID: objec.uniqueID,
-            title: information[0],
-            album: information[1],
-            artist: information[3],
-            caption,
-            group,
-            isFavourite: false,
-            mediaType: 'Music'
-        });
-        const findTags = mytags.find((tag) => tag === this.state.group);
-        if (findTags === undefined) {
-            mytags.push(this.state.group);
-            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+        if (this.state.information === null || this.state.caption === null || this.state.group === null || this.state.information === '' || this.state.caption === '' || this.state.group === '') {
+            this.setState({ isNull: true });
+        } else {
+            const { information, caption, group } = this.state;
+            const audios = JSON.parse(await AsyncStorage.getItem('Audio'));
+            const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+            const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+            const gen = JSON.parse(await AsyncStorage.getItem('Media'));
+            audios.push({
+                title: information[0],
+                album: information[1],
+                artist: information[3],
+                caption,
+                group,
+                isFavourite: false,
+                mediaType: 'Music'
+            });
+            gen.push({
+                uniqueID: objec.uniqueID,
+                title: information[0],
+                album: information[1],
+                artist: information[3],
+                caption,
+                group,
+                isFavourite: false,
+                mediaType: 'Music'
+            });
+            const findTags = mytags.find((tag) => tag === this.state.group);
+            if (findTags === undefined) {
+                mytags.push(this.state.group);
+                AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+            }
+            AsyncStorage.setItem('Media', JSON.stringify(gen));
+            AsyncStorage.setItem('Audio', JSON.stringify(audios));
+            console.log(await AsyncStorage.getItem('Audio'));
+            Actions.Home();
         }
-        AsyncStorage.setItem('Media', JSON.stringify(gen));
-        AsyncStorage.setItem('Audio', JSON.stringify(audios));
-        console.log(await AsyncStorage.getItem('Audio'));
-        Actions.Home();
-    }
-
-    async createNew() {
-        const { information, caption, group } = this.state;
-        const audios = JSON.parse(await AsyncStorage.getItem('Audio'));
-        const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
-        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
-        const gen = JSON.parse(await AsyncStorage.getItem('Media'));
-        audios.push({
-            title: information[0],
-            album: information[1],
-            artist: information[3],
-            caption,
-            group,
-            isFavourite: false,
-            mediaType: 'Music'
-        });
-        gen.push({
-            uniqueID: objec.uniqueID,
-            title: information[0],
-            album: information[1],
-            artist: information[3],
-            caption,
-            group,
-            isFavourite: false,
-            mediaType: 'Music'
-        });
-        const findTags = mytags.find((tag) => tag === this.state.group);
-        if (findTags === undefined) {
-            mytags.push(this.state.group);
-            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
         }
-        AsyncStorage.setItem('Media', JSON.stringify(gen));
-        AsyncStorage.setItem('Audio', JSON.stringify(audios));
-        console.log(await AsyncStorage.getItem('Audio'));
-        this.setState({ information: null, caption: null, group: null });
-    }
+    
+        async createNew() {
+            const { information, caption, group } = this.state;
+            if (this.state.information === null || this.state.caption === null || this.state.group === null || this.state.information === '' || this.state.caption === '' || this.state.group === '') {
+                this.setState({ isNull: true });
+            } else {
+                const audios = JSON.parse(await AsyncStorage.getItem('Audio'));
+                const objec = JSON.parse(await AsyncStorage.getItem('uniqueID'));
+                const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+                const gen = JSON.parse(await AsyncStorage.getItem('Media'));
+                audios.push({
+                    title: information[0],
+                    album: information[1],
+                    artist: information[3],
+                    caption,
+                    group,
+                    isFavourite: false,
+                    mediaType: 'Music'
+                });
+                gen.push({
+                    uniqueID: objec.uniqueID,
+                    title: information[0],
+                    album: information[1],
+                    artist: information[3],
+                    caption,
+                    group,
+                    isFavourite: false,
+                    mediaType: 'Music'
+                });
+                const findTags = mytags.find((tag) => tag === this.state.group);
+                if (findTags === undefined) {
+                    mytags.push(this.state.group);
+                    AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+                }
+                AsyncStorage.setItem('Media', JSON.stringify(gen));
+                AsyncStorage.setItem('Audio', JSON.stringify(audios));
+                console.log(await AsyncStorage.getItem('Audio'));
+                this.setState({ information: null, caption: null, group: null });
+            }
+            }
     
     onAudioSelect() {
         if (this.state.languages === null) {
@@ -333,6 +341,28 @@ class AddAudio extends Component {
         if (this.state.languages !== null) {
             return (
             <View style={{ flex: 1 }}>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
