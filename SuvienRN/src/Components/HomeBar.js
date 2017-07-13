@@ -259,6 +259,7 @@ class HomeBar extends Component {
         const month = d.getMonth();
         const dayFilter = messages.filter((message) => message.day.find((da) => da === weekday[numbDay]) !== undefined);
         this.setState({ name: await AsyncStorage.getItem('name'), messages, dayFilter });
+        /*
         if (currentHour < 12) {
             this.setState({ greeting: `${Languages[this.state.languages]['007']}, ${this.state.name}!`, section: require('../Images/morning.png') });
         }
@@ -271,6 +272,7 @@ class HomeBar extends Component {
         if (currentHour >= 22) {
             this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, section: require('../Images/night.png') });
         }
+        */
         if (this.state.languages === 'FRE') {
             this.setState({ currentDate: `${weekday[numbDay]}, le ${numbDate} ${months[month]} ${numbYear}` });
         }
