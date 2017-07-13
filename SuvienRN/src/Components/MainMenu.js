@@ -8,6 +8,7 @@ import Orientation from 'react-native-orientation';
 class MainMenu extends Component {
     state = { pictures: null, isFirst: null, isComp: null, stage: null, preferences: null, language: null, lang: null, ask: null, img: null }
     async componentDidMount() {
+        //AsyncStorage.setItem('Messages', JSON.stringify([]));
         Orientation.lockToLandscape();
          if (await AsyncStorage.getItem('name') !== null && await AsyncStorage.getItem('stage') !== null) {
              this.setState({ isComp: await AsyncStorage.getItem('Acheivement'), language: await AsyncStorage.getItem('Language'), preferences: JSON.parse(await AsyncStorage.getItem('Preferences')), stage: await AsyncStorage.getItem('Stage'), media: JSON.parse(await AsyncStorage.getItem('Pictures')), acheivement: await AsyncStorage.getItem('Acheivement') });
@@ -113,6 +114,42 @@ class MainMenu extends Component {
 
     async onLanguageSelect(lang) {
         if (this.state.isFirst === false) {
+            const dayarray = Languages[await AsyncStorage.getItem('Language')]['012'];
+            const messagearray = JSON.parse(await AsyncStorage.getItem('Messages'));
+            const newmessagearray = messagearray.map((message) => {
+                const newDay = message.day.map((days) => {
+                    return (Languages[lang]['012'])[dayarray.indexOf(days)];
+                });
+                if (message.messageType === 'Msg') {
+                    return (
+                        {
+                            day: newDay,
+                            message: message.message,
+                            startHour: message.startHour,
+                            startMinute: message.startMinute,
+                            endHour: message.endHour,
+                            endMinute: message.endMinute,
+                            messageType: 'Msg',
+                            messageID: message.messageID
+                        }
+                    );
+                }
+                if (message.messageType === 'VideoMsg') {
+                    return (
+                        {
+                            day: newDay,
+                            message: message.message,
+                            startHour: message.startHour,
+                            startMinute: message.startMinute,
+                            endHour: message.endHour,
+                            endMinute: message.endMinute,
+                            uri: message.uri,
+                            messageType: 'VideoMsg',
+                            messageID: message.messageID
+                        }
+                    );
+                }
+            });
             const presetarray = Languages[await AsyncStorage.getItem('Language')]['094'];
             const preferencearray = Languages[await AsyncStorage.getItem('Language')]['029'];
             const preset = await AsyncStorage.getItem('Preset');
@@ -122,9 +159,9 @@ class MainMenu extends Component {
             for (let i = 0; i < 5; i++) {
                 newpreferences[(Languages[lang]['029'])[i]] = preferences[preferencearray[i]];
             }
-            const keys = ['Language', 'Preferences', 'Preset', 'Ask'];
-            const values = [lang, JSON.stringify(newpreferences), newpreset, JSON.stringify(this.state.ask)];
-            for (let i = 0; i < 4; i++) {
+            const keys = ['Language', 'Preferences', 'Preset', 'Ask', 'Messages'];
+            const values = [lang, JSON.stringify(newpreferences), newpreset, JSON.stringify(this.state.ask), JSON.stringify(newmessagearray)];
+            for (let i = 0; i < 5; i++) {
                 AsyncStorage.setItem(keys[i], values[i]);
             }
             this.setState({ lang: false, language: lang, img: Languages[lang]['103'] });
