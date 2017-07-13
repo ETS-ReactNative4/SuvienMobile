@@ -154,23 +154,48 @@ class HomeBar extends Component {
     }
     renderHeaderGreeting() {
         const { greeting, currentDate, preferences, languages } = this.state;
+        const dd = new Date();
+        const finalmessage = this.state.dayFilter.filter((day) => (day.startHour <= dd.getHours() && day.startMinute <= dd.getMinutes() && day.endHour >= dd.getHours() && day.endMinute > dd.getMinutes()));
         const authArray = [];
         const proparray = [Languages[languages]['031'], (Languages[languages]['029'])[0]];
         const truearray = [
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>{ greeting }</Text>,
                 <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['011']} { currentDate }</Text>
                 ];
+        const messagearray = [<View style={{ flexDirection: 'row' }}>
+                            <TouchableOpacity 
+                            onPress={() => {
+                            AsyncStorage.setItem('currentVideoMsg', finalmessage[0].uri);
+                            //console.log(AsyncStorage.getItem('currentVideoMsg'));
+                            Actions.VideoTest(); 
+                            }}
+                            >
+                            <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>{Languages[this.state.languages]['015']}</Text>
+                            </TouchableOpacity>
+                            </View>, <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['011']} { currentDate }</Text>
+                            ];
         if (preferences[Languages[languages]['031']] === false && preferences[(Languages[languages]['029'])[0]] === false) {
             authArray.push(<Image source={require('../Images/placeholderphoto.png')} style={{ height: 70, width: 200 }} />);
         } else {
-            for (let i = 0; i < 3; i++) {
-            if (preferences[proparray[i]] === true) {
-                authArray.push(truearray[i]);
+            if (this.state.messageType === 'VideoMsg') {
+                for (let i = 0; i < 3; i++) {
+                    if (preferences[proparray[i]] === true) {
+                        authArray.push(messagearray[i]);
+                    }
+                    if (preferences[proparray[i]] === false) {
+                        authArray.push(<View />);
+                    }
+                }   
+            } else {
+                for (let i = 0; i < 3; i++) {
+                    if (preferences[proparray[i]] === true) {
+                        authArray.push(truearray[i]);
+                    }
+                    if (preferences[proparray[i]] === false) {
+                        authArray.push(<View />);
+                    }
+                }
             }
-            if (preferences[proparray[i]] === false) {
-                authArray.push(<View />);
-            }
-        }
         }
         return (
             [...authArray]
@@ -271,18 +296,7 @@ class HomeBar extends Component {
                     {this.renderHeaderClock()}
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity 
-                        onPress={() => {
-                        AsyncStorage.setItem('currentVideoMsg', finalmessage[0].uri);
-                        //console.log(AsyncStorage.getItem('currentVideoMsg'));
-                        Actions.VideoTest(); 
-                        }}
-                        >
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin', color: this.state.color }}>{Languages[this.state.languages]['015']}</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <Text style={{ fontSize: 25, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['011']} { currentDate }</Text>
+                    {this.renderHeaderGreeting()}
                 </View>
                 <View style={{ alignItems: 'flex-end', width: finalsize }}>
                     <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
