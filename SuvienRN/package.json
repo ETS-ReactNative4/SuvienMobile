@@ -10,13 +10,11 @@
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",
     "react-native-camera": "^0.6.0",
-    "react-native-image-picker": "^0.26.3",
     "react-native-musicplayercontroller": "^1.0.0",
     "react-native-orientation": "git+https://github.com/yamill/react-native-orientation.git",
     "react-native-router-flux": "^3.39.1",
     "react-native-simple-radio-button": "^2.5.0-alpha.1",
-    "react-native-video": "^1.0.0",
-    "react-native-youtube": "^1.0.0-alpha.4"
+    "react-native-video": "^1.0.0"
   },
   "rnpm": {
     "assets": [

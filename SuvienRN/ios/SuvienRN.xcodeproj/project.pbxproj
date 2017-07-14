@@ -25,7 +25,6 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		1988736B27484D039F9A92DE /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9F0D82BF555427A98D05537 /* libRCTOrientation.a */; };
 		250D0C83BBC94D9BB81F89CD /* libRNReactNativeMusicplayercontroller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69ABDCC154B64C4F872708B9 /* libRNReactNativeMusicplayercontroller.a */; };
-		2C05399577CB4E899A8151F4 /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AF9C0D2D504AC49EC01203 /* libRCTYouTube.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -130,7 +129,6 @@
 		74FAC1EE1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */; };
 		74FECB191EEED0C600934A37 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FECB181EEED08700934A37 /* libRCTCameraRoll.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		A76C341F7C54410BAFD86D9A /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B86F2633424C4AFC8724720B /* libRNImagePicker.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -337,20 +335,6 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNReactNativeMusicplayercontroller;
 		};
-		743A79501EE6E20B001BD07F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 752C882935ED4EA78B2CA3A2 /* RNImagePicker.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
-			remoteInfo = RNImagePicker;
-		};
-		7462B9FE1EE71C7C00DB279F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 243D25E6D3A34D069689DFF1 /* RCTYouTube.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8BDB9BC91B4289AE00EF9FEF;
-			remoteInfo = RCTYouTube;
-		};
 		74FECB171EEED08700934A37 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 74FECB131EEED08600934A37 /* RCTCameraRoll.xcodeproj */;
@@ -395,7 +379,6 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SuvienRN/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2201807E9FA7490D9F933BDA /* libRCTVideo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTVideo.a; sourceTree = "<group>"; };
-		243D25E6D3A34D069689DFF1 /* RCTYouTube.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTYouTube.xcodeproj; path = "../node_modules/react-native-youtube/RCTYouTube.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* SuvienRN-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SuvienRN-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* SuvienRN-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SuvienRN-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30085ADBDB8342598F43C323 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
@@ -433,14 +416,10 @@
 		74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClementePDag-Book.ttf"; path = "../android/app/src/main/assets/fonts/ClementePDag-Book.ttf"; sourceTree = "<group>"; };
 		74FAC20F1EF1671100F4E4FC /* ClementePDae-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClementePDae-Light.ttf"; path = "../android/app/src/main/assets/fonts/ClementePDae-Light.ttf"; sourceTree = "<group>"; };
 		74FECB131EEED08600934A37 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
-		752C882935ED4EA78B2CA3A2 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		85BD386D4EB44832B6CB5E19 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
-		AE9BA4EE36CA46DEADAE7EB2 /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "YTPlayerView-iframe-player.html"; path = "../node_modules/react-native-youtube/assets/YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
-		B86F2633424C4AFC8724720B /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		F79C946D4F9D430092ABE364 /* RNReactNativeMusicplayercontroller.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeMusicplayercontroller.xcodeproj; path = "../node_modules/react-native-musicplayercontroller/ios/RNReactNativeMusicplayercontroller.xcodeproj"; sourceTree = "<group>"; };
-		F9AF9C0D2D504AC49EC01203 /* libRCTYouTube.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTYouTube.a; sourceTree = "<group>"; };
 		F9F0D82BF555427A98D05537 /* libRCTOrientation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOrientation.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -469,12 +448,10 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				A76C341F7C54410BAFD86D9A /* libRNImagePicker.a in Frameworks */,
 				6917A18CA0C240B88EB36C6E /* libRCTCamera.a in Frameworks */,
 				50958FC2713C4043A2DF8665 /* libRCTVideo.a in Frameworks */,
 				1988736B27484D039F9A92DE /* libRCTOrientation.a in Frameworks */,
 				250D0C83BBC94D9BB81F89CD /* libRNReactNativeMusicplayercontroller.a in Frameworks */,
-				2C05399577CB4E899A8151F4 /* libRCTYouTube.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,22 +627,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		743A794D1EE6E20B001BD07F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				743A79511EE6E20B001BD07F /* libRNImagePicker.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		7462B9E71EE71C7C00DB279F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7462B9FF1EE71C7C00DB279F /* libRCTYouTube.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		74FECB141EEED08600934A37 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -698,12 +659,10 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				752C882935ED4EA78B2CA3A2 /* RNImagePicker.xcodeproj */,
 				30085ADBDB8342598F43C323 /* RCTCamera.xcodeproj */,
 				85BD386D4EB44832B6CB5E19 /* RCTVideo.xcodeproj */,
 				55219E0736DA49B3BA478EA5 /* RCTOrientation.xcodeproj */,
 				F79C946D4F9D430092ABE364 /* RNReactNativeMusicplayercontroller.xcodeproj */,
-				243D25E6D3A34D069689DFF1 /* RCTYouTube.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -951,16 +910,8 @@
 					ProjectRef = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
 				},
 				{
-					ProductGroup = 7462B9E71EE71C7C00DB279F /* Products */;
-					ProjectRef = 243D25E6D3A34D069689DFF1 /* RCTYouTube.xcodeproj */;
-				},
-				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-				},
-				{
-					ProductGroup = 743A794D1EE6E20B001BD07F /* Products */;
-					ProjectRef = 752C882935ED4EA78B2CA3A2 /* RNImagePicker.xcodeproj */;
 				},
 				{
 					ProductGroup = 743A79241EE6E20B001BD07F /* Products */;
@@ -1165,20 +1116,6 @@
 			fileType = archive.ar;
 			path = libRNReactNativeMusicplayercontroller.a;
 			remoteRef = 743A794B1EE6E20B001BD07F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		743A79511EE6E20B001BD07F /* libRNImagePicker.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNImagePicker.a;
-			remoteRef = 743A79501EE6E20B001BD07F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7462B9FF1EE71C7C00DB279F /* libRCTYouTube.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTYouTube.a;
-			remoteRef = 7462B9FE1EE71C7C00DB279F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		74FECB181EEED08700934A37 /* libRCTCameraRoll.a */ = {
@@ -1436,8 +1373,6 @@
 					"$(SRCROOT)..\node_modules\neact-native-videoios",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
 					"$(SRCROOT)..\node_modules\neact-native-musicplayercontrollerios",
-					"$(SRCROOT)..\node_modules\neact-native-youtube/**",
-					"$(SRCROOT)..\node_modules\neact-native-fs/**",
 				);
 				INFOPLIST_FILE = SuvienRNTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1474,8 +1409,6 @@
 					"$(SRCROOT)..\node_modules\neact-native-videoios",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
 					"$(SRCROOT)..\node_modules\neact-native-musicplayercontrollerios",
-					"$(SRCROOT)..\node_modules\neact-native-youtube/**",
-					"$(SRCROOT)..\node_modules\neact-native-fs/**",
 				);
 				INFOPLIST_FILE = SuvienRNTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1515,8 +1448,6 @@
 					"$(SRCROOT)..\node_modules\neact-native-videoios",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
 					"$(SRCROOT)..\node_modules\neact-native-musicplayercontrollerios",
-					"$(SRCROOT)..\node_modules\neact-native-youtube/**",
-					"$(SRCROOT)..\node_modules\neact-native-fs/**",
 				);
 				INFOPLIST_FILE = SuvienRN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1546,8 +1477,6 @@
 					"$(SRCROOT)..\node_modules\neact-native-videoios",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
 					"$(SRCROOT)..\node_modules\neact-native-musicplayercontrollerios",
-					"$(SRCROOT)..\node_modules\neact-native-youtube/**",
-					"$(SRCROOT)..\node_modules\neact-native-fs/**",
 				);
 				INFOPLIST_FILE = SuvienRN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1582,8 +1511,6 @@
 					"$(SRCROOT)..\node_modules\neact-native-videoios",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
 					"$(SRCROOT)..\node_modules\neact-native-musicplayercontrollerios",
-					"$(SRCROOT)..\node_modules\neact-native-youtube/**",
-					"$(SRCROOT)..\node_modules\neact-native-fs/**",
 				);
 				INFOPLIST_FILE = "SuvienRN-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1628,8 +1555,6 @@
 					"$(SRCROOT)..\node_modules\neact-native-videoios",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
 					"$(SRCROOT)..\node_modules\neact-native-musicplayercontrollerios",
-					"$(SRCROOT)..\node_modules\neact-native-youtube/**",
-					"$(SRCROOT)..\node_modules\neact-native-fs/**",
 				);
 				INFOPLIST_FILE = "SuvienRN-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
