@@ -898,48 +898,147 @@ class Settings extends Component {
         }
             } 
         if (this.state.acheivement === 'INCOM') {
-            return (
-                <View>
-                <Header style={{ height: 60, flexDirection: 'row' }}>
-                <View style={{ flex: 1 }}>
-                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['021']}</Text>
-                </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
-            </Header>
-            <ScrollView>
-            <View style={{ marginTop: 10, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
-                <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>{Languages[this.state.languages]['022']}</Text>
-                    <Image source={require('../Images/infoicon.png')} style={{ marginLeft: 10, height: 30, width: 30 }} />
-                </View>
-                <CardSection>
-                    <Input
-                    placeholder="Lance McClain"
-                    label={Languages[this.state.languages]['023']}
-                    value={this.state.name}
-                    labelstyle={{ flex: 1 }}
-                    onChangeText={(name) => this.setState({ name })}
-                    />
-                </CardSection>
-
-                {this.renderRadioButton()}
-
-                <CardSection>
-                    <Button onPress={this.onButtonPress.bind(this)}>
-                        {Languages[this.state.languages]['077']}
-                    </Button>
-                </CardSection>
-                </View>
-                </ScrollView>
-                </View>
+            if (this.state.mediaType === null) {
+                return (
+                    <View>
+                    <Header style={{ height: 60, flexDirection: 'row' }}>
+                    <View style={{ flex: 1 }}>
+                        <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                    </View>
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['021']}</Text>
+                    </View>
+                    <View style={{ flex: 1 }}>
+                        <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                        <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                        </TouchableWithoutFeedback>
+                    </View>
+                </Header>
+                <ScrollView>
+                <View style={{ marginTop: 10, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>{Languages[this.state.languages]['022']}</Text>
+                        <Image source={require('../Images/infoicon.png')} style={{ marginLeft: 10, height: 30, width: 30 }} />
+                    </View>
+                    <CardSection>
+                        <Input
+                        placeholder="Lance McClain"
+                        label={Languages[this.state.languages]['023']}
+                        value={this.state.name}
+                        labelstyle={{ flex: 1 }}
+                        onChangeText={(name) => this.setState({ name })}
+                        />
+                    </CardSection>
+    
+                    {this.renderRadioButton()}
+    
+                    <CardSection>
+                        <Button onPress={this.onButtonPress.bind(this)}>
+                            {Languages[this.state.languages]['077']}
+                        </Button>
+                    </CardSection>
+                    <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300', marginBottom: 20 }}>{Languages[this.state.languages]['041']}</Text>
+                    <View style={{ flexDirection: 'row', width: null }}>
+                        <Button onPress={async () => this.setState({ mediaType: 'Pictures', media: JSON.parse(await AsyncStorage.getItem('Pictures')) })}>{Languages[this.state.languages]['036']}</Button>
+                        <Button onPress={async () => this.setState({ mediaType: 'Videos', media: JSON.parse(await AsyncStorage.getItem('Videos')) })}>{Languages[this.state.languages]['037']}</Button>
+                        <Button onPress={async () => this.setState({ mediaType: 'Audio', media: JSON.parse(await AsyncStorage.getItem('Audio')) })}>{Languages[this.state.languages]['038']}</Button>
+                    </View>
+                    </View>
+                    </ScrollView>
+                    </View>
+                    );
+            }
+            if (this.state.mediaType !== null) {
+                if (this.state.selectedItem === null) {
+                    return (
+                        <View style={{ flex: 1 }}>
+                            <Modal
+                    animationType={"fade"}
+                    transparent
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => {}}
+    >
+                <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['114']}</Text>
+                        <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                            <Button 
+                            onPress={() => this.onDelete(this.state.delete)}
+                            >
+                        {Languages[this.state.languages]['096']}
+                            </Button>
+                        </CardSection>
+                        <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                            <Button 
+                            onPress={() => this.setState({ modalVisible: false, delete: null })}
+                            >
+                        {Languages[this.state.languages]['097']}
+                            </Button>
+                        </CardSection>
+                    </View>
+                    </View>
+                    </Modal>
+                        <Header style={{ height: 60, flexDirection: 'row' }}>
+                    <View style={{ flex: 1 }}>
+                        <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                    </View>
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['076']}</Text>
+                    </View>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <TouchableWithoutFeedback onPress={() => this.setState({ mediaType: null })}>
+                        <Image source={require('../Images/settings.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                        <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                        </TouchableWithoutFeedback>
+                    </View>
+                </Header>
+                        <ScrollView>
+                            <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
+                                {this.renderPhotos()}
+                            </View>
+                        </ScrollView>
+                        </View>
+                    );
+                }
+                if (this.state.selectedItem !== null) {
+                        return (
+                            <View>
+                            <Header style={{ height: 60, flexDirection: 'row' }}>
+                    <View style={{ flex: 1 }}>
+                        <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                    </View>
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['076']}</Text>
+                    </View>
+                    <View style={{ flex: 1 }}>
+                        <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                        <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                        </TouchableWithoutFeedback>
+                    </View>
+                </Header>
+                        {this.renderExplorer()}
+                        <CardSection>
+                            <Button onPress={this.onSaveItemPress.bind(this)}>
+                                {Languages[this.state.languages]['077']}
+                                <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            </Button>
+                        </CardSection>
+                        <CardSection>
+                            <Button onPress={() => this.setState({ selectedItem: null })}>
+                                {Languages[this.state.languages]['070']}
+                            </Button>
+                        </CardSection>
+                        <CardSection>
+                            <Button onPress={() => this.setState({ selectedItem: null, mediaType: null })}>
+                                {Languages[this.state.languages]['069']}
+                            </Button>
+                        </CardSection>
+                    </View>
                 );
+                }
+            }
             }
             if (this.state.acheivement === null) {
                 return (
