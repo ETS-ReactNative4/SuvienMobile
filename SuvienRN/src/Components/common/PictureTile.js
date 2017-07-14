@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, Image, AsyncStorage, View, Platform } from 'react-native';
 import Languages from './Languages.json';
-import RNFS from 'react-native-fs';
 import { CardSection } from './CardSection';
 import { Actions } from 'react-native-router-flux';
 
@@ -24,7 +23,7 @@ class PictureTile extends Component {
                     }
                     }
             >
-                <Image source={{ uri: `${Languages[this.state.languages]['115']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={this.props.style} />
+                <Image source={{ uri: `${Languages[this.state.languages]['014']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={this.props.style} />
             </TouchableOpacity>
         );
     }

@@ -158,8 +158,8 @@ class AddPhoto extends Component {
                         <Image source={{ uri: `${Languages[this.state.languages]['064']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
                     </CardSection>
                     </View>
-                    <View style={{ width: (this.state.widthc - 450), backgroundColor: 'white' }}>
-                        <View style={{ flexDirection: 'row', width: (this.state.widthc - 450), backgroundColor: 'white' }}>
+                    <View style={{ width: (this.state.widthc - 380), backgroundColor: 'white' }}>
+                        <View style={{ flexDirection: 'row', width: (this.state.widthc - 380), backgroundColor: 'white' }}>
                             <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                             <Button onPress={this.onTakePhotoPress.bind(this)}>
                                 {Languages[this.state.languages]['049']}
@@ -372,7 +372,8 @@ class AddPhoto extends Component {
     render() {
         if (this.state.languages !== null) {
             if (this.state.isRecording === false) {
-            if (this.state.photos === null) {
+            if (this.state.acheivement === null || this.state.acheivement === 'INCOM') {
+                if (this.state.photos === null) {
             return (
                 <View style={{ flex: 1 }}>
                     <Modal
@@ -411,7 +412,146 @@ class AddPhoto extends Component {
                 </View>
             </Header>
                 <ScrollView ref="scrollView">
-                    <View style={{ marginLeft: 80, marginRight: 80, flex: 1 }}>
+                    <View style={{ marginLeft: 0, marginRight: 0, flex: 1 }}>
+                    {this.onPhotoSelect()}
+                        <View>
+                        <CardSection>
+                        <Button onPress={this.onSaveItemPress.bind(this)}>
+                            {Languages[this.state.languages]['067']}
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                        </CardSection>
+                        <CardSection>
+                        <Button onPress={() => Actions.Settings()}>
+                            {Languages[this.state.languages]['069']}
+                        </Button>
+                        </CardSection>
+                    </View>
+                    </View>
+                </ScrollView>
+                </View>
+        );        
+    }
+        if (this.state.photos !== null) {
+            return (
+                <View style={{ flex: 1 }}>
+                    <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
+                    <Modal
+                        animationType={'fade'}
+                        transparent
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => {}}
+                    >
+                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                                <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
+                                    <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
+                                </View>
+                                <View style={{ height: 590, width: 910, backgroundColor: '#EFEFEF', position: 'relative', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'row', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
+                                    <ScrollView>
+                                        <View style={{ marginLeft: 20, flexDirection: 'row', flexWrap: 'wrap' }}>
+                                            {this.renderPhotos()}
+                                        </View>
+                                    </ScrollView>
+                                </View>
+                            </View>
+                        </Modal>
+                <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['084']}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
+                <ScrollView>
+                    <View style={{ marginTop: 5, marginLeft: 0, marginRight: 0, flex: 1 }}>
+                    {this.onPhotoSelect()}
+                    <View>
+                    <CardSection>
+                    <Button onPress={this.onSaveItemPress.bind(this)}>
+                        {Languages[this.state.languages]['067']}
+                        <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                    </Button>
+                    </CardSection>
+                    <CardSection>
+                    <Button onPress={() => Actions.Settings()}>
+                        {Languages[this.state.languages]['069']}
+                    </Button>
+                    </CardSection>
+                </View>
+                    </View>
+                </ScrollView>
+                </View>
+            );
+        }
+            }
+            if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
+                if (this.state.photos === null) {
+            return (
+                <View style={{ flex: 1 }}>
+                    <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
+                <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['084']}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
+                <ScrollView ref="scrollView">
+                    <View style={{ marginLeft: 0, marginRight: 0, flex: 1 }}>
                     {this.onPhotoSelect()}
                         <View>
                         <CardSection>
@@ -495,7 +635,7 @@ class AddPhoto extends Component {
                 </View>
             </Header>
                 <ScrollView>
-                    <View style={{ marginTop: 5, marginLeft: 80, marginRight: 80, flex: 1 }}>
+                    <View style={{ marginTop: 5, marginLeft: 0, marginRight: 0, flex: 1 }}>
                     {this.onPhotoSelect()}
                     <View>
                     <CardSection>
@@ -521,6 +661,7 @@ class AddPhoto extends Component {
                 </View>
             );
         }
+            }
         }
         if (this.state.isRecording === true) {
             return (

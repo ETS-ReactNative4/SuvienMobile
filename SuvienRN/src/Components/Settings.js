@@ -738,6 +738,7 @@ class Settings extends Component {
                     placeholder="Lance McClain"
                     label={Languages[this.state.languages]['023']}
                     value={this.state.name}
+                    labelstyle={{ flex: 1 }}
                     onChangeText={(name) => this.setState({ name })}
                     />
                 </CardSection>
@@ -923,6 +924,7 @@ class Settings extends Component {
                     placeholder="Lance McClain"
                     label={Languages[this.state.languages]['023']}
                     value={this.state.name}
+                    labelstyle={{ flex: 1 }}
                     onChangeText={(name) => this.setState({ name })}
                     />
                 </CardSection>
@@ -971,6 +973,7 @@ class Settings extends Component {
                     placeholder="Lance McClain"
                     label={Languages[this.state.languages]['023']}
                     value={this.state.name}
+                    labelstyle={{ flex: 1 }}
                     onChangeText={(name) => this.setState({ name })}
                     />
                 </CardSection>
