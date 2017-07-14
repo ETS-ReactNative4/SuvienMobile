@@ -6,11 +6,11 @@ import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 
 class AddAudioAnd extends Component {
-    state = { title: null, artist: null, album: null, uri: null, caption: null, group: null, acheivement: null, languages: null, isNull: false, widthc: null, heightc: null }
+    state = { title: null, artist: null, album: null, uri: null, caption: null, group: null, acheivement: null, languages: null, isNull: false, widthc: null, heightc: null, color: null }
     //console.log(JSON.parse(await AsyncStorage.getItem('samplemusic')));
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async componentWillMount() {
-        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height });
+        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height });
     }
     async onSaveItemPress() {
         if (this.state.uri === null || this.state.caption === null || this.state.group === null || this.state.uri === '' || this.state.caption === '' || this.state.group === '') {
@@ -245,7 +245,7 @@ class AddAudioAnd extends Component {
                         visible={this.state.isNull}
                         onRequestClose={() => {}}
         >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
                             <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
@@ -300,7 +300,7 @@ class AddAudioAnd extends Component {
                         visible={this.state.isNull}
                         onRequestClose={() => {}}
         >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
                             <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>

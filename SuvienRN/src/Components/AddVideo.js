@@ -6,13 +6,14 @@ import { CardSection, Button, Input, Header } from './common';
 import Camera from 'react-native-camera';
 
 class AddVideo extends Component {
-    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, isNull: false, languages: null, heightc: null, widthc: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
+    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, color: null, isNull: false, languages: null, heightc: null, widthc: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
     async componentWillMount() {
         this.setState({ 
             heightc: Dimensions.get('window').height,
             widthc: Dimensions.get('window').width,
             acheivement: await AsyncStorage.getItem('Acheivement'),
-            languages: await AsyncStorage.getItem('Language')
+            languages: await AsyncStorage.getItem('Language'),
+            color: await AsyncStorage.getItem('BGColour')
         });
     }
     onAddWebVideoPress() {
@@ -742,7 +743,7 @@ class AddVideo extends Component {
                         visible={this.state.isNull}
                         onRequestClose={() => {}}
         >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
                             <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
@@ -779,7 +780,7 @@ class AddVideo extends Component {
                                 visible={this.state.modalVisible}
                                 onRequestClose={() => {}}
                             >
-                                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: this.state.color }}>
                                         <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
                                             <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
                                         </View>
@@ -820,7 +821,7 @@ class AddVideo extends Component {
                         visible={this.state.isNull}
                         onRequestClose={() => {}}
         >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
                             <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
@@ -918,7 +919,7 @@ class AddVideo extends Component {
                         visible={this.state.isNull}
                         onRequestClose={() => {}}
         >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
                             <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
@@ -955,7 +956,7 @@ class AddVideo extends Component {
                                 visible={this.state.modalVisible}
                                 onRequestClose={() => {}}
                             >
-                                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: this.state.color }}>
                                         <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
                                             <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
                                         </View>
@@ -1002,7 +1003,7 @@ class AddVideo extends Component {
                         visible={this.state.isNull}
                         onRequestClose={() => {}}
         >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
                             <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>

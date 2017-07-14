@@ -11,9 +11,9 @@ import CongratsModal from './CongratsModal';
 import { Media } from './';
 
 class Home extends Component {
-    state = { dim: null, media: null, preset: null, tags: null, width: null, acheivement: null, medias: null, languages: null }
+    state = { dim: null, media: null, preset: null, tags: null, width: null, acheivement: null, medias: null, languages: null, color: null }
     async componentWillMount() {
-        this.setState({ width: parseInt(await AsyncStorage.getItem('Width')), languages: await AsyncStorage.getItem('Language') });
+        this.setState({ width: parseInt(await AsyncStorage.getItem('Width')), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour') });
         console.log(await AsyncStorage.getItem('Preferences'));
         this.doMath();
         Orientation.lockToLandscape();
@@ -292,7 +292,7 @@ class Home extends Component {
                 visible
                 onRequestClose={() => {}}
                 >
-                <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ flex: 1, backgroundColor: this.state.color, alignItems: 'center', justifyContent: 'center' }}>
                     <Media
                     obj={this.state.medias}
                     onInvisible={async (flag) => {

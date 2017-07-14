@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { CardSection, Button, Header } from './common';
 
 class CaptionGame extends Component {
-    state = { caption: null, languages: null, height: null, width: null, tiles: null, dim: null, congrats: false, timesRun: null, wrongphotos: [], selected: null }
+    state = { caption: null, languages: null, height: null, width: null, tiles: null, dim: null, congrats: false, timesRun: null, wrongphotos: [], selected: null, color: null }
     async componentWillMount() {
         this.createNewGame();
         this.doMath();
@@ -59,7 +59,7 @@ class CaptionGame extends Component {
         for (let i = 0; i < 4; i++) {
             allTiles.push(pictures1[randarray[i]]);
         }
-        this.setState({ tiles: [...allTiles], width: parseInt(await AsyncStorage.getItem('Width')), wrongphotos: [], timesRun: number, height: parseInt(await AsyncStorage.getItem('Height')), congrats: false, caption: allTiles[indexx].caption, languages: await AsyncStorage.getItem('Language') });
+        this.setState({ tiles: [...allTiles], color: await AsyncStorage.getItem('BGColour'), width: parseInt(await AsyncStorage.getItem('Width')), wrongphotos: [], timesRun: number, height: parseInt(await AsyncStorage.getItem('Height')), congrats: false, caption: allTiles[indexx].caption, languages: await AsyncStorage.getItem('Language') });
     }
 
     async doMath() {
@@ -108,7 +108,7 @@ class CaptionGame extends Component {
         if (this.state.dim !== null && this.state.tiles !== null) {
             if (this.state.congrats === false) {
                 return (
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: this.state.color }}>
                     <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
@@ -143,14 +143,14 @@ class CaptionGame extends Component {
                         let newHeight = this.state.height - 50;
                         let newWidth = this.state.selected.width * heightRatio;
                         return (
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: this.state.color }}>
                     <Modal
                 animationType={"fade"}
                 transparent
                 visible
                 onRequestClose={() => {}}
                 >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.8)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                     <Image
                     style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
                     source={{ uri: this.state.selected.imageuri }}
@@ -227,14 +227,14 @@ class CaptionGame extends Component {
                         let newHeight = this.state.height - 300;
                         let newWidth = this.state.selected.width * heightRatio;
                         return (
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: this.state.color }}>
                     <Modal
                 animationType={"fade"}
                 transparent
                 visible
                 onRequestClose={() => {}}
                 >
-                <View style={{ backgroundColor: 'rgba(0,0,0,0.8)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                     <Image
                     style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
                     source={{ uri: this.state.selected.imageuri }}
@@ -320,14 +320,14 @@ class CaptionGame extends Component {
                 }
                 if (this.state.timesRun >= 8) {
                     return (
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: this.state.color }}>
                     <Modal
                 animationType={"fade"}
                 transparent
                 visible
                 onRequestClose={() => {}}
                 >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 400, width: 600, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                             <Image source={require('../Images/trophy.png')} style={{ height: 200, width: 200 }} />
                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['082']}</Text>

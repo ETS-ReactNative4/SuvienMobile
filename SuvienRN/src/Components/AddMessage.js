@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
 class AddMessage extends Component {
-    state = { secheight: null, secwidth: null, message: null, day: '[]', startHour: 0, modalVisible: false, delete: null, startMinute: 0, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
+    state = { secheight: null, secwidth: null, message: null, color: null, day: '[]', startHour: 0, modalVisible: false, delete: null, startMinute: 0, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
     async componentWillMount() {
         if (Platform.OS === 'ios') {
             this.setState({ secheight: 200, secwidth: 100 });
@@ -18,7 +18,8 @@ class AddMessage extends Component {
             heightc: Dimensions.get('window').height,
             widthc: Dimensions.get('window').width,
             messages: JSON.parse(await AsyncStorage.getItem('Messages')),
-            languages: await AsyncStorage.getItem('Language')
+            languages: await AsyncStorage.getItem('Language'),
+            color: await AsyncStorage.getItem('BGColour')
         });
     }
 
@@ -300,7 +301,7 @@ class AddMessage extends Component {
                 visible={this.state.modalVisible}
                 onRequestClose={() => {}}
 >
-            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['114']}</Text>
                     <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>

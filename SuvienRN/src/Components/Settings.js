@@ -6,7 +6,7 @@ import RadioForm from 'react-native-simple-radio-button';
 import { Actions } from 'react-native-router-flux';
 
 class Settings extends Component {
-    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, languages: null, mediaType: null, media: null, mediaArray: null, selectedItem: null, width: null, modalVisible: false, delete: null };
+    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, languages: null, mediaType: null, color: null, media: null, mediaArray: null, selectedItem: null, width: null, modalVisible: false, delete: null };
     async componentWillMount() {
         if (await AsyncStorage.getItem('name') !== null) {
             this.setState({ 
@@ -16,7 +16,8 @@ class Settings extends Component {
                 preset: await AsyncStorage.getItem('Preset'),
                 mediaArray: JSON.parse(await AsyncStorage.getItem('Media')),
                 width: parseInt(await AsyncStorage.getItem('Width')),
-                languages: await AsyncStorage.getItem('Language')
+                languages: await AsyncStorage.getItem('Language'),
+                color: await AsyncStorage.getItem('BGColour')
             });
         }
         if (await AsyncStorage.getItem('name') === null) {
@@ -533,7 +534,7 @@ class Settings extends Component {
              (
                 <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
                     <View style={{ backgroundColor: 'transparent', height: 200 }} />
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
                             <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
@@ -561,7 +562,7 @@ class Settings extends Component {
                 return (
                 <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.uri }}>
                     <View style={{ backgroundColor: 'transparent', height: 200 }} />
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
                             <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
@@ -583,7 +584,7 @@ class Settings extends Component {
                 return (
                 <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
                     <View style={{ backgroundColor: 'transparent', height: 200 }} />
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
                             <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
@@ -611,7 +612,7 @@ class Settings extends Component {
                 return (
                 <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={require('../Images/musicalbumart.png')}>
                     <View style={{ backgroundColor: 'transparent', height: 200 }} />
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
                         <View style={{ flexDirection: 'row', marginTop: 10 }}>
                             <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
@@ -815,7 +816,7 @@ class Settings extends Component {
                 visible={this.state.modalVisible}
                 onRequestClose={() => {}}
 >
-            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['114']}</Text>
                     <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
@@ -958,7 +959,7 @@ class Settings extends Component {
                     visible={this.state.modalVisible}
                     onRequestClose={() => {}}
     >
-                <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['114']}</Text>
                         <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>

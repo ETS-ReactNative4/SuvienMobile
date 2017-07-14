@@ -10,6 +10,7 @@ class MainMenu extends Component {
     async componentDidMount() {
         //AsyncStorage.setItem('Messages', JSON.stringify([]));
         Orientation.lockToLandscape();
+        AsyncStorage.setItem('BGColour', 'rgba(60,60,60,0.95)');
          if (await AsyncStorage.getItem('name') !== null && await AsyncStorage.getItem('stage') !== null) {
              this.setState({ isComp: await AsyncStorage.getItem('Acheivement'), language: await AsyncStorage.getItem('Language'), preferences: JSON.parse(await AsyncStorage.getItem('Preferences')), stage: await AsyncStorage.getItem('Stage'), media: JSON.parse(await AsyncStorage.getItem('Pictures')), acheivement: await AsyncStorage.getItem('Acheivement') });
          }
@@ -174,9 +175,10 @@ class MainMenu extends Component {
                 prefobj[array[i]] = true;
             }
             prefobj[array[4]] = false;
-            const keys = ['Videos', 'Tags', 'Media', 'Pictures', 'Favourites', 'Height', 'Width', 'Audio', 'Messages', 'Acheivement', 'Cards', 'Preset', 'Preferences', 'Ask'];
+            const keys = ['Videos', 'Tags', 'Media', 'Pictures', 'Favourites', 'Height', 'Width', 'Audio', 'Messages', 'Acheivement', 'Cards', 'Preset', 'Preferences', 'Ask', 'BGColour'];
             const values = [JSON.stringify([]), JSON.stringify([]), JSON.stringify([]), JSON.stringify([]), JSON.stringify([]), Dimensions.get('window').height.toString(), Dimensions.get('window').width.toString(), 
-                            JSON.stringify([]), JSON.stringify([]), 'INCOM', JSON.stringify([]), (Languages[await AsyncStorage.getItem('Language')]['094'])[3], JSON.stringify(prefobj), JSON.stringify(this.state.ask)
+                            JSON.stringify([]), JSON.stringify([]), 'INCOM', JSON.stringify([]), (Languages[await AsyncStorage.getItem('Language')]['094'])[3], JSON.stringify(prefobj), JSON.stringify(this.state.ask),
+                            'rgba(60,60,60,0.85)'
                            ];
             for (let i = 0; i < keys.length; i++) {
                 AsyncStorage.setItem(keys[i], values[i]);

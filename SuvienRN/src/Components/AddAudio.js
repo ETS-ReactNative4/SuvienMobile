@@ -6,10 +6,10 @@ import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 
 class AddAudio extends Component {
-    state = { information: null, caption: null, group: null, acheivement: null, languages: null, isNull: false, heightc: null, widthc: null }
+    state = { information: null, caption: null, group: null, acheivement: null, languages: null, isNull: false, heightc: null, widthc: null, color: null }
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async componentWillMount() {
-        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), heightc: Dimensions.get('window').height, widthc: Dimensions.get('window').width });
+        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), heightc: Dimensions.get('window').height, widthc: Dimensions.get('window').width });
     }
     async onSaveItemPress() {
         if (this.state.information === null || this.state.caption === null || this.state.group === null || this.state.information === '' || this.state.caption === '' || this.state.group === '') {
@@ -240,7 +240,7 @@ class AddAudio extends Component {
                         visible={this.state.isNull}
                         onRequestClose={() => {}}
         >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
                             <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
@@ -295,7 +295,7 @@ class AddAudio extends Component {
                         visible={this.state.isNull}
                         onRequestClose={() => {}}
         >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
                             <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>

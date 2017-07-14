@@ -9,14 +9,15 @@ import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null, languages: null, acheivement: null, isNull: false, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    state = { imageuri: null, caption: null, group: null, languages: null, acheivement: null, color: null, isNull: false, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
     async componentWillMount() {
         console.log(await AsyncStorage.getItem('Language'));
         this.setState({ 
             heightc: Dimensions.get('window').height,
             widthc: Dimensions.get('window').width,
             acheivement: await AsyncStorage.getItem('Acheivement'),
-            languages: await AsyncStorage.getItem('Language')
+            languages: await AsyncStorage.getItem('Language'),
+            color: await AsyncStorage.getItem('BGColour')
         });
     }
     async onSaveItemPress() {
@@ -382,7 +383,7 @@ class AddPhoto extends Component {
                 visible={this.state.isNull}
                 onRequestClose={() => {}}
 >
-            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
                     <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
@@ -441,7 +442,7 @@ class AddPhoto extends Component {
                 visible={this.state.isNull}
                 onRequestClose={() => {}}
 >
-            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
                     <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
@@ -463,7 +464,7 @@ class AddPhoto extends Component {
                         visible={this.state.modalVisible}
                         onRequestClose={() => {}}
                     >
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: this.state.color }}>
                                 <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
                                     <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
                                 </View>
@@ -521,7 +522,7 @@ class AddPhoto extends Component {
                 visible={this.state.isNull}
                 onRequestClose={() => {}}
 >
-            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
                     <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
@@ -586,7 +587,7 @@ class AddPhoto extends Component {
                 visible={this.state.isNull}
                 onRequestClose={() => {}}
 >
-            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
                     <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
@@ -608,7 +609,7 @@ class AddPhoto extends Component {
                         visible={this.state.modalVisible}
                         onRequestClose={() => {}}
                     >
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: this.state.color }}>
                                 <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
                                     <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
                                 </View>

@@ -5,7 +5,7 @@ import Languages from '../Languages/Languages.json';
 import { CardSection, Button, Header, GameTile } from './common';
 
 class MemoryGame extends Component {
-    state = { tiles: null, card1: null, overrideKey: null, card2: null, languages: null, cards: null, showCaption: false, width: null, height: null, seconds: 0, minutes: 0 }
+    state = { tiles: null, card1: null, overrideKey: null, card2: null, languages: null, cards: null, showCaption: false, width: null, height: null, seconds: 0, minutes: 0, color: null }
     componentWillMount() {
         this.createNewGame();
     }
@@ -22,7 +22,7 @@ class MemoryGame extends Component {
         const newNumbArray = this.generateNumArray(8);
         const newRandArray = this.shuffle(newNumbArray);
         const allTilesShuffle = this.shuffleTiles(allTiles, newRandArray);
-        this.setState({ tiles: [...allTilesShuffle], width: parseInt(await AsyncStorage.getItem('Width')), height: parseInt(await AsyncStorage.getItem('Height')), showCaption: false, card1: null, card2: null, overrideKey: null, cards: null, languages: await AsyncStorage.getItem('Language') });
+        this.setState({ tiles: [...allTilesShuffle], color: await AsyncStorage.getItem('BGColour'), width: parseInt(await AsyncStorage.getItem('Width')), height: parseInt(await AsyncStorage.getItem('Height')), showCaption: false, card1: null, card2: null, overrideKey: null, cards: null, languages: await AsyncStorage.getItem('Language') });
         AsyncStorage.setItem('Cards', JSON.stringify([]));  
     }
 
@@ -158,7 +158,7 @@ class MemoryGame extends Component {
                 visible
                 onRequestClose={() => {}}
                 >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 400, width: 600, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                             <Image source={require('../Images/trophy.png')} style={{ height: 200, width: 200 }} />
                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['082']}</Text>
@@ -206,7 +206,7 @@ class MemoryGame extends Component {
                 visible
                 onRequestClose={() => {}}
                 >
-                <View style={{ backgroundColor: 'rgba(0,0,0,0.8)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                     <Image
                     style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
                     source={{ uri: this.state.card1.imageuri }}
@@ -256,7 +256,7 @@ class MemoryGame extends Component {
                 visible
                 onRequestClose={() => {}}
                 >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.8)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
                     <Image
                     style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
                     source={{ uri: this.state.card1.imageuri }}
