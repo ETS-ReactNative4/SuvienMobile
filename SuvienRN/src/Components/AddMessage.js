@@ -397,6 +397,7 @@ class AddMessage extends Component {
                         value={this.state.message}
                         onChangeText={(message) => this.setState({ message })}
                         labelstyle={{ marginLeft: 40 }}
+                        maxLength={25}
                     />
                 </CardSection>
                 <CardSection style={{ flexDirection: 'column', height: 70 }}>
@@ -607,6 +608,7 @@ class AddMessage extends Component {
                         placeholder={Languages[this.state.languages]['089']}
                         label={Languages[this.state.languages]['039']}
                         value={selected.message}
+                        maxLength={25}
                         onChangeText={(message) => {
                             selected.message = message;
                             this.setState({ currentMessage: JSON.stringify(selected) });
