@@ -3,13 +3,10 @@ package com.suvienrn;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.rnfs.RNFSPackage;
-import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.reactlibrary.RNReactNativeMusicplayercontrollerPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
-import com.imagepicker.ImagePickerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -33,7 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNReactNativeMusicplayercontrollerPackage(),
             new OrientationPackage(),
             new ReactVideoPackage(),
-            new RCTCameraPackage(),
+            new RCTCameraPackage()
       );
     }
   };

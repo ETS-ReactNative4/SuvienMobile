@@ -3,7 +3,6 @@ import { View, Text, AsyncStorage, Image, Dimensions, TouchableWithoutFeedback, 
 import { Actions } from 'react-native-router-flux';
 import { Button, CardSection } from './common';
 import Languages from '../Languages/Languages.json';
-import YouTube from 'react-native-youtube';
 import Orientation from 'react-native-orientation';
 import MusicPlayerController from 'react-native-musicplayercontroller';
 import Video from 'react-native-video';
