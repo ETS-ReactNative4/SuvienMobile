@@ -24,7 +24,7 @@ class PictureTile extends Component {
                     }
                     }
             >
-                <Image source={{ uri: `${Languages[this.state.languages]['014']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={this.props.style} />
+                <Image source={{ uri: `${Languages[this.state.languages]['115']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={this.props.style} />
             </TouchableOpacity>
         );
     }
@@ -58,7 +58,7 @@ class PictureTile extends Component {
                     }
                     }
                     >
-                        <Image source={{ uri: this.props.data.imageuri }} style={this.props.style} onError={() => this.setState({ isnone: require('./nocontents.png') })}>
+                        <Image source={{ uri: this.props.data.imageuri }} style={this.props.style} onError={() => this.setState({ isnone: `${Languages[this.state.languages]['115']}${Platform.OS === 'ios' ? '.png' : ''}` })}>
                             <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end', width: this.props.style.height, height: this.props.style.height, paddingBottom: 10, paddingRight: 10 }}>
                             <Image source={require('./photoimagebig.png')} style={{ height: 50, width: 50 }} />
                             </View>
@@ -94,7 +94,7 @@ class PictureTile extends Component {
                     }
                     }
                     >
-                        <Image source={this.state.isnone} style={this.props.style} onError={() => this.setState({ isnone: require('./nocontents.png') })}>
+                        <Image source={{ uri: this.state.isnone }} style={this.props.style} onError={() => this.setState({ isnone: `${Languages[this.state.languages]['115']}${Platform.OS === 'ios' ? '.png' : ''}` })}>
                             <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end', width: this.props.style.height, height: this.props.style.height, paddingBottom: 10, paddingRight: 10 }}>
                             <Image source={require('./photoimagebig.png')} style={{ height: 50, width: 50 }} />
                             </View>
@@ -211,7 +211,7 @@ class PictureTile extends Component {
                     }
                     }
                     >
-                        <Image source={{ uri: this.props.data.uri }} style={this.props.style} onError={() => this.setState({ isnone: require('./nocontents.png') })}>
+                        <Image source={{ uri: this.props.data.uri }} style={this.props.style} onError={() => this.setState({ isnone: `${Languages[this.state.languages]['115']}${Platform.OS === 'ios' ? '.png' : ''}` })}>
                             <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end', width: this.props.style.height, height: this.props.style.height, paddingBottom: 10, paddingRight: 10 }}>
                             <Image source={require('./videoicon.png')} style={{ height: 50, width: 50 }} />
                             </View>
@@ -238,7 +238,7 @@ class PictureTile extends Component {
                     }
                     }
                     >
-                        <Image source={this.state.isnone} style={this.props.style}>
+                        <Image source={{ uri: this.state.isnone }} style={this.props.style}>
                             <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end', width: this.props.style.height, height: this.props.style.height, paddingBottom: 10, paddingRight: 10 }}>
                             <Image source={require('./videoicon.png')} style={{ height: 50, width: 50 }} />
                             </View>
