@@ -405,7 +405,7 @@ class HomeBar extends Component {
         <View>
             <View>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{ marginTop: 30 }}>Loading</Text>
+                    <Text style={{ marginTop: 60 }}>...</Text>
                 </View>
             </View>
             <View style={{ opacity: 0 }}>

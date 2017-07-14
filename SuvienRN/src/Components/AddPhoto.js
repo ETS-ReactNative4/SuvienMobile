@@ -76,8 +76,8 @@ class AddPhoto extends Component {
     renderWeb() {
         if (this.state.webphoto === true && this.state.languages !== null) {
             return (
-                <View>
-                    <CardSection style={{ borderTopWidth: 1 }}>
+                <View style={{ width: (this.state.widthc - 380) }}>
+                    <CardSection style={{ borderTopWidth: 0, width: (this.state.widthc - 380), backgroundColor: 'white' }}>
                         <Input
                         placeholder="https://68.media.tumblr.com/58023028ed8452496ba154aa4b0c229f/tumblr_nnorxsvxtT1tmz3boo1_500.jpg"
                         label="URL"
@@ -85,7 +85,7 @@ class AddPhoto extends Component {
                         onChangeText={(imgsrc) => this.setState({ imgsrc })}
                         />
                     </CardSection>
-                    <CardSection>
+                    <CardSection style={{ width: (this.state.widthc - 500), backgroundColor: 'white', marginRight: 100 }}>
                         <Button onPress={this.onSaveURLPress.bind(this)}>
                             {Languages[this.state.languages]['083']}
                         </Button>
@@ -149,15 +149,37 @@ class AddPhoto extends Component {
         console.log(this.state.languages);
         console.log(this.state.acheivement)
         //1496411711468
-        if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
             if (this.state.languages !== null) {
                 if (this.state.imageuri === null) {
             return (
-                <View style={{ alignItems: 'center' }}>
+                <View style={{ alignItems: 'flex-start', flexDirection: 'row', width: this.state.widthc, marginTop: 10 }}>
+                    <View>
                     <CardSection style={{ borderBottomWidth: 0 }}>
                         <Image source={{ uri: `${Languages[this.state.languages]['064']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
                     </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
+                    </View>
+                    <View style={{ width: (this.state.widthc - 450), backgroundColor: 'white' }}>
+                        <View style={{ flexDirection: 'row', width: (this.state.widthc - 450), backgroundColor: 'white' }}>
+                            <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
+                            <Button onPress={this.onTakePhotoPress.bind(this)}>
+                                {Languages[this.state.languages]['049']}
+                                <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
+                            </Button>
+                        </CardSection>
+                        <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
+                            <Button onPress={this.onChoosePhotoPress.bind(this)}>
+                                {Languages[this.state.languages]['053']}
+                                <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
+                            </Button>
+                        </CardSection>
+                        <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
+                            <Button onPress={this.onAddWebPhotoPress.bind(this)}>
+                                {Languages[this.state.languages]['056']}
+                                <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
+                            </Button>
+                        </CardSection>
+                        </View>
+                    <CardSection style={{ borderTopWidth: 1, width: (this.state.widthc - 380), marginTop: 10 }}>
                         <Input
                         placeholder={Languages[this.state.languages]['061']}
                         label={Languages[this.state.languages]['058']}
@@ -165,7 +187,7 @@ class AddPhoto extends Component {
                         onChangeText={(title) => this.setState({ title })}
                         />
                     </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
+                    <CardSection style={{ width: (this.state.widthc - 380) }}>
                         <Input
                         placeholder={Languages[this.state.languages]['062']}
                         label={Languages[this.state.languages]['059']}
@@ -173,7 +195,7 @@ class AddPhoto extends Component {
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
-                    <CardSection>
+                    <CardSection style={{ width: (this.state.widthc - 380) }}>
                         <Input
                         placeholder={Languages[this.state.languages]['063']}
                         label={Languages[this.state.languages]['060']}
@@ -183,29 +205,41 @@ class AddPhoto extends Component {
                         onFocus={this.inputFocused.bind(this, 'username')}
                         />
                     </CardSection>
-                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={() => Actions.Settings()}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
+                    {this.renderWeb()}
                     </View>
                 </View>
             );
         }
         if (this.state.imageuri !== null) {
             return (
-                <View style={{ alignItems: 'center' }}>
+                <View style={{ alignItems: 'flex-start', flexDirection: 'row', width: this.state.widthc, marginTop: 10 }}>
+                    <View>
                     <CardSection style={{ borderBottomWidth: 0 }}>
                         <Image source={{ uri: this.state.imageuri }} style={{ height: 300, width: 300 }} />
                     </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
+                    </View>
+                    <View style={{ width: (this.state.widthc - 450), backgroundColor: 'white' }}>
+                        <View style={{ flexDirection: 'row', width: (this.state.widthc - 450), backgroundColor: 'white' }}>
+                            <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
+                            <Button onPress={this.onTakePhotoPress.bind(this)}>
+                                {Languages[this.state.languages]['049']}
+                                <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
+                            </Button>
+                        </CardSection>
+                        <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
+                            <Button onPress={this.onChoosePhotoPress.bind(this)}>
+                                {Languages[this.state.languages]['053']}
+                                <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
+                            </Button>
+                        </CardSection>
+                        <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
+                            <Button onPress={this.onAddWebPhotoPress.bind(this)}>
+                                {Languages[this.state.languages]['056']}
+                                <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
+                            </Button>
+                        </CardSection>
+                        </View>
+                    <CardSection style={{ borderTopWidth: 1, width: (this.state.widthc - 380), marginTop: 10 }}>
                         <Input
                         placeholder={Languages[this.state.languages]['061']}
                         label={Languages[this.state.languages]['058']}
@@ -213,7 +247,7 @@ class AddPhoto extends Component {
                         onChangeText={(title) => this.setState({ title })}
                         />
                     </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
+                    <CardSection style={{ width: (this.state.widthc - 380) }}>
                         <Input
                         placeholder={Languages[this.state.languages]['062']}
                         label={Languages[this.state.languages]['059']}
@@ -221,118 +255,22 @@ class AddPhoto extends Component {
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
-                    <CardSection>
+                    <CardSection style={{ width: (this.state.widthc - 380) }}>
                         <Input
                         placeholder={Languages[this.state.languages]['063']}
                         label={Languages[this.state.languages]['060']}
                         value={this.state.group}
                         onChangeText={(group) => this.setState({ group })}
+                        ref='username'
+                        onFocus={this.inputFocused.bind(this, 'username')}
                         />
                     </CardSection>
-                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={() => Actions.Settings()}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
+                    {this.renderWeb()}
                     </View>
                 </View>
             );
         }
     }
-}
-    if (this.state.acheivement === null || this.state.acheivement === 'INCOM') {
-            if (this.state.imageuri === null) {
-            return (
-                <View style={{ alignItems: 'center' }}>
-                    <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: `${Languages[this.state.languages]['064']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 300, width: 300 }} />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['061']}
-                        label={Languages[this.state.languages]['058']}
-                        value={this.state.title}
-                        onChangeText={(title) => this.setState({ title })}
-                        />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['062']}
-                        label={Languages[this.state.languages]['059']}
-                        value={this.state.caption}
-                        onChangeText={(caption) => this.setState({ caption })}
-                        />
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        value={this.state.group}
-                        onChangeText={(group) => this.setState({ group })}
-                        />
-                    </CardSection>
-                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={() => Actions.Settings()}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
-                    </View>
-                </View>
-            );
-        }
-        if (this.state.imageuri !== null) {
-            return (
-                <View style={{ alignItems: 'center' }}>
-                    <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: this.state.imageuri }} style={{ height: 300, width: 300 }} />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['061']}
-                        label={Languages[this.state.languages]['058']}
-                        value={this.state.title}
-                        onChangeText={(title) => this.setState({ title })}
-                        />
-                    </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['062']}
-                        label={Languages[this.state.languages]['059']}
-                        value={this.state.caption}
-                        onChangeText={(caption) => this.setState({ caption })}
-                        />
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        value={this.state.group}
-                        onChangeText={(group) => this.setState({ group })}
-                        />
-                    </CardSection>
-                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={() => Actions.Settings()}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
-                    </View>
-                </View>
-            );
-        }
-            }
             if (this.state.languages === null) {
                 return (
                     <View />
@@ -473,27 +411,27 @@ class AddPhoto extends Component {
                 </View>
             </Header>
                 <ScrollView ref="scrollView">
-                    <View style={{ marginTop: 5, marginLeft: 80, marginRight: 80, flex: 1 }}>
+                    <View style={{ marginLeft: 80, marginRight: 80, flex: 1 }}>
+                    {this.onPhotoSelect()}
+                        <View>
                         <CardSection>
-                            <Button onPress={this.onTakePhotoPress.bind(this)}>
-                                {Languages[this.state.languages]['049']}
-                                <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
-                            </Button>
+                        <Button onPress={this.onSaveItemPress.bind(this)}>
+                            {Languages[this.state.languages]['067']}
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
                         </CardSection>
                         <CardSection>
-                            <Button onPress={this.onChoosePhotoPress.bind(this)}>
-                                {Languages[this.state.languages]['053']}
-                                <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
-                            </Button>
+                        <Button onPress={this.createNew.bind(this)}>
+                            {Languages[this.state.languages]['068']}
+                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
                         </CardSection>
                         <CardSection>
-                            <Button onPress={this.onAddWebPhotoPress.bind(this)}>
-                                {Languages[this.state.languages]['056']}
-                                <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
-                            </Button>
+                        <Button onPress={() => Actions.Settings()}>
+                            {Languages[this.state.languages]['069']}
+                        </Button>
                         </CardSection>
-                        {this.renderWeb()}
-                        {this.onPhotoSelect()}
+                    </View>
                     </View>
                 </ScrollView>
                 </View>
@@ -558,26 +496,26 @@ class AddPhoto extends Component {
             </Header>
                 <ScrollView>
                     <View style={{ marginTop: 5, marginLeft: 80, marginRight: 80, flex: 1 }}>
-                        <CardSection>
-                            <Button onPress={this.onTakePhotoPress.bind(this)}>
-                                {Languages[this.state.languages]['049']}
-                                <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
-                            </Button>
-                        </CardSection>
-                        <CardSection>
-                            <Button onPress={this.onChoosePhotoPress.bind(this)}>
-                                {Languages[this.state.languages]['053']}
-                                <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
-                            </Button>
-                        </CardSection>
-                        <CardSection>
-                            <Button onPress={this.onAddWebPhotoPress.bind(this)}>
-                                {Languages[this.state.languages]['056']}
-                                <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
-                            </Button>
-                        </CardSection>
-                        {this.renderWeb()}
-                        {this.onPhotoSelect()}
+                    {this.onPhotoSelect()}
+                    <View>
+                    <CardSection>
+                    <Button onPress={this.onSaveItemPress.bind(this)}>
+                        {Languages[this.state.languages]['067']}
+                        <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                    </Button>
+                    </CardSection>
+                    <CardSection>
+                    <Button onPress={this.createNew.bind(this)}>
+                        {Languages[this.state.languages]['068']}
+                        <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                    </Button>
+                    </CardSection>
+                    <CardSection>
+                    <Button onPress={() => Actions.Settings()}>
+                        {Languages[this.state.languages]['069']}
+                    </Button>
+                    </CardSection>
+                </View>
                     </View>
                 </ScrollView>
                 </View>

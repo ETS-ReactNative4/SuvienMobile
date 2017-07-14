@@ -363,81 +363,138 @@ class Settings extends Component {
     
     renderExplorer() {
         if (this.state.mediaType === 'Pictures' || this.state.mediaType === 'Videos') {
-            const explorerArray = [<CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['061']}
-                        label={Languages[this.state.languages]['058']}
-                        value={this.state.selectedItem.title}
-                        onChangeText={(title) => {
-                            const selectedItem = this.state.selectedItem;
-                            selectedItem.title = title;
-                            this.setState({ selectedItem });
-                            }
-                            }
-                        />
-                    </CardSection>,
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['062']}
-                        label={Languages[this.state.languages]['059']}
-                        value={this.state.selectedItem.caption}
-                        onChangeText={(caption) => {
-                            const selectedItem = this.state.selectedItem;
-                            selectedItem.caption = caption;
-                            this.setState({ selectedItem });
-                            }
-                            }
-                        />
-                    </CardSection>,
-                    <CardSection>
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        value={this.state.selectedItem.group}
-                        onChangeText={(group) => {
-                            const selectedItem = this.state.selectedItem;
-                            selectedItem.group = group;
-                            this.setState({ selectedItem });
-                            }
-                            }
-                        />
-                    </CardSection>,
-                    <CardSection style={{ flexDirection: 'row' }}>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['077']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={() => this.setState({ selectedItem: null })}>
-                            {Languages[this.state.languages]['070']}
-                        </Button>
-                        <Button onPress={() => this.setState({ selectedItem: null, mediaType: null })}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
-                    </CardSection>];
-                    return (
-            [...explorerArray]
-        );
+            if (this.state.selectedItem.mediaType === 'Video') {
+                return (
+                    <View style={{ alignItems: 'flex-start', flexDirection: 'row', width: this.state.widthc, marginTop: 10 }}>
+                    <View>
+                <CardSection style={{ borderBottomWidth: 0 }}>
+                    <Image source={{ uri: this.state.selectedItem.uri }} style={{ height: 300, width: 300 }} />
+                </CardSection>
+                </View>
+                <View style={{ width: (this.state.width - 450), backgroundColor: 'white', height: 300, justifyContent: 'center' }}>
+                <CardSection style={{ borderTopWidth: 1, width: (this.state.width - 380), marginTop: 10 }}>
+                            <Input
+                            placeholder={Languages[this.state.languages]['061']}
+                            label={Languages[this.state.languages]['058']}
+                            value={this.state.selectedItem.title}
+                            onChangeText={(title) => {
+                                const selectedItem = this.state.selectedItem;
+                                selectedItem.title = title;
+                                this.setState({ selectedItem });
+                                }
+                                }
+                            />
+                        </CardSection>
+                        <CardSection style={{ width: (this.state.width - 380) }}>
+                            <Input
+                            placeholder={Languages[this.state.languages]['062']}
+                            label={Languages[this.state.languages]['059']}
+                            value={this.state.selectedItem.caption}
+                            onChangeText={(caption) => {
+                                const selectedItem = this.state.selectedItem;
+                                selectedItem.caption = caption;
+                                this.setState({ selectedItem });
+                                }
+                                }
+                            />
+                        </CardSection>
+                        <CardSection style={{ width: (this.state.width - 380) }}>
+                            <Input
+                            placeholder={Languages[this.state.languages]['063']}
+                            label={Languages[this.state.languages]['060']}
+                            value={this.state.selectedItem.group}
+                            onChangeText={(group) => {
+                                const selectedItem = this.state.selectedItem;
+                                selectedItem.group = group;
+                                this.setState({ selectedItem });
+                                }
+                                }
+                            />
+                        </CardSection>
+                    </View>
+                    </View>
+                );
+            } else {
+                return (
+                    <View style={{ alignItems: 'flex-start', flexDirection: 'row', width: this.state.widthc, marginTop: 10 }}>
+                    <View>
+                <CardSection style={{ borderBottomWidth: 0 }}>
+                    <Image source={{ uri: this.state.selectedItem.imageuri }} style={{ height: 300, width: 300 }} />
+                </CardSection>
+                </View>
+                <View style={{ width: (this.state.width - 450), backgroundColor: 'white', height: 300, justifyContent: 'center' }}>
+                <CardSection style={{ borderTopWidth: 1, width: (this.state.width - 380), marginTop: 10 }}>
+                            <Input
+                            placeholder={Languages[this.state.languages]['061']}
+                            label={Languages[this.state.languages]['058']}
+                            value={this.state.selectedItem.title}
+                            onChangeText={(title) => {
+                                const selectedItem = this.state.selectedItem;
+                                selectedItem.title = title;
+                                this.setState({ selectedItem });
+                                }
+                                }
+                            />
+                        </CardSection>
+                        <CardSection style={{ width: (this.state.width - 380) }}>
+                            <Input
+                            placeholder={Languages[this.state.languages]['062']}
+                            label={Languages[this.state.languages]['059']}
+                            value={this.state.selectedItem.caption}
+                            onChangeText={(caption) => {
+                                const selectedItem = this.state.selectedItem;
+                                selectedItem.caption = caption;
+                                this.setState({ selectedItem });
+                                }
+                                }
+                            />
+                        </CardSection>
+                        <CardSection style={{ width: (this.state.width - 380) }}>
+                            <Input
+                            placeholder={Languages[this.state.languages]['063']}
+                            label={Languages[this.state.languages]['060']}
+                            value={this.state.selectedItem.group}
+                            onChangeText={(group) => {
+                                const selectedItem = this.state.selectedItem;
+                                selectedItem.group = group;
+                                this.setState({ selectedItem });
+                                }
+                                }
+                            />
+                        </CardSection>
+                        </View>
+                    </View>
+                );
+            }
     }
         if (this.state.selectedItem.mediaType === 'Music' || this.state.selectedItem.mediaType === 'MusicAnd') {
-            const explorerArray = [<CardSection style={{ borderTopWidth: 1 }}>
+            return (
+                <View style={{ alignItems: 'flex-start', flexDirection: 'row', width: this.state.widthc, marginTop: 10 }}>
+                <View>
+            <CardSection style={{ borderBottomWidth: 0 }}>
+                <Image source={require('../Images/musicalbumart.png')} style={{ height: 300, width: 300 }} />
+            </CardSection>
+            </View>
+            <View style={{ width: (this.state.width - 450), backgroundColor: 'white', height: 300, justifyContent: 'center' }}>
+            <CardSection style={{ borderTopWidth: 1, width: (this.state.width - 380), marginTop: 10 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.title}</Text>
                         </View>
-                    </CardSection>,
-                    <CardSection style={{ borderTopWidth: 1 }}>
+                    </CardSection>
+                    <CardSection style={{ width: (this.state.width - 380) }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.album}</Text>
                         </View>
-                    </CardSection>,
-                    <CardSection style={{ borderTopWidth: 1 }}>
+                    </CardSection>
+                    <CardSection style={{ width: (this.state.width - 380) }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.artist}</Text>
                         </View>
-                    </CardSection>,
-                    <CardSection style={{ borderTopWidth: 1 }}>
+                    </CardSection>
+                    <CardSection style={{ width: (this.state.width - 380) }}>
                         <Input
                         placeholder={Languages[this.state.languages]['062']}
                         label={Languages[this.state.languages]['059']}
@@ -449,8 +506,8 @@ class Settings extends Component {
                             }
                             }
                         />
-                    </CardSection>,
-                    <CardSection>
+                    </CardSection>
+                    <CardSection style={{ width: (this.state.width - 380) }}>
                         <Input
                         placeholder={Languages[this.state.languages]['063']}
                         label={Languages[this.state.languages]['060']}
@@ -462,22 +519,10 @@ class Settings extends Component {
                             }
                             }
                         />
-                    </CardSection>,
-                    <CardSection style={{ flexDirection: 'row' }}>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['077']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                        <Button onPress={() => this.setState({ selectedItem: null })}>
-                            {Languages[this.state.languages]['070']}
-                        </Button>
-                        <Button onPress={() => this.setState({ selectedItem: null, mediaType: null })}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
-                    </CardSection>];
-                    return (
-            [...explorerArray]
-        );
+                    </CardSection>
+                    </View>
+                    </View>
+            );
         }
     }
 
@@ -814,7 +859,6 @@ class Settings extends Component {
                 );
             }
             if (this.state.selectedItem !== null) {
-                if (this.state.mediaType === 'Pictures') {
                     return (
                         <View>
                         <Header style={{ height: 60, flexDirection: 'row' }}>
@@ -830,92 +874,25 @@ class Settings extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
-                        <View style={{ alignItems: 'center' }}>
-                    <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: this.state.selectedItem.imageuri }} style={{ height: 300, width: 300 }} />
-                    </CardSection>
                     {this.renderExplorer()}
-                </View>
+                    <CardSection>
+                        <Button onPress={this.onSaveItemPress.bind(this)}>
+                            {Languages[this.state.languages]['077']}
+                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        </Button>
+                    </CardSection>
+                    <CardSection>
+                        <Button onPress={() => this.setState({ selectedItem: null })}>
+                            {Languages[this.state.languages]['070']}
+                        </Button>
+                    </CardSection>
+                    <CardSection>
+                        <Button onPress={() => this.setState({ selectedItem: null, mediaType: null })}>
+                            {Languages[this.state.languages]['069']}
+                        </Button>
+                    </CardSection>
                 </View>
             );
-                }
-                if (this.state.mediaType === 'Videos') {
-                    if (this.state.selectedItem.mediaType === 'Youtube') {
-                        return (
-                        <View>
-                        <Header style={{ height: 60, flexDirection: 'row' }}>
-                <View style={{ flex: 1 }}>
-                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['076']}</Text>
-                </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
-            </Header>
-                        <View style={{ alignItems: 'center' }}>
-                    <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: this.state.selectedItem.imageuri }} style={{ height: 300, width: 300 }} />
-                    </CardSection>
-                    {this.renderExplorer()}
-                </View>
-                </View>
-            );
-                    }
-                    if (this.state.selectedItem.mediaType === 'Video') {
-                        return (
-                        <View>
-                        <Header style={{ height: 60, flexDirection: 'row' }}>
-                <View style={{ flex: 1 }}>
-                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['076']}</Text>
-                </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
-            </Header>
-                        <View style={{ alignItems: 'center' }}>
-                    <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={{ uri: this.state.selectedItem.uri }} style={{ height: 300, width: 300 }} />
-                    </CardSection>
-                    {this.renderExplorer()}
-                </View>
-                </View>
-            );
-                    }
-                }
-                if (this.state.selectedItem.mediaType === 'Music' || this.state.selectedItem.mediaType === 'MusicAnd') {
-                    return (
-                        <View>
-                        <Header style={{ height: 60, flexDirection: 'row' }}>
-                <View style={{ flex: 1 }}>
-                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['076']}</Text>
-                </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
-            </Header>
-                        <View style={{ alignItems: 'center' }}>
-                    <CardSection style={{ borderBottomWidth: 0 }}>
-                        <Image source={require('../Images/musicalbumart.png')} style={{ height: 300, width: 300 }} />
-                    </CardSection>
-                    {this.renderExplorer()}
-                </View>
-                </View>
-            );
-                }
             }
         }
             } 
