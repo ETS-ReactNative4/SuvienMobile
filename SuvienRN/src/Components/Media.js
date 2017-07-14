@@ -180,71 +180,9 @@ class Media extends Component {
                 }, () => {
                     //console.log('I didnt find it :(');
                 });
-        }
-                
+        }        
     }
 
-    /*
-    <YouTube
-                            apiKey='AIzaSyDCv-gME-M7Zm42sZz8vuQcK-3uNtbTVhU'
-                            ref={(component) => {
-                            this._youTubePlayer = component;
-                            }}
-                            videoId="KVZ-P-ZI6W4"           // The YouTube video ID
-                            playlist="PLF797E961509B4EB5"   // A playlist's ID, overridden by `videoId`
-                            play                   // control playback of video with true/false
-                            fullscreen={false}               // control whether the video should play in fullscreen or inline
-                            loop                     // control whether the video should loop when ended
-
-                            onReady={(e) => {
-                                this.setState({ isReady: true });
-                                this._youTubePlayer.seekTo(0);
-                            }
-                            }
-                            onChangeState={e => this.setState({ status: e.state })}
-                            onChangeQuality={e => this.setState({ quality: e.quality })}
-                            onError={e => this.setState({ error: e.error })}
-                            onProgress={e => this.setState({ currentTime: e.currentTime, duration: e.duration })}
-
-                            style={{ alignSelf: 'stretch', height: 400, backgroundColor: 'black' }}
-                            />
-                            <View style={{ flex: 1, height: null, width: null, backgroundColor: '#e3edf9' }}>
-                    <View 
-                    style={{
-                        backgroundColor: '#d5deea', 
-                        height: (newHeight + 100), 
-                        flexDirection: 'row', 
-                        marginTop: (paddingheight - 50), 
-                        alignItems: 'center', 
-                        justifyContent: 'center',
-                        }}
-                    >
-                        <View style={{ flexDirection: 'row', height: scheight, backgroundColor: 'transparent', justifyContent: 'center' }}>
-                            <View style={{ flexDirection: 'row', alignSelf: 'flex-end', marginBottom: paddingheight, backgroundColor: '#c7d0db' }}>
-                                <Image source={{ uri: this.state.uri }} style={{ height: newHeight, width: newWidth }} />
-                                <View style={{ height: newHeight, width: 400, backgroundColor: '#e3edf9', marginLeft: 10, marginRight: 10 }}>
-                                    <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                            {this.state.title}
-                                        </Text>
-                                        <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
-                                            <Image source={imagerend} style={{ height: 40, width: 40 }} />
-                                        </TouchableWithoutFeedback>
-                                    </View>
-                                        <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
-                                        <Text style={styles.textBodyStyle}>
-                                            <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
-                                            {this.state.tag}
-                                        </Text>
-                                    <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>Return to Home</Button>
-                                    </CardSection>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-    */
     onHomeReturn() {
         if (this.state.mediaType === 'Photo') {
             const myimages = this.state.pictures;
