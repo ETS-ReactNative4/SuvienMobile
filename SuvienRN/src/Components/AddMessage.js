@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
 class AddMessage extends Component {
-    state = { secheight: null, secwidth: null, message: null, color: null, day: '[]', startHour: 0, modalVisible: false, delete: null, startMinute: 0, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
+    state = { secheight: null, secwidth: null, message: null, color: null, day: '[]', startHour: 0, modalVisible: false, delete: null, startMinute: 0, isRecording: false, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
     async componentWillMount() {
         if (Platform.OS === 'ios') {
             this.setState({ secheight: 200, secwidth: 100 });
@@ -231,12 +231,12 @@ class AddMessage extends Component {
 
     startRecording() {
     console.log('start rec');
-
+    this.setState({ isRecording: true });
     this.camera.capture()
       .then((data) => {
         console.log('capturing...');
         console.log(data);
-        this.setState({ isLaunchCam: false, uri: data.path });
+        this.setState({ isLaunchCam: false, uri: data.path, isRecording: false });
       });
   }
 
@@ -856,6 +856,7 @@ class AddMessage extends Component {
                         placeholder={Languages[this.state.languages]['093']}
                         label={Languages[this.state.languages]['058']}
                         value={selected.message}
+                        maxLength={39}
                         onChangeText={(message) => {
                             selected.message = message;
                             this.setState({ currentMessage: JSON.stringify(selected) });
@@ -1137,6 +1138,7 @@ class AddMessage extends Component {
                         placeholder={Languages[this.state.languages]['093']}
                         label={Languages[this.state.languages]['058']}
                         value={this.state.title}
+                        maxLength={39}
                         onChangeText={(title) => this.setState({ title })}
                         labelstyle={{ marginLeft: 40 }}
                     />
@@ -1332,7 +1334,44 @@ class AddMessage extends Component {
             }
     }
          if (this.state.isLaunchCam === true) {
-        return (
+             console.log(this.state.isRecording);
+             if (this.state.isRecording === false) {
+                return (
+                    <View style={styles.container}>
+                        <Camera
+                        ref={(cam) => {
+                        this.camera = cam;
+                        }}
+                        style={styles.preview}
+                        playSoundOnCapture={false}
+                        aspect={Camera.constants.Aspect.fill}
+                        captureMode={Camera.constants.CaptureMode.video}
+                        onFocusChanged={() => {}}
+                        onZoomChanged={() => {}}
+                        type={this.state.cameraType}
+                        >
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
+                                <TouchableWithoutFeedback onPress={this.startRecording.bind(this)}>
+                                    <Image source={require('../Images/startrecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={this.stopRecording.bind(this)}>
+                                    <Image source={require('../Images/stoprecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
+                                    <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                                    <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                </TouchableWithoutFeedback>
+                            </View>
+                    </View>
+            </Camera>
+          </View>
+        );    
+             }
+        if (this.state.isRecording === true) {
+            return (
                 <View style={styles.container}>
                     <Camera
                     ref={(cam) => {
@@ -1347,6 +1386,7 @@ class AddMessage extends Component {
                     type={this.state.cameraType}
                     >
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
+                    <Image source={{ uri: `${Languages[this.state.languages]['117']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ alignSelf: 'flex-start', height: 100, width: 200, marginRight: (this.state.widthc - 350) }} />
                         <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
                             <TouchableWithoutFeedback onPress={this.startRecording.bind(this)}>
                                 <Image source={require('../Images/startrecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
@@ -1365,6 +1405,7 @@ class AddMessage extends Component {
         </Camera>
       </View>
     );
+        }
 }
     }
         }

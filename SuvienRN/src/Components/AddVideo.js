@@ -6,7 +6,7 @@ import { CardSection, Button, Input, Header } from './common';
 import Camera from 'react-native-camera';
 
 class AddVideo extends Component {
-    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, color: null, isNull: false, languages: null, heightc: null, widthc: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
+    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, color: null, isNull: false, languages: null, heightc: null, widthc: null, cameraType: 'back', isRecording: false, videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
     async componentWillMount() {
         this.setState({ 
             heightc: Dimensions.get('window').height,
@@ -707,12 +707,12 @@ class AddVideo extends Component {
     }
     startRecording() {
     console.log('start rec');
-
+    this.setState({ isRecording: true });
     this.camera.capture()
       .then((data) => {
         console.log('capturing...');
         console.log(data);
-        this.setState({ isLaunchCam: false, uri: data.path, mediaType: 'Video' });
+        this.setState({ isLaunchCam: false, uri: data.path, mediaType: 'Video', isRecording: false });
       });
   }
 
@@ -873,7 +873,8 @@ class AddVideo extends Component {
             }
                 }
             if (this.state.isLaunchCam === true) {
-                return (
+                if (this.state.isRecording === true) {
+                    return (
                         <View style={styles.container}>
                             <Camera
                             ref={(cam) => {
@@ -888,6 +889,7 @@ class AddVideo extends Component {
                             type={this.state.cameraType}
                             >
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
+                            <Image source={{ uri: `${Languages[this.state.languages]['117']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ alignSelf: 'flex-start', height: 100, width: 200, marginRight: (this.state.widthc - 350) }} />
                                 <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
                                     <TouchableWithoutFeedback onPress={this.startRecording.bind(this)}>
                                         <Image source={require('../Images/startrecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
@@ -906,6 +908,42 @@ class AddVideo extends Component {
                 </Camera>
               </View>
             );
+                }
+            if (this.state.isRecording === false) {
+                return (
+                    <View style={styles.container}>
+                        <Camera
+                        ref={(cam) => {
+                        this.camera = cam;
+                        }}
+                        style={styles.preview}
+                        playSoundOnCapture={false}
+                        aspect={Camera.constants.Aspect.fill}
+                        captureMode={Camera.constants.CaptureMode.video}
+                        onFocusChanged={() => {}}
+                        onZoomChanged={() => {}}
+                        type={this.state.cameraType}
+                        >
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
+                                <TouchableWithoutFeedback onPress={this.startRecording.bind(this)}>
+                                    <Image source={require('../Images/startrecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={this.stopRecording.bind(this)}>
+                                    <Image source={require('../Images/stoprecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
+                                    <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                                    <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                </TouchableWithoutFeedback>
+                            </View>
+                    </View>
+            </Camera>
+          </View>
+        );
+            }
             }
             }
             if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {
@@ -1060,8 +1098,45 @@ class AddVideo extends Component {
                 );
             }
                 }
-            if (this.state.isLaunchCam === true) {
-                return (
+                if (this.state.isLaunchCam === true) {
+                    if (this.state.isRecording === true) {
+                        return (
+                            <View style={styles.container}>
+                                <Camera
+                                ref={(cam) => {
+                                this.camera = cam;
+                                }}
+                                style={styles.preview}
+                                playSoundOnCapture={false}
+                                aspect={Camera.constants.Aspect.fill}
+                                captureMode={Camera.constants.CaptureMode.video}
+                                onFocusChanged={() => {}}
+                                onZoomChanged={() => {}}
+                                type={this.state.cameraType}
+                                >
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
+                                <Image source={{ uri: `${Languages[this.state.languages]['117']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ alignSelf: 'flex-start', height: 100, width: 200, marginRight: (this.state.widthc - 350) }} />
+                                    <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
+                                        <TouchableWithoutFeedback onPress={this.startRecording.bind(this)}>
+                                            <Image source={require('../Images/startrecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                        </TouchableWithoutFeedback>
+                                        <TouchableWithoutFeedback onPress={this.stopRecording.bind(this)}>
+                                            <Image source={require('../Images/stoprecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                        </TouchableWithoutFeedback>
+                                        <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
+                                            <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                        </TouchableWithoutFeedback>
+                                        <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                                            <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                        </TouchableWithoutFeedback>
+                                    </View>
+                            </View>
+                    </Camera>
+                  </View>
+                );
+                    }
+                if (this.state.isRecording === false) {
+                    return (
                         <View style={styles.container}>
                             <Camera
                             ref={(cam) => {
@@ -1094,7 +1169,8 @@ class AddVideo extends Component {
                 </Camera>
               </View>
             );
-            }
+                }
+                }
             }
         }
         if (this.state.languages === null) {
