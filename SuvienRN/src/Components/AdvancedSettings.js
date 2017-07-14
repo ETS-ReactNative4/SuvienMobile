@@ -187,6 +187,7 @@ class AdvancedSettings extends Component {
                 }
                 }}
             />
+            <View>
             <CheckBox
             checkType="Preferences"
             label={Languages[this.state.languages]['033']}
@@ -204,6 +205,8 @@ class AdvancedSettings extends Component {
                 }
                 }}
             />
+            <Text style={{ marginLeft: 50, fontSize: 17, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['116']}</Text>
+            </View>
             </View>
             </View>
             <View style={{ alignItems: 'center' }}>
@@ -245,7 +248,7 @@ const styles = {
         marginLeft: 100,
         flex: 1,
         alignSelf: 'center',
-        fontFamily: 'Roboto-Light'
+        fontFamily: 'Roboto-Thin'
     }
 };
 

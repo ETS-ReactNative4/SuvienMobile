@@ -115,7 +115,8 @@
         "112" : "Please fill in the missing field(s) to continue",
         "113" : "Okay",
         "114" : "Are you sure you want to delete this?",
-        "115" : "nocontents"
+        "115" : "nocontents",
+        "116" : "Tap the sun/moon icon four(4) times to return to settings"
     },
     "FRE" : {
         "000" : "Démarrer",
@@ -233,7 +234,8 @@
         "112" : "Complétez le(s) champ(s) texte(s) vides au continuer, s'il vous plaît",
         "113" : "D'accord.",
         "114" : "Voulez-vous vraiment vous supprimez ce contenu?",
-        "115" : "nocontentsfre"
+        "115" : "nocontentsfre",
+        "116" : "Appuyez sur le symbole du soleil / lune quatre (4) fois pour revenir au menu des paramètres"
     },
     "ESP" : {
         "000" : "Empezar",
@@ -351,6 +353,7 @@
         "112" : "Complete los campo(s) de textos vacíos para continuar, por favor.",
         "113" : "De acuerdo",
         "114" : "¿Está seguro de que desea borrar este?",
-        "115" : "nocontentsesp"
+        "115" : "nocontentsesp",
+        "116" : "Puntear el icono del sol/luna quatro(4) veces para volver al menú de configuración"
     }
 }
