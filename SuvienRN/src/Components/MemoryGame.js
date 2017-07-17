@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, AsyncStorage, TouchableOpacity, Dimensions, Modal, Platform } from 'react-native';
+import { View, Text, Image, AsyncStorage, TouchableOpacity, Dimensions, Modal, Platform, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Languages from '../Languages/Languages.json';
 import { CardSection, Button, Header, GameTile } from './common';
@@ -137,9 +137,19 @@ class MemoryGame extends Component {
                 return (
                 <View style={{ flex: 1, flexDirection: 'column' }}>
                     <View style={{ flex: 1 }}>
-                    <Header style={{ height: 60 }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
-                    </Header>
+                    <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                     </View>
                 <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                     {this.renderTiles()}
@@ -183,9 +193,19 @@ class MemoryGame extends Component {
                             </View>
                         </Modal>
                             <View style={{ flex: 1 }}>
-                            <Header style={{ height: 60 }}>
-                                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
-                            </Header>
+                            <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                             </View>
                         <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                             {this.renderTiles()}
@@ -231,9 +251,19 @@ class MemoryGame extends Component {
                          </View>
                      </Modal>
                          <View style={{ flex: 1 }}>
-                         <Header style={{ height: 60 }}>
-                             <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
-                         </Header>
+                         <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                          </View>
                      <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                          {this.renderTiles()}
@@ -281,9 +311,19 @@ class MemoryGame extends Component {
                          </View>
                      </Modal>
                          <View style={{ flex: 1 }}>
-                         <Header style={{ height: 60 }}>
-                             <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
-                         </Header>
+                         <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                          </View>
                      <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                          {this.renderTiles()}
@@ -330,9 +370,19 @@ class MemoryGame extends Component {
                          </View>
                      </Modal>
                          <View style={{ flex: 1 }}>
-                         <Header style={{ height: 60 }}>
-                             <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
-                         </Header>
+                         <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                          </View>
                      <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                          {this.renderTiles()}
@@ -380,9 +430,19 @@ class MemoryGame extends Component {
                          </View>
                      </Modal>
                          <View style={{ flex: 1 }}>
-                         <Header style={{ height: 60 }}>
-                             <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
-                         </Header>
+                         <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                          </View>
                      <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                          {this.renderTiles()}

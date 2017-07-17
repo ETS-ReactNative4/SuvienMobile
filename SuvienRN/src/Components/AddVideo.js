@@ -781,11 +781,11 @@ class AddVideo extends Component {
                                 onRequestClose={() => {}}
                             >
                                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: this.state.color }}>
-                                        <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
-                                            <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
+                                        <View style={{ width: 910, backgroundColor: '#D9D9D9', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
                                             <TouchableWithoutFeedback onPress={() => this.setState({ videos: null })}>
-                                        <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 30, width: 30 }} />
+                                        <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 40, width: 40, marginRight: 5 }} />
                                     </TouchableWithoutFeedback>
+                                            <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
                                         </View>
                                         <View style={{ height: 590, width: 910, backgroundColor: '#EFEFEF', position: 'relative', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'row', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                                             <ScrollView>
@@ -1000,11 +1000,11 @@ class AddVideo extends Component {
                                 onRequestClose={() => {}}
                             >
                                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: this.state.color }}>
-                                        <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
-                                            <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
+                                        <View style={{ width: 910, backgroundColor: '#D9D9D9', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
                                             <TouchableWithoutFeedback onPress={() => this.setState({ videos: null })}>
-                                        <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 30, width: 30 }} />
+                                        <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 40, width: 40, marginRight: 5 }} />
                                     </TouchableWithoutFeedback>
+                                            <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
                                         </View>
                                         <View style={{ height: 590, width: 910, backgroundColor: '#EFEFEF', position: 'relative', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'row', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
                                             <ScrollView>

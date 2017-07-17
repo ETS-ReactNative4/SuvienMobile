@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, AsyncStorage, Text, TouchableOpacity, TouchableWithoutFeedback, Modal } from 'react-native';
+import { View, Image, AsyncStorage, Text, TouchableOpacity, Platform, TouchableWithoutFeedback, Modal } from 'react-native';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Button, Header } from './common';
@@ -108,7 +108,7 @@ class CaptionGame extends Component {
         if (this.state.dim !== null && this.state.tiles !== null) {
             if (this.state.congrats === false) {
                 return (
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: this.state.color }}>
+                <View style={{ flex: 1 }}>
                     <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
@@ -117,12 +117,12 @@ class CaptionGame extends Component {
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['106']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
-                <View style={{ flexDirection: 'row'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ flexDirection: 'row', width: (this.state.dim * 2), flexWrap: 'wrap' }}>
                     {this.renderTiles()}
                 </View>
@@ -189,8 +189,8 @@ class CaptionGame extends Component {
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['106']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
@@ -284,8 +284,8 @@ class CaptionGame extends Component {
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['106']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
@@ -359,8 +359,8 @@ class CaptionGame extends Component {
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['106']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>

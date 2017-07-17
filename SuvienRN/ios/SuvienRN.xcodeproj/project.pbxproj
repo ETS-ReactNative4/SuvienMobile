@@ -131,6 +131,8 @@
 		749C562F1F1D04A80051B889 /* loadingflag.png in Resources */ = {isa = PBXBuildFile; fileRef = 749C562C1F1D04A80051B889 /* loadingflag.png */; };
 		749C56301F1D04A80051B889 /* loadingflagesp.png in Resources */ = {isa = PBXBuildFile; fileRef = 749C562D1F1D04A80051B889 /* loadingflagesp.png */; };
 		749C56311F1D04A80051B889 /* loadingflagfre.png in Resources */ = {isa = PBXBuildFile; fileRef = 749C562E1F1D04A80051B889 /* loadingflagfre.png */; };
+		749C56431F1D16180051B889 /* backbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 749C56421F1D16180051B889 /* backbutton.png */; };
+		749C56631F1D19E30051B889 /* backbuttondark.png in Resources */ = {isa = PBXBuildFile; fileRef = 749C56621F1D19E30051B889 /* backbuttondark.png */; };
 		74FAC1EB1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */; };
 		74FAC1EC1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */; };
 		74FAC1ED1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */; };
@@ -430,6 +432,8 @@
 		749C562C1F1D04A80051B889 /* loadingflag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingflag.png; sourceTree = "<group>"; };
 		749C562D1F1D04A80051B889 /* loadingflagesp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingflagesp.png; sourceTree = "<group>"; };
 		749C562E1F1D04A80051B889 /* loadingflagfre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingflagfre.png; sourceTree = "<group>"; };
+		749C56421F1D16180051B889 /* backbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backbutton.png; sourceTree = "<group>"; };
+		749C56621F1D19E30051B889 /* backbuttondark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backbuttondark.png; sourceTree = "<group>"; };
 		74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClementePDag-Book.ttf"; path = "../android/app/src/main/assets/fonts/ClementePDag-Book.ttf"; sourceTree = "<group>"; };
 		74FAC20F1EF1671100F4E4FC /* ClementePDae-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClementePDae-Light.ttf"; path = "../android/app/src/main/assets/fonts/ClementePDae-Light.ttf"; sourceTree = "<group>"; };
 		74FECB131EEED08600934A37 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
@@ -706,6 +710,7 @@
 				742D192D1F14FC3700CC489D /* noimageesp.png */,
 				742D192E1F14FC3700CC489D /* noimagefre.png */,
 				749C562C1F1D04A80051B889 /* loadingflag.png */,
+				749C56621F1D19E30051B889 /* backbuttondark.png */,
 				749C562D1F1D04A80051B889 /* loadingflagesp.png */,
 				749C562E1F1D04A80051B889 /* loadingflagfre.png */,
 				749C56081F1CFA520051B889 /* nointernet.png */,
@@ -716,6 +721,7 @@
 				747D57401F19678B00C70AF1 /* recording.png */,
 				747D57411F19678B00C70AF1 /* recordingesp.png */,
 				747D57421F19678B00C70AF1 /* recordingfre.png */,
+				749C56421F1D16180051B889 /* backbutton.png */,
 				74330F5C1F1923FE005152BF /* nocontentsfre.png */,
 				74330F5D1F1923FE005152BF /* nourl.png */,
 				74330F5E1F1923FE005152BF /* nourlesp.png */,
@@ -1216,6 +1222,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				742D19491F14FC3700CC489D /* nocontentfre.png in Resources */,
 				749C560B1F1CFA520051B889 /* nointernet.png in Resources */,
+				749C56431F1D16180051B889 /* backbutton.png in Resources */,
 				747D57431F19678B00C70AF1 /* recording.png in Resources */,
 				742D193D1F14FC3700CC489D /* noaudiofre.png in Resources */,
 				742D195D1F14FC3700CC489D /* novideoesp.png in Resources */,
@@ -1233,6 +1240,7 @@
 				74330F601F1923FE005152BF /* nocontents.png in Resources */,
 				749C560C1F1CFA520051B889 /* nointernetesp.png in Resources */,
 				749C56311F1D04A80051B889 /* loadingflagfre.png in Resources */,
+				749C56631F1D19E30051B889 /* backbuttondark.png in Resources */,
 				742D194D1F14FC3700CC489D /* noimage.png in Resources */,
 				7408C60A1EFAFB7700F952B2 /* Roboto-Light.ttf in Resources */,
 				74330F641F1923FE005152BF /* nourlesp.png in Resources */,

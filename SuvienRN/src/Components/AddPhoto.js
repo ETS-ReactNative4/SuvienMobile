@@ -465,9 +465,9 @@ class AddPhoto extends Component {
                         onRequestClose={() => {}}
                     >
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: this.state.color }}>
-                                <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
+                                <View style={{ width: 910, backgroundColor: '#D9D9D9', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
                                     <TouchableWithoutFeedback onPress={() => this.setState({ photos: null })}>
-                                        <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 30, width: 30 }} />
+                                        <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 40, width: 40, marginRight: 70 }} />
                                     </TouchableWithoutFeedback>
                                     <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
                                 </View>
@@ -613,9 +613,9 @@ class AddPhoto extends Component {
                         onRequestClose={() => {}}
                     >
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: this.state.color }}>
-                                <View style={{ width: 910, backgroundColor: '#D9D9D9', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
+                                <View style={{ width: 910, backgroundColor: '#D9D9D9', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
                                     <TouchableWithoutFeedback onPress={() => this.setState({ photos: null })}>
-                                        <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 30, width: 30 }} />
+                                        <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 40, width: 40, marginRight: 5 }} />
                                     </TouchableWithoutFeedback>
                                     <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
                                 </View>
