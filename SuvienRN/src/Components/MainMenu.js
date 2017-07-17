@@ -269,7 +269,7 @@ class MainMenu extends Component {
             if (this.state.isFirst === null || this.state.language === null) {
             return (
                 <View style={styles.loadingContainer}>
-                    <Text style={{ marginTop: 30 }}>Loading</Text>
+                    <Image source={{ uri: `loadingflag${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 500, height: 200 }} />
                 </View>
             );
         } else {

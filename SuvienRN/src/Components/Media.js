@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, Image, Dimensions, TouchableWithoutFeedback, ScrollView, WebView } from 'react-native';
+import { View, Text, AsyncStorage, Image, Dimensions, TouchableWithoutFeedback, ScrollView, WebView, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button, CardSection } from './common';
 import Languages from '../Languages/Languages.json';
@@ -314,7 +314,7 @@ class Media extends Component {
             if (scheight === null || width === null || uri === null || caption === null || tag === null || height === null || scwidth === null || isFavourite === null || imagerend === null){
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Loading</Text>
+                    <Image source={{ uri: `${Languages[this.state.languages]['119']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 500, height: 200 }} />
                 </View>  
             );
         }
@@ -414,7 +414,7 @@ class Media extends Component {
             if (uri === null || caption === null || tag === null || isFavourite === null || imageuri === null || imagerend === null) {
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Loading</Text>
+                    <Image source={{ uri: `${Languages[this.state.languages]['119']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 500, height: 200 }} />
                 </View>  
             );
         }
@@ -456,7 +456,7 @@ class Media extends Component {
                     return (
                         <View style={{ height: (this.state.scheight - 100), alignItems: 'center', justifyContent: 'center', marginTop: 40 }}>
                             <View style={{ height: 500, backgroundColor: 'white', width: 800 }}>
-                                <Text>Loading</Text>
+                            <Image source={{ uri: `${Languages[this.state.languages]['119']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 500, height: 200 }} />
                             </View>
                             <WebView
                             style={{ height: 200, backgroundColor: 'black', width: 800, opacity: 0.5 }}
@@ -561,7 +561,7 @@ class Media extends Component {
             } 
             if (this.state.album === null || this.state.title === null || this.state.artist === null) {
                     return (
-                        <Text> Loading </Text>
+                        <Image source={{ uri: `${Languages[this.state.languages]['119']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 500, height: 200 }} />
                     );
                 }
             }

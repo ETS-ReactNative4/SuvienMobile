@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, AsyncStorage, TouchableOpacity, Dimensions, Modal } from 'react-native';
+import { View, Text, Image, AsyncStorage, TouchableOpacity, Dimensions, Modal, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Languages from '../Languages/Languages.json';
 import { CardSection, Button, Header, GameTile } from './common';
@@ -123,7 +123,7 @@ class MemoryGame extends Component {
         if (this.state.languages !== null) {
             if (this.state.width === null) {
             return (
-                <Text style={{ marginTop: 30 }}>Loading</Text>
+                <Image source={{ uri: `${Languages[this.state.languages]['119']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 500, height: 200 }} />
             );
         }
         if (this.state.width !== null) {

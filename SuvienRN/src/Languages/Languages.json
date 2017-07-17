@@ -118,7 +118,8 @@
         "115" : "nocontents",
         "116" : "Tap the sun/moon icon four(4) times to return to settings",
         "117" : "recording",
-        "118" : "nointernet"
+        "118" : "nointernet",
+        "119" : "loadingflag"
     },
     "FRE" : {
         "000" : "Démarrer",
@@ -239,7 +240,8 @@
         "115" : "nocontentsfre",
         "116" : "Appuyez sur le symbole du soleil / lune quatre (4) fois pour revenir au menu des paramètres",
         "117" : "recordingfre",
-        "118" : "nointernetfre"
+        "118" : "nointernetfre",
+        "119" : "loadingflagfre"
     },
     "ESP" : {
         "000" : "Empezar",
@@ -360,6 +362,7 @@
         "115" : "nocontentsesp",
         "116" : "Puntear el icono del sol/luna quatro(4) veces para volver al menú de configuración",
         "117" : "recordingesp",
-        "118" : "nointernetesp"
+        "118" : "nointernetesp",
+        "119" : "loadingflagesp"
     }
 }
