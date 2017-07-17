@@ -5,7 +5,7 @@ import { CardSection } from './CardSection';
 import { Actions } from 'react-native-router-flux';
 
 class PictureTile extends Component {
-    state = { imageuri: null, caption: null, tag: null, isNull: true, languages: null, isnone: null }
+    state = { imageuri: null, caption: null, tag: null, isNull: true, languages: null, isnone: null, noint: false }
 
     async componentWillMount() {
         this.setState({ languages: await AsyncStorage.getItem('Language') });
@@ -103,38 +103,49 @@ class PictureTile extends Component {
             }
     }
     if (this.props.data.mediaType === 'Youtube') {
-        return (
-        <TouchableOpacity 
-            onPress={() => {
-                this.props.onChangePress({ uri: this.props.data.videouri,
-                title: this.props.data.title,
-                imageuri: this.props.imageuri, 
-                caption: this.props.data.caption, 
-                tag: this.props.data.group,
-                isFavourite: this.props.data.isFavourite,
-                mediaType: 'Youtube'
-                });
-                /*
-                AsyncStorage.setItem('isSelected', JSON.stringify(
-                { uri: this.props.data.videouri,
-                title: this.props.data.title,
-                imageuri: this.props.imageuri, 
-                caption: this.props.data.caption, 
-                tag: this.props.data.group,
-                isFavourite: this.props.data.isFavourite,
-                mediaType: 'Youtube'
-                }));*/
-                //Actions.Media();
-            }
-            }
-        >
-                <Image source={{ uri: this.props.data.imageuri }} style={this.props.style}>
-                    <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end', width: this.props.style.height, height: this.props.style.height, paddingBottom: 10, paddingRight: 10 }}>
-                    <Image source={require('./videoicon.png')} style={{ height: 50, width: 50 }} />
-                    </View>
-                </Image>
-            </TouchableOpacity>
-        );
+        if (this.state.noint === false) {
+            return (
+                <TouchableOpacity 
+                    onPress={() => {
+                        this.props.onChangePress({ uri: this.props.data.videouri,
+                        title: this.props.data.title,
+                        imageuri: this.props.imageuri, 
+                        caption: this.props.data.caption, 
+                        tag: this.props.data.group,
+                        isFavourite: this.props.data.isFavourite,
+                        mediaType: 'Youtube'
+                        });
+                        /*
+                        AsyncStorage.setItem('isSelected', JSON.stringify(
+                        { uri: this.props.data.videouri,
+                        title: this.props.data.title,
+                        imageuri: this.props.imageuri, 
+                        caption: this.props.data.caption, 
+                        tag: this.props.data.group,
+                        isFavourite: this.props.data.isFavourite,
+                        mediaType: 'Youtube'
+                        }));*/
+                        //Actions.Media();
+                    }
+                    }
+                >
+                        <Image source={{ uri: this.props.data.imageuri }} style={this.props.style} onError={() => this.setState({ noint: true })}>
+                            <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end', width: this.props.style.height, height: this.props.style.height, paddingBottom: 10, paddingRight: 10 }}>
+                            <Image source={require('./videoicon.png')} style={{ height: 50, width: 50 }} />
+                            </View>
+                        </Image>
+                    </TouchableOpacity>
+                );
+        }
+        if (this.state.noint === true) {
+            return (
+                        <Image source={{ uri: `${Languages[this.state.languages]['118']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={this.props.style}>
+                            <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end', width: this.props.style.height, height: this.props.style.height, paddingBottom: 10, paddingRight: 10 }}>
+                            <Image source={require('./videoicon.png')} style={{ height: 50, width: 50 }} />
+                            </View>
+                        </Image>
+                );
+        }
     }
         if (this.props.data.mediaType === 'Music') {
             return (

@@ -35,7 +35,8 @@ class Media extends Component {
         audios: null,
         album: null,
         artist: null,
-        languages: null
+        languages: null,
+        failed: false
     }
     async componentWillMount() {
         //Note. The orientation issue only persists on android, not ioss
@@ -424,6 +425,7 @@ class Media extends Component {
                             <WebView
                             style={{ height: 200, backgroundColor: 'black', width: 800 }}
                             source={{ uri: `https://www.youtube.com/embed/${uri}?&autoplay=1` }}
+                            onError={() => this.setState({ failed: true })}
                             />
                             <View style={{ height: 250, backgroundColor: '#e3edf9', width: 800 }}>
                                         <ScrollView>
@@ -459,6 +461,7 @@ class Media extends Component {
                             <WebView
                             style={{ height: 200, backgroundColor: 'black', width: 800, opacity: 0.5 }}
                             source={{ uri: `https://www.youtube.com/embed/${uri}?&autoplay=1` }}
+                            onError={() => this.setState({ failed: true })}
                             onLoadEnd={() => this.setState({ loading: false })}
                             />
                             <View style={{ height: 250, backgroundColor: '#e3edf9', width: 800 }}>
