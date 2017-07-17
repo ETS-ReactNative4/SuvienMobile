@@ -1364,9 +1364,9 @@ class AddMessage extends Component {
                                 <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
                                     <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                                 </TouchableWithoutFeedback>
-                                <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                                    <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
-                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={() => this.setState({ isLaunchCam: false, isRecording: false, uri: null })}>
+                                <Image source={{ uri: `backbutton${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
                             </View>
                     </View>
             </Camera>
@@ -1401,9 +1401,9 @@ class AddMessage extends Component {
                             <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
                                 <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                             </TouchableWithoutFeedback>
-                            <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                                <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
-                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={() => this.setState({ isLaunchCam: false, isRecording: false, uri: null })}>
+                            <Image source={{ uri: `backbutton${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                        </TouchableWithoutFeedback>
                         </View>
                 </View>
         </Camera>

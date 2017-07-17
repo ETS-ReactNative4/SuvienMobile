@@ -901,8 +901,8 @@ class AddVideo extends Component {
                                     <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
                                         <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                                     </TouchableWithoutFeedback>
-                                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                                        <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                    <TouchableWithoutFeedback onPress={() => this.setState({ isLaunchCam: null, videos: null, isRecording: false })}>
+                                        <Image source={{ uri: `backbutton${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 100, width: 100, marginBottom: 25 }} />
                                     </TouchableWithoutFeedback>
                                 </View>
                         </View>
@@ -937,9 +937,9 @@ class AddVideo extends Component {
                                 <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
                                     <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                                 </TouchableWithoutFeedback>
-                                <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                                    <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
-                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={() => this.setState({ videos: null, isLaunchCam: false })}>
+                                <Image source={{ uri: `backbutton${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
                             </View>
                     </View>
             </Camera>
@@ -1129,9 +1129,9 @@ class AddVideo extends Component {
                                         <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
                                             <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                                         </TouchableWithoutFeedback>
-                                        <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                                            <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
-                                        </TouchableWithoutFeedback>
+                                        <TouchableWithoutFeedback onPress={() => this.setState({ videos: null, isLaunchCam: false, isRecording: false })}>
+                                        <Image source={{ uri: `backbutton${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                    </TouchableWithoutFeedback>
                                     </View>
                             </View>
                     </Camera>
@@ -1165,9 +1165,9 @@ class AddVideo extends Component {
                                     <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
                                         <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                                     </TouchableWithoutFeedback>
-                                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                                        <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
-                                    </TouchableWithoutFeedback>
+                                    <TouchableWithoutFeedback onPress={() => this.setState({ videos: null, isLaunchCam: false })}>
+                                    <Image source={{ uri: `backbutton${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                </TouchableWithoutFeedback>
                                 </View>
                         </View>
                 </Camera>
