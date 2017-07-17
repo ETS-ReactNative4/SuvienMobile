@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { CardSection, Button, Header } from './common';
 
 class CaptionGame extends Component {
-    state = { caption: null, languages: null, height: null, width: null, tiles: null, dim: null, congrats: false, timesRun: null, wrongphotos: [], selected: null, color: null }
+    state = { caption: null, languages: null, complete: false, height: null, width: null, tiles: null, dim: null, congrats: false, timesRun: null, wrongphotos: [], selected: null, color: null }
     async componentWillMount() {
         this.createNewGame();
         this.doMath();
@@ -137,7 +137,7 @@ class CaptionGame extends Component {
             );
             }
             if (this.state.congrats === true) {
-                if (this.state.timesRun < 8) {
+                if (this.state.complete === false) {
                     if (this.state.selected !== null && this.state.selected.height > this.state.selected.width) {
                         const heightRatio = parseFloat(this.state.height - 50) / parseFloat(this.state.selected.height);
                         let newHeight = this.state.height - 50;
@@ -174,7 +174,7 @@ class CaptionGame extends Component {
                         if (this.state.timesRun < 8) {
                             this.createNewGame();
                         } else {
-                            Actions.Settings();
+                            this.setState({ complete: true });
                         }
                     }} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['105']}</Button>
                                     </CardSection>
@@ -209,7 +209,7 @@ class CaptionGame extends Component {
                         if (this.state.timesRun < 8) {
                             this.createNewGame();
                         } else {
-                            Actions.Settings();
+                            this.setState({ complete: true });
                         }
                     }}
                     >
@@ -269,7 +269,7 @@ class CaptionGame extends Component {
                         if (this.state.timesRun < 8) {
                             this.createNewGame();
                         } else {
-                            Actions.Settings();
+                            this.setState({ complete: true });
                         }
                     }} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['105']}</Button>
                                     </CardSection>
@@ -304,7 +304,7 @@ class CaptionGame extends Component {
                         if (this.state.timesRun < 8) {
                             this.createNewGame();
                         } else {
-                            Actions.Settings();
+                            this.setState({ complete: true });
                         }
                     }}
                     >
@@ -318,7 +318,7 @@ class CaptionGame extends Component {
             );
                     }
                 }
-                if (this.state.timesRun >= 8) {
+                if (this.state.complete === true) {
                     return (
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: this.state.color }}>
                     <Modal
@@ -379,7 +379,7 @@ class CaptionGame extends Component {
                         if (this.state.timesRun < 8) {
                             this.createNewGame();
                         } else {
-                            Actions.Settings();
+                            this.setState({ complete: true });
                         }
                     }}
                     >
