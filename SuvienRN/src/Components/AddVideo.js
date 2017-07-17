@@ -884,6 +884,7 @@ class AddVideo extends Component {
                             playSoundOnCapture={false}
                             aspect={Camera.constants.Aspect.fill}
                             captureMode={Camera.constants.CaptureMode.video}
+                            captureAudio={true}
                             onFocusChanged={() => {}}
                             onZoomChanged={() => {}}
                             type={this.state.cameraType}
@@ -920,6 +921,7 @@ class AddVideo extends Component {
                         playSoundOnCapture={false}
                         aspect={Camera.constants.Aspect.fill}
                         captureMode={Camera.constants.CaptureMode.video}
+                        captureAudio={true}
                         onFocusChanged={() => {}}
                         onZoomChanged={() => {}}
                         type={this.state.cameraType}
@@ -1110,6 +1112,7 @@ class AddVideo extends Component {
                                 playSoundOnCapture={false}
                                 aspect={Camera.constants.Aspect.fill}
                                 captureMode={Camera.constants.CaptureMode.video}
+                                captureAudio={true}
                                 onFocusChanged={() => {}}
                                 onZoomChanged={() => {}}
                                 type={this.state.cameraType}
@@ -1144,6 +1147,7 @@ class AddVideo extends Component {
                             }}
                             style={styles.preview}
                             playSoundOnCapture={false}
+                            captureAudio={true}
                             aspect={Camera.constants.Aspect.fill}
                             captureMode={Camera.constants.CaptureMode.video}
                             onFocusChanged={() => {}}

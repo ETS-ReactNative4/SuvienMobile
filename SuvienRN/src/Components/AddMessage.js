@@ -1346,6 +1346,7 @@ class AddMessage extends Component {
                         playSoundOnCapture={false}
                         aspect={Camera.constants.Aspect.fill}
                         captureMode={Camera.constants.CaptureMode.video}
+                        captureAudio={true}
                         onFocusChanged={() => {}}
                         onZoomChanged={() => {}}
                         type={this.state.cameraType}
@@ -1381,6 +1382,7 @@ class AddMessage extends Component {
                     playSoundOnCapture={false}
                     aspect={Camera.constants.Aspect.fill}
                     captureMode={Camera.constants.CaptureMode.video}
+                    captureAudio={true}
                     onFocusChanged={() => {}}
                     onZoomChanged={() => {}}
                     type={this.state.cameraType}
