@@ -1,7 +1,7 @@
 //Get everything on one page
 //Dimension fix: need to input the dimensions in async
 import React, { Component } from 'react';
-import { View, AsyncStorage, Text, Dimensions, ScrollView, Modal, Platform } from 'react-native';
+import { View, AsyncStorage, Text, Dimensions, ScrollView, Modal, Platform, Image } from 'react-native';
 import Orientation from 'react-native-orientation';
 import Languages from '../Languages/Languages.json';
 import { Header, PictureTile, Button, CardSection } from './common';
@@ -318,7 +318,9 @@ class Home extends Component {
     }
         if (this.state.media === null && this.state.media !== []) {
             return (
-                <Image source={{ uri: `${Languages[this.state.languages]['119']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 500, height: 200 }} />
+                <View style={{ flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <Image source={{ uri: `loadingflag${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 250, height: 100 }} />
+                </View>
             );
         }
     } 
