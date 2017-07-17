@@ -832,7 +832,7 @@ class AddMessage extends Component {
             if (this.state.currentMessage !== null) {
                 const selected = JSON.parse(this.state.currentMessage);
                 return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
@@ -846,6 +846,7 @@ class AddMessage extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
+            <View style={{ flex: 1 }}>
             <ScrollView>
                 <View style={{ flex: 1 }}>
                 <CardSection style={{ marginLeft: 0, alignItems: 'center', justifyContent: 'center' }}>
@@ -1074,6 +1075,7 @@ class AddMessage extends Component {
                     </View>
                     </View>
                     </ScrollView>
+                    </View>
             </View>
         );
             }
@@ -1114,7 +1116,7 @@ class AddMessage extends Component {
             }
             if (this.state.uri !== null) {
                 return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
