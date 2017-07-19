@@ -6,7 +6,7 @@ import RadioForm from 'react-native-simple-radio-button';
 import { Actions } from 'react-native-router-flux';
 
 class Settings extends Component {
-    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, languages: null, mediaType: null, color: null, media: null, mediaArray: null, selectedItem: null, width: null, modalVisible: false, delete: null };
+    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, languages: null, mediaType: null, color: null, media: null, mediaArray: null, selectedItem: null, width: null, modalVisible: false, delete: null, isNull: false };
     async componentWillMount() {
         if (await AsyncStorage.getItem('name') !== null) {
             this.setState({ 
@@ -137,227 +137,231 @@ class Settings extends Component {
 
     async onSaveItemPress() {
         const selected = this.state.selectedItem;
-        const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
-        if (this.state.mediaType === 'Pictures') {
-            const searchContent = this.state.media.findIndex((element, index, array) => {
-                if (element.imageuri === selected.imageuri) { //If we set something to change photos, we need to make a unique ID
-                    return true;
-                } else {
-                    return false;
-                }});
-            const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
-                if (element.imageuri === selected.imageuri) {
-                    return true;
-                } else {
-                    return false;
-                }});
-            const { imageuri, caption, title, group, mediaType, height, width, isFavourite } = selected;
-            const media = this.state.mediaArray;
-            const content = this.state.media;
-            media[searchMedia] = {
-                imageuri,
-                caption,
-                title,
-                group,
-                mediaType,
-                height,
-                width,
-                isFavourite
-            };
-            content[searchContent] = {
-                imageuri,
-                caption,
-                title,
-                group,
-                mediaType,
-                height,
-                width,
-                isFavourite
-            };
-            AsyncStorage.setItem('Pictures', JSON.stringify(content));
-            AsyncStorage.setItem('Media', JSON.stringify(media));
-            const findTags = mytags.find((tag) => tag === selected.group);
-            if (findTags === undefined) {
-            mytags.push(selected.group);
-            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+        if (this.state.selectedItem.title === null || this.state.selectedItem.title === '' || this.state.selectedItem.caption === null || this.state.selectedItem.caption === '' || this.state.selectedItem.group === null || this.state.selectedItem.group === '') {
+            this.setState({ isNull: true });
+        } else {
+            const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
+            if (this.state.mediaType === 'Pictures') {
+                const searchContent = this.state.media.findIndex((element, index, array) => {
+                    if (element.imageuri === selected.imageuri) { //If we set something to change photos, we need to make a unique ID
+                        return true;
+                    } else {
+                        return false;
+                    }});
+                const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+                    if (element.imageuri === selected.imageuri) {
+                        return true;
+                    } else {
+                        return false;
+                    }});
+                const { imageuri, caption, title, group, mediaType, height, width, isFavourite } = selected;
+                const media = this.state.mediaArray;
+                const content = this.state.media;
+                media[searchMedia] = {
+                    imageuri,
+                    caption,
+                    title,
+                    group,
+                    mediaType,
+                    height,
+                    width,
+                    isFavourite
+                };
+                content[searchContent] = {
+                    imageuri,
+                    caption,
+                    title,
+                    group,
+                    mediaType,
+                    height,
+                    width,
+                    isFavourite
+                };
+                AsyncStorage.setItem('Pictures', JSON.stringify(content));
+                AsyncStorage.setItem('Media', JSON.stringify(media));
+                const findTags = mytags.find((tag) => tag === selected.group);
+                if (findTags === undefined) {
+                mytags.push(selected.group);
+                AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+                this.setState({ mediaArray: media, media: content, selectedItem: null });
+            }
             this.setState({ mediaArray: media, media: content, selectedItem: null });
         }
-        this.setState({ mediaArray: media, media: content, selectedItem: null });
-    }
-        if (this.state.mediaType === 'Videos') {
-            if (selected.mediaType === 'Youtube') {
-                const searchContent = this.state.media.findIndex((element, index, array) => {
-                if (element.imageuri === selected.imageuri) { //If we set something to change photos, we need to make a unique ID
-                    return true;
-                } else {
-                    return false;
-                }});
-            const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
-                if (element.imageuri === selected.imageuri) {
-                    return true;
-                } else {
-                    return false;
-                }});
-            const { imageuri, videouri, caption, title, group, mediaType, isFavourite } = selected;
-            const media = this.state.mediaArray;
-            const content = this.state.media;
-            media[searchMedia] = {
-                imageuri,
-                videouri,
-                caption,
-                title,
-                group,
-                mediaType,
-                isFavourite
-            };
-            content[searchContent] = {
-                imageuri,
-                videouri,
-                caption,
-                title,
-                group,
-                mediaType,
-                isFavourite
-            };
-            AsyncStorage.setItem('Videos', JSON.stringify(content));
-            AsyncStorage.setItem('Media', JSON.stringify(media));
-            const findTags = mytags.find((tag) => tag === selected.group);
-            if (findTags === undefined) {
-            mytags.push(selected.group);
-            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
-        }
-        this.setState({ mediaArray: media, media: content, selectedItem: null });
+            if (this.state.mediaType === 'Videos') {
+                if (selected.mediaType === 'Youtube') {
+                    const searchContent = this.state.media.findIndex((element, index, array) => {
+                    if (element.imageuri === selected.imageuri) { //If we set something to change photos, we need to make a unique ID
+                        return true;
+                    } else {
+                        return false;
+                    }});
+                const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+                    if (element.imageuri === selected.imageuri) {
+                        return true;
+                    } else {
+                        return false;
+                    }});
+                const { imageuri, videouri, caption, title, group, mediaType, isFavourite } = selected;
+                const media = this.state.mediaArray;
+                const content = this.state.media;
+                media[searchMedia] = {
+                    imageuri,
+                    videouri,
+                    caption,
+                    title,
+                    group,
+                    mediaType,
+                    isFavourite
+                };
+                content[searchContent] = {
+                    imageuri,
+                    videouri,
+                    caption,
+                    title,
+                    group,
+                    mediaType,
+                    isFavourite
+                };
+                AsyncStorage.setItem('Videos', JSON.stringify(content));
+                AsyncStorage.setItem('Media', JSON.stringify(media));
+                const findTags = mytags.find((tag) => tag === selected.group);
+                if (findTags === undefined) {
+                mytags.push(selected.group);
+                AsyncStorage.setItem('Tags', JSON.stringify(mytags));
             }
-            if (selected.mediaType === 'Video') {
-                const searchContent = this.state.media.findIndex((element, index, array) => {
-                if (element.uri === selected.uri) { //If we set something to change photos, we need to make a unique ID
-                    return true;
-                } else {
-                    return false;
-                }});
-            const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
-                if (element.uri === selected.uri) {
-                    return true;
-                } else {
-                    return false;
-                }});
-            const { uri, caption, title, group, mediaType, isFavourite } = selected;
-            const media = this.state.mediaArray;
-            const content = this.state.media;
-            media[searchMedia] = {
-                uri,
-                caption,
-                title,
-                group,
-                mediaType,
-                isFavourite
-            };
-            content[searchContent] = {
-                uri,
-                caption,
-                title,
-                group,
-                mediaType,
-                isFavourite
-            };
-            AsyncStorage.setItem('Videos', JSON.stringify(content));
-            AsyncStorage.setItem('Media', JSON.stringify(media));
-            const findTags = mytags.find((tag) => tag === selected.group);
-            if (findTags === undefined) {
-            mytags.push(selected.group);
-            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
-        }
-        this.setState({ mediaArray: media, media: content, selectedItem: null });
+            this.setState({ mediaArray: media, media: content, selectedItem: null });
+                }
+                if (selected.mediaType === 'Video') {
+                    const searchContent = this.state.media.findIndex((element, index, array) => {
+                    if (element.uri === selected.uri) { //If we set something to change photos, we need to make a unique ID
+                        return true;
+                    } else {
+                        return false;
+                    }});
+                const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+                    if (element.uri === selected.uri) {
+                        return true;
+                    } else {
+                        return false;
+                    }});
+                const { uri, caption, title, group, mediaType, isFavourite } = selected;
+                const media = this.state.mediaArray;
+                const content = this.state.media;
+                media[searchMedia] = {
+                    uri,
+                    caption,
+                    title,
+                    group,
+                    mediaType,
+                    isFavourite
+                };
+                content[searchContent] = {
+                    uri,
+                    caption,
+                    title,
+                    group,
+                    mediaType,
+                    isFavourite
+                };
+                AsyncStorage.setItem('Videos', JSON.stringify(content));
+                AsyncStorage.setItem('Media', JSON.stringify(media));
+                const findTags = mytags.find((tag) => tag === selected.group);
+                if (findTags === undefined) {
+                mytags.push(selected.group);
+                AsyncStorage.setItem('Tags', JSON.stringify(mytags));
             }
-        }
-        if (this.state.mediaType === 'Audio') {
-            if (selected.mediaType === 'Music') {
-                const searchContent = this.state.media.findIndex((element, index, array) => {
-                if (element.title === selected.title && element.album === selected.album && element.artist === selected.artist) { //If we set something to change photos, we need to make a unique ID
-                    return true;
-                } else {
-                    return false;
-                }});
-            const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
-                if (element.title === selected.title && element.album === selected.album && element.artist === selected.artist) {
-                    return true;
-                } else {
-                    return false;
-                }});
-            const { caption, title, group, mediaType, isFavourite, artist, album } = selected;
-            const media = this.state.mediaArray;
-            const content = this.state.media;
-            media[searchMedia] = {
-                caption,
-                title,
-                album,
-                artist,
-                group,
-                mediaType,
-                isFavourite
-            };
-            content[searchContent] = {
-                caption,
-                album,
-                artist,
-                title,
-                group,
-                mediaType,
-                isFavourite
-            };
-            AsyncStorage.setItem('Audio', JSON.stringify(content));
-            AsyncStorage.setItem('Media', JSON.stringify(media));
-            const findTags = mytags.find((tag) => tag === selected.group);
-            if (findTags === undefined) {
-            mytags.push(selected.group);
-            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
-        }
-        this.setState({ mediaArray: media, media: content, selectedItem: null });
+            this.setState({ mediaArray: media, media: content, selectedItem: null });
+                }
             }
-            if (selected.mediaType === 'MusicAnd') {
-                const searchContent = this.state.media.findIndex((element, index, array) => {
-                if (element.uri === selected.uri) { //If we set something to change photos, we need to make a unique ID
-                    return true;
-                } else {
-                    return false;
-                }});
-            const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
-                if (element.uri === selected.uri) {
-                    return true;
-                } else {
-                    return false;
-                }});
-            const { uri, caption, title, group, mediaType, isFavourite, album, artist } = selected;
-            const media = this.state.mediaArray;
-            const content = this.state.media;
-            media[searchMedia] = {
-                uri,
-                album,
-                artist,
-                caption,
-                title,
-                group,
-                mediaType,
-                isFavourite
-            };
-            content[searchContent] = {
-                uri,
-                album,
-                artist,
-                caption,
-                title,
-                group,
-                mediaType,
-                isFavourite
-            };
-            AsyncStorage.setItem('Audio', JSON.stringify(content));
-            AsyncStorage.setItem('Media', JSON.stringify(media));
-            const findTags = mytags.find((tag) => tag === selected.group);
-            if (findTags === undefined) {
-            mytags.push(selected.group);
-            AsyncStorage.setItem('Tags', JSON.stringify(mytags));
-        }
-        this.setState({ mediaArray: media, media: content, selectedItem: null });
+            if (this.state.mediaType === 'Audio') {
+                if (selected.mediaType === 'Music') {
+                    const searchContent = this.state.media.findIndex((element, index, array) => {
+                    if (element.title === selected.title && element.album === selected.album && element.artist === selected.artist) { //If we set something to change photos, we need to make a unique ID
+                        return true;
+                    } else {
+                        return false;
+                    }});
+                const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+                    if (element.title === selected.title && element.album === selected.album && element.artist === selected.artist) {
+                        return true;
+                    } else {
+                        return false;
+                    }});
+                const { caption, title, group, mediaType, isFavourite, artist, album } = selected;
+                const media = this.state.mediaArray;
+                const content = this.state.media;
+                media[searchMedia] = {
+                    caption,
+                    title,
+                    album,
+                    artist,
+                    group,
+                    mediaType,
+                    isFavourite
+                };
+                content[searchContent] = {
+                    caption,
+                    album,
+                    artist,
+                    title,
+                    group,
+                    mediaType,
+                    isFavourite
+                };
+                AsyncStorage.setItem('Audio', JSON.stringify(content));
+                AsyncStorage.setItem('Media', JSON.stringify(media));
+                const findTags = mytags.find((tag) => tag === selected.group);
+                if (findTags === undefined) {
+                mytags.push(selected.group);
+                AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+            }
+            this.setState({ mediaArray: media, media: content, selectedItem: null });
+                }
+                if (selected.mediaType === 'MusicAnd') {
+                    const searchContent = this.state.media.findIndex((element, index, array) => {
+                    if (element.uri === selected.uri) { //If we set something to change photos, we need to make a unique ID
+                        return true;
+                    } else {
+                        return false;
+                    }});
+                const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+                    if (element.uri === selected.uri) {
+                        return true;
+                    } else {
+                        return false;
+                    }});
+                const { uri, caption, title, group, mediaType, isFavourite, album, artist } = selected;
+                const media = this.state.mediaArray;
+                const content = this.state.media;
+                media[searchMedia] = {
+                    uri,
+                    album,
+                    artist,
+                    caption,
+                    title,
+                    group,
+                    mediaType,
+                    isFavourite
+                };
+                content[searchContent] = {
+                    uri,
+                    album,
+                    artist,
+                    caption,
+                    title,
+                    group,
+                    mediaType,
+                    isFavourite
+                };
+                AsyncStorage.setItem('Audio', JSON.stringify(content));
+                AsyncStorage.setItem('Media', JSON.stringify(media));
+                const findTags = mytags.find((tag) => tag === selected.group);
+                if (findTags === undefined) {
+                mytags.push(selected.group);
+                AsyncStorage.setItem('Tags', JSON.stringify(mytags));
+            }
+            this.setState({ mediaArray: media, media: content, selectedItem: null });
+                }
             }
         }
     }
@@ -480,19 +484,19 @@ class Settings extends Component {
             <CardSection style={{ borderTopWidth: 1, width: (this.state.width - 380), marginTop: 10 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.title}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 100, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.title}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ width: (this.state.width - 380) }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.album}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 100, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.album}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ width: (this.state.width - 380) }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.artist}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 100, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.artist}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ width: (this.state.width - 380) }}>
@@ -636,25 +640,28 @@ class Settings extends Component {
         }
     }
     async onButtonPress() {
-        if (this.state.stage === null) {
-            try {
-                await AsyncStorage.setItem('name', this.state.name);
-                await AsyncStorage.setItem('stage', '0');
-                } catch (error) {
-                console.log(error);
+        if (this.state.name === null || this.state.name === '') {
+            this.setState({ isNull: true });
+        } else {
+            if (this.state.stage === null) {
+                try {
+                    await AsyncStorage.setItem('name', this.state.name);
+                    await AsyncStorage.setItem('stage', '0');
+                    } catch (error) {
+                    console.log(error);
+            }
         }
-    }
-        if (this.state.stage !== null) {
-            try {
-                await AsyncStorage.setItem('name', this.state.name);
-                await AsyncStorage.setItem('stage', this.state.stage);
-                } catch (error) {
-                console.log(error);
+            if (this.state.stage !== null) {
+                try {
+                    await AsyncStorage.setItem('name', this.state.name);
+                    await AsyncStorage.setItem('stage', this.state.stage);
+                    } catch (error) {
+                    console.log(error);
+            }
+            }
+            
+            Actions.Home();
         }
-        }
-        
-        //Actions.Home();
-        Actions.Home();
 }
     renderRadioButton() {
         const radioProps = [
@@ -728,6 +735,29 @@ class Settings extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
+            <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `blankfield${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 400 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
             <ScrollView>
             <View style={{ marginTop: 10, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row' }}>
@@ -877,6 +907,29 @@ class Settings extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
+            <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `blankfield${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 400 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
                     {this.renderExplorer()}
                     <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
@@ -916,6 +969,29 @@ class Settings extends Component {
                         </TouchableWithoutFeedback>
                     </View>
                 </Header>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `blankfield${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 400 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
                 <ScrollView>
                 <View style={{ marginTop: 10, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
                     <View style={{ flexDirection: 'row' }}>
@@ -1021,6 +1097,29 @@ class Settings extends Component {
                         </TouchableWithoutFeedback>
                     </View>
                 </Header>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `blankfield${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 400 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
                         {this.renderExplorer()}
                         <CardSection>
                             <Button onPress={this.onSaveItemPress.bind(this)}>
