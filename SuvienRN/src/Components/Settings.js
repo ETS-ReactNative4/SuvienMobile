@@ -818,7 +818,8 @@ class Settings extends Component {
 >
             <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['114']}</Text>
+                    <Image source={{ uri: `garbage${Platform.OS === 'ios' ? '.png' : ''}`}} style={{ height: 200, width: 200 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginBottom: 20 }}>{Languages[this.state.languages]['114']}</Text>
                     <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
                         <Button 
                         onPress={() => this.onDelete(this.state.delete)}
@@ -961,7 +962,8 @@ class Settings extends Component {
     >
                 <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                     <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['114']}</Text>
+                    <Image source={{ uri: `garbage${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 200 }} />
+                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginBottom: 20 }}>{Languages[this.state.languages]['114']}</Text>
                         <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
                             <Button 
                             onPress={() => this.onDelete(this.state.delete)}
