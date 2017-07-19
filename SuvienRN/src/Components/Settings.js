@@ -483,20 +483,20 @@ class Settings extends Component {
             <View style={{ width: (this.state.width - 450), backgroundColor: 'white', height: 300, justifyContent: 'center' }}>
             <CardSection style={{ borderTopWidth: 1, width: (this.state.width - 380), marginTop: 10 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 100, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.title}</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.title}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ width: (this.state.width - 380) }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 100, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.album}</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.album}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ width: (this.state.width - 380) }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 100, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.artist}</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.selectedItem.artist}</Text>
                         </View>
                     </CardSection>
                     <CardSection style={{ width: (this.state.width - 380) }}>
