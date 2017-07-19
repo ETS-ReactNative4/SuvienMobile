@@ -122,8 +122,10 @@
         "119" : "loadingflag",
         "120" : "Your start time can't be later or equal to your end time",
         "121" : "Please correct the times to continue",
-        "122" : "Uh Oh! We can't find this audio file.",
-        "123" : "You may have deleted it off your device."
+        "122" : "Uh Oh! We can't find this content.",
+        "123" : "You may have deleted this content off your device.",
+        "124" : "We will return you to the main menu in 5 seconds...",
+        "125" : "For this reason, we will delete this tile."
     },
     "FRE" : {
         "000" : "Démarrer",
@@ -248,8 +250,10 @@
         "119" : "loadingflagfre",
         "120" : "Votre heure de début ne peut être après ou pendant votre heure de fin",
         "121" : "Rectifier les fois où continuer",
-        "122" : "Oh Oh! Nous ne pouvons pas trouver ce ficher audio",
-        "123" : "Il est possible que vous avez supprimé le contenu depuis votre appareil"
+        "122" : "Oh Oh! Nous ne pouvons pas trouver ce contenu",
+        "123" : "Il est probable que vous avez supprimé le contenu",
+        "124" : "Nous vous renverrons à la page d'accueil en 5 secondes ...",
+        "125" : "Pour cette raison, nous supprimerons cette tuile"
     },
     "ESP" : {
         "000" : "Empezar",
@@ -374,7 +378,9 @@
         "119" : "loadingflagesp",
         "120" : "Su tiempo inicial no puede ser después o durante su tiempo final",
         "121" : "Corregir los tiempos para continuar",
-        "122" : "Oh Oh! No podemos encontrar este fichero audio",
-        "123" : "Es posible que usted eliminó el contenido para su dispositivo"
+        "122" : "Oh Oh! No podemos encontrar este contenido",
+        "123" : "Es probable que usted eliminó el contenido",
+        "124" : "Le devolveremos a la página principal en 5 segundos ...",
+        "125" : "Por esta razón, se eliminará este teja"
     }
 }
