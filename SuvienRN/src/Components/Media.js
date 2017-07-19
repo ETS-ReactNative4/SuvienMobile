@@ -37,7 +37,9 @@ class Media extends Component {
         album: null,
         artist: null,
         languages: null,
-        failed: false
+        failed: false,
+        isValid: null,
+        mediaArray: null
     }
     async componentWillMount() {
         //Note. The orientation issue only persists on android, not ioss
@@ -48,7 +50,8 @@ class Media extends Component {
             if (chosen.height !== null && chosen.width !== null) {
                 this.setState({ 
                     pictures: JSON.parse(await AsyncStorage.getItem('Pictures')),
-                    media: JSON.parse(await AsyncStorage.getItem('Media')),
+                    mediaArray: JSON.parse(await AsyncStorage.getItem('Media')),
+                    media: JSON.parse(await AsyncStorage.getItem('Pictures')),
                     uri: chosen.uri, 
                     caption: chosen.caption, 
                     tag: chosen.tag,
@@ -56,19 +59,21 @@ class Media extends Component {
                     width: chosen.width,
                     isFavourite: chosen.isFavourite,
                     title: chosen.title,
-                    mediaType: chosen.mediaType
+                    mediaType: chosen.mediaType,
+                    isValid: chosen.isValid
                 });
             } else {
                 Image.getSize(chosen.uri, (width, height) => { this.setState({ height, width }); });
                 this.setState({ 
                     pictures: JSON.parse(await AsyncStorage.getItem('Pictures')),
-                    media: JSON.parse(await AsyncStorage.getItem('Media')),
+                    mediaArray: JSON.parse(await AsyncStorage.getItem('Media')),
+                    media: JSON.parse(await AsyncStorage.getItem('Pictures')),
                     uri: chosen.uri, 
                     caption: chosen.caption, 
                     tag: chosen.tag,
                     isFavourite: chosen.isFavourite,
                     title: chosen.title,
-                    mediaType: chosen.mediaType
+                    mediaType: chosen.mediaType,
                 });
             }
         if (chosen.isFavourite === false) {
@@ -79,7 +84,7 @@ class Media extends Component {
         }
     }
         if (chosen.mediaType === 'Youtube') {
-        this.setState({ videos: JSON.parse(await AsyncStorage.getItem('Videos')), media: JSON.parse(await AsyncStorage.getItem('Media')) });
+        this.setState({ videos: JSON.parse(await AsyncStorage.getItem('Videos')), mediaArray: JSON.parse(await AsyncStorage.getItem('Media')), media: JSON.parse(await AsyncStorage.getItem('Videos')) });
         if (chosen.isFavourite === false) {
             this.setState({ imagerend: require('../Images/favouritenot.png') });
         }
@@ -98,7 +103,7 @@ class Media extends Component {
         });
     }
         if (chosen.mediaType === 'Video') {
-            this.setState({ videos: JSON.parse(await AsyncStorage.getItem('Videos')), media: JSON.parse(await AsyncStorage.getItem('Media')) });
+            this.setState({ videos: JSON.parse(await AsyncStorage.getItem('Videos')), mediaArray: JSON.parse(await AsyncStorage.getItem('Media')), media: JSON.parse(await AsyncStorage.getItem('Videos')), });
         if (chosen.isFavourite === false) {
             this.setState({ imagerend: require('../Images/favouritenot.png') });
         }
@@ -112,11 +117,12 @@ class Media extends Component {
             isFavourite: chosen.isFavourite,
             title: chosen.title,
             mediaType: chosen.mediaType,
+            isValid: chosen.isValid,
             chosen
         });
         }
         if (chosen.mediaType === 'Music') {
-            this.setState({ audios: JSON.parse(await AsyncStorage.getItem('Audio')), media: JSON.parse(await AsyncStorage.getItem('Media')) });
+            this.setState({ audios: JSON.parse(await AsyncStorage.getItem('Audio')), mediaArray: JSON.parse(await AsyncStorage.getItem('Media')), media: JSON.parse(await AsyncStorage.getItem('Audio')) });
             if (chosen.isFavourite === false) {
                 this.setState({ imagerend: require('../Images/favouritenot.png') });
             }
@@ -135,7 +141,7 @@ class Media extends Component {
         });
     }
     if (chosen.mediaType === 'MusicAnd') {
-            this.setState({ audios: JSON.parse(await AsyncStorage.getItem('Audio')), media: JSON.parse(await AsyncStorage.getItem('Media')) });
+            this.setState({ audios: JSON.parse(await AsyncStorage.getItem('Audio')), mediaArray: JSON.parse(await AsyncStorage.getItem('Media')), media: JSON.parse(await AsyncStorage.getItem('Audio')) });
             if (chosen.isFavourite === false) {
                 this.setState({ imagerend: require('../Images/favouritenot.png') });
             }
@@ -179,6 +185,52 @@ class Media extends Component {
         });
     }
 
+    onDelete(item) {
+        if (this.state.mediaType === 'Photo') {
+        const media = this.state.mediaArray;
+       const content = this.state.media;
+       const searchContent = this.state.media.findIndex((element, index, array) => {
+               if (element.imageuri === item) { //If we set something to change photos, we need to make a unique ID
+                   return true;
+               } else {
+                   return false;
+       }});
+       const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+               if (element.imageuri === item) {
+                   return true;
+               } else {
+                   return false;
+       }});
+       media.splice(searchMedia, 1);
+       content.splice(searchContent, 1);
+       AsyncStorage.setItem('Pictures', JSON.stringify(content));
+       AsyncStorage.setItem('Media', JSON.stringify(media));
+       this.setState({ mediaArray: media, media: content });
+   }
+       if (this.state.mediaType === 'Video') {
+           const media = this.state.mediaArray;
+       const content = this.state.media;
+       const searchContent = this.state.media.findIndex((element, index, array) => {
+               if (element.uri === item) { //If we set something to change photos, we need to make a unique ID
+                   return true;
+               } else {
+                   return false;
+       }});
+       const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+               if (element.uri === item) {
+                   return true;
+               } else {
+                   return false;
+       }});
+       media.splice(searchMedia, 1);
+       content.splice(searchContent, 1);
+       AsyncStorage.setItem('Videos', JSON.stringify(content));
+       AsyncStorage.setItem('Media', JSON.stringify(media));
+       this.setState({ mediaArray: media, media: content });
+       }
+       this.props.onInvisible(true);
+       Actions.MainMenu();
+    }
     preloadMusicPlay() {
         const { title, album, artist, uri } = this.state;
         if (this.state.mediaType === 'Music') {
@@ -212,7 +264,7 @@ class Media extends Component {
             });
             myimages[loca].isFavourite = this.state.isFavourite;
             AsyncStorage.setItem('Pictures', JSON.stringify(myimages));
-            const mymedia = this.state.media;
+            const mymedia = this.state.mediaArray;
             const locati = mymedia.findIndex(((element, index, array) => {
                 if (element.imageuri === this.state.uri) {
                     return true;
@@ -236,7 +288,7 @@ class Media extends Component {
             });
             myimages[loca].isFavourite = this.state.isFavourite;
             AsyncStorage.setItem('Videos', JSON.stringify(myimages));
-            const mymedia = this.state.media;
+            const mymedia = this.state.mediaArray;
             const locati = mymedia.findIndex(((element, index, array) => {
                 if (element.uri === this.state.uri) {
                     return true;
@@ -261,7 +313,7 @@ class Media extends Component {
             });
             myvideos[locat].isFavourite = this.state.isFavourite;
             AsyncStorage.setItem('Videos', JSON.stringify(myvideos));
-            const mymedia = this.state.media;
+            const mymedia = this.state.mediaArray;
             const locatio = mymedia.findIndex(((element, index, array) => {
                 if (element.videouri === this.state.uri) {
                     return true;
@@ -285,7 +337,7 @@ class Media extends Component {
             });
             myaudios[locat].isFavourite = this.state.isFavourite;
             AsyncStorage.setItem('Audio', JSON.stringify(myaudios));
-            const mymedia = this.state.media;
+            const mymedia = this.state.mediaArray;
             const locatio = mymedia.findIndex(((element, index, array) => {
                 if (element.title === this.state.title && element.album === this.state.album && element.artist === this.state.artist) {
                     return true;
@@ -318,8 +370,6 @@ class Media extends Component {
     }
 
     render() {
-        console.log(this.state.height);
-        console.log(this.state.width);
         if (this.state.mediaType === null || this.state.languages === null) {
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -327,6 +377,7 @@ class Media extends Component {
                 </View>  
             );
         }
+
         if (this.state.mediaType === 'Photo') {
             const { height, width, scheight, scwidth, uri, caption, tag, isFavourite, imagerend } = this.state;
             if (scheight === null || width === null || uri === null || caption === null || tag === null || height === null || scwidth === null || isFavourite === null || imagerend === null){
@@ -336,96 +387,118 @@ class Media extends Component {
                 </View>  
             );
         }
+
             if (scheight !== null && width !== null && imagerend !== null) {
-                if (height <= width) {
-                    const heightRatio = parseFloat(scheight - 300) / parseFloat(height);
-                let newHeight = scheight - 300;
-                let newWidth = width * heightRatio;
-                /*
-                if (newWidth > (scwidth - 400)) {
-                    const widthRatio = parseFloat((scwidth - 400)) / parseFloat(newWidth);
-                    newWidth = scwidth - 400;
-                    newHeight *= widthRatio;
+                if (this.state.isValid !== undefined && this.state.isValid !== null) {
+                    return (
+                        <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                        <View style={{ height: 500, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                        <Image source={{ uri: `garbage${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 200 }} />
+                            <Text style={{ marginLeft: 30, marginRight: 20, fontSize: 30, fontFamily: 'Roboto-Light', marginBottom: 10, marginTop: 10 }}>{Languages[this.state.languages]['123']}</Text>
+                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 27, fontFamily: 'Roboto-Thin', marginBottom: 20 }}>{Languages[this.state.languages]['125']}</Text>
+                            <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                                <Button 
+                                onPress={() => {
+                                this.onDelete(this.state.uri);
+                                }}
+                                >
+                            {Languages[this.state.languages]['113']}
+                                </Button>
+                            </CardSection>
+                        </View>
+                        </View>
+                    );
+                } else {
+                    if (height <= width) {
+                        const heightRatio = parseFloat(scheight - 300) / parseFloat(height);
+                    let newHeight = scheight - 300;
+                    let newWidth = width * heightRatio;
+                    /*
+                    if (newWidth > (scwidth - 400)) {
+                        const widthRatio = parseFloat((scwidth - 400)) / parseFloat(newWidth);
+                        newWidth = scwidth - 400;
+                        newHeight *= widthRatio;
+                    }
+                    const paddingheight = (scheight - newHeight) / 2;
+                    */
+    
+                    return (
+                        <View style={{ flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                        <Image
+                        style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
+                        source={{ uri: this.state.uri, height: newHeight, width: newWidth }}
+                        />
+                        <View style={{ height: 250, backgroundColor: '#e3edf9', width: newWidth }}>
+                                    <ScrollView>
+                                        <View>
+                                            <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
+                                                {this.state.title}
+                                            </Text>
+                                            <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                <Image source={imagerend} style={{ height: 40, width: 40 }} />
+                                            </TouchableWithoutFeedback>
+                                        </View>
+                                            <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
+                                            <Text style={styles.textBodyStyle}>
+                                                <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
+                                                {this.state.tag}
+                                            </Text>
+                                        <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                            <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
+                                        </CardSection>
+                                        </View>
+                                    </ScrollView>
+                                </View>
+                        </View>
+                );
+                    }
+                    if (height > width) {
+                        const heightRatio = parseFloat(scheight - 50) / parseFloat(height);
+                    let newHeight = scheight - 50;
+                    let newWidth = width * heightRatio;
+                    /*
+                    if (newWidth > (scwidth - 400)) {
+                        const widthRatio = parseFloat((scwidth - 400)) / parseFloat(newWidth);
+                        newWidth = scwidth - 400;
+                        newHeight *= widthRatio;
+                    }
+                    const paddingheight = (scheight - newHeight) / 2;
+                    */
+    
+                    return (
+                        <View style={{ flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                        <Image
+                        style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
+                        source={{ uri: this.state.uri, height: newHeight, width: newWidth }}
+                        />
+                        <View style={{ height: newHeight, backgroundColor: '#e3edf9', width: 400 }}>
+                                    <ScrollView>
+                                        <View>
+                                            <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
+                                                {this.state.title}
+                                            </Text>
+                                            <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                <Image source={imagerend} style={{ height: 40, width: 40 }} />
+                                            </TouchableWithoutFeedback>
+                                        </View>
+                                            <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
+                                            <Text style={styles.textBodyStyle}>
+                                                <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
+                                                {this.state.tag}
+                                            </Text>
+                                        <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                            <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
+                                        </CardSection>
+                                        </View>
+                                    </ScrollView>
+                                </View>
+                        </View>
+                );
+                    }
+            }
                 }
-                const paddingheight = (scheight - newHeight) / 2;
-                */
-
-                return (
-                    <View style={{ flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
-                    <Image
-                    style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
-                    source={{ uri: this.state.uri, height: newHeight, width: newWidth }}
-                    />
-                    <View style={{ height: 250, backgroundColor: '#e3edf9', width: newWidth }}>
-                                <ScrollView>
-                                    <View>
-                                        <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                            {this.state.title}
-                                        </Text>
-                                        <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
-                                            <Image source={imagerend} style={{ height: 40, width: 40 }} />
-                                        </TouchableWithoutFeedback>
-                                    </View>
-                                        <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
-                                        <Text style={styles.textBodyStyle}>
-                                            <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
-                                            {this.state.tag}
-                                        </Text>
-                                    <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
-                                    </CardSection>
-                                    </View>
-                                </ScrollView>
-                            </View>
-                    </View>
-            );
-                }
-                if (height > width) {
-                    const heightRatio = parseFloat(scheight - 50) / parseFloat(height);
-                let newHeight = scheight - 50;
-                let newWidth = width * heightRatio;
-                /*
-                if (newWidth > (scwidth - 400)) {
-                    const widthRatio = parseFloat((scwidth - 400)) / parseFloat(newWidth);
-                    newWidth = scwidth - 400;
-                    newHeight *= widthRatio;
-                }
-                const paddingheight = (scheight - newHeight) / 2;
-                */
-
-                return (
-                    <View style={{ flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                    <Image
-                    style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
-                    source={{ uri: this.state.uri, height: newHeight, width: newWidth }}
-                    />
-                    <View style={{ height: newHeight, backgroundColor: '#e3edf9', width: 400 }}>
-                                <ScrollView>
-                                    <View>
-                                        <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                            {this.state.title}
-                                        </Text>
-                                        <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
-                                            <Image source={imagerend} style={{ height: 40, width: 40 }} />
-                                        </TouchableWithoutFeedback>
-                                    </View>
-                                        <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
-                                        <Text style={styles.textBodyStyle}>
-                                            <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
-                                            {this.state.tag}
-                                        </Text>
-                                    <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
-                                    </CardSection>
-                                    </View>
-                                </ScrollView>
-                            </View>
-                    </View>
-            );
-                }
-        }
     }
         if (this.state.mediaType === 'Youtube') {
             const { uri, caption, tag, isFavourite, imageuri, imagerend } = this.state;
@@ -609,47 +682,68 @@ class Media extends Component {
             }
             if (this.state.mediaType === 'Video'){
                 if (this.state.uri !== null && this.state.caption !== null && this.state.tag !== null && this.state.title !== null) {
-                return (
-                <View>
-                        <View style={{ flexDirection: 'column', height: 800, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center' }}>
-                                <Video 
-                                source={{ uri: this.state.uri }}   // Can be a URL or a local file.
-                                ref={(ref) => {
-                                    this.player = ref;
-                                }}                                      // Store reference
-                                rate={1.0}                              // 0 is paused, 1 is normal.
-                                volume={1.0}                            // 0 is muted, 1 is normal.
-                                muted={false}                           // Mutes the audio entirely.
-                                paused={false}                          // Pauses playback entirely.
-                                resizeMode="cover"                      // Fill the whole screen at aspect ratio.*
-                                repeat                         // Repeat forever.
-                                playInBackground={false}                // Audio continues to play when app entering background.
-                                playWhenInactive={false}                // [iOS] Video continues to play when control or notification center are shown.
-                                ignoreSilentSwitch={"ignore"}           // [iOS] ignore | obey - When 'ignore', audio will still play with the iOS hard silent switch set to silent. When 'obey', audio will toggle with the switch. When not specified, will inherit audio settings as usual.
-                                progressUpdateInterval={250.0}          // [iOS] Interval to fire onProgress (default to ~250ms)
-                                style={{ height: 450, width: 800 }} 
-                                />
-                                <View style={{ height: 250, width: 800, backgroundColor: '#e3edf9', marginLeft: 10, marginRight: 10 }}>
-                                    <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                            {this.state.title}
-                                        </Text>
-                                        <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
-                                            <Image source={this.state.imagerend} style={{ height: 40, width: 40 }} />
-                                        </TouchableWithoutFeedback>
-                                    </View>
-                                        <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
-                                        <Text style={styles.textBodyStyle}>
-                                            <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
-                                            {this.state.tag}
-                                        </Text>
-                                    <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
-                                    </CardSection>
-                                </View>
+                    if (this.state.isValid !== undefined && this.state.isValid !== null) {
+                        return (
+                            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                            <View style={{ height: 500, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                            <Image source={{ uri: `garbage${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 200 }} />
+                                <Text style={{ marginLeft: 30, marginRight: 20, fontSize: 30, fontFamily: 'Roboto-Light', marginBottom: 10, marginTop: 10 }}>{Languages[this.state.languages]['123']}</Text>
+                                <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 27, fontFamily: 'Roboto-Thin', marginBottom: 20 }}>{Languages[this.state.languages]['125']}</Text>
+                                <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                                    <Button 
+                                    onPress={() => {
+                                    this.onDelete(this.state.uri);
+                                    }}
+                                    >
+                                {Languages[this.state.languages]['113']}
+                                    </Button>
+                                </CardSection>
                             </View>
-                </View>
-            );
+                            </View>
+                        );
+                    } else {
+                        return (
+                            <View>
+                                    <View style={{ flexDirection: 'column', height: 800, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center' }}>
+                                            <Video 
+                                            source={{ uri: this.state.uri }}   // Can be a URL or a local file.
+                                            ref={(ref) => {
+                                                this.player = ref;
+                                            }}                                      // Store reference
+                                            rate={1.0}                              // 0 is paused, 1 is normal.
+                                            volume={1.0}                            // 0 is muted, 1 is normal.
+                                            muted={false}                           // Mutes the audio entirely.
+                                            paused={false}                          // Pauses playback entirely.
+                                            resizeMode="cover"                      // Fill the whole screen at aspect ratio.*
+                                            repeat                         // Repeat forever.
+                                            playInBackground={false}                // Audio continues to play when app entering background.
+                                            playWhenInactive={false}                // [iOS] Video continues to play when control or notification center are shown.
+                                            ignoreSilentSwitch={"ignore"}           // [iOS] ignore | obey - When 'ignore', audio will still play with the iOS hard silent switch set to silent. When 'obey', audio will toggle with the switch. When not specified, will inherit audio settings as usual.
+                                            progressUpdateInterval={250.0}          // [iOS] Interval to fire onProgress (default to ~250ms)
+                                            style={{ height: 450, width: 800 }} 
+                                            />
+                                            <View style={{ height: 250, width: 800, backgroundColor: '#e3edf9', marginLeft: 10, marginRight: 10 }}>
+                                                <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
+                                                        {this.state.title}
+                                                    </Text>
+                                                    <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                        <Image source={this.state.imagerend} style={{ height: 40, width: 40 }} />
+                                                    </TouchableWithoutFeedback>
+                                                </View>
+                                                    <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
+                                                    <Text style={styles.textBodyStyle}>
+                                                        <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
+                                                        {this.state.tag}
+                                                    </Text>
+                                                <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                                    <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
+                                                </CardSection>
+                                            </View>
+                                        </View>
+                            </View>
+                        );
+                    }
                 }
             } else {
                 return (
