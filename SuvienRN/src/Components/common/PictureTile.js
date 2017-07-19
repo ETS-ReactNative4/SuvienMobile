@@ -77,7 +77,8 @@ class PictureTile extends Component {
                         height: this.props.data.height,
                         width: this.props.data.width,
                         isFavourite: this.props.data.isFavourite,
-                        mediaType: 'Photo'
+                        mediaType: 'Photo',
+                        isValid: 'false'
                         });
                         /*
                         AsyncStorage.setItem('isSelected', JSON.stringify(
@@ -234,7 +235,8 @@ class PictureTile extends Component {
                         caption: this.props.data.caption, 
                         tag: this.props.data.group,
                         isFavourite: this.props.data.isFavourite,
-                        mediaType: 'Video'
+                        mediaType: 'Video',
+                        isValid: 'false'
                         });
                         /*
                         AsyncStorage.setItem('isSelected', JSON.stringify(
