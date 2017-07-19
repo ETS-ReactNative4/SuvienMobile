@@ -138,11 +138,11 @@ class MemoryGame extends Component {
                 <View style={{ flex: 1, flexDirection: 'column' }}>
                     <View style={{ flex: 1 }}>
                     <Header style={{ height: 60, flexDirection: 'row' }}>
+                        <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
-                </View>
-                <View style={{ flex: 1 }}>
-                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
@@ -268,9 +268,6 @@ class MemoryGame extends Component {
                      <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                          {this.renderTiles()}
                      </View>
-                     <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30, backgroundColor: 'grey' }}>
-                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin' }}>{this.state.card1.caption}</Text>
-                     </View>
                      </View>
                  );
                         }
@@ -386,9 +383,6 @@ class MemoryGame extends Component {
                          </View>
                      <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                          {this.renderTiles()}
-                     </View>
-                     <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30, backgroundColor: 'grey' }}>
-                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin' }}>{this.state.card1.caption}</Text>
                      </View>
                      </View>
                  );
