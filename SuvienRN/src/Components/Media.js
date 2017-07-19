@@ -181,7 +181,7 @@ class Media extends Component {
 
     preloadMusicPlay() {
         const { title, album, artist, uri } = this.state;
-        if (this.state.mediaType === 'Music'){
+        if (this.state.mediaType === 'Music') {
             MusicPlayerController.preloadMusic([title, album, 227.004, artist], (metadata) => {
                     //console.log('I found the music! Its:');
                     //console.log(metadata);
@@ -305,6 +305,7 @@ class Media extends Component {
                                 });
         }
         this.props.onInvisible(true);
+        this.setState({ invalid: false });
     }
 
     onFavouritePress() {

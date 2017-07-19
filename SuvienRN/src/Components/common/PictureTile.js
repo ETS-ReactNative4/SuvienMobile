@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, Image, AsyncStorage, View, Platform } from 'rea
 import Languages from './Languages.json';
 import { CardSection } from './CardSection';
 import { Actions } from 'react-native-router-flux';
+import MusicPlayerController from 'react-native-musicplayercontroller';
 
 class PictureTile extends Component {
     state = { imageuri: null, caption: null, tag: null, isNull: true, languages: null, isnone: null, noint: false }
@@ -148,7 +149,7 @@ class PictureTile extends Component {
         }
     }
         if (this.props.data.mediaType === 'Music') {
-            return (
+            MusicPlayerController.preloadMusic([this.props.data.title, this.props.data.album, 227.004, this.props.data.artist], (metadata) => (
             <TouchableOpacity 
             onPress={() => {
                 this.props.onChangePress({
@@ -160,11 +161,6 @@ class PictureTile extends Component {
                 isFavourite: this.props.data.isFavourite,
                 mediaType: 'Music'
                 });
-                /*
-                AsyncStorage.setItem('isSelected', JSON.stringify(
-                ));
-                Actions.Media();
-                */
             }
             }
             >
@@ -174,7 +170,9 @@ class PictureTile extends Component {
                     </View>
                 </Image>
             </TouchableOpacity>
-            );
+            ), () => (
+                        <Image source={{ uri: `${Languages[this.state.languages]['115']}.png` }} style={this.props.style} />
+                    ));
         }
         if (this.props.data.mediaType === 'MusicAnd') {
             return (
