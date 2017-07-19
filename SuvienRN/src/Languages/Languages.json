@@ -119,7 +119,11 @@
         "116" : "Tap the sun/moon icon four(4) times to return to settings",
         "117" : "recording",
         "118" : "nointernet",
-        "119" : "loadingflag"
+        "119" : "loadingflag",
+        "120" : "Your start time can't be later or equal to your end time",
+        "121" : "Please correct the times to continue",
+        "122" : "Uh Oh! We can't find this audio file.",
+        "123" : "You may have deleted it off your device."
     },
     "FRE" : {
         "000" : "Démarrer",
@@ -233,7 +237,7 @@
         "108" : "Jeux",
         "109" : "Quel jou voulez-vous jouer?",
         "110" : "nourlfre",
-        "111" : "Oh, Oh! Vous n'avez rien inscrit dans un/quelques des champs textes!",
+        "111" : "Vous n'avez rien inscrit dans quelques des champs textes!",
         "112" : "Complétez le(s) champ(s) texte(s) vides au continuer, s'il vous plaît",
         "113" : "D'accord.",
         "114" : "Voulez-vous vraiment vous supprimez ce contenu?",
@@ -241,7 +245,11 @@
         "116" : "Appuyez sur le symbole du soleil / lune quatre (4) fois pour revenir au menu des paramètres",
         "117" : "recordingfre",
         "118" : "nointernetfre",
-        "119" : "loadingflagfre"
+        "119" : "loadingflagfre",
+        "120" : "Votre heure de début ne peut être après ou pendant votre heure de fin",
+        "121" : "Rectifier les fois où continuer",
+        "122" : "Oh Oh! Nous ne pouvons pas trouver ce ficher audio",
+        "123" : "Il est possible que vous avez supprimé le contenu depuis votre appareil"
     },
     "ESP" : {
         "000" : "Empezar",
@@ -355,7 +363,7 @@
         "108" : "Juegos",
         "109" : "¿Qué juego le gustaría jugar?",
         "110" : "nourlesp",
-        "111" : "Oh Oh! Usted dejó en blanco un/algunos de campos de textos!",
+        "111" : "Usted dejó en blanco algunos de campos de textos!",
         "112" : "Complete los campo(s) de textos vacíos para continuar, por favor.",
         "113" : "De acuerdo",
         "114" : "¿Está seguro de que desea borrar este?",
@@ -363,6 +371,10 @@
         "116" : "Puntear el icono del sol/luna quatro(4) veces para volver al menú de configuración",
         "117" : "recordingesp",
         "118" : "nointernetesp",
-        "119" : "loadingflagesp"
+        "119" : "loadingflagesp",
+        "120" : "Su tiempo inicial no puede ser después o durante su tiempo final",
+        "121" : "Corregir los tiempos para continuar",
+        "122" : "Oh Oh! No podemos encontrar este fichero audio",
+        "123" : "Es posible que usted eliminó el contenido para su dispositivo"
     }
 }
