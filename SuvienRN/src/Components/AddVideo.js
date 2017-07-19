@@ -685,14 +685,7 @@ class AddVideo extends Component {
     }
 
     onRenderYoutube() {
-        /* 
-        <Input
-                        placeholder="https://www.youtube.com/watch?v=KVZ-P-ZI6W4"
-                        label="URL"
-                        value={this.state.videosrc}
-                        onChangeText={(videosrc) => this.setState({ videosrc })}
-                        />
-        */
+        
         if (this.state.webvid === true && this.state.languages !== null) {
             return (
                 <View>
