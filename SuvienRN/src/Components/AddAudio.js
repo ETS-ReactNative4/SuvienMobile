@@ -119,7 +119,6 @@ class AddAudio extends Component {
                                     <Input
                                     placeholder={Languages[this.state.languages]['062']}
                                     label={Languages[this.state.languages]['059']}
-                                    labelstyle={{ flex: 1 }}
                                     value={this.state.caption}
                                     onChangeText={(caption) => this.setState({ caption })}
                                     />
@@ -129,7 +128,6 @@ class AddAudio extends Component {
                                     placeholder={Languages[this.state.languages]['063']}
                                     label={Languages[this.state.languages]['060']}
                                     value={this.state.group}
-                                    labelstyle={{ flex: 1 }}
                                     onChangeText={(group) => this.setState({ group })}
                                     ref='username'
                                     />
@@ -137,19 +135,19 @@ class AddAudio extends Component {
                                     <CardSection style={{ borderTopWidth: 1, width: (this.state.widthc - 380) }}>
                                     <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                         <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
-                                        <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
+                                        <Text style={{ color: '#000', marginRight: 100, marginLeft: 100, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
                                     </View>
                                 </CardSection>
                                 <CardSection style={{ width: (this.state.widthc - 380) }}>
                                     <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                         <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
-                                        <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
+                                        <Text style={{ color: '#000', marginRight: 100, marginLeft: 100, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
                                     </View>
                                 </CardSection>
                                 <CardSection style={{ width: (this.state.widthc - 380) }}>
                                     <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                         <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
-                                        <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
+                                        <Text style={{ color: '#000', marginRight: 100, marginLeft: 100, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
                                     </View>
                                 </CardSection>
                                 </View>
@@ -178,7 +176,6 @@ class AddAudio extends Component {
                                 placeholder={Languages[this.state.languages]['062']}
                                 label={Languages[this.state.languages]['059']}
                                 value={this.state.caption}
-                                labelstyle={{ flex: 1 }}
                                 onChangeText={(caption) => this.setState({ caption })}
                                 />
                             </CardSection>
@@ -187,7 +184,6 @@ class AddAudio extends Component {
                                 placeholder={Languages[this.state.languages]['063']}
                                 label={Languages[this.state.languages]['060']}
                                 value={this.state.group}
-                                labelstyle={{ flex: 1 }}
                                 onChangeText={(group) => this.setState({ group })}
                                 ref='username'
                                 />
@@ -195,19 +191,19 @@ class AddAudio extends Component {
                                 <CardSection style={{ borderTopWidth: 1, width: (this.state.widthc - 380) }}>
                                 <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                     <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
-                                    <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[0]}</Text>
+                                    <Text style={{ color: '#000', marginRight: 100, marginLeft: 100, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[0]}</Text>
                                 </View>
                             </CardSection>
                             <CardSection style={{ width: (this.state.widthc - 380) }}>
                                 <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                     <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
-                                    <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[1]}</Text>
+                                    <Text style={{ color: '#000', marginRight: 100, marginLeft: 100, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[1]}</Text>
                                 </View>
                             </CardSection>
                             <CardSection style={{ width: (this.state.widthc - 380) }}>
                                 <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center', width: (this.state.widthc - 380) }}>
                                     <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
-                                    <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[3]}</Text>
+                                    <Text style={{ color: '#000', marginRight: 100, marginLeft: 100, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[3]}</Text>
                                 </View>
                             </CardSection>
                             </View>

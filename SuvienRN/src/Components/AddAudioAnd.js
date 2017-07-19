@@ -139,22 +139,22 @@ class AddAudioAnd extends Component {
                             ref='username'
                             />
                         </CardSection>
-                            <CardSection style={{ borderTopWidth: 1 }}>
+                            <CardSection>
                             <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
-                                <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
+                                <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
                             </View>
                         </CardSection>
-                        <CardSection style={{ borderTopWidth: 1 }}>
+                        <CardSection>
                             <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
-                                <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
+                                <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
                             </View>
                         </CardSection>
-                        <CardSection style={{ borderTopWidth: 1 }}>
+                        <CardSection>
                             <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
-                                <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
+                                <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
                             </View>
                         </CardSection>
                         </View>
@@ -197,22 +197,22 @@ class AddAudioAnd extends Component {
                         ref='username'
                         />
                     </CardSection>
-                        <CardSection style={{ borderTopWidth: 1 }}>
+                        <CardSection>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.title}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.title}</Text>
                         </View>
                     </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
+                    <CardSection>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.album}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.album}</Text>
                         </View>
                     </CardSection>
-                    <CardSection style={{ borderTopWidth: 1 }}>
+                    <CardSection>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
-                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 5, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.artist}</Text>
+                            <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.artist}</Text>
                         </View>
                     </CardSection>
                     </View>
