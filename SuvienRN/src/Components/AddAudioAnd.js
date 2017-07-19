@@ -125,6 +125,7 @@ class AddAudioAnd extends Component {
                             placeholder={Languages[this.state.languages]['062']}
                             label={Languages[this.state.languages]['059']}
                             value={this.state.caption}
+                            labelstyle={{ flex: 1 }}
                             onChangeText={(caption) => this.setState({ caption })}
                             />
                         </CardSection>
@@ -133,6 +134,7 @@ class AddAudioAnd extends Component {
                             placeholder={Languages[this.state.languages]['063']}
                             label={Languages[this.state.languages]['060']}
                             value={this.state.group}
+                            labelstyle={{ flex: 1 }}
                             onChangeText={(group) => this.setState({ group })}
                             ref='username'
                             />
@@ -181,6 +183,7 @@ class AddAudioAnd extends Component {
                         placeholder={Languages[this.state.languages]['062']}
                         label={Languages[this.state.languages]['059']}
                         value={this.state.caption}
+                        labelstyle={{ flex: 1 }}
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
@@ -189,6 +192,7 @@ class AddAudioAnd extends Component {
                         placeholder={Languages[this.state.languages]['063']}
                         label={Languages[this.state.languages]['060']}
                         value={this.state.group}
+                        labelstyle={{ flex: 1 }}
                         onChangeText={(group) => this.setState({ group })}
                         ref='username'
                         />
@@ -247,8 +251,9 @@ class AddAudioAnd extends Component {
         >
                     <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
-                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
+                        <Image source={{ uri: `blankfield` }} style={{ height: 200, width: 400 }} />
+                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
+                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
                             <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
                                 <Button 
                                 onPress={() => {
@@ -302,8 +307,9 @@ class AddAudioAnd extends Component {
         >
                     <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['111']}</Text>
-                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['112']}</Text>
+                        <Image source={{ uri: `blankfield` }} style={{ height: 200, width: 400 }} />
+                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
+                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
                             <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
                                 <Button 
                                 onPress={() => {
