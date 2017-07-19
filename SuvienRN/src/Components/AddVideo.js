@@ -685,17 +685,25 @@ class AddVideo extends Component {
     }
 
     onRenderYoutube() {
-        if (this.state.webvid === true && this.state.languages !== null) {
-            return (
-                <View>
-                    <CardSection style={{ borderTopWidth: 1 }}>
-                        <Input
+        /* 
+        <Input
                         placeholder="https://www.youtube.com/watch?v=KVZ-P-ZI6W4"
                         label="URL"
                         value={this.state.videosrc}
                         onChangeText={(videosrc) => this.setState({ videosrc })}
                         />
-                    </CardSection>
+        */
+        if (this.state.webvid === true && this.state.languages !== null) {
+            return (
+                <View>
+                    <CardSection style={{ width: (this.state.widthc - 380), marginTop: 10 }}>
+                                <Input
+                        placeholder="https://www.youtube.com/watch?v=KVZ-P-ZI6W4"
+                        label="URL"
+                        value={this.state.videosrc}
+                        onChangeText={(videosrc) => this.setState({ videosrc })}
+                        />
+                            </CardSection>
                     <CardSection>
                         <Button onPress={this.onSaveURLPress.bind(this)}>
                             {Languages[this.state.languages]['083']}
