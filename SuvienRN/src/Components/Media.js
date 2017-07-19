@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, Image, Dimensions, TouchableWithoutFeedback, ScrollView, WebView, Platform } from 'react-native';
+import { View, Text, AsyncStorage, Image, Dimensions, TouchableWithoutFeedback, ScrollView, WebView, Platform, Modal } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button, CardSection } from './common';
 import Languages from '../Languages/Languages.json';
@@ -18,7 +18,8 @@ class Media extends Component {
         scheight: null, 
         scwidth: null, 
         isFavourite: null, 
-        imagerend: null, 
+        imagerend: null,
+        invalid: false, 
         pictures: null, 
         media: null, 
         title: null,
@@ -44,18 +45,32 @@ class Media extends Component {
         this.setState({ languages: await AsyncStorage.getItem('Language') }); 
         console.log(chosen);
         if (chosen.mediaType === 'Photo') {
-        this.setState({ 
-            pictures: JSON.parse(await AsyncStorage.getItem('Pictures')),
-            media: JSON.parse(await AsyncStorage.getItem('Media')),
-            uri: chosen.uri, 
-            caption: chosen.caption, 
-            tag: chosen.tag,
-            height: chosen.height,
-            width: chosen.width,
-            isFavourite: chosen.isFavourite,
-            title: chosen.title,
-            mediaType: chosen.mediaType
-        });
+            if (chosen.height !== null && chosen.width !== null) {
+                this.setState({ 
+                    pictures: JSON.parse(await AsyncStorage.getItem('Pictures')),
+                    media: JSON.parse(await AsyncStorage.getItem('Media')),
+                    uri: chosen.uri, 
+                    caption: chosen.caption, 
+                    tag: chosen.tag,
+                    height: chosen.height,
+                    width: chosen.width,
+                    isFavourite: chosen.isFavourite,
+                    title: chosen.title,
+                    mediaType: chosen.mediaType
+                });
+            } else {
+                Image.getSize(chosen.uri, (width, height) => { this.setState({ height, width }); });
+                this.setState({ 
+                    pictures: JSON.parse(await AsyncStorage.getItem('Pictures')),
+                    media: JSON.parse(await AsyncStorage.getItem('Media')),
+                    uri: chosen.uri, 
+                    caption: chosen.caption, 
+                    tag: chosen.tag,
+                    isFavourite: chosen.isFavourite,
+                    title: chosen.title,
+                    mediaType: chosen.mediaType
+                });
+            }
         if (chosen.isFavourite === false) {
             this.setState({ imagerend: require('../Images/favouritenot.png') });
         }
@@ -171,18 +186,18 @@ class Media extends Component {
                     //console.log('I found the music! Its:');
                     //console.log(metadata);
                 }, () => {
-                    //console.log('I didnt find it :(');
+                    this.setState({ invalid: true });
                 });
         }
         if (this.state.mediaType === 'MusicAnd') {
-            MusicPlayerController.preloadMusic(uri, (metadata) => {
+                MusicPlayerController.preloadMusic(uri, (metadata) => {
                     //console.log('I found the music! Its:');
                     //console.log(metadata);
                 }, () => {
-                    //console.log('I didnt find it :(');
-                });
-        }        
+                    this.setState({ invalid: true });
+                });      
     }
+}
 
     onHomeReturn() {
         if (this.state.mediaType === 'Photo') {
@@ -302,6 +317,8 @@ class Media extends Component {
     }
 
     render() {
+        console.log(this.state.height);
+        console.log(this.state.width);
         if (this.state.mediaType === null || this.state.languages === null) {
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -501,6 +518,30 @@ class Media extends Component {
                     });
                     return (
                     <View style={{ height: 500, backgroundColor: '#e3edf9', flexDirection: 'row', width: 800 }}>
+                        <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.invalid}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 500, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `garbage${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 200 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['122']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['123']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ invalid: false });
+                        this.onHomeReturn();
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
                         <View style={{ marginTop: 20 }}>
                             <Image source={require('../Images/musicalbumart.png')} style={{ height: 300, width: 300, marginLeft: 50, marginRight: 30 }} />
                             <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}>
