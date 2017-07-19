@@ -24,88 +24,90 @@ class AddMessage extends Component {
     }
 
     async onSaveMessagePress() {
-            if ((this.state.message === null && this.state.messageType === 'Msg') || (this.state.title === null && this.state.messageType === 'VideoMsg') || this.state.day === '[]') {
+            if (((((this.state.message === null || this.state.message === '') && this.state.messageType === 'Msg') || ((this.state.title === null || this.state.message === '') && this.state.messageType === 'VideoMsg') || this.state.day === '[]') && this.state.currentMessage === null) || (this.state.currentMessage !== null && (JSON.parse(this.state.currentMessage).message === null || JSON.parse(this.state.currentMessage).message === '' || JSON.parse(this.state.currentMessage).day.length === 0))) {
                 this.setState({ isNull: true });
             } else {
                 const dd = new Date();
                 const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
                 if (this.state.currentMessage === null) {
                     const { message, day, startHour, startMinute, endHour, endMinute, messageType, uri, title } = this.state;
-                    if ((this.state.startHour > this.state.endHour) || (this.state.startHour <= this.state.endHour && this.state.startminute >= this.state.endMinute)) {
+                    if ((this.state.startHour > this.state.endHour) || (this.state.startHour <= this.state.endHour && this.state.startMinute >= this.state.endMinute)) {
                         this.setState({ invalid: true });
+                    } else {
+                        if (messageType === 'Msg') {
+                            messages.push({
+                            day: JSON.parse(day),
+                            message,
+                            startHour,
+                            startMinute,
+                            endHour,
+                            endMinute,
+                            messageType,
+                            messageID: dd.getTime()
+                        }); 
+                        }
+                        if (messageType === 'VideoMsg') {
+                            messages.push({
+                            day: JSON.parse(day),
+                            message: title,
+                            startHour,
+                            startMinute,
+                            endHour,
+                            endMinute,
+                            uri,
+                            messageType,
+                            messageID: dd.getTime()
+                        });
+                        }
+                       AsyncStorage.setItem('Messages', JSON.stringify(messages));
+                       console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+                       Actions.Home();
                     }
-                if (messageType === 'Msg') {
-                    messages.push({
-                    day: JSON.parse(day),
-                    message,
-                    startHour,
-                    startMinute,
-                    endHour,
-                    endMinute,
-                    messageType,
-                    messageID: dd.getTime()
-                }); 
-                }
-                if (messageType === 'VideoMsg') {
-                    messages.push({
-                    day: JSON.parse(day),
-                    message: title,
-                    startHour,
-                    startMinute,
-                    endHour,
-                    endMinute,
-                    uri,
-                    messageType,
-                    messageID: dd.getTime()
-                });
-                }
-               AsyncStorage.setItem('Messages', JSON.stringify(messages));
-               console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
-               Actions.Home();
                 } 
                 if (this.state.currentMessage !== null) {
                     const selected = JSON.parse(this.state.currentMessage);
-                    if ((selected.startHour > selected.endHour) || (selected.startHour <= selected.endHour && selected.startminute >= selected.endMinute)) {
+                    if ((selected.startHour > selected.endHour) || (selected.startHour <= selected.endHour && selected.startMinute >= selected.endMinute)) {
                         this.setState({ invalid: true });
+                    } else {
+                        const searc = messages.findIndex((element, index, array) => {
+                            if (element.messageID === selected.messageID) {
+                                return true;
+                            } else {
+                                return false;
+                            }});
+                        if (selected.messageType === 'Msg') {
+                            const { day, message, startHour, startMinute, endHour, endMinute, messageID } = selected;
+                        messages[searc] = {
+                            day,
+                            message,
+                            startHour,
+                            startMinute,
+                            endHour,
+                            endMinute,
+                            messageType: 'Msg',
+                            messageID
+                        };
+                        AsyncStorage.setItem('Messages', JSON.stringify(messages));
+                        console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+                        Actions.Home();
                     }
-                    const searc = messages.findIndex((element, index, array) => {
-                        if (element.messageID === selected.messageID) {
-                            return true;
-                        } else {
-                            return false;
-                        }});
-                    if (selected.messageType === 'Msg') {
-                        const { day, message, startHour, startMinute, endHour, endMinute, messageID } = selected;
-                    messages[searc] = {
-                        day,
-                        message,
-                        startHour,
-                        startMinute,
-                        endHour,
-                        endMinute,
-                        messageType: 'Msg',
-                        messageID
-                    };
-                    AsyncStorage.setItem('Messages', JSON.stringify(messages));
-                    console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
-                    Actions.Home();
-                }
-                    if (selected.messageType === 'VideoMsg') {
-                        const { day, message, uri, startHour, startMinute, endHour, endMinute, messageID } = selected;
-                    messages[searc] = {
-                        day,
-                        message,
-                        startHour,
-                        startMinute,
-                        endHour,
-                        endMinute,
-                        uri,
-                        messageType: 'VideoMsg',
-                        messageID
-                    };
-                    AsyncStorage.setItem('Messages', JSON.stringify(messages));
-                    console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
-                    Actions.Home();
+                        if (selected.messageType === 'VideoMsg') {
+                            const { day, message, uri, startHour, startMinute, endHour, endMinute, messageID } = selected;
+                        messages[searc] = {
+                            day,
+                            message,
+                            startHour,
+                            startMinute,
+                            endHour,
+                            endMinute,
+                            uri,
+                            messageType: 'VideoMsg',
+                            messageID
+                        };
+                        AsyncStorage.setItem('Messages', JSON.stringify(messages));
+                        console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+                        Actions.Home();
+                        }
                     }
                 }
             }
@@ -400,8 +402,8 @@ class AddMessage extends Component {
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <TouchableWithoutFeedback onPress={() => this.setState({ messageType: null })}>
+                    <Image source={require('../Images/backbuttondark.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
@@ -647,8 +649,8 @@ class AddMessage extends Component {
         );
             }
             if (this.state.currentMessage !== null) {
+                console.log(this.state.currentMessage);
                 const selected = JSON.parse(this.state.currentMessage);
-                console.log('im not null!');
                     return (
             <View>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
@@ -659,8 +661,8 @@ class AddMessage extends Component {
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <TouchableWithoutFeedback onPress={() => this.setState({ messageType: null, currentMessage: null })}>
+                    <Image source={require('../Images/backbuttondark.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
@@ -1535,7 +1537,6 @@ class AddMessage extends Component {
             }
     }
          if (this.state.isLaunchCam === true) {
-             console.log(this.state.isRecording);
              if (this.state.isRecording === false) {
                 return (
                     <View style={styles.container}>
