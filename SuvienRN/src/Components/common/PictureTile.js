@@ -149,30 +149,28 @@ class PictureTile extends Component {
         }
     }
         if (this.props.data.mediaType === 'Music') {
-            MusicPlayerController.preloadMusic([this.props.data.title, this.props.data.album, 227.004, this.props.data.artist], (metadata) => (
-            <TouchableOpacity 
-            onPress={() => {
-                this.props.onChangePress({
-                title: this.props.data.title,
-                album: this.props.data.album,
-                artist: this.props.data.artist,
-                caption: this.props.data.caption, 
-                tag: this.props.data.group,
-                isFavourite: this.props.data.isFavourite,
-                mediaType: 'Music'
-                });
-            }
-            }
-            >
-                <Image source={require('./musicalbumart.png')} style={this.props.style}>
-                    <View style={{ justifyContent: 'flex-end', alignItems: 'center' }}>  
-                        <Text style={{ backgroundColor: 'transparent', color: 'white', marginTop: 10, fontFamily: 'Roboto-Light', fontSize: 20 }}>{this.props.data.title}</Text>
-                    </View>
-                </Image>
-            </TouchableOpacity>
-            ), () => (
-                        <Image source={{ uri: `${Languages[this.state.languages]['115']}.png` }} style={this.props.style} />
-                    ));
+            return (
+                <TouchableOpacity 
+                onPress={() => {
+                    this.props.onChangePress({
+                    title: this.props.data.title,
+                    album: this.props.data.album,
+                    artist: this.props.data.artist,
+                    caption: this.props.data.caption, 
+                    tag: this.props.data.group,
+                    isFavourite: this.props.data.isFavourite,
+                    mediaType: 'Music'
+                    });
+                }
+                }
+                >
+                    <Image source={require('./musicalbumart.png')} style={this.props.style}>
+                        <View style={{ justifyContent: 'flex-end', alignItems: 'center' }}>  
+                            <Text style={{ backgroundColor: 'transparent', color: 'white', marginTop: 10, fontFamily: 'Roboto-Light', fontSize: 20 }}>{this.props.data.title}</Text>
+                        </View>
+                    </Image>
+                </TouchableOpacity>
+            );
         }
         if (this.props.data.mediaType === 'MusicAnd') {
             return (
