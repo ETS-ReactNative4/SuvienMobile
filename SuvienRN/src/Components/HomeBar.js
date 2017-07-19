@@ -20,11 +20,11 @@ class HomeBar extends Component {
     flashTitle() {
         setInterval(() => {
             if (this.state.icon === true) {
-                if (this.state.color === null || this.state.color === 'black') {
+                if (this.state.color === null) {
                     this.setState({ color: '#86a6e0' });
                 }
                 if (this.state.color === '#86a6e0') {
-                    setTimeout(() => this.setState({ color: 'black' }), 1000);
+                    setTimeout(() => this.setState({ color: null }), 1000);
                 }
             if (this.state.icon === false || this.state.icon === null) {
                 this.setState({ color: null });
@@ -78,7 +78,7 @@ class HomeBar extends Component {
             if (dd.getHours() >= 17 && dd.getHours() < 21) {
             this.setState({ greeting: `${Languages[this.state.languages]['009']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/evening.png'), messageType: null });
             }
-            if (dd.getHours() >= 22) {
+            if (dd.getHours() >= 21) {
             this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/night.png'), messageType: null });
         }
                 }
@@ -94,7 +94,7 @@ class HomeBar extends Component {
             if (dd.getHours() >= 17 && dd.getHours() < 21) {
             this.setState({ greeting: `${Languages[this.state.languages]['009']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/evening.png'), icon: false });
             }
-            if (dd.getHours() >= 22) {
+            if (dd.getHours() >= 21) {
             this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/night.png'), icon: false });
         }
             }
@@ -102,7 +102,7 @@ class HomeBar extends Component {
     }
 
     parseHour(i) {
-        const times = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '8', '9', '10', '11'];
+        const times = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
         return times[i];
     }
     addZero(p) {
@@ -258,21 +258,24 @@ class HomeBar extends Component {
         const currentHour = d.getHours();
         const month = d.getMonth();
         const dayFilter = messages.filter((message) => message.day.find((da) => da === weekday[numbDay]) !== undefined);
+        console.log(dayFilter);
+        if (dayFilter.length === 0) {
+            console.log(currentHour);
+            if (currentHour < 12) {
+                this.setState({ greeting: `${Languages[this.state.languages]['007']}, ${this.state.name}!`, section: require('../Images/morning.png'), aorp: 'am' });
+            }
+            if (currentHour >= 12 && currentHour < 17) {
+                this.setState({ greeting: `${Languages[this.state.languages]['008']}, ${this.state.name}!`, section: require('../Images/afternoon.png'), aorp: 'pm' });
+            }
+            if (currentHour >= 18 && currentHour < 21) {
+                this.setState({ greeting: `${Languages[this.state.languages]['009']}, ${this.state.name}!`, section: require('../Images/evening.png'), aorp: 'pm' });
+            }
+            if (currentHour >= 21) {
+                console.log('Immmmm herreee!');
+                this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, section: require('../Images/night.png'), aorp: 'pm' });
+            }
+        }
         this.setState({ name: await AsyncStorage.getItem('name'), messages, dayFilter });
-        /*
-        if (currentHour < 12) {
-            this.setState({ greeting: `${Languages[this.state.languages]['007']}, ${this.state.name}!`, section: require('../Images/morning.png') });
-        }
-        if (currentHour >= 12 && currentHour < 17) {
-            this.setState({ greeting: `${Languages[this.state.languages]['008']}, ${this.state.name}!`, section: require('../Images/afternoon.png') });
-        }
-        if (currentHour >= 18 && currentHour < 21) {
-            this.setState({ greeting: `${Languages[this.state.languages]['009']}, ${this.state.name}!`, section: require('../Images/evening.png') });
-        }
-        if (currentHour >= 22) {
-            this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, section: require('../Images/night.png') });
-        }
-        */
         if (this.state.languages === 'FRE') {
             this.setState({ currentDate: `${weekday[numbDay]}, le ${numbDate} ${months[month]} ${numbYear}` });
         }
