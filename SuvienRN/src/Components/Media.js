@@ -271,6 +271,7 @@ class Media extends Component {
         this.setState({ mediaArray: media, media: content });
        }
        this.props.onInvisible(true);
+       this.setState({ invalid: false });
        Actions.MainMenu();
     }
     preloadMusicPlay() {

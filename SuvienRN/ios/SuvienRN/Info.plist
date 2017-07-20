@@ -26,17 +26,19 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Suvien would like to request access to your music library</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSCameraUsageDescription</key>
 	<string>Suvien would like to request access to your camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Suvien would like to request access to your microphone</string>
 	<key>NSPhotoLibraryUsageDescription</key>
