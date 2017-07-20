@@ -533,7 +533,8 @@ class Settings extends Component {
 
     renderPhotos() {
         if (this.state.mediaType === 'Pictures') {
-            const allphotos = this.state.media.map((photo) => 
+            const newmedia = this.state.media.reverse();
+            const allphotos = newmedia.map((photo) => 
             //For future applications, long press may prove to be more user friendly
              (
                 <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
@@ -560,7 +561,8 @@ class Settings extends Component {
             );
         }
         if (this.state.mediaType === 'Videos') {
-            const allphotos = this.state.media.map((photo) => {
+            const newmedia = this.state.media.reverse();
+            const allphotos = newmedia.map((photo) => {
             //For future applications, long press may prove to be more user friendly
             if (photo.mediaType === 'Video') {
                 return (
@@ -612,7 +614,8 @@ class Settings extends Component {
             );
         }
         if (this.state.mediaType === 'Audio') {
-            const allphotos = this.state.media.map((photo) => {
+            const newmedia = this.state.media.reverse();
+            const allphotos = newmedia.map((photo) => {
                 return (
                 <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={require('../Images/musicalbumart.png')}>
                     <View style={{ backgroundColor: 'transparent', height: 200 }} />
@@ -933,8 +936,7 @@ class Settings extends Component {
                     {this.renderExplorer()}
                     <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['077']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['077']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                     </CardSection>
                     <CardSection>
@@ -1123,8 +1125,7 @@ class Settings extends Component {
                         {this.renderExplorer()}
                         <CardSection>
                             <Button onPress={this.onSaveItemPress.bind(this)}>
-                                {Languages[this.state.languages]['077']}
-                                <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                                {Languages[this.state.languages]['077']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                             </Button>
                         </CardSection>
                         <CardSection>
@@ -1164,6 +1165,29 @@ class Settings extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
+            <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `blankfield${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 400 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
             <View style={{ marginTop: 10, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={{ fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight' }}>{Languages[this.state.languages]['022']}</Text>

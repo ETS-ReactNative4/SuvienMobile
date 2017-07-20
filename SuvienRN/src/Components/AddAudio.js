@@ -274,8 +274,7 @@ class AddAudio extends Component {
                             <View>
                     <CardSection>
                     <Button onPress={this.onSaveItemPress.bind(this)}>
-                        {Languages[this.state.languages]['067']}
-                        <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                     </Button>
                     </CardSection>
                     <CardSection>
@@ -330,14 +329,12 @@ class AddAudio extends Component {
                             <View>
                     <CardSection>
                     <Button onPress={this.onSaveItemPress.bind(this)}>
-                        {Languages[this.state.languages]['067']}
-                        <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                     </Button>
                     </CardSection>
                     <CardSection>
                     <Button onPress={this.createNew.bind(this)}>
-                        {Languages[this.state.languages]['068']}
-                        <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                        {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                     </Button>
                     </CardSection>
                     <CardSection>

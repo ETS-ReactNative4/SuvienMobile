@@ -71,7 +71,12 @@ class AddPhoto extends Component {
     }
 
     onSaveURLPress() {
-        Image.getSize(this.state.imgsrc, (width, height) => { this.setState({ height, width, imageuri: this.state.imgsrc }); });
+        const url = this.state.imgsrc;
+        if (url.substring(0, 7) !== 'http://' || url.substring(0, 8) !== 'https://') {
+            Image.getSize(`http://${this.state.imgsrc}`, (width, height) => { this.setState({ height, width, imageuri: `http://${this.state.imgsrc}` }); });
+        } else {
+            Image.getSize(this.state.imgsrc, (width, height) => { this.setState({ height, width, imageuri: this.state.imgsrc }); });
+        }
     }
 
     renderWeb() {
@@ -169,8 +174,7 @@ class AddPhoto extends Component {
                         </CardSection>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                             <Button onPress={this.onChoosePhotoPress.bind(this)}>
-                                {Languages[this.state.languages]['053']}
-                                <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
+                                {Languages[this.state.languages]['053']}  <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 30, width: 30 }} />
                             </Button>
                         </CardSection>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
@@ -229,8 +233,7 @@ class AddPhoto extends Component {
                         </CardSection>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                             <Button onPress={this.onChoosePhotoPress.bind(this)}>
-                                {Languages[this.state.languages]['053']}
-                                <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
+                                {Languages[this.state.languages]['053']}  <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 30, width: 30 }} />
                             </Button>
                         </CardSection>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
@@ -419,8 +422,7 @@ class AddPhoto extends Component {
                         <View>
                         <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         </CardSection>
                         <CardSection>
@@ -501,8 +503,7 @@ class AddPhoto extends Component {
                     <View>
                     <CardSection>
                     <Button onPress={this.onSaveItemPress.bind(this)}>
-                        {Languages[this.state.languages]['067']}
-                        <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                     </Button>
                     </CardSection>
                     <CardSection>
@@ -563,14 +564,12 @@ class AddPhoto extends Component {
                         <View>
                         <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         </CardSection>
                         <CardSection>
                         <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         </CardSection>
                         <CardSection>
@@ -651,14 +650,12 @@ class AddPhoto extends Component {
                     <View>
                     <CardSection>
                     <Button onPress={this.onSaveItemPress.bind(this)}>
-                        {Languages[this.state.languages]['067']}
-                        <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                     </Button>
                     </CardSection>
                     <CardSection>
                     <Button onPress={this.createNew.bind(this)}>
-                        {Languages[this.state.languages]['068']}
-                        <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                        {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                     </Button>
                     </CardSection>
                     <CardSection>

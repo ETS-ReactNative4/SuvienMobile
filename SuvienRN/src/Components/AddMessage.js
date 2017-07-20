@@ -634,12 +634,10 @@ class AddMessage extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
                             {Languages[this.state.languages]['069']}
@@ -922,12 +920,10 @@ class AddMessage extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
                             {Languages[this.state.languages]['069']}
@@ -1217,12 +1213,10 @@ class AddMessage extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
                             {Languages[this.state.languages]['069']}
@@ -1517,12 +1511,10 @@ class AddMessage extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
                             {Languages[this.state.languages]['069']}
