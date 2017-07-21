@@ -228,6 +228,48 @@ class Media extends Component {
        AsyncStorage.setItem('Media', JSON.stringify(media));
        this.setState({ mediaArray: media, media: content });
        }
+       if (this.state.mediaType === 'MusicAnd') {
+        const media = this.state.mediaArray;
+        const content = this.state.media;
+        const searchContent = this.state.media.findIndex((element, index, array) => {
+                if (element.uri === item) { //If we set something to change photos, we need to make a unique ID
+                    return true;
+                } else {
+                    return false;
+        }});
+        const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+                if (element.uri === item) {
+                    return true;
+                } else {
+                    return false;
+        }});
+        media.splice(searchMedia, 1);
+        content.splice(searchContent, 1);
+        AsyncStorage.setItem('Audio', JSON.stringify(content));
+        AsyncStorage.setItem('Media', JSON.stringify(media));
+        this.setState({ mediaArray: media, media: content });
+       }
+       if (this.state.mediaType === 'Music') {
+        const media = this.state.mediaArray;
+        const content = this.state.media;
+        const searchContent = this.state.media.findIndex((element, index, array) => {
+                if (element.title === item.title && element.album === item.album && element.artist === item.artist) { //If we set something to change photos, we need to make a unique ID
+                    return true;
+                } else {
+                    return false;
+        }});
+        const searchMedia = this.state.mediaArray.findIndex((element, index, array) => {
+                if (element.title === item.title && element.album === item.album && element.artist === item.artist) {
+                    return true;
+                } else {
+                    return false;
+        }});
+        media.splice(searchMedia, 1);
+        content.splice(searchContent, 1);
+        AsyncStorage.setItem('Audio', JSON.stringify(content));
+        AsyncStorage.setItem('Media', JSON.stringify(media));
+        this.setState({ mediaArray: media, media: content });
+       }
        this.props.onInvisible(true);
        Actions.MainMenu();
     }
@@ -510,51 +552,12 @@ class Media extends Component {
             );
         }
             if (uri !== null && imageuri !== null) {
-                if (this.state.loading === false) {
-                    return (
-                        <View style={{ height: (this.state.scheight - 100), alignItems: 'center', justifyContent: 'center', marginTop: 40 }}>
-                            <WebView
-                            style={{ height: 200, backgroundColor: 'black', width: 800 }}
-                            source={{ uri: `https://www.youtube.com/embed/${uri}?&autoplay=1` }}
-                            onError={() => this.setState({ failed: true })}
-                            />
-                            <View style={{ height: 250, backgroundColor: '#e3edf9', width: 800 }}>
-                                        <ScrollView>
-                                            <View>
-                                                <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                                                <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                    {this.state.title}
-                                                </Text>
-                                                <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
-                                                    <Image source={imagerend} style={{ height: 40, width: 40 }} />
-                                                </TouchableWithoutFeedback>
-                                            </View>
-                                                <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
-                                                <Text style={styles.textBodyStyle}>
-                                                    <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
-                                                    {this.state.tag}
-                                                </Text>
-                                            <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                                <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
-                                            </CardSection>
-                                            </View>
-                                        </ScrollView>
-                                    </View>
-                            </View>
-                    );
-                }
-                if (this.state.loading === null) {
+                if (this.state.failed === true) {
                     return (
                         <View style={{ height: (this.state.scheight - 100), alignItems: 'center', justifyContent: 'center', marginTop: 40 }}>
                             <View style={{ height: 450, backgroundColor: 'white', width: 800, alignItems: 'center', justifyContent: 'center' }}>
-                            <Image source={{ uri: `${Languages[this.state.languages]['119']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 250, height: 100 }} />
+                            <Image source={{ uri: `${Languages[this.state.languages]['118']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 300, height: 300 }} />
                             </View>
-                            <WebView
-                            style={{ height: 200, backgroundColor: 'black', width: 800, opacity: 0.5 }}
-                            source={{ uri: `https://www.youtube.com/embed/${uri}?&autoplay=1` }}
-                            onError={() => this.setState({ failed: true })}
-                            onLoadEnd={() => this.setState({ loading: false })}
-                            />
                             <View style={{ height: 250, backgroundColor: '#e3edf9', width: 800 }}>
                                         <ScrollView>
                                             <View>
@@ -579,6 +582,77 @@ class Media extends Component {
                                     </View>
                             </View>
                     );
+                } else {
+                    if (this.state.loading === false) {
+                        return (
+                            <View style={{ height: (this.state.scheight - 100), alignItems: 'center', justifyContent: 'center', marginTop: 40 }}>
+                                <WebView
+                                style={{ height: 200, backgroundColor: 'black', width: 800 }}
+                                source={{ uri: `https://www.youtube.com/embed/${uri}?&autoplay=1` }}
+                                onError={() => this.setState({ failed: true })}
+                                />
+                                <View style={{ height: 250, backgroundColor: '#e3edf9', width: 800 }}>
+                                            <ScrollView>
+                                                <View>
+                                                    <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
+                                                        {this.state.title}
+                                                    </Text>
+                                                    <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                        <Image source={imagerend} style={{ height: 40, width: 40 }} />
+                                                    </TouchableWithoutFeedback>
+                                                </View>
+                                                    <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
+                                                    <Text style={styles.textBodyStyle}>
+                                                        <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
+                                                        {this.state.tag}
+                                                    </Text>
+                                                <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                                    <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
+                                                </CardSection>
+                                                </View>
+                                            </ScrollView>
+                                        </View>
+                                </View>
+                        );
+                    }
+                    if (this.state.loading === null) {
+                        return (
+                            <View style={{ height: (this.state.scheight - 100), alignItems: 'center', justifyContent: 'center', marginTop: 40 }}>
+                                <View style={{ height: 450, backgroundColor: 'white', width: 800, alignItems: 'center', justifyContent: 'center' }}>
+                                <Image source={{ uri: `${Languages[this.state.languages]['119']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 250, height: 100 }} />
+                                </View>
+                                <WebView
+                                style={{ height: 200, backgroundColor: 'black', width: 800, opacity: 0.5 }}
+                                source={{ uri: `https://www.youtube.com/embed/${uri}?&autoplay=1` }}
+                                onError={() => this.setState({ failed: true })}
+                                onLoadEnd={() => this.setState({ loading: false })}
+                                />
+                                <View style={{ height: 250, backgroundColor: '#e3edf9', width: 800 }}>
+                                            <ScrollView>
+                                                <View>
+                                                    <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
+                                                        {this.state.title}
+                                                    </Text>
+                                                    <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                        <Image source={imagerend} style={{ height: 40, width: 40 }} />
+                                                    </TouchableWithoutFeedback>
+                                                </View>
+                                                    <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
+                                                    <Text style={styles.textBodyStyle}>
+                                                        <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
+                                                        {this.state.tag}
+                                                    </Text>
+                                                <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                                    <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
+                                                </CardSection>
+                                                </View>
+                                            </ScrollView>
+                                        </View>
+                                </View>
+                        );
+                    }
                 }
         }
         //Note: this is configured only for ios at the moment       
@@ -596,25 +670,28 @@ class Media extends Component {
                 animationType={"fade"}
                 transparent
                 visible={this.state.invalid}
-                onRequestClose={() => {}}
->
-            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{ height: 500, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-                <Image source={{ uri: `garbage${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 200 }} />
-                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['122']}</Text>
-                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['123']}</Text>
-                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
-                        <Button 
-                        onPress={() => {
-                        this.setState({ invalid: false });
-                        this.onHomeReturn();
-                        }}
-                        >
-                    {Languages[this.state.languages]['113']}
-                        </Button>
-                    </CardSection>
-                </View>
-                </View>
+                onRequestClose={() => {}}>
+                        <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                        <View style={{ height: 500, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                        <Image source={{ uri: `garbage${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 200 }} />
+                            <Text style={{ marginLeft: 30, marginRight: 20, fontSize: 30, fontFamily: 'Roboto-Light', marginBottom: 10, marginTop: 10 }}>{Languages[this.state.languages]['123']}</Text>
+                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 27, fontFamily: 'Roboto-Thin', marginBottom: 20 }}>{Languages[this.state.languages]['125']}</Text>
+                            <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                                <Button 
+                                onPress={() => {
+                                if (this.state.mediaType === 'Music') {
+                                    this.onDelete({ title: this.state.title, album: this.state.album, artist: this.state.artist });
+                                }
+                                if (this.state.mediaType === 'MusicAnd') {
+                                    this.onDelete(this.state.uri);
+                                }
+                                }}
+                                >
+                            {Languages[this.state.languages]['113']}
+                                </Button>
+                            </CardSection>
+                        </View>
+                        </View>
                 </Modal>
                         <View style={{ marginTop: 20 }}>
                             <Image source={require('../Images/musicalbumart.png')} style={{ height: 300, width: 300, marginLeft: 50, marginRight: 30 }} />
