@@ -140,7 +140,7 @@ Suvien is only able to use music files that have a defined title, artist, and al
 
 I downloaded an image/video from an email/from google drive/from dropbox onto my device but when I open the camera roll, I can't find it.
 
-Suvien looks only into your camera roll when looking for pictures and videos. Ensure that when you open your camera roll/gallery that the image/video is visible. (Picture) If it is under a different folder, move it into the camera roll/gallery
+Suvien looks only into your camera roll when looking for pictures and videos. Ensure that when you open your camera roll/gallery that the image/video is visible. If it is under a different folder, move it into the camera roll/gallery
 
 I tried uploading a panorama image into Suvien, but the app stretches off the screen when I enlarge it.
 

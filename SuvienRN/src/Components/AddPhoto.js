@@ -424,7 +424,7 @@ class AddPhoto extends Component {
                         <View>
                         <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['067']} <Image source={require('../Images/saveicon.png')} style={{ height: 40, width: 30, marginTop: 10 }} />
+                            {Languages[this.state.languages]['067']} <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                         </Button>
                         </CardSection>
                         <CardSection>

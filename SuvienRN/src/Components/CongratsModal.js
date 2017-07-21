@@ -42,6 +42,7 @@ class CongratsModal extends Component {
                                 onPress={() => {
                                     this.setState({ modalVisible: false });
                                     AsyncStorage.setItem('Acheivement', 'COMP');
+                                    AsyncStorage.setItem('Preset', Languages[this.state.languages]['094'][0]);
                                     Actions.Settings();
                                 }}
                                 >

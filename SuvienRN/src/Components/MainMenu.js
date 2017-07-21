@@ -9,6 +9,15 @@ class MainMenu extends Component {
     state = { pictures: null, isFirst: null, isComp: null, stage: null, preferences: null, language: null, lang: null, ask: null, img: null }
     async componentDidMount() {
         //AsyncStorage.setItem('Messages', JSON.stringify([]));
+        /*
+        const array = Languages[await AsyncStorage.getItem('Language')]['029'];
+        const prefobj = {};
+        for (let i = 0; i < 4; i++) {
+            prefobj[array[i]] = true;
+        }
+        prefobj[array[4]] = false;
+        AsyncStorage.setItem('Preferences', JSON.stringify(prefobj));
+        */
         Orientation.lockToLandscape();
         AsyncStorage.setItem('BGColour', 'rgba(60,60,60,0.95)');
          if (await AsyncStorage.getItem('name') !== null && await AsyncStorage.getItem('stage') !== null) {

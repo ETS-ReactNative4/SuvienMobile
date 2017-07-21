@@ -293,6 +293,7 @@ class HomeBar extends Component {
         if (greeting !== null) {
             const last = greeting.slice(-6);
         }
+        console.log(this.state.preferences);
         //console.log(aorp);
         //console.log(this.state.sizes);
         if (this.state.sizes !== null && hour !== null && minute !== null && currentDate !== null && (greeting !== null && greeting.slice(-6) !== ' null!') && this.state.languages !== null && this.state.preferences !== null) {

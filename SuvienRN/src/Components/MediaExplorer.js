@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Text, Dimensions, Platform, AsyncStorage } from 'react-native';
+import { View, Image, Text, Dimensions, Platform, AsyncStorage, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Languages from '../Languages/Languages.json';
 import { CardSection, Button } from './common';
@@ -25,7 +25,13 @@ class MediaExplorer extends Component {
             return (
             <View>
             <View style={{ flexDirection: 'column', backgroundColor: '#f9f7f7', height: this.state.height, width: this.state.width, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginBottom: 10 }}> {Languages[this.state.languages]['040']}</Text>
+                <View style={{ flexDirection: 'row' }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Home() }>
+            <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, marginRight: 20 }} />
+            </TouchableWithoutFeedback>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginBottom: 10 }}> 
+                    {Languages[this.state.languages]['040']}</Text>
+                </View>
                     <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0, width: (this.state.width - 100) }}>
                         <Button onPress={() => Actions.AddPhoto()}>
                             {Languages[this.state.languages]['036']}

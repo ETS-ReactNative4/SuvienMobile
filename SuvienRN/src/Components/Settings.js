@@ -6,8 +6,9 @@ import RadioForm from 'react-native-simple-radio-button';
 import { Actions } from 'react-native-router-flux';
 
 class Settings extends Component {
-    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, languages: null, mediaType: null, color: null, media: null, mediaArray: null, selectedItem: null, width: null, modalVisible: false, delete: null, isNull: false };
+    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, languages: null, mediaType: null, color: null, media: null, mediaArray: null, selectedItem: null, width: null, modalVisible: false, delete: null, isNull: false, selected: null, preferences: null};
     async componentWillMount() {
+        const transarray = ['ENG', 'FRE', 'ESP'];
         if (await AsyncStorage.getItem('name') !== null) {
             this.setState({ 
                 name: await AsyncStorage.getItem('name'), 
@@ -17,7 +18,8 @@ class Settings extends Component {
                 mediaArray: JSON.parse(await AsyncStorage.getItem('Media')),
                 width: parseInt(await AsyncStorage.getItem('Width')),
                 languages: await AsyncStorage.getItem('Language'),
-                color: await AsyncStorage.getItem('BGColour')
+                color: await AsyncStorage.getItem('BGColour'),
+                selected: transarray.indexOf(await AsyncStorage.getItem('Language'))
             });
         }
         if (await AsyncStorage.getItem('name') === null) {
@@ -718,6 +720,52 @@ class Settings extends Component {
         }
     }
 
+    async onSaveLangPress() {
+        const transarray = ['ENG', 'FRE', 'ESP'];
+        const presetarray = Languages[this.state.languages]['094'];
+        const preferencearray = Languages[this.state.languages]['029'];
+        const preset = await AsyncStorage.getItem('Preset');
+        const preferences = JSON.parse(await AsyncStorage.getItem('Preferences'));
+        const newpreset = (Languages[transarray[this.state.selected]]['094'])[presetarray.indexOf(preset)];
+        let newpreferences = {};
+        console.log(preferences);
+        for (let i = 0; i < 5; i++) {
+            newpreferences[(Languages[transarray[this.state.selected]]['029'])[i]] = preferences[preferencearray[i]];
+        }
+        AsyncStorage.setItem('Language', transarray[this.state.selected]);
+        AsyncStorage.setItem('Preferences', JSON.stringify(newpreferences));
+        AsyncStorage.setItem('Preset', newpreset);
+        Actions.Home();
+    }
+
+    renderRadioLangButton() {
+        const transarray = ['ENG', 'FRE', 'ESP'];
+        const radioProps = [
+        { label: 'English', value: 0 },
+        { label: 'Français', value: 1 },
+        { label: 'Español', value: 2 }
+        ];
+        if (this.state.languages !== null) {
+            return (
+            <CardSection>
+                <Text style={styles.radioTextStyle}>{Languages[this.state.languages]['101']}</Text>
+                <RadioForm
+                        radio_props={radioProps}
+                        initial={transarray.indexOf(this.state.languages)}
+                        buttonColor={'#4A86E8'}
+                        style={{ flex: 6 }}
+                        onPress={(selected) => this.setState({ selected })} 
+                />
+            </CardSection>
+            );
+        }
+        if (this.state.languages === null) {
+            return (
+                <View />
+            );
+        }
+    }
+
     render() {
         console.log(this.state.selectedItem);
         if (this.state.isFirst === false) {
@@ -1011,6 +1059,7 @@ class Settings extends Component {
                     </CardSection>
     
                     {this.renderRadioButton()}
+                    {this.renderRadioLangButton()}
     
                     <CardSection>
                         <Button onPress={this.onButtonPress.bind(this)}>
