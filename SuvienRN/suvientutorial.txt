@@ -1,0 +1,176 @@
+The new user interface
+
+Suvien 2.0's new interface integrates new elements to enhance the user's experience. The diagram below explains all the icons and components.
+(Picture pointing out where things are)
+
+Using Suvien 2.0 for the first time
+
+Since our app has changed in appearance, we want to get you comfortable with the changes before presenting you with more options. After being prompted to enter your name and stage of dementia (Picture)
+You will be redirected to the home page. This is where your content will be displayed for the user.
+(Picture)
+To begin, click on any of the empty tiles.
+
+Adding Content
+Suvien 2.0 supports the following media:
+
+-Images taken using the device camera
+-Images added using an image url
+-Videos recorded using the device camera
+-Videos added using a YouTube url
+-Music added from the music gallery
+
+Note, here are some things to keep in mind:
+
+-YouTube videos can only play when connected to the internet
+-To see images added from a url, you do not need to be on the internet, however, to add them initially, you must be connected.
+-Any videos and photos taken in Suvien will be automatically saved to your device's gallery
+-If any content is deleted from your device outside Suvien, the app will notify you on your next launch then delete the tile.
+
+After adding a piece of content, you may add a title, caption, and tag. There is no limitation on the length or content of each, just keep in mind that your tag can be used later to create a preset. So, it's best to keep it short but descriptive (i.e. FamilyReunion2017). Don't worry if you make a mistake or are unsure, all of these can be edited later from the settings menu.
+
+Favourites
+
+Once you've added your first tile, clicking on it will enlarge it and display the title, caption, and tag. Also, you will notice a small heart icon to the right of the title (Picture)
+This is the favourites icon. You can press it to favourite a tile. Later, we will show you how to set Suvien to show only those favourited pictures. The empty heart means it's not favourited, and the full heart means it is.
+
+Editing/Deleting Content
+
+If at any time you wish to edit or delete a tile, you can do so by navigating to the settings menu (Picture)
+Then selecting your desired type of media (Picture)
+
+After you have located your desired tile, either click on the edit icon to edit your title, caption, or tag, or click on the trash can icon to delete it. Note: Suvien is not able to delete Images, Videos, or Music off your actual device. Deleting a tile just removes your title, caption, and tag off the app.
+
+Updating the settings page
+
+After you have added 8 pieces of content, Suvien will direct you to the enhanced settings page with more user control. Below is a diagram explaining the new additions. (Picture)
+
+Presets
+
+One of the new features is allowing presets. Presets are a way to sort your tiles based on a filter you have selected. After recieving the content acheivement, the preset is automatically set to date, so do not be alarmed if your content is ordered differently. Here's a quick explaination of the presets
+Date - Sort the tiles by the most recent tiles first and the oldest last.
+Tag - Show only content with a specific tag
+Favourites - Show only content that has been favourited
+Random - Sort the tiles in a random order. Refreshes everytime a photo is selected.
+
+Don't worry about losing your presets between launches, Suvien will always launch using the last selected preset.
+
+Uploading content after the settings page update
+
+After you've uploaded your first 8 pieces of content, your content will now be added via the settings menu. (Pictures)
+
+Messages
+
+After the update, you are now able to set messages! There are two types of messages, each displaying on the header of the home menu
+
+-Header/Written message
+-Video Message
+
+It is recommended if your message exceeds 20 characters, to record it as a video message.
+
+Messages can be scheduled multiple days a week for a specific interval of time. Please note that messages can be a minimum of 1 minute and a maximum of 23 hours and 59 minutes.
+
+Messages, like content, can always be edited and deleted from the messages page (Picture). The content of the message can be edited as well as the time and days.
+
+If two or more messages have overlapping time intervals, please note that each message that starts later will override the original, earlier message.
+
+Advanced Settings
+
+Located under the settings menu, you can access Suvien's advanced settings. Here you can change user preferences and language. (Pictures)
+
+Here is a quick explaination of all the user preferences
+
+-Display Date: Toggles the date on the bottom of the header
+-Display Clock: Toggles the clock on the left side of the header
+-Display Greeting: Toggles the greeting on the top of the header
+NOTE: If this option is disabled, no messages will be displayed
+-Games enabled: Toggles the games menu (This will be mentioned later)
+-Admin-User Mode enabled: Hide the main menu and settings menu icons. To return to the settings page, tap the sun/moon icon on the far left corner of the header four (4) times.
+
+You can also change the language, as well as tell Suvien whether or not to save your language preferneces. If not, Suvien will prompt the user to select a language upon every launch.
+
+Games
+
+After you have uploaded 8 photos onto Suvien, you are able to access the games menu. Note: this is only accessable for those who have listed their stage as 'Early'
+There are two games avaliable, and the more photos you add the more fun they become!
+
+Memory Game:
+
+A classic card-based memory game, now with your memories! In order to play, tap a tile and try to find the matching photo. The game finishes after all the cards have been overturned.
+
+Caption Game:
+
+In this game, Suvien will give you four images and one caption. You must match the caption with the picture to continue. This game runs 8 times before finishing.
+
+Content Adding Tips and Tricks
+
+There's no need to be disappointed in Suvien's new content system. There are many ways that content can be shared outside of Suvien between devices!
+
+Google Drive/Dropbox
+
+These are cloud services that operate similarly to our old server. Both options are free for a specific storage size and the link can be shared amongst family members, keeping your data secure and private. Both also have an Android and iOS app, making downloading to your device much easier. (Links)
+
+Email
+
+All pieces of content can be transfered over email to the user or caretaker. For Audio files, .mp3 format is prefered and for Video files .mp4 is prefered. For images, .jpg, .jpeg, or .png is prefered, .gif files should be avoided because they reduce app performance.
+
+Facebook
+
+If you own a facebook account, chances are high that many of the images you will be adding to Suvien will be uploaded to Facebook by either you or another family member/friend. Here's a handy tutorial for adding an image from a url on facebook (stuff)
+
+Troubleshooting
+
+I've tried uploading a YouTube video, but Suvien says that it can't find the URL. 
+
+If this is happening, it either means the video you're trying to upload has been deleted, or the url is not a valid YouTube url. If you have checked that both of these are valid, check your internet connection.
+
+I launched Suvien and one of the tiles says that Suvien can't find the content.
+
+If this happens, it is likely that you have either:
+-Deleted the content off your device
+-Moved the content to a new file location
+Check to ensure that the media is still on your device. If it is, make sure it was in the same location as it was when you uploaded it.
+
+I launched Suvien and one of the tiles are blank, but I haven't deleted or moved any content.
+
+This is most likely a web based item (A YouTube video or a Web Image). If it is blank, the content may have been deleted or the url is no longer valid. Attempt to go to the web address in your browser and see if the problem persists.
+
+I tried adding an audio file, but the title, artist, and album are still showing 'None'
+
+Suvien is only able to use music files that have a defined title, artist, and album. Please check the song to ensure all the required info is listed. If you are having trouble, visit one of these links. (Links for adding info).
+
+I downloaded an image/video from an email/from google drive/from dropbox onto my device but when I open the camera roll, I can't find it.
+
+Suvien looks only into your camera roll when looking for pictures and videos. Ensure that when you open your camera roll/gallery that the image/video is visible. (Picture) If it is under a different folder, move it into the camera roll/gallery
+
+I tried uploading a panorama image into Suvien, but the app stretches off the screen when I enlarge it.
+
+Suvien does not support the use of panorama images due to their dimensions.
+
+
+FAQ
+
+In the old Suvien I was able to get my family to share content on a server, is that still avaliable?
+
+Suvien 2.0 is a standalone app that no longer uses a server. This ensures that your files are safer and more secure, as well as enabling us to offer Suvien to our users completely free of charge. The downside is that you can no longer share content on a server. However, take a look at our New ways to migrate section for ideas on how to still share content outside of Suvien.
+
+I accidentally deleted a tile, is there any way to get it back?
+
+Unfortunately, Suvien deletes the title, caption, and potentially the tag permanently when a tile is deleted. However, the actual content is still on your device. So, you are still able to reupload with a new title, caption, and tag.
+
+I purchased a new tablet and want to migrate Suvien onto it, is that possible?
+
+Since Suvien operates strictly using the device's data, migration between devices is not possible. 
+
+Misc.
+
+I want to contribute to Suvien by adding new graphics/language support/programming fixes.
+
+You are welcome to help out! Visit us on our GitHub repo for more information. (link)
+
+I have a question/concern/comment not present on this list.
+
+Contact our support: 
+
+
+
+
