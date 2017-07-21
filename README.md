@@ -9,7 +9,7 @@ Suvien 2.0 was created using [JavaScript](https://en.wikipedia.org/wiki/JavaScri
 
 **Note - Many of these libraries' code was changed in order to fit Suvien 2.0's needs. Running npm install on these libraries without replacing the files with the ones in the ModifiedNodeFiles folder afterwards will cause Suvien to crash upon running.**
 # Contributions
-Contributions are always welcome! However, please read our Contribution Guidelines before doing so.
+Contributions are always welcome! However, please read our [Contribution Guidelines](SuvienMobile/CONTRIBUTING.md) before doing so.
 # More Information
 For more information about Suvien 2.0, please visit our [website](http://www.suvien.com/).
 
