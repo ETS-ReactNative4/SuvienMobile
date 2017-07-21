@@ -25,6 +25,7 @@ import android.database.Cursor;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import android.content.SharedPreferences;
@@ -149,7 +150,7 @@ public class RNReactNativeMusicplayercontroller extends ReactContextBaseJavaModu
         if (savedUriString != null && savedUriString != "unknown") { //As long as there's a uri string...
             Uri audioUri = Uri.parse(savedUriString); //The uri to play is the parsed string uri just fetched
             WritableArray metadatas = createMetadataFrom(audioUri);
-            if (metadatas.size() == 1) {//Give us the title, album, etc of the item
+            if (metadatas.getType(0) == ReadableType.String) {//Give us the title, album, etc of the item
                 handler.invoke(1, "Nothing to preload");
             } else {
                 final WritableArray metadata = createMetadataFrom(audioUri);
