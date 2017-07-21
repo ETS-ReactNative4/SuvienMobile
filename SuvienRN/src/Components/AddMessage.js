@@ -31,7 +31,7 @@ class AddMessage extends Component {
                 const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
                 if (this.state.currentMessage === null) {
                     const { message, day, startHour, startMinute, endHour, endMinute, messageType, uri, title } = this.state;
-                    if ((this.state.startHour > this.state.endHour) || (this.state.startHour <= this.state.endHour && this.state.startMinute >= this.state.endMinute)) {
+                    if ((this.state.startHour > this.state.endHour) || (this.state.startHour === this.state.endHour && this.state.startMinute >= this.state.endMinute)) {
                         this.setState({ invalid: true });
                     } else {
                         if (messageType === 'Msg') {
@@ -66,7 +66,7 @@ class AddMessage extends Component {
                 } 
                 if (this.state.currentMessage !== null) {
                     const selected = JSON.parse(this.state.currentMessage);
-                    if ((selected.startHour > selected.endHour) || (selected.startHour <= selected.endHour && selected.startMinute >= selected.endMinute)) {
+                    if ((selected.startHour > selected.endHour) || (selected.startHour === selected.endHour && selected.startMinute >= selected.endMinute)) {
                         this.setState({ invalid: true });
                     } else {
                         const searc = messages.findIndex((element, index, array) => {
