@@ -71,7 +71,7 @@ class AddPhoto extends Component {
     }
 
     onSaveURLPress() {
-        this.setState({ imageuri: this.state.imgsrc });
+        Image.getSize(this.state.imgsrc, (width, height) => { this.setState({ height, width, imageuri: this.state.imgsrc }); });
     }
 
     renderWeb() {
