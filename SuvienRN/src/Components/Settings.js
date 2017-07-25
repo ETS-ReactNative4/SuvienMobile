@@ -1220,7 +1220,7 @@ class Settings extends Component {
                 visible={this.state.isNull}
                 onRequestClose={() => {}}
 >
-            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                 <Image source={{ uri: `blankfield${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 400 }} />
                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
