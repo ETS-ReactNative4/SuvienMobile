@@ -8,6 +8,7 @@ Suvien 2.0 was created using [JavaScript](https://en.wikipedia.org/wiki/JavaScri
 - [react-native-video](https://github.com/react-native-community/react-native-video)
 
 **Note - Many of these libraries' code was changed in order to fit Suvien 2.0's needs. Running npm install on these libraries without replacing the files with the ones in the ModifiedNodeFiles folder afterwards will cause Suvien to crash upon running.**
+**Please consult our [Setup guide](SETUP.md) before attempting to debug**
 # Contributions
 Contributions are always welcome! However, please read our [Contribution Guidelines](CONTRIBUTING.md) before doing so.
 # More Information
