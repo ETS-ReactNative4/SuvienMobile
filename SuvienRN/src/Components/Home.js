@@ -68,7 +68,10 @@ class Home extends Component {
             );
         }
         if (this.state.languages !== null) {
+            console.log('langs not null');
              if (this.state.media !== null) {
+                 console.log(this.state.preset);
+                 console.log(this.state.languages);
             if (this.state.preset === (Languages[this.state.languages]['094'])[0]) {
             let newMedia = this.state.media.reverse();
             let j;
@@ -189,11 +192,8 @@ class Home extends Component {
                 [...allTiles]
             );
         }
-        
-        }
-
         if (this.state.preset === (Languages[this.state.languages]['094'])[3]) {
-            //console.logconsole.log('Im in preset!');
+            console.log('Im in none!');
             if (this.state.media !== null) {
                 //console.log('Im in media not null')
                 const allTiles = [];
@@ -201,6 +201,7 @@ class Home extends Component {
                 for (i = 0; i < 8; i++) {
                     let isFound = this.state.media.find((medi) => medi.uniqueID === i);
                     if (isFound === undefined) {
+                        console.log('im here now!');
                         allTiles.push(
                         <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={null} unique={i} key={`${i}p`} />
                     );  
@@ -232,6 +233,8 @@ class Home extends Component {
                 );
             }
         }
+        }
+
         if (this.state.media === null) {
             return (
                 <View />
@@ -256,7 +259,8 @@ class Home extends Component {
         //console.log(this.state.minute);;
         //console.log(aorp);
         //console.log(this.state.sizes);
-        if ((this.state.media !== null || this.state.media === []) && this.state.acheivement !== null && this.state.acheivement ) {
+        console.log(this.state.medias);
+        if ((this.state.media !== null || this.state.media === []) && this.state.acheivement !== null) {
             if (this.state.medias === null) {
                  return (
             <View style={{ flex: 1 }}>

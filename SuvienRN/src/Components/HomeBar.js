@@ -260,9 +260,7 @@ class HomeBar extends Component {
         const currentHour = d.getHours();
         const month = d.getMonth();
         const dayFilter = messages.filter((message) => message.day.find((da) => da === weekday[numbDay]) !== undefined);
-        console.log(dayFilter);
         if (dayFilter.length === 0) {
-            console.log(currentHour);
             if (currentHour < 12) {
                 this.setState({ greeting: `${Languages[this.state.languages]['007']}, ${this.state.name}!`, section: require('../Images/morning.png'), aorp: 'am' });
             }
@@ -273,7 +271,6 @@ class HomeBar extends Component {
                 this.setState({ greeting: `${Languages[this.state.languages]['009']}, ${this.state.name}!`, section: require('../Images/evening.png'), aorp: 'pm' });
             }
             if (currentHour >= 21) {
-                console.log('Immmmm herreee!');
                 this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, section: require('../Images/night.png'), aorp: 'pm' });
             }
         }
@@ -293,7 +290,6 @@ class HomeBar extends Component {
         if (greeting !== null) {
             const last = greeting.slice(-6);
         }
-        console.log(this.state.preferences);
         //console.log(aorp);
         //console.log(this.state.sizes);
         if (this.state.sizes !== null && hour !== null && minute !== null && currentDate !== null && (greeting !== null && greeting.slice(-6) !== ' null!') && this.state.languages !== null && this.state.preferences !== null) {

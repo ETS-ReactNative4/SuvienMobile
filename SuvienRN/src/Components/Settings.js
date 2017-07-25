@@ -664,7 +664,9 @@ class Settings extends Component {
                     console.log(error);
             }
             }
-            
+            if (this.state.isFirst === false) {
+                this.onSaveLangPress();
+            }
             Actions.Home();
         }
 }
@@ -722,17 +724,16 @@ class Settings extends Component {
 
     async onSaveLangPress() {
         const transarray = ['ENG', 'FRE', 'ESP'];
+        AsyncStorage.setItem('Language', transarray[this.state.selected]);
         const presetarray = Languages[this.state.languages]['094'];
         const preferencearray = Languages[this.state.languages]['029'];
         const preset = await AsyncStorage.getItem('Preset');
         const preferences = JSON.parse(await AsyncStorage.getItem('Preferences'));
         const newpreset = (Languages[transarray[this.state.selected]]['094'])[presetarray.indexOf(preset)];
         let newpreferences = {};
-        console.log(preferences);
         for (let i = 0; i < 5; i++) {
             newpreferences[(Languages[transarray[this.state.selected]]['029'])[i]] = preferences[preferencearray[i]];
         }
-        AsyncStorage.setItem('Language', transarray[this.state.selected]);
         AsyncStorage.setItem('Preferences', JSON.stringify(newpreferences));
         AsyncStorage.setItem('Preset', newpreset);
         Actions.Home();
@@ -767,7 +768,6 @@ class Settings extends Component {
     }
 
     render() {
-        console.log(this.state.selectedItem);
         if (this.state.isFirst === false) {
             if (this.state.acheivement === 'COMP') {
                 if (this.state.mediaType === null) {
