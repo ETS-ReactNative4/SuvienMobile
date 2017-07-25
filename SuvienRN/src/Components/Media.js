@@ -734,9 +734,6 @@ class Media extends Component {
                                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
                                         {this.state.title}
                                     </Text>
-                                    <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
-                                        <Image source={this.state.imagerend} style={{ height: 40, width: 40 }} />
-                                    </TouchableWithoutFeedback>
                                     </View>
                                         <Text style={styles.textBodyStyle}>{this.state.artist} - {this.state.album}</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
@@ -744,6 +741,9 @@ class Media extends Component {
                                             <Image source={require('../Images/tag.png')} style={{ height: 30, width: 30 }} />
                                             {this.state.tag}
                                         </Text>
+                                        <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                        <Image source={this.state.imagerend} style={{ height: 40, width: 40 }} />
+                                    </TouchableWithoutFeedback>
                                     <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0, width: 400 }}>
                                         <Button onPress={this.onHomeReturn.bind(this)} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['020']}</Button>
                                     </CardSection>

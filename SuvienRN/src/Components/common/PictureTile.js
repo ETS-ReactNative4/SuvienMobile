@@ -165,7 +165,7 @@ class PictureTile extends Component {
                 }
                 }
                 >
-                    <Image source={require('./musicalbumart.png')} style={this.props.style}>
+                    <Image source={require('./musicalbumart2.png')} style={this.props.style}>
                         <View style={{ justifyContent: 'flex-end', alignItems: 'center' }}>  
                             <Text style={{ backgroundColor: 'transparent', color: 'white', marginTop: 10, fontFamily: 'Roboto-Light', fontSize: 20 }}>{this.props.data.title}</Text>
                         </View>
@@ -190,7 +190,7 @@ class PictureTile extends Component {
             }
             }
             >
-                <Image source={require('./musicalbumart.png')} style={this.props.style}>
+                <Image source={require('./musicalbumart2.png')} style={this.props.style}>
                     <View style={{ justifyContent: 'flex-end', alignItems: 'center' }}>  
                         <Text style={{ backgroundColor: 'transparent', color: 'white', marginTop: 10, fontFamily: 'Roboto-Light', fontSize: 20 }}>{this.props.data.title}</Text>
                     </View>
