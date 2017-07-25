@@ -60,6 +60,9 @@ class AdvancedSettings extends Component {
         const presetarray = Languages[this.state.languages]['094'];
         const preferencearray = Languages[this.state.languages]['029'];
         const preset = await AsyncStorage.getItem('Preset');
+        if (presetarray.find((pres) => pres === preset) !== undefined) {
+         AsyncStorage.setItem('Preset', newpreset);   
+        }
         const preferences = this.state.preferences;
         const newpreset = (Languages[transarray[this.state.selected]]['094'])[presetarray.indexOf(preset)];
         let newpreferences = {};
@@ -70,7 +73,6 @@ class AdvancedSettings extends Component {
         AsyncStorage.setItem('Messages', JSON.stringify(newmessagearray));
         AsyncStorage.setItem('Language', transarray[this.state.selected]);
         AsyncStorage.setItem('Preferences', JSON.stringify(newpreferences));
-        AsyncStorage.setItem('Preset', newpreset);
     }
 
     renderRadioButton() {
