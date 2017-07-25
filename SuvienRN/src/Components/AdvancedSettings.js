@@ -21,7 +21,42 @@ class AdvancedSettings extends Component {
 
     async onSaveLangPress() {
         const transarray = ['ENG', 'FRE', 'ESP'];
-        console.log(this.state.selected);
+        const dayarray = Languages[this.state.languages]['012'];
+        const messagearray = JSON.parse(await AsyncStorage.getItem('Messages'));
+        const newmessagearray = messagearray.map((message) => {
+            const newDay = message.day.map((days) => {
+                return (Languages[transarray[this.state.selected]]['012'])[dayarray.indexOf(days)];
+            });
+            if (message.messageType === 'Msg') {
+                return (
+                    {
+                        day: newDay,
+                        message: message.message,
+                        startHour: message.startHour,
+                        startMinute: message.startMinute,
+                        endHour: message.endHour,
+                        endMinute: message.endMinute,
+                        messageType: 'Msg',
+                        messageID: message.messageID
+                    }
+                );
+            }
+            if (message.messageType === 'VideoMsg') {
+                return (
+                    {
+                        day: newDay,
+                        message: message.message,
+                        startHour: message.startHour,
+                        startMinute: message.startMinute,
+                        endHour: message.endHour,
+                        endMinute: message.endMinute,
+                        uri: message.uri,
+                        messageType: 'VideoMsg',
+                        messageID: message.messageID
+                    }
+                );
+            }
+        });
         const presetarray = Languages[this.state.languages]['094'];
         const preferencearray = Languages[this.state.languages]['029'];
         const preset = await AsyncStorage.getItem('Preset');
@@ -32,6 +67,7 @@ class AdvancedSettings extends Component {
         for (let i = 0; i < 5; i++) {
             newpreferences[(Languages[transarray[this.state.selected]]['029'])[i]] = preferences[preferencearray[i]];
         }
+        AsyncStorage.setItem('Messages', JSON.stringify(newmessagearray));
         AsyncStorage.setItem('Language', transarray[this.state.selected]);
         AsyncStorage.setItem('Preferences', JSON.stringify(newpreferences));
         AsyncStorage.setItem('Preset', newpreset);
@@ -151,6 +187,7 @@ class AdvancedSettings extends Component {
                 }
                 }}
             />
+            <View>
             <CheckBox
             checkType="Preferences"
             label={Languages[this.state.languages]['033']}
@@ -168,6 +205,8 @@ class AdvancedSettings extends Component {
                 }
                 }}
             />
+            <Text style={{ marginLeft: 50, fontSize: 17, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['116']}</Text>
+            </View>
             </View>
             </View>
             <View style={{ alignItems: 'center' }}>
@@ -209,7 +248,7 @@ const styles = {
         marginLeft: 100,
         flex: 1,
         alignSelf: 'center',
-        fontFamily: 'Roboto-Light'
+        fontFamily: 'Roboto-Thin'
     }
 };
 

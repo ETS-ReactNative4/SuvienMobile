@@ -1,7 +1,7 @@
 //Get everything on one page
 //Dimension fix: need to input the dimensions in async
 import React, { Component } from 'react';
-import { View, AsyncStorage, Text, Dimensions, ScrollView, Modal } from 'react-native';
+import { View, AsyncStorage, Text, Dimensions, ScrollView, Modal, Platform, Image } from 'react-native';
 import Orientation from 'react-native-orientation';
 import Languages from '../Languages/Languages.json';
 import { Header, PictureTile, Button, CardSection } from './common';
@@ -11,9 +11,9 @@ import CongratsModal from './CongratsModal';
 import { Media } from './';
 
 class Home extends Component {
-    state = { dim: null, media: null, preset: null, tags: null, width: null, acheivement: null, medias: null, languages: null }
+    state = { dim: null, media: null, preset: null, tags: null, width: null, acheivement: null, medias: null, languages: null, color: null }
     async componentWillMount() {
-        this.setState({ width: parseInt(await AsyncStorage.getItem('Width')), languages: await AsyncStorage.getItem('Language') });
+        this.setState({ width: parseInt(await AsyncStorage.getItem('Width')), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour') });
         console.log(await AsyncStorage.getItem('Preferences'));
         this.doMath();
         Orientation.lockToLandscape();
@@ -292,7 +292,7 @@ class Home extends Component {
                 visible
                 onRequestClose={() => {}}
                 >
-                <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ flex: 1, backgroundColor: this.state.color, alignItems: 'center', justifyContent: 'center' }}>
                     <Media
                     obj={this.state.medias}
                     onInvisible={async (flag) => {
@@ -318,7 +318,9 @@ class Home extends Component {
     }
         if (this.state.media === null && this.state.media !== []) {
             return (
-                <Text>Loading</Text>
+                <View style={{ flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <Image source={{ uri: `loadingflag${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 250, height: 100 }} />
+                </View>
             );
         }
     } 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Image, Text, View, AsyncStorage, Dimensions } from 'react-native';
+import { TouchableOpacity, Image, Text, View, AsyncStorage, Dimensions, Platform, TouchableWithoutFeedback } from 'react-native';
 import { CardSection } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
@@ -74,8 +74,11 @@ renderList() {
         if (this.state.languages !== null) {
             return (
             <View style={{ flexDirection: 'row', paddingTop: 15, backgroundColor: '#f9f7f7', height: this.state.height, width: this.state.width }}>
-                <View style={{ flex: 1, alignItems: 'center' }}>
+                <View style={{ flex: 1 }}>
                     <View style={{ flexDirection: 'row' }}>
+                        <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
+                        <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, marginRight: 10, marginLeft: 10 }} />
+                        </TouchableWithoutFeedback>
                         <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light', marginLeft: 10, marginTop: 10, marginBottom: 10 }}>{Languages[this.state.languages]['048']}</Text>
                     </View>
                     <View style={{ backgroundColor: 'white', borderRadius: 20, marginLeft: 5, width: (this.state.width - 70) }}>

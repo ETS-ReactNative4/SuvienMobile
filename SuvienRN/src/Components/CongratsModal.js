@@ -5,10 +5,10 @@ import { Actions } from 'react-native-router-flux';
 import { CardSection, Button } from './common';
 
 class CongratsModal extends Component {
-    state = { modalVisible: false, languages: null }
+    state = { modalVisible: false, languages: null, color: null }
     async componentWillMount() {
         if ((await AsyncStorage.getItem('Acheivement')) === 'COM') {
-            this.setState({ modalVisible: true, languages: await AsyncStorage.getItem('Language') });
+            this.setState({ modalVisible: true, languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour') });
         }
     }
     render() {
@@ -32,7 +32,7 @@ class CongratsModal extends Component {
                 visible={this.state.modalVisible}
                 onRequestClose={() => {}}
                 >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
                             <Image source={require('../Images/trophy.png')} style={{ height: 300, width: 300 }} />
                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['082']}</Text>
@@ -42,6 +42,7 @@ class CongratsModal extends Component {
                                 onPress={() => {
                                     this.setState({ modalVisible: false });
                                     AsyncStorage.setItem('Acheivement', 'COMP');
+                                    AsyncStorage.setItem('Preset', Languages[this.state.languages]['094'][0]);
                                     Actions.Settings();
                                 }}
                                 >

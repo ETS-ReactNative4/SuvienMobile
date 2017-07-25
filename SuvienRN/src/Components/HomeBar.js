@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { Button } from './common';
 
 class HomeBar extends Component {
-    state = { greeting: null, name: null, languages: null, section: null, width: null, aorp: null, hour: null, minute: null, currentDate: null, preferences: null, sizes: null, sizes2: null, dayFilter: null, messages: null, icon: null, messageType: null, color: null }
+    state = { greeting: null, name: null, languages: null, section: null, width: null, aorp: null, hour: null, minute: null, currentDate: null, preferences: null, sizes: null, sizes2: null, dayFilter: null, messages: null, icon: null, messageType: null, color: null, admode: 0 }
     async componentWillMount() {
         this.setState({ width: Dimensions.get('window').width, preferences: JSON.parse(await AsyncStorage.getItem('Preferences')), languages: await AsyncStorage.getItem('Language') });
         this.getInfo();
@@ -20,11 +20,11 @@ class HomeBar extends Component {
     flashTitle() {
         setInterval(() => {
             if (this.state.icon === true) {
-                if (this.state.color === null || this.state.color === 'black') {
+                if (this.state.color === null) {
                     this.setState({ color: '#86a6e0' });
                 }
                 if (this.state.color === '#86a6e0') {
-                    setTimeout(() => this.setState({ color: 'black' }), 1000);
+                    setTimeout(() => this.setState({ color: null }), 1000);
                 }
             if (this.state.icon === false || this.state.icon === null) {
                 this.setState({ color: null });
@@ -37,7 +37,8 @@ class HomeBar extends Component {
             const dd = new Date();
             this.setState({ hour: this.parseHour(dd.getHours()), minute: this.addZero(dd.getMinutes()) });
             if (this.state.dayFilter !== null && this.state.dayFilter.length !== 0) {
-                const finalmessage = this.state.dayFilter.filter((day) => (day.startHour <= dd.getHours() && day.startMinute <= dd.getMinutes() && day.endHour >= dd.getHours() && day.endMinute > dd.getMinutes())); 
+                const finalmessages = this.state.dayFilter.filter((day) => (day.startHour <= dd.getHours() && day.startMinute <= dd.getMinutes() && day.endHour >= dd.getHours() && day.endMinute > dd.getMinutes())); 
+                const finalmessage = finalmessages.reverse();
                 if ((finalmessage !== undefined && finalmessage.length !== 0) && dd.getHours() < 12) { //this works on the time and after
                     if (dd.getMinutes() === finalmessage[0].startMinute && dd.getSeconds() <= 6) {
                         this.setState({ greeting: finalmessage[0].message, aorp: 'am', section: require('../Images/morning.png'), icon: true, messageType: finalmessage[0].messageType });
@@ -78,7 +79,7 @@ class HomeBar extends Component {
             if (dd.getHours() >= 17 && dd.getHours() < 21) {
             this.setState({ greeting: `${Languages[this.state.languages]['009']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/evening.png'), messageType: null });
             }
-            if (dd.getHours() >= 22) {
+            if (dd.getHours() >= 21) {
             this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/night.png'), messageType: null });
         }
                 }
@@ -94,7 +95,7 @@ class HomeBar extends Component {
             if (dd.getHours() >= 17 && dd.getHours() < 21) {
             this.setState({ greeting: `${Languages[this.state.languages]['009']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/evening.png'), icon: false });
             }
-            if (dd.getHours() >= 22) {
+            if (dd.getHours() >= 21) {
             this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, aorp: 'pm', section: require('../Images/night.png'), icon: false });
         }
             }
@@ -102,7 +103,7 @@ class HomeBar extends Component {
     }
 
     parseHour(i) {
-        const times = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '8', '9', '10', '11'];
+        const times = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
         return times[i];
     }
     addZero(p) {
@@ -114,19 +115,62 @@ class HomeBar extends Component {
 
     renderHeaderClock() {
         const { width, sizes, preferences, languages } = this.state;
-        const finalsize = Math.trunc((width - sizes) / 2);
-        if (preferences[Languages[languages]['030']] === false) {
-            return (
-                <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }} />
-            );
+        
+        if (this.state.preferences[(Languages[this.state.languages]['029'])[4]] === true) {
+            const finalsize = Math.trunc((width - sizes) / 2);
+            if (preferences[Languages[languages]['030']] === false) {
+                return (
+                    <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
+                    <TouchableWithoutFeedback
+                        onPress={() => {
+                        if (this.state.admode < 3) {
+                            const myadmin = this.state.admode + 1;
+                            this.setState({ admode: myadmin });
+                        } else {
+                            Actions.Settings();
+                        }
+                        }}
+                    >
+                        <Image source={this.state.section} style={{ height: 80, width: 80 }} />
+                    </TouchableWithoutFeedback>
+                    </View>
+                );
+            }
+            if (preferences[Languages[languages]['030']] === true) {
+                return (
+                    <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
+                        <TouchableWithoutFeedback
+                        onPress={() => {
+                        if (this.state.admode < 3) {
+                            const myadmin = this.state.admode + 1;
+                            this.setState({ admode: myadmin });
+                        } else {
+                            Actions.Settings();
+                        }
+                        }}
+                        >
+                        <Image source={this.state.section} style={{ height: 80, width: 80 }} />
+                        </TouchableWithoutFeedback>
+                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
+                    </View>
+                );
+            }
         }
-        if (preferences[Languages[languages]['030']] === true) {
-            return (
-                <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
-                    <Image source={this.state.section} style={{ height: 80, width: 80 }} />
-                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
-                </View>
-            );
+        if (this.state.preferences[(Languages[this.state.languages]['029'])[4]] === false) {
+            const finalsize = Math.trunc((width - sizes) / 2);
+            if (preferences[Languages[languages]['030']] === false) {
+                return (
+                    <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }} />
+                );
+            }
+            if (preferences[Languages[languages]['030']] === true) {
+                return (
+                    <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
+                        <Image source={this.state.section} style={{ height: 80, width: 80 }} />
+                        <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginLeft: 10 }}>{this.state.hour}:{this.state.minute} {this.state.aorp}</Text>
+                    </View>
+                );
+            }
         }
         /*
         const proparray = ['Display Clock', 'Display Greeting', 'Display Date'];
@@ -155,7 +199,8 @@ class HomeBar extends Component {
     renderHeaderGreeting() {
         const { greeting, currentDate, preferences, languages } = this.state;
         const dd = new Date();
-        const finalmessage = this.state.dayFilter.filter((day) => (day.startHour <= dd.getHours() && day.startMinute <= dd.getMinutes() && day.endHour >= dd.getHours() && day.endMinute > dd.getMinutes()));
+        const finalmessages = this.state.dayFilter.filter((day) => (day.startHour <= dd.getHours() && day.startMinute <= dd.getMinutes() && day.endHour >= dd.getHours() && day.endMinute > dd.getMinutes()));
+        const finalmessage = finalmessages.reverse();
         const authArray = [];
         const proparray = [Languages[languages]['031'], (Languages[languages]['029'])[0]];
         const truearray = [
@@ -215,19 +260,24 @@ class HomeBar extends Component {
         const currentHour = d.getHours();
         const month = d.getMonth();
         const dayFilter = messages.filter((message) => message.day.find((da) => da === weekday[numbDay]) !== undefined);
+        console.log(dayFilter);
+        if (dayFilter.length === 0) {
+            console.log(currentHour);
+            if (currentHour < 12) {
+                this.setState({ greeting: `${Languages[this.state.languages]['007']}, ${this.state.name}!`, section: require('../Images/morning.png'), aorp: 'am' });
+            }
+            if (currentHour >= 12 && currentHour < 17) {
+                this.setState({ greeting: `${Languages[this.state.languages]['008']}, ${this.state.name}!`, section: require('../Images/afternoon.png'), aorp: 'pm' });
+            }
+            if (currentHour >= 18 && currentHour < 21) {
+                this.setState({ greeting: `${Languages[this.state.languages]['009']}, ${this.state.name}!`, section: require('../Images/evening.png'), aorp: 'pm' });
+            }
+            if (currentHour >= 21) {
+                console.log('Immmmm herreee!');
+                this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, section: require('../Images/night.png'), aorp: 'pm' });
+            }
+        }
         this.setState({ name: await AsyncStorage.getItem('name'), messages, dayFilter });
-        if (currentHour < 12) {
-            this.setState({ greeting: `${Languages[this.state.languages]['007']}, ${this.state.name}!`, section: require('../Images/morning.png') });
-        }
-        if (currentHour >= 12 && currentHour < 17) {
-            this.setState({ greeting: `${Languages[this.state.languages]['008']}, ${this.state.name}!`, section: require('../Images/afternoon.png') });
-        }
-        if (currentHour >= 18 && currentHour < 21) {
-            this.setState({ greeting: `${Languages[this.state.languages]['009']}, ${this.state.name}!`, section: require('../Images/evening.png') });
-        }
-        if (currentHour >= 22) {
-            this.setState({ greeting: `${Languages[this.state.languages]['010']}, ${this.state.name}!`, section: require('../Images/night.png') });
-        }
         if (this.state.languages === 'FRE') {
             this.setState({ currentDate: `${weekday[numbDay]}, le ${numbDate} ${months[month]} ${numbYear}` });
         }
@@ -243,9 +293,55 @@ class HomeBar extends Component {
         if (greeting !== null) {
             const last = greeting.slice(-6);
         }
+        console.log(this.state.preferences);
         //console.log(aorp);
         //console.log(this.state.sizes);
-        if (this.state.sizes !== null && hour !== null && minute !== null && currentDate !== null && (greeting !== null && greeting.slice(-6) !== ' null!') && this.state.languages !== null) {
+        if (this.state.sizes !== null && hour !== null && minute !== null && currentDate !== null && (greeting !== null && greeting.slice(-6) !== ' null!') && this.state.languages !== null && this.state.preferences !== null) {
+            if (this.state.preferences[(Languages[this.state.languages]['029'])[4]] === true) {
+                const finalsize = Math.trunc((width - sizes) / 2);
+                if (this.state.messageType === null) {
+                    return (
+            <View style={{ flexDirection: 'row' }}>
+                <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
+                    {this.renderHeaderClock()}
+                </View>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
+                    {this.renderHeaderGreeting()}
+                </View>
+                <View style={{ justifyContent: 'flex-end', alignItems: 'center', width: finalsize, flexDirection: 'row' }} />
+            </View>
+        ); 
+                }
+                if (this.state.messageType === 'Msg') {
+                    return (
+            <View style={{ flexDirection: 'row' }}>
+                <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
+                    {this.renderHeaderClock()}
+                </View>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
+                    {this.renderHeaderGreeting()}
+                </View>
+                <View style={{ justifyContent: 'flex-end', alignItems: 'center', width: finalsize, flexDirection: 'row' }} />
+            </View>
+        );
+                }
+                if (this.state.messageType === 'VideoMsg') {
+                    const dd = new Date();
+                    const finalmessage = this.state.dayFilter.filter((day) => (day.startHour <= dd.getHours() && day.startMinute <= dd.getMinutes() && day.endHour >= dd.getHours() && day.endMinute > dd.getMinutes()));
+                    return (
+            <View style={{ flexDirection: 'row' }}>
+                <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
+                    {this.renderHeaderClock()}
+                </View>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
+                    {this.renderHeaderGreeting()}
+                </View>
+                <View style={{ justifyContent: 'flex-end', alignItems: 'center', width: finalsize, flexDirection: 'row' }} />
+            </View>
+        );
+                }
+            }
+            if (this.state.preferences[(Languages[this.state.languages]['029'])[4]] === false) {
                 const finalsize = Math.trunc((width - sizes) / 2);
                 if (this.state.messageType === null) {
                     return (
@@ -276,7 +372,7 @@ class HomeBar extends Component {
                 <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
                     {this.renderHeaderGreeting()}
                 </View>
-                <View style={{ alignItems: 'flex-end', width: finalsize }}>
+                <View style={{ justifyContent: 'flex-end', alignItems: 'center', width: finalsize, flexDirection: 'row' }}>
                     <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
                         <Image source={require('../Images/mainmenu.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
                     </TouchableWithoutFeedback>
@@ -298,7 +394,7 @@ class HomeBar extends Component {
                 <View style={{ justifyContent: 'center', alignItems: 'center' }} onLayout={(event) => { this.setState({ sizes: event.nativeEvent.layout.width, sizes2: event.nativeEvent.layout.height }); }}>
                     {this.renderHeaderGreeting()}
                 </View>
-                <View style={{ alignItems: 'flex-end', width: finalsize }}>
+                <View style={{ justifyContent: 'flex-end', alignItems: 'center', width: finalsize, flexDirection: 'row' }}>
                     <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
                         <Image source={require('../Images/mainmenu.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
                     </TouchableWithoutFeedback>
@@ -310,11 +406,12 @@ class HomeBar extends Component {
         );
                 }
             }
+            }
     return (
         <View>
             <View>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{ marginTop: 30 }}>Loading</Text>
+                    <Text style={{ marginTop: 60 }}>...</Text>
                 </View>
             </View>
             <View style={{ opacity: 0 }}>

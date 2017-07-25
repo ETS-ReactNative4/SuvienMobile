@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, AsyncStorage, Dimensions, Platform, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
+import { View, Text, Picker, AsyncStorage, Dimensions, Platform, TouchableWithoutFeedback, Image, ScrollView, Modal } from 'react-native';
 import { CardSection, Button, Input, Header, CheckBox } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
 
 class AddMessage extends Component {
-    state = { secheight: null, secwidth: null, message: null, day: '[]', startHour: 0, startMinute: 0, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
+    state = { secheight: null, secwidth: null, message: null, color: null, day: '[]', startHour: 0, modalVisible: false, delete: null, invalid: false, startMinute: 0, isRecording: false, isNull: false, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
     async componentWillMount() {
         if (Platform.OS === 'ios') {
             this.setState({ secheight: 200, secwidth: 100 });
@@ -18,165 +18,179 @@ class AddMessage extends Component {
             heightc: Dimensions.get('window').height,
             widthc: Dimensions.get('window').width,
             messages: JSON.parse(await AsyncStorage.getItem('Messages')),
-            languages: await AsyncStorage.getItem('Language')
+            languages: await AsyncStorage.getItem('Language'),
+            color: await AsyncStorage.getItem('BGColour')
         });
     }
 
     async onSaveMessagePress() {
-        const dd = new Date();
-        const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
-        if (this.state.currentMessage === null) {
-            const { message, day, startHour, startMinute, endHour, endMinute, messageType, uri, title } = this.state;
-        if (messageType === 'Msg') {
-            messages.push({
-            day: JSON.parse(day),
-            message,
-            startHour,
-            startMinute,
-            endHour,
-            endMinute,
-            messageType,
-            messageID: dd.getTime()
-        }); 
-        }
-        if (messageType === 'VideoMsg') {
-            messages.push({
-            day: JSON.parse(day),
-            message: title,
-            startHour,
-            startMinute,
-            endHour,
-            endMinute,
-            uri,
-            messageType,
-            messageID: dd.getTime()
-        });
-        }
-       AsyncStorage.setItem('Messages', JSON.stringify(messages));
-       console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
-       Actions.Home();
-        } 
-        if (this.state.currentMessage !== null) {
-            const selected = JSON.parse(this.state.currentMessage);
-            const searc = messages.findIndex((element, index, array) => {
-                if (element.messageID === selected.messageID) {
-                    return true;
-                } else {
-                    return false;
-                }});
-            if (selected.messageType === 'Msg') {
-                const { day, message, startHour, startMinute, endHour, endMinute, messageID } = selected;
-            messages[searc] = {
-                day,
+            if (((((this.state.message === null || this.state.message === '') && this.state.messageType === 'Msg') || ((this.state.title === null || this.state.message === '') && this.state.messageType === 'VideoMsg') || this.state.day === '[]') && this.state.currentMessage === null) || (this.state.currentMessage !== null && (JSON.parse(this.state.currentMessage).message === null || JSON.parse(this.state.currentMessage).message === '' || JSON.parse(this.state.currentMessage).day.length === 0))) {
+                this.setState({ isNull: true });
+            } else {
+                const dd = new Date();
+                const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
+                if (this.state.currentMessage === null) {
+                    const { message, day, startHour, startMinute, endHour, endMinute, messageType, uri, title } = this.state;
+                    if ((this.state.startHour > this.state.endHour) || (this.state.startHour === this.state.endHour && this.state.startMinute >= this.state.endMinute)) {
+                        this.setState({ invalid: true });
+                    } else {
+                        if (messageType === 'Msg') {
+                            messages.push({
+                            day: JSON.parse(day),
+                            message,
+                            startHour,
+                            startMinute,
+                            endHour,
+                            endMinute,
+                            messageType,
+                            messageID: dd.getTime()
+                        }); 
+                        }
+                        if (messageType === 'VideoMsg') {
+                            messages.push({
+                            day: JSON.parse(day),
+                            message: title,
+                            startHour,
+                            startMinute,
+                            endHour,
+                            endMinute,
+                            uri,
+                            messageType,
+                            messageID: dd.getTime()
+                        });
+                        }
+                       AsyncStorage.setItem('Messages', JSON.stringify(messages));
+                       console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+                       Actions.Home();
+                    }
+                } 
+                if (this.state.currentMessage !== null) {
+                    const selected = JSON.parse(this.state.currentMessage);
+                    if ((selected.startHour > selected.endHour) || (selected.startHour === selected.endHour && selected.startMinute >= selected.endMinute)) {
+                        this.setState({ invalid: true });
+                    } else {
+                        const searc = messages.findIndex((element, index, array) => {
+                            if (element.messageID === selected.messageID) {
+                                return true;
+                            } else {
+                                return false;
+                            }});
+                        if (selected.messageType === 'Msg') {
+                            const { day, message, startHour, startMinute, endHour, endMinute, messageID } = selected;
+                        messages[searc] = {
+                            day,
+                            message,
+                            startHour,
+                            startMinute,
+                            endHour,
+                            endMinute,
+                            messageType: 'Msg',
+                            messageID
+                        };
+                        AsyncStorage.setItem('Messages', JSON.stringify(messages));
+                        console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+                        Actions.Home();
+                    }
+                        if (selected.messageType === 'VideoMsg') {
+                            const { day, message, uri, startHour, startMinute, endHour, endMinute, messageID } = selected;
+                        messages[searc] = {
+                            day,
+                            message,
+                            startHour,
+                            startMinute,
+                            endHour,
+                            endMinute,
+                            uri,
+                            messageType: 'VideoMsg',
+                            messageID
+                        };
+                        AsyncStorage.setItem('Messages', JSON.stringify(messages));
+                        console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+                        Actions.Home();
+                        }
+                    }
+                }
+            }
+    }
+    
+        async createNew() {
+            const dd = new Date();
+            const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
+            if (this.state.currentMessage === null) {
+                const { message, day, startHour, startMinute, endHour, endMinute, messageType, uri, title } = this.state;
+            if (messageType === 'Msg') {
+                messages.push({
+                day: JSON.parse(day),
                 message,
                 startHour,
                 startMinute,
                 endHour,
                 endMinute,
-                messageType: 'Msg',
-                messageID
-            };
-            AsyncStorage.setItem('Messages', JSON.stringify(messages));
-            console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
-            Actions.Home();
-        }
-            if (selected.messageType === 'VideoMsg') {
-                const { day, message, uri, startHour, startMinute, endHour, endMinute, messageID } = selected;
-            messages[searc] = {
-                day,
-                message,
+                messageType,
+                messageID: dd.getTime()
+            }); 
+            }
+            if (messageType === 'VideoMsg') {
+                messages.push({
+                day: JSON.parse(day),
+                message: title,
                 startHour,
                 startMinute,
                 endHour,
                 endMinute,
                 uri,
-                messageType: 'VideoMsg',
-                messageID
-            };
-            AsyncStorage.setItem('Messages', JSON.stringify(messages));
-            console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
-            Actions.Home();
+                messageType,
+                messageID: dd.getTime()
+            });
+            }
+           AsyncStorage.setItem('Messages', JSON.stringify(messages));
+           console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+           this.setState({ message: null, day: '[]', startHour: 0, startMinute: 0, endHour: 0, endMinute: 0, title: null, messages: JSON.parse(await AsyncStorage.getItem('Messages')), messageType: null, isLaunchCam: false, deletedMessage: null, uri: null, cameraType: 'back', currentMessage: null });
+            } 
+            if (this.state.currentMessage !== null) {
+                const selected = JSON.parse(this.state.currentMessage);
+                const searc = messages.findIndex((element, index, array) => {
+                    if (element.messageID === selected.messageID) {
+                        return true;
+                    } else {
+                        return false;
+                    }});
+                if (selected.messageType === 'Msg') {
+                    const { day, message, startHour, startMinute, endHour, endMinute, messageID } = selected;
+                messages[searc] = {
+                    day,
+                    message,
+                    startHour,
+                    startMinute,
+                    endHour,
+                    endMinute,
+                    messageType: 'Msg',
+                    messageID
+                };
+                AsyncStorage.setItem('Messages', JSON.stringify(messages));
+                console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+                Actions.Home();
+            }
+                if (selected.messageType === 'VideoMsg') {
+                    const { day, message, uri, startHour, startMinute, endHour, endMinute, messageID } = selected;
+                messages[searc] = {
+                    day,
+                    message,
+                    startHour,
+                    startMinute,
+                    endHour,
+                    endMinute,
+                    uri,
+                    messageType: 'VideoMsg',
+                    messageID
+                };
+                AsyncStorage.setItem('Messages', JSON.stringify(messages));
+                console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+                Actions.Home();
+                }
             }
         }
-    }
 
-    async createNew() {
-        const dd = new Date();
-        const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
-        if (this.state.currentMessage === null) {
-            const { message, day, startHour, startMinute, endHour, endMinute, messageType, uri, title } = this.state;
-        if (messageType === 'Msg') {
-            messages.push({
-            day: JSON.parse(day),
-            message,
-            startHour,
-            startMinute,
-            endHour,
-            endMinute,
-            messageType,
-            messageID: dd.getTime()
-        }); 
-        }
-        if (messageType === 'VideoMsg') {
-            messages.push({
-            day: JSON.parse(day),
-            message: title,
-            startHour,
-            startMinute,
-            endHour,
-            endMinute,
-            uri,
-            messageType,
-            messageID: dd.getTime()
-        });
-        }
-       AsyncStorage.setItem('Messages', JSON.stringify(messages));
-       console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
-       this.setState({ message: null, day: '[]', startHour: 0, startMinute: 0, endHour: 0, endMinute: 0, title: null, messages: JSON.parse(await AsyncStorage.getItem('Messages')), messageType: null, isLaunchCam: false, deletedMessage: null, uri: null, cameraType: 'back', currentMessage: null });
-        } 
-        if (this.state.currentMessage !== null) {
-            const selected = JSON.parse(this.state.currentMessage);
-            const searc = messages.findIndex((element, index, array) => {
-                if (element.messageID === selected.messageID) {
-                    return true;
-                } else {
-                    return false;
-                }});
-            if (selected.messageType === 'Msg') {
-                const { day, message, startHour, startMinute, endHour, endMinute, messageID } = selected;
-            messages[searc] = {
-                day,
-                message,
-                startHour,
-                startMinute,
-                endHour,
-                endMinute,
-                messageType: 'Msg',
-                messageID
-            };
-            AsyncStorage.setItem('Messages', JSON.stringify(messages));
-            console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
-            Actions.Home();
-        }
-            if (selected.messageType === 'VideoMsg') {
-                const { day, message, uri, startHour, startMinute, endHour, endMinute, messageID } = selected;
-            messages[searc] = {
-                day,
-                message,
-                startHour,
-                startMinute,
-                endHour,
-                endMinute,
-                uri,
-                messageType: 'VideoMsg',
-                messageID
-            };
-            AsyncStorage.setItem('Messages', JSON.stringify(messages));
-            console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
-            Actions.Home();
-            }
-        }
-    }
     addZero(p) {
         if (p < 10) {
             p = `0${p}`;
@@ -193,24 +207,16 @@ class AddMessage extends Component {
                         <View style={{ flexDirection: 'row' }}>
                         <Text style={{ fontFamily: 'Roboto-Light', fontSize: 25, alignSelf: 'center' }}>{message.message} </Text>
                         <View style={{ flexDirection: 'row' }}>
-                            <TouchableWithoutFeedback onPress={() => {
+                            <TouchableWithoutFeedback 
+                            onPress={() => {
                             this.setState({ messageType: message.messageType, currentMessage: JSON.stringify(message) });
                             }}
                             >
                             <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20, marginRight: 10 }} />
                             </TouchableWithoutFeedback>
-                            <TouchableWithoutFeedback onPress={() => {
-                            const searc = currentmessages.findIndex((element, index, array) => {
-                                if (element.messageID === message.messageID) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }});
-                                currentmessages.splice(searc, 1);
-                                AsyncStorage.setItem('Messages', JSON.stringify(currentmessages));
-                                this.setState({ messages: currentmessages });
-                        }
-                        }
+                            <TouchableWithoutFeedback 
+                            onPress={() => this.setState({ modalVisible: true, delete: message })
+                                }
                         >
                                 <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center' }}/>
                             </TouchableWithoutFeedback>
@@ -238,12 +244,12 @@ class AddMessage extends Component {
 
     startRecording() {
     console.log('start rec');
-
+    this.setState({ isRecording: true });
     this.camera.capture()
       .then((data) => {
         console.log('capturing...');
         console.log(data);
-        this.setState({ isLaunchCam: false, uri: data.path });
+        this.setState({ isLaunchCam: false, uri: data.path, isRecording: false });
       });
   }
 
@@ -302,6 +308,45 @@ class AddMessage extends Component {
             if (this.state.messageType === null) {
             return (
                 <View style={{ flex: 1 }}>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.modalVisible}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `garbage${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 200 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', marginBottom: 20 }}>{Languages[this.state.languages]['114']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                            const messagess = this.state.messages;
+                            const searc = this.state.messages.findIndex((element, index, array) => {
+                                if (element.messageID === this.state.delete.messageID) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }});
+                                messagess.splice(searc, 1);
+                                this.setState({ messages: messagess, modalVisible: false, delete: null });
+                                AsyncStorage.setItem('Messages', JSON.stringify(messagess));
+                                }
+                                }
+                        >
+                    {Languages[this.state.languages]['096']}
+                        </Button>
+                    </CardSection>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => this.setState({ modalVisible: false, delete: null })}
+                        >
+                    {Languages[this.state.languages]['097']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
@@ -309,7 +354,10 @@ class AddMessage extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
+                        <Image source={require('../Images/settings.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                        </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
                     <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
                     </TouchableWithoutFeedback>
@@ -354,11 +402,57 @@ class AddMessage extends Component {
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <TouchableWithoutFeedback onPress={() => this.setState({ messageType: null })}>
+                    <Image source={require('../Images/backbuttondark.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
+            <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `blankfield${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 400 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.invalid}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `invalidtime${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 200 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['120']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['121']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ invalid: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
                 <CardSection style={{ marginLeft: 0 }}>
                     <Input
                         placeholder={Languages[this.state.languages]['089']}
@@ -366,6 +460,7 @@ class AddMessage extends Component {
                         value={this.state.message}
                         onChangeText={(message) => this.setState({ message })}
                         labelstyle={{ marginLeft: 40 }}
+                        maxLength={25}
                     />
                 </CardSection>
                 <CardSection style={{ flexDirection: 'column', height: 70 }}>
@@ -539,12 +634,10 @@ class AddMessage extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
                             {Languages[this.state.languages]['069']}
@@ -554,8 +647,8 @@ class AddMessage extends Component {
         );
             }
             if (this.state.currentMessage !== null) {
+                console.log(this.state.currentMessage);
                 const selected = JSON.parse(this.state.currentMessage);
-                console.log('im not null!');
                     return (
             <View>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
@@ -566,16 +659,63 @@ class AddMessage extends Component {
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <TouchableWithoutFeedback onPress={() => this.setState({ messageType: null, currentMessage: null })}>
+                    <Image source={require('../Images/backbuttondark.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
+            <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `blankfield${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 400 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.invalid}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `invalidtime${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 200 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['120']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['121']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ invalid: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
                 <CardSection style={{ marginLeft: 0 }}>
                     <Input
                         placeholder={Languages[this.state.languages]['089']}
                         label={Languages[this.state.languages]['039']}
                         value={selected.message}
+                        maxLength={25}
                         onChangeText={(message) => {
                             selected.message = message;
                             this.setState({ currentMessage: JSON.stringify(selected) });
@@ -780,12 +920,10 @@ class AddMessage extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
                             {Languages[this.state.languages]['069']}
@@ -799,7 +937,7 @@ class AddMessage extends Component {
             if (this.state.currentMessage !== null) {
                 const selected = JSON.parse(this.state.currentMessage);
                 return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
@@ -813,22 +951,70 @@ class AddMessage extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
+            <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `blankfield${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 400 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.invalid}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `invalidtime${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 200 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['120']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['121']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ invalid: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
+            <View style={{ flex: 1 }}>
             <ScrollView>
                 <View style={{ flex: 1 }}>
-                <CardSection style={{ marginLeft: 0, alignItems: 'center', justifyContent: 'center' }}>
-                    <Image source={{ uri: selected.uri }} style={{ height: 300, width: 400 }} />
-                </CardSection>
-                <CardSection style={{ marginLeft: 0 }}>
+                    <CardSection style={{ marginLeft: 0 }}>
                     <Input
                         placeholder={Languages[this.state.languages]['093']}
                         label={Languages[this.state.languages]['058']}
                         value={selected.message}
+                        maxLength={39}
                         onChangeText={(message) => {
                             selected.message = message;
                             this.setState({ currentMessage: JSON.stringify(selected) });
                         }}
                         labelstyle={{ marginLeft: 40 }}
                     />
+                </CardSection>
+                <CardSection style={{ marginLeft: 0, alignItems: 'center', justifyContent: 'center' }}>
+                    <Image source={{ uri: selected.uri }} style={{ height: 300, width: 400 }} />
                 </CardSection>
                 <CardSection style={{ flexDirection: 'column', height: 70 }}>
                     <Text style={{ fontSize: 18, paddingLeft: 20, marginBottom: 5 }}>{Languages[this.state.languages]['090']}</Text>
@@ -1027,12 +1213,10 @@ class AddMessage extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
                             {Languages[this.state.languages]['069']}
@@ -1040,6 +1224,7 @@ class AddMessage extends Component {
                     </View>
                     </View>
                     </ScrollView>
+                    </View>
             </View>
         );
             }
@@ -1080,7 +1265,7 @@ class AddMessage extends Component {
             }
             if (this.state.uri !== null) {
                 return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
@@ -1094,19 +1279,66 @@ class AddMessage extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
+            <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNull}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `blankfield${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 400 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNull: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.invalid}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={{ uri: `invalidtime${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 200 }} />
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['120']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['121']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ invalid: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
             <ScrollView>
                 <View style={{ flex: 1 }}>
-                <CardSection style={{ marginLeft: 0, alignItems: 'center', justifyContent: 'center' }}>
-                    <Image source={{ uri: this.state.uri }} style={{ height: 300, width: 400 }} />
-                </CardSection>
-                <CardSection style={{ marginLeft: 0 }}>
+                    <CardSection style={{ marginLeft: 0 }}>
                     <Input
                         placeholder={Languages[this.state.languages]['093']}
                         label={Languages[this.state.languages]['058']}
                         value={this.state.title}
+                        maxLength={39}
                         onChangeText={(title) => this.setState({ title })}
                         labelstyle={{ marginLeft: 40 }}
                     />
+                </CardSection>
+                <CardSection style={{ marginLeft: 0, alignItems: 'center', justifyContent: 'center' }}>
+                    <Image source={{ uri: this.state.uri }} style={{ height: 300, width: 400 }} />
                 </CardSection>
                 <CardSection style={{ flexDirection: 'column', height: 70 }}>
                     <Text style={{ fontSize: 18, paddingLeft: 20, marginBottom: 5 }}>{Languages[this.state.languages]['090']}</Text>
@@ -1279,12 +1511,10 @@ class AddMessage extends Component {
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
-                            {Languages[this.state.languages]['067']}
-                            <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}
-                            <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                            {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
                             {Languages[this.state.languages]['069']}
@@ -1299,7 +1529,44 @@ class AddMessage extends Component {
             }
     }
          if (this.state.isLaunchCam === true) {
-        return (
+             if (this.state.isRecording === false) {
+                return (
+                    <View style={styles.container}>
+                        <Camera
+                        ref={(cam) => {
+                        this.camera = cam;
+                        }}
+                        style={styles.preview}
+                        playSoundOnCapture={false}
+                        aspect={Camera.constants.Aspect.fill}
+                        captureMode={Camera.constants.CaptureMode.video}
+                        captureAudio={true}
+                        onFocusChanged={() => {}}
+                        onZoomChanged={() => {}}
+                        type={this.state.cameraType}
+                        >
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
+                                <TouchableWithoutFeedback onPress={this.startRecording.bind(this)}>
+                                    <Image source={require('../Images/startrecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={this.stopRecording.bind(this)}>
+                                    <Image source={require('../Images/stoprecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
+                                    <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={() => this.setState({ isLaunchCam: false, isRecording: false, uri: null })}>
+                                <Image source={{ uri: `backbutton${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                            </TouchableWithoutFeedback>
+                            </View>
+                    </View>
+            </Camera>
+          </View>
+        );    
+             }
+        if (this.state.isRecording === true) {
+            return (
                 <View style={styles.container}>
                     <Camera
                     ref={(cam) => {
@@ -1309,11 +1576,13 @@ class AddMessage extends Component {
                     playSoundOnCapture={false}
                     aspect={Camera.constants.Aspect.fill}
                     captureMode={Camera.constants.CaptureMode.video}
+                    captureAudio={true}
                     onFocusChanged={() => {}}
                     onZoomChanged={() => {}}
                     type={this.state.cameraType}
                     >
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', backgroundColor: 'transparent', width: this.state.widthc, height: this.state.heightc }}>
+                    <Image source={{ uri: `${Languages[this.state.languages]['117']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ alignSelf: 'flex-start', height: 100, width: 200, marginRight: (this.state.widthc - 350) }} />
                         <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.8)', width: 150, height: this.state.heightc }}>
                             <TouchableWithoutFeedback onPress={this.startRecording.bind(this)}>
                                 <Image source={require('../Images/startrecording.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
@@ -1324,14 +1593,15 @@ class AddMessage extends Component {
                             <TouchableWithoutFeedback onPress={this.onSwitchCameraPress.bind(this)}>
                                 <Image source={require('../Images/switchcamera.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
                             </TouchableWithoutFeedback>
-                            <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                                <Image source={require('../Images/home.png')} style={{ height: 100, width: 100, marginBottom: 25 }} />
-                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback onPress={() => this.setState({ isLaunchCam: false, isRecording: false, uri: null })}>
+                            <Image source={{ uri: `backbutton${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 100, width: 100, marginBottom: 25 }} />
+                        </TouchableWithoutFeedback>
                         </View>
                 </View>
         </Camera>
       </View>
     );
+        }
 }
     }
         }

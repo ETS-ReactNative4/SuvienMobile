@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, Image, AsyncStorage, TouchableOpacity, Dimensions, Modal } from 'react-native';
+import { View, Text, Image, AsyncStorage, TouchableOpacity, Dimensions, Modal, Platform, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Languages from '../Languages/Languages.json';
 import { CardSection, Button, Header, GameTile } from './common';
 
 class MemoryGame extends Component {
-    state = { tiles: null, card1: null, overrideKey: null, card2: null, languages: null, cards: null, showCaption: false, width: null, height: null, seconds: 0, minutes: 0 }
+    state = { tiles: null, card1: null, overrideKey: null, card2: null, languages: null, cards: null, showCaption: false, width: null, height: null, seconds: 0, minutes: 0, color: null, complete: false }
     componentWillMount() {
         this.createNewGame();
     }
@@ -22,7 +22,7 @@ class MemoryGame extends Component {
         const newNumbArray = this.generateNumArray(8);
         const newRandArray = this.shuffle(newNumbArray);
         const allTilesShuffle = this.shuffleTiles(allTiles, newRandArray);
-        this.setState({ tiles: [...allTilesShuffle], width: parseInt(await AsyncStorage.getItem('Width')), height: parseInt(await AsyncStorage.getItem('Height')), showCaption: false, card1: null, card2: null, overrideKey: null, cards: null, languages: await AsyncStorage.getItem('Language') });
+        this.setState({ tiles: [...allTilesShuffle], color: await AsyncStorage.getItem('BGColour'), width: parseInt(await AsyncStorage.getItem('Width')), height: parseInt(await AsyncStorage.getItem('Height')), showCaption: false, card1: null, card2: null, overrideKey: null, cards: null, languages: await AsyncStorage.getItem('Language') });
         AsyncStorage.setItem('Cards', JSON.stringify([]));  
     }
 
@@ -123,7 +123,7 @@ class MemoryGame extends Component {
         if (this.state.languages !== null) {
             if (this.state.width === null) {
             return (
-                <Text style={{ marginTop: 30 }}>Loading</Text>
+                <Image source={{ uri: `${Languages[this.state.languages]['119']}${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ width: 500, height: 200 }} />
             );
         }
         if (this.state.width !== null) {
@@ -137,9 +137,19 @@ class MemoryGame extends Component {
                 return (
                 <View style={{ flex: 1, flexDirection: 'column' }}>
                     <View style={{ flex: 1 }}>
-                    <Header style={{ height: 60 }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
-                    </Header>
+                    <Header style={{ height: 60, flexDirection: 'row' }}>
+                        <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
                     </View>
                 <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                     {this.renderTiles()}
@@ -149,148 +159,292 @@ class MemoryGame extends Component {
             );
             }
             if (this.state.showCaption === true) {
-                if (this.state.cards.length === 8) {
-                   return (
-                <View style={{ flex: 1, flexDirection: 'column' }}>
-                    <Modal
-                animationType={"fade"}
-                transparent
-                visible
-                onRequestClose={() => {}}
-                >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.5)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
-                        <View style={{ height: 400, width: 600, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-                            <Image source={require('../Images/trophy.png')} style={{ height: 200, width: 200 }} />
-                            <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['082']}</Text>
-                            <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['095']}</Text>
+                if (this.state.complete === true) {
+                    return (
+                        <View style={{ flex: 1, flexDirection: 'column' }}>
+                            <Modal
+                        animationType={"fade"}
+                        transparent
+                        visible
+                        onRequestClose={() => {}}
+                        >
+                            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                                <View style={{ height: 400, width: 600, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image source={require('../Images/trophy.png')} style={{ height: 200, width: 200 }} />
+                                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['082']}</Text>
+                                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['095']}</Text>
+                                    <CardSection style={{ height: 50, width: 200, backgroundColor: 'transparent', borderBottomWidth: 0 }}>
+                            <Button onPress={this.createNewGame.bind(this)} textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}>
+                                {Languages[this.state.languages]['096']}
+                            </Button>
+                            </CardSection>
                             <CardSection style={{ height: 50, width: 200, backgroundColor: 'transparent', borderBottomWidth: 0 }}>
-                    <Button onPress={this.createNewGame.bind(this)} textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}>
-                        {Languages[this.state.languages]['096']}
-                    </Button>
-                    </CardSection>
-                    <CardSection style={{ height: 50, width: 200, backgroundColor: 'transparent', borderBottomWidth: 0 }}>
-                    <Button 
-                    onPress={() => {
-                        this.setState({ showCaption: false });
-                        Actions.MainMenu();
-                        }}
-                    textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}
-                    >
-                        {Languages[this.state.languages]['097']}
-                    </Button>
-                </CardSection>
+                            <Button 
+                            onPress={() => {
+                                this.setState({ showCaption: false });
+                                Actions.MainMenu();
+                                }}
+                            textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}
+                            >
+                                {Languages[this.state.languages]['097']}
+                            </Button>
+                        </CardSection>
+                                </View>
+                            </View>
+                        </Modal>
+                            <View style={{ flex: 1 }}>
+                            <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
+                            </View>
+                        <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
+                            {this.renderTiles()}
                         </View>
-                    </View>
-                </Modal>
-                    <View style={{ flex: 1 }}>
-                    <Header style={{ height: 60 }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
-                    </Header>
-                    </View>
-                <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
-                    {this.renderTiles()}
+                        </View>
+                    );
+                } else {
+                    if (this.state.cards.length === 8) {
+                        if (this.state.card1.height <= this.state.card1.width) {
+                            const heightRatio = parseFloat(this.state.height - 300) / parseFloat(this.state.card1.height);
+                             let newHeight = this.state.height - 300;
+                             let newWidth = this.state.card1.width * heightRatio;
+                              return (
+                     <View style={{ flex: 1, flexDirection: 'column' }}>
+                         <Modal
+                     animationType={"fade"}
+                     transparent
+                     visible
+                     onRequestClose={() => {}}
+                     >
+                     <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                         <Image
+                         style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
+                         source={{ uri: this.state.card1.imageuri }}
+                         />
+                         <View style={{ height: 200, backgroundColor: '#e3edf9', width: newWidth, alignItems: 'center', justifyContent: 'center' }}>
+                                             <Text 
+                                             style={{
+                 fontSize: 30, 
+                 fontFamily: 'Roboto-Thin',  
+                 backgroundColor: '#e3edf9', //#edf5ff
+                 marginLeft: 5, 
+                 width: null,
+                 marginTop: 5,
+                 marginBottom: 5,
+                 alignItems: 'center'
+             }}
+             >{this.state.card1.caption}</Text>
+                                         <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                             <Button onPress={() => this.setState({ card1: null, card2: null, complete: true })} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['098']}</Button>
+                                         </CardSection>
+                                         </View>
+                         </View>
+                     </Modal>
+                         <View style={{ flex: 1 }}>
+                         <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
                 </View>
-            );
-                }
-                if (this.state.cards.length !== 8) {
-                   if (this.state.card1.height <= this.state.card1.width) {
-                       const heightRatio = parseFloat(this.state.height - 300) / parseFloat(this.state.card1.height);
-                        let newHeight = this.state.height - 300;
-                        let newWidth = this.state.card1.width * heightRatio;
-                         return (
-                <View style={{ flex: 1, flexDirection: 'column' }}>
-                    <Modal
-                animationType={"fade"}
-                transparent
-                visible
-                onRequestClose={() => {}}
-                >
-                <View style={{ backgroundColor: 'rgba(0,0,0,0.8)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
-                    <Image
-                    style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
-                    source={{ uri: this.state.card1.imageuri }}
-                    />
-                    <View style={{ height: 200, backgroundColor: '#e3edf9', width: newWidth, alignItems: 'center', justifyContent: 'center' }}>
-                                        <Text 
-                                        style={{
-            fontSize: 30, 
-            fontFamily: 'Roboto-Thin',  
-            backgroundColor: '#e3edf9', //#edf5ff
-            marginLeft: 5, 
-            width: null,
-            marginTop: 5,
-            marginBottom: 5,
-            alignItems: 'center'
-        }}
-        >{this.state.card1.caption}</Text>
-                                    <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={() => this.setState({ card1: null, card2: null, showCaption: false })} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['098']}</Button>
-                                    </CardSection>
-                                    </View>
-                    </View>
-                </Modal>
-                    <View style={{ flex: 1 }}>
-                    <Header style={{ height: 60 }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
-                    </Header>
-                    </View>
-                <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
-                    {this.renderTiles()}
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
                 </View>
-                <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30, backgroundColor: 'grey' }}>
-                <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin' }}>{this.state.card1.caption}</Text>
+            </Header>
+                         </View>
+                     <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
+                         {this.renderTiles()}
+                     </View>
+                     </View>
+                 );
+                        }
+                     if (this.state.card1.height > this.state.card1.width) {
+                         const heightRatio = parseFloat(this.state.height - 50) / parseFloat(this.state.card1.height);
+                     let newHeight = this.state.height - 50;
+                     let newWidth = this.state.card1.width * heightRatio;
+                     return (
+                     <View style={{ flex: 1, flexDirection: 'column' }}>
+                         <Modal
+                     animationType={"fade"}
+                     transparent
+                     visible
+                     onRequestClose={() => {}}
+                     >
+                         <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                         <Image
+                         style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
+                         source={{ uri: this.state.card1.imageuri }}
+                         />
+                         <View style={{ height: newHeight, backgroundColor: '#e3edf9', width: 400, alignItems: 'center', justifyContent: 'center' }}>
+                                             <Text 
+                                             style={{
+                 fontSize: 30, 
+                 fontFamily: 'Roboto-Thin',  
+                 backgroundColor: '#e3edf9', //#edf5ff
+                 marginLeft: 5, 
+                 width: null,
+                 marginTop: 5,
+                 marginBottom: 5,
+                 alignItems: 'center'
+             }}
+             >{this.state.card1.caption}</Text>
+                                         <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                             <Button onPress={() => this.setState({ card1: null, card2: null, showCaption: false })} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['098']}</Button>
+                                         </CardSection>
+                                         </View>
+                         </View>
+                     </Modal>
+                         <View style={{ flex: 1 }}>
+                         <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
                 </View>
-            );
-                   }
-                if (this.state.card1.height > this.state.card1.width) {
-                    const heightRatio = parseFloat(this.state.height - 50) / parseFloat(this.state.card1.height);
-                let newHeight = this.state.height - 50;
-                let newWidth = this.state.card1.width * heightRatio;
-                return (
-                <View style={{ flex: 1, flexDirection: 'column' }}>
-                    <Modal
-                animationType={"fade"}
-                transparent
-                visible
-                onRequestClose={() => {}}
-                >
-                    <View style={{ backgroundColor: 'rgba(0,0,0,0.8)', flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                    <Image
-                    style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
-                    source={{ uri: this.state.card1.imageuri }}
-                    />
-                    <View style={{ height: newHeight, backgroundColor: '#e3edf9', width: 400, alignItems: 'center', justifyContent: 'center' }}>
-                                        <Text 
-                                        style={{
-            fontSize: 30, 
-            fontFamily: 'Roboto-Thin',  
-            backgroundColor: '#e3edf9', //#edf5ff
-            marginLeft: 5, 
-            width: null,
-            marginTop: 5,
-            marginBottom: 5,
-            alignItems: 'center'
-        }}
-        >{this.state.card1.caption}</Text>
-                                    <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                        <Button onPress={() => this.setState({ card1: null, card2: null, showCaption: false })} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['098']}</Button>
-                                    </CardSection>
-                                    </View>
-                    </View>
-                </Modal>
-                    <View style={{ flex: 1 }}>
-                    <Header style={{ height: 60 }}>
-                        <Text style={{ fontSize: 27, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['099']}</Text>
-                    </Header>
-                    </View>
-                <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
-                    {this.renderTiles()}
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
                 </View>
+            </Header>
+                         </View>
+                     <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
+                         {this.renderTiles()}
+                     </View>
+                     </View>
+                 );
+                     }
+                    }
+                    if (this.state.cards.length !== 8) {
+                        if (this.state.card1.height <= this.state.card1.width) {
+                            const heightRatio = parseFloat(this.state.height - 300) / parseFloat(this.state.card1.height);
+                             let newHeight = this.state.height - 300;
+                             let newWidth = this.state.card1.width * heightRatio;
+                              return (
+                     <View style={{ flex: 1, flexDirection: 'column' }}>
+                         <Modal
+                     animationType={"fade"}
+                     transparent
+                     visible
+                     onRequestClose={() => {}}
+                     >
+                     <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                         <Image
+                         style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
+                         source={{ uri: this.state.card1.imageuri }}
+                         />
+                         <View style={{ height: 200, backgroundColor: '#e3edf9', width: newWidth, alignItems: 'center', justifyContent: 'center' }}>
+                                             <Text 
+                                             style={{
+                 fontSize: 30, 
+                 fontFamily: 'Roboto-Thin',  
+                 backgroundColor: '#e3edf9', //#edf5ff
+                 marginLeft: 5, 
+                 width: null,
+                 marginTop: 5,
+                 marginBottom: 5,
+                 alignItems: 'center'
+             }}
+             >{this.state.card1.caption}</Text>
+                                         <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                             <Button onPress={() => this.setState({ card1: null, card2: null, showCaption: false })} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['098']}</Button>
+                                         </CardSection>
+                                         </View>
+                         </View>
+                     </Modal>
+                         <View style={{ flex: 1 }}>
+                         <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
                 </View>
-            );
-                }
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
+                         </View>
+                     <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
+                         {this.renderTiles()}
+                     </View>
+                     </View>
+                 );
+                        }
+                     if (this.state.card1.height > this.state.card1.width) {
+                         const heightRatio = parseFloat(this.state.height - 50) / parseFloat(this.state.card1.height);
+                     let newHeight = this.state.height - 50;
+                     let newWidth = this.state.card1.width * heightRatio;
+                     return (
+                     <View style={{ flex: 1, flexDirection: 'column' }}>
+                         <Modal
+                     animationType={"fade"}
+                     transparent
+                     visible
+                     onRequestClose={() => {}}
+                     >
+                         <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                         <Image
+                         style={{ height: newHeight, backgroundColor: 'black', width: newWidth }}
+                         source={{ uri: this.state.card1.imageuri }}
+                         />
+                         <View style={{ height: newHeight, backgroundColor: '#e3edf9', width: 400, alignItems: 'center', justifyContent: 'center' }}>
+                                             <Text 
+                                             style={{
+                 fontSize: 30, 
+                 fontFamily: 'Roboto-Thin',  
+                 backgroundColor: '#e3edf9', //#edf5ff
+                 marginLeft: 5, 
+                 width: null,
+                 marginTop: 5,
+                 marginBottom: 5,
+                 alignItems: 'center'
+             }}
+             >{this.state.card1.caption}</Text>
+                                         <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
+                                             <Button onPress={() => this.setState({ card1: null, card2: null, showCaption: false })} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['098']}</Button>
+                                         </CardSection>
+                                         </View>
+                         </View>
+                     </Modal>
+                         <View style={{ flex: 1 }}>
+                         <Header style={{ height: 60, flexDirection: 'row' }}>
+                <View style={{ flex: 1 }}>
+                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                </View>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
+                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    </TouchableWithoutFeedback>
+                </View>
+            </Header>
+                         </View>
+                     <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
+                         {this.renderTiles()}
+                     </View>
+                     </View>
+                 );
+                     }
+                    }
                 }
             }
         }
