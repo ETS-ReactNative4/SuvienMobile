@@ -664,7 +664,7 @@ class Settings extends Component {
                     console.log(error);
             }
             }
-            
+            this.onSaveLangPress();
             Actions.Home();
         }
 }

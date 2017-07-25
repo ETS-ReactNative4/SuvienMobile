@@ -189,8 +189,6 @@ class Home extends Component {
                 [...allTiles]
             );
         }
-        
-        }
 
         if (this.state.preset === (Languages[this.state.languages]['094'])[3]) {
             //console.logconsole.log('Im in preset!');
@@ -200,7 +198,7 @@ class Home extends Component {
                 let i;
                 for (i = 0; i < 8; i++) {
                     let isFound = this.state.media.find((medi) => medi.uniqueID === i);
-                    if (isFound === undefined) {
+                    if (isFound === undefined || isFound === []) {
                         allTiles.push(
                         <PictureTile style={{ marginLeft: 5, height: this.state.dim, width: this.state.dim, marginBottom: 5 }} data={null} unique={i} key={`${i}p`} />
                     );  
@@ -232,6 +230,7 @@ class Home extends Component {
                 );
             }
         }
+             }
         if (this.state.media === null) {
             return (
                 <View />
