@@ -664,7 +664,7 @@ class Settings extends Component {
                     console.log(error);
             }
             }
-            if (this.state.isFirst === false) {
+            if (this.state.isFirst === false && this.state.acheivement === 'INCOM') {
                 this.onSaveLangPress();
             }
             Actions.Home();

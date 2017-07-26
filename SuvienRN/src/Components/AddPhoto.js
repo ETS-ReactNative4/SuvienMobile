@@ -73,7 +73,7 @@ class AddPhoto extends Component {
     onSaveURLPress() {
         const url = this.state.imgsrc;
         if (url.substring(0, 7) !== 'http://' || url.substring(0, 8) !== 'https://') {
-            Image.getSize(`http://${this.state.imgsrc}`, (width, height) => { this.setState({ height, width, imageuri: `http://${this.state.imgsrc}` }); });
+            Image.getSize(`https://${this.state.imgsrc}`, (width, height) => { this.setState({ height, width, imageuri: `http://${this.state.imgsrc}` }); });
         } else {
             Image.getSize(this.state.imgsrc, (width, height) => { this.setState({ height, width, imageuri: this.state.imgsrc }); });
         }

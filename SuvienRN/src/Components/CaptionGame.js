@@ -78,7 +78,7 @@ class CaptionGame extends Component {
             if (findarray !== undefined && findarray.length !== 0 && findarray !== -1) {
                 return (
                     <Image style={{ height: this.state.dim, width: this.state.dim }} source={{ uri: tile.imageuri }}>
-                        <Text style={{ fontSize: 40, color: '#ef4343' }}>X</Text>
+                        <Text style={{ fontSize: 40, color: '#ef4343', backgroundColor: 'transparent' }}>X</Text>
                     </Image>
             );
             } else {
