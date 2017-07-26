@@ -4,10 +4,12 @@ import { CardSection, Button, Input, Header, CheckBox } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
+import Orientation from 'react-native-orientation';
 
 class AddMessage extends Component {
     state = { secheight: null, secwidth: null, message: null, color: null, day: '[]', startHour: 0, modalVisible: false, delete: null, invalid: false, startMinute: 0, isRecording: false, isNull: false, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
     async componentWillMount() {
+        Orientation.lockToLandscape();
         if (Platform.OS === 'ios') {
             this.setState({ secheight: 200, secwidth: 100 });
         }

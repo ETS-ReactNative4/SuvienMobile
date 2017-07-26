@@ -125,7 +125,8 @@
         "122" : "Uh Oh! We can't find this content.",
         "123" : "You may have deleted this content off your device.",
         "124" : "We will return you to the main menu in 5 seconds...",
-        "125" : "For this reason, we will delete this tile."
+        "125" : "For this reason, we will delete this tile.",
+        "126" : "Delete a..."
     },
     "FRE" : {
         "000" : "Démarrer",
@@ -253,7 +254,8 @@
         "122" : "Oh Oh! Nous ne pouvons pas trouver ce contenu",
         "123" : "Il est probable que vous avez supprimé le contenu",
         "124" : "Nous vous renverrons à la page d'accueil en 5 secondes ...",
-        "125" : "Pour cette raison, nous supprimerons cette tuile"
+        "125" : "Pour cette raison, nous supprimerons cette tuile",
+        "126" : "Supprimer un..."
     },
     "ESP" : {
         "000" : "Empezar",
@@ -381,6 +383,7 @@
         "122" : "Oh Oh! No podemos encontrar este contenido",
         "123" : "Es probable que usted eliminó el contenido",
         "124" : "Le devolveremos a la página principal en 5 segundos ...",
-        "125" : "Por esta razón, se eliminará este teja"
+        "125" : "Por esta razón, se eliminará este teja",
+        "126" : "Eliminar un..."
     }
 }

@@ -3,10 +3,12 @@ import { View, Text, AsyncStorage, Image, TouchableWithoutFeedback, Linking } fr
 import { Button, CardSection, Header } from './common';
 import { Actions } from 'react-native-router-flux';
 import Languages from '../Languages/Languages.json';
+import Orientation from 'react-native-orientation';
 
 class FirstLanding extends Component {
     state = { languages: null }
     async componentWillMount() {
+        Orientation.lockToLandscape();
         this.setState({ languages: await AsyncStorage.getItem('Language') });
     }
     render() {

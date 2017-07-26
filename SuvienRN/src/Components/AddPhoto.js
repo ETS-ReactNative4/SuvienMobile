@@ -7,10 +7,12 @@ import { CardSection, Button, Input, Header } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
+import Orientation from 'react-native-orientation';
 
 class AddPhoto extends Component {
     state = { imageuri: null, caption: null, group: null, languages: null, acheivement: null, color: null, isNull: false, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
     async componentWillMount() {
+        Orientation.lockToLandscape();
         console.log(await AsyncStorage.getItem('Language'));
         this.setState({ 
             heightc: Dimensions.get('window').height,

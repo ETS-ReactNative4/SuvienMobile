@@ -4,10 +4,12 @@ import Languages from '../Languages/Languages.json';
 import { CardSection, Button, CheckBox, Header } from './common';
 import RadioForm from 'react-native-simple-radio-button';
 import { Actions } from 'react-native-router-flux';
+import Orientation from 'react-native-orientation';
 
 class AdvancedSettings extends Component {
     state = { preferences: null, languages: null, selected: null, ask: null }
     async componentWillMount() {
+        Orientation.lockToLandscape();
         const transarray = ['ENG', 'FRE', 'ESP'];
         this.setState({ ask: JSON.parse(await AsyncStorage.getItem('Ask')), preferences: JSON.parse(await AsyncStorage.getItem('Preferences')), languages: await AsyncStorage.getItem('Language'), selected: transarray.indexOf(await AsyncStorage.getItem('Language')) });
     }

@@ -4,12 +4,14 @@ import { View, AsyncStorage, Image, Text, ScrollView, TouchableWithoutFeedback, 
 import { CardSection, Button, Input, Header } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
+import Orientation from 'react-native-orientation';
 
 class AddAudioAnd extends Component {
     state = { title: null, artist: null, album: null, uri: null, caption: null, group: null, acheivement: null, languages: null, isNull: false, widthc: null, heightc: null, color: null }
     //console.log(JSON.parse(await AsyncStorage.getItem('samplemusic')));
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async componentWillMount() {
+        Orientation.lockToLandscape();
         this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height });
     }
     async onSaveItemPress() {

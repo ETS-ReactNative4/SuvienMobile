@@ -4,10 +4,12 @@ import { CardSection, Input, Button, Header } from './common';
 import Languages from '../Languages/Languages.json';
 import RadioForm from 'react-native-simple-radio-button';
 import { Actions } from 'react-native-router-flux';
+import Orientation from 'react-native-orientation';
 
 class Settings extends Component {
     state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, languages: null, mediaType: null, color: null, media: null, mediaArray: null, selectedItem: null, width: null, modalVisible: false, delete: null, isNull: false, selected: null, preferences: null};
     async componentWillMount() {
+        Orientation.lockToLandscape();
         const transarray = ['ENG', 'FRE', 'ESP'];
         if (await AsyncStorage.getItem('name') !== null) {
             this.setState({ 
@@ -534,114 +536,214 @@ class Settings extends Component {
     }
 
     renderPhotos() {
-        if (this.state.mediaType === 'Pictures') {
-            const newmedia = this.state.media.reverse();
-            const allphotos = newmedia.map((photo) => 
-            //For future applications, long press may prove to be more user friendly
-             (
-                <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
-                    <View style={{ backgroundColor: 'transparent', height: 200 }} />
-                    <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
-                        <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                            <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
-                                <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
-                            </TouchableWithoutFeedback>
-                            <TouchableWithoutFeedback 
-                            onPress={() => {
-                                this.setState({ modalVisible: true, delete: photo });
-                                }}
-                            >
-                                <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
-                            </TouchableWithoutFeedback>
+        if (this.state.acheivement !== 'INCOM') {
+            if (this.state.mediaType === 'Pictures') {
+                const newmedia = this.state.media.reverse();
+                const allphotos = newmedia.map((photo) => 
+                //For future applications, long press may prove to be more user friendly
+                 (
+                    <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
+                        <View style={{ backgroundColor: 'transparent', height: 200 }} />
+                        <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
+                                    <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback 
+                                onPress={() => {
+                                    this.setState({ modalVisible: true, delete: photo });
+                                    }}
+                                >
+                                    <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
+                                </TouchableWithoutFeedback>
+                            </View>
                         </View>
-                    </View>
-                </Image>
-            ));
-            return (
-                [...allphotos]
-            );
-        }
-        if (this.state.mediaType === 'Videos') {
-            const newmedia = this.state.media.reverse();
-            const allphotos = newmedia.map((photo) => {
-            //For future applications, long press may prove to be more user friendly
-            if (photo.mediaType === 'Video') {
+                    </Image>
+                ));
                 return (
-                <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.uri }}>
-                    <View style={{ backgroundColor: 'transparent', height: 200 }} />
-                    <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
-                        <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                            <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
-                                <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
-                            </TouchableWithoutFeedback>
-                            <TouchableWithoutFeedback 
-                            onPress={() => {
-                                this.setState({ modalVisible: true, delete: photo });
-                                }}
-                            >
-                                <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
-                            </TouchableWithoutFeedback>
-                        </View>
-                    </View>
-                </Image>
+                    [...allphotos]
                 );
             }
-            if (photo.mediaType === 'Youtube') {
-                return (
-                <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
-                    <View style={{ backgroundColor: 'transparent', height: 200 }} />
-                    <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
-                        <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                            <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
-                                <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
-                            </TouchableWithoutFeedback>
-                            <TouchableWithoutFeedback 
-                            onPress={() => {
-                                this.setState({ modalVisible: true, delete: photo });
-                                }}
-                            >
-                                <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
-                            </TouchableWithoutFeedback>
+            if (this.state.mediaType === 'Videos') {
+                const newmedia = this.state.media.reverse();
+                const allphotos = newmedia.map((photo) => {
+                //For future applications, long press may prove to be more user friendly
+                if (photo.mediaType === 'Video') {
+                    return (
+                    <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.uri }}>
+                        <View style={{ backgroundColor: 'transparent', height: 200 }} />
+                        <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
+                                    <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback 
+                                onPress={() => {
+                                    this.setState({ modalVisible: true, delete: photo });
+                                    }}
+                                >
+                                    <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
+                                </TouchableWithoutFeedback>
+                            </View>
                         </View>
-                    </View>
-                </Image>
+                    </Image>
+                    );
+                }
+                if (photo.mediaType === 'Youtube') {
+                    return (
+                    <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
+                        <View style={{ backgroundColor: 'transparent', height: 200 }} />
+                        <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
+                                    <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback 
+                                onPress={() => {
+                                    this.setState({ modalVisible: true, delete: photo });
+                                    }}
+                                >
+                                    <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
+                                </TouchableWithoutFeedback>
+                            </View>
+                        </View>
+                    </Image>
+                    );
+                }
+                });
+                return (
+                    [...allphotos]
                 );
             }
-            });
-            return (
-                [...allphotos]
-            );
-        }
-        if (this.state.mediaType === 'Audio') {
-            const newmedia = this.state.media.reverse();
-            const allphotos = newmedia.map((photo) => {
-                return (
-                <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={require('../Images/musicalbumart.png')}>
-                    <View style={{ backgroundColor: 'transparent', height: 200 }} />
-                    <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
-                        <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                            <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
-                                <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
-                            </TouchableWithoutFeedback>
-                            <TouchableWithoutFeedback 
-                            onPress={() => {
-                                this.setState({ modalVisible: true, delete: photo });
-                                }}
-                            >
-                                <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
-                            </TouchableWithoutFeedback>
+            if (this.state.mediaType === 'Audio') {
+                const newmedia = this.state.media.reverse();
+                const allphotos = newmedia.map((photo) => {
+                    return (
+                    <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={require('../Images/musicalbumart.png')}>
+                        <View style={{ backgroundColor: 'transparent', height: 200 }} />
+                        <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
+                                    <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback 
+                                onPress={() => {
+                                    this.setState({ modalVisible: true, delete: photo });
+                                    }}
+                                >
+                                    <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
+                                </TouchableWithoutFeedback>
+                            </View>
                         </View>
-                    </View>
-                </Image>
+                    </Image>
+                    );
+                });
+                return (
+                    [...allphotos]
                 );
-            });
-            return (
-                [...allphotos]
-            );
+            }
+        } else {
+            if (this.state.mediaType === 'Pictures') {
+                const newmedia = this.state.media.reverse();
+                const allphotos = newmedia.map((photo) => 
+                //For future applications, long press may prove to be more user friendly
+                 (
+                    <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
+                        <View style={{ backgroundColor: 'transparent', height: 200 }} />
+                        <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                <TouchableWithoutFeedback 
+                                onPress={() => {
+                                    this.setState({ modalVisible: true, delete: photo });
+                                    }}
+                                >
+                                    <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
+                                </TouchableWithoutFeedback>
+                            </View>
+                        </View>
+                    </Image>
+                ));
+                return (
+                    [...allphotos]
+                );
+            }
+            if (this.state.mediaType === 'Videos') {
+                const newmedia = this.state.media.reverse();
+                const allphotos = newmedia.map((photo) => {
+                //For future applications, long press may prove to be more user friendly
+                if (photo.mediaType === 'Video') {
+                    return (
+                    <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.uri }}>
+                        <View style={{ backgroundColor: 'transparent', height: 200 }} />
+                        <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                <TouchableWithoutFeedback 
+                                onPress={() => {
+                                    this.setState({ modalVisible: true, delete: photo });
+                                    }}
+                                >
+                                    <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
+                                </TouchableWithoutFeedback>
+                            </View>
+                        </View>
+                    </Image>
+                    );
+                }
+                if (photo.mediaType === 'Youtube') {
+                    return (
+                    <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
+                        <View style={{ backgroundColor: 'transparent', height: 200 }} />
+                        <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                <TouchableWithoutFeedback 
+                                onPress={() => {
+                                    this.setState({ modalVisible: true, delete: photo });
+                                    }}
+                                >
+                                    <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
+                                </TouchableWithoutFeedback>
+                            </View>
+                        </View>
+                    </Image>
+                    );
+                }
+                });
+                return (
+                    [...allphotos]
+                );
+            }
+            if (this.state.mediaType === 'Audio') {
+                const newmedia = this.state.media.reverse();
+                const allphotos = newmedia.map((photo) => {
+                    return (
+                    <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={require('../Images/musicalbumart.png')}>
+                        <View style={{ backgroundColor: 'transparent', height: 200 }} />
+                        <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                <TouchableWithoutFeedback 
+                                onPress={() => {
+                                    this.setState({ modalVisible: true, delete: photo });
+                                    }}
+                                >
+                                    <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
+                                </TouchableWithoutFeedback>
+                            </View>
+                        </View>
+                    </Image>
+                    );
+                });
+                return (
+                    [...allphotos]
+                );
+            }
         }
     }
     async onButtonPress() {
@@ -1066,7 +1168,7 @@ class Settings extends Component {
                             {Languages[this.state.languages]['077']}
                         </Button>
                     </CardSection>
-                    <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300', marginBottom: 20 }}>{Languages[this.state.languages]['041']}</Text>
+                    <Text style={{ marginTop: 30, fontSize: 30, alignSelf: 'center', fontFamily: 'UltimaPDac-UltraLight', fontWeight: '300', marginBottom: 20 }}>{Languages[this.state.languages]['126']}</Text>
                     <View style={{ flexDirection: 'row', width: null }}>
                         <Button onPress={async () => this.setState({ mediaType: 'Pictures', media: JSON.parse(await AsyncStorage.getItem('Pictures')) })}>{Languages[this.state.languages]['036']}</Button>
                         <Button onPress={async () => this.setState({ mediaType: 'Videos', media: JSON.parse(await AsyncStorage.getItem('Videos')) })}>{Languages[this.state.languages]['037']}</Button>

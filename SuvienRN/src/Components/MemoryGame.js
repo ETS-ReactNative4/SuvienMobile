@@ -3,10 +3,12 @@ import { View, Text, Image, AsyncStorage, TouchableOpacity, Dimensions, Modal, P
 import { Actions } from 'react-native-router-flux';
 import Languages from '../Languages/Languages.json';
 import { CardSection, Button, Header, GameTile } from './common';
+import Orientation from 'react-native-orientation';
 
 class MemoryGame extends Component {
     state = { tiles: null, card1: null, overrideKey: null, card2: null, languages: null, cards: null, showCaption: false, width: null, height: null, seconds: 0, minutes: 0, color: null, complete: false }
     componentWillMount() {
+        Orientation.lockToLandscape();
         this.createNewGame();
     }
 

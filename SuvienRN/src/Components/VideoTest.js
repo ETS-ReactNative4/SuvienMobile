@@ -3,10 +3,12 @@ import { View, AsyncStorage, Text, Image, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Languages from '../Languages/Languages.json';
 import Video from 'react-native-video';
+import Orientation from 'react-native-orientation';
 
 class VideoTest extends Component {
     state = { uri: null, failed: null, languages: null }
     async componentWillMount() {
+        Orientation.lockToLandscape();
         this.setState({ uri: await AsyncStorage.getItem('currentVideoMsg'), languages: await AsyncStorage.getItem('Language') });
     }
     render() {
