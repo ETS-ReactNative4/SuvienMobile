@@ -44,10 +44,10 @@ class CaptionGame extends Component {
 
     async createNewGame() {
         let number = this.state.timesRun;
-        if (number === null) {
+        if (number === null || number >= 8) {
             number = 0;
-        }
-        if (number !== null) {
+        } 
+        if (number !== null && number < 8) {
             number += 1;
         }
         const pictures1 = JSON.parse(await AsyncStorage.getItem('Pictures'));
@@ -105,6 +105,7 @@ class CaptionGame extends Component {
     }
 
     render() {
+        console.log(this.state.timesRun);
         if (this.state.dim !== null && this.state.tiles !== null) {
             if (this.state.congrats === false) {
                 return (
@@ -335,7 +336,7 @@ class CaptionGame extends Component {
                             <CardSection style={{ height: 50, width: 200, backgroundColor: 'transparent', borderBottomWidth: 0 }}>
                     <Button 
                     onPress={() => {
-                        this.setState({ timesRun: null, complete: false, congrats: false });
+                        this.setState({ timesRun: 0, complete: false, congrats: false });
                         this.createNewGame();
                         }} textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}>
                         {Languages[this.state.languages]['096']}
