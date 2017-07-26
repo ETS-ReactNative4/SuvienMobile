@@ -333,7 +333,11 @@ class CaptionGame extends Component {
                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['082']}</Text>
                             <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['095']}</Text>
                             <CardSection style={{ height: 50, width: 200, backgroundColor: 'transparent', borderBottomWidth: 0 }}>
-                    <Button onPress={this.createNewGame.bind(this)} textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}>
+                    <Button 
+                    onPress={() => {
+                        this.setState({ timesRun: null, complete: false, congrats: false });
+                        this.createNewGame();
+                        }} textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}>
                         {Languages[this.state.languages]['096']}
                     </Button>
                     </CardSection>
