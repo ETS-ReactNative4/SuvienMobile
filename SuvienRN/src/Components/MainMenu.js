@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Languages from '../Languages/Languages.json';
-import { Image, View, AsyncStorage, Text, Dimensions, Platform } from 'react-native';
+import { Image, View, AsyncStorage, Text, Dimensions, Platform, Linking } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Button, CardSection, Header, CheckBox } from './common';
 import Orientation from 'react-native-orientation';
@@ -66,7 +66,7 @@ class MainMenu extends Component {
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
                                 <View style={{ flex: 150 }}>
-                                    <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
+                                    <Button style={styles.buttonContainer} onPress={() => Linking.openURL('http://www.suvien.com/how-to-use-suvien.html')}>
                                         {Languages[this.state.language]['003']}
                                     </Button>
                                 </View>
@@ -92,7 +92,7 @@ class MainMenu extends Component {
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
                                 <View style={{ flex: 150 }}>
-                                    <Button style={styles.buttonContainer} onPress={this.onButtonPress.bind(this)}>
+                                    <Button style={styles.buttonContainer} onPress={() => Linking.openURL('http://www.suvien.com/how-to-use-suvien.html')}>
                                         {Languages[this.state.language]['003']}
                                     </Button>
                                 </View>

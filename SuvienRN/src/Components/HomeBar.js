@@ -350,7 +350,7 @@ class HomeBar extends Component {
                 </View>
                 <View style={{ justifyContent: 'flex-end', alignItems: 'center', width: finalsize, flexDirection: 'row' }}>
                     <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                        <Image source={require('../Images/mainmenu.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
+                        <Image source={require('../Images/homeheader.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
                         <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80, marginRight: 30 }} />
@@ -370,7 +370,7 @@ class HomeBar extends Component {
                 </View>
                 <View style={{ justifyContent: 'flex-end', alignItems: 'center', width: finalsize, flexDirection: 'row' }}>
                     <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                        <Image source={require('../Images/mainmenu.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
+                        <Image source={require('../Images/homeheader.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
                         <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80, marginRight: 30 }} />
@@ -392,7 +392,7 @@ class HomeBar extends Component {
                 </View>
                 <View style={{ justifyContent: 'flex-end', alignItems: 'center', width: finalsize, flexDirection: 'row' }}>
                     <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                        <Image source={require('../Images/mainmenu.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
+                        <Image source={require('../Images/homeheader.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
                         <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80, marginRight: 30 }} />
@@ -418,7 +418,7 @@ class HomeBar extends Component {
                 </View>
                 <View style={{ alignItems: 'flex-end' }}>
                     <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                        <Image source={require('../Images/mainmenu.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
+                        <Image source={require('../Images/homeheader.png')} style={{ height: 70, width: 70, marginRight: 30 }} />
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
                         <Image source={require('../Images/settings.png')} style={{ height: 80, width: 80 }} />

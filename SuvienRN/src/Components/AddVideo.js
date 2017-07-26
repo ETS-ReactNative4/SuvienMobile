@@ -219,19 +219,16 @@ class AddVideo extends Component {
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onTakeVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['050']}
-                                        <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onChooseVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['054']}
-                                        <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onAddWebVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['057']}
-                                        <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                                     </Button>
                                 </CardSection>
                                 </View>
@@ -277,13 +274,11 @@ class AddVideo extends Component {
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onTakeVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['050']}
-                                        <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onAddWebVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['057']}
-                                        <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                                     </Button>
                                 </CardSection>
                                 </View>
@@ -331,19 +326,16 @@ class AddVideo extends Component {
                                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                         <Button onPress={this.onTakeVideoPress.bind(this)}>
                                             {Languages[this.state.languages]['050']}
-                                            <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
                                         </Button>
                                     </CardSection>
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                         <Button onPress={this.onChooseVideoPress.bind(this)}>
                                             {Languages[this.state.languages]['054']}
-                                            <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
                                         </Button>
                                     </CardSection>
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                         <Button onPress={this.onAddWebVideoPress.bind(this)}>
                                             {Languages[this.state.languages]['057']}
-                                            <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                                         </Button>
                                     </CardSection>
                                     </View>
@@ -389,19 +381,16 @@ class AddVideo extends Component {
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onTakeVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['050']}
-                                        <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onChooseVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['054']}
-                                        <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onAddWebVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['057']}
-                                        <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                                     </Button>
                                 </CardSection>
                                 </View>
@@ -448,19 +437,16 @@ class AddVideo extends Component {
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onTakeVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['050']}
-                                        <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onChooseVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['054']}
-                                        <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 40, width: 40 }} />
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onAddWebVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['057']}
-                                        <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                                     </Button>
                                 </CardSection>
                                 </View>
@@ -509,13 +495,11 @@ class AddVideo extends Component {
                                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                         <Button onPress={this.onTakeVideoPress.bind(this)}>
                                             {Languages[this.state.languages]['050']}
-                                            <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
                                         </Button>
                                     </CardSection>
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                         <Button onPress={this.onAddWebVideoPress.bind(this)}>
                                             {Languages[this.state.languages]['057']}
-                                            <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                                         </Button>
                                     </CardSection>
                                     </View>
@@ -561,13 +545,11 @@ class AddVideo extends Component {
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onTakeVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['050']}
-                                        <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onAddWebVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['057']}
-                                        <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                                     </Button>
                                 </CardSection>
                                 </View>
@@ -614,13 +596,11 @@ class AddVideo extends Component {
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onTakeVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['050']}
-                                        <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                     <Button onPress={this.onAddWebVideoPress.bind(this)}>
                                         {Languages[this.state.languages]['057']}
-                                        <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                                     </Button>
                                 </CardSection>
                                 </View>
@@ -770,7 +750,7 @@ class AddVideo extends Component {
                         </View>
                         <View style={{ flex: 1 }}>
                             <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                            <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                            <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                             </TouchableWithoutFeedback>
                         </View>
                     </Header>
@@ -802,7 +782,7 @@ class AddVideo extends Component {
                                 <View style={{ marginTop: 10, marginBottom: 10 }}>
                                 <CardSection>
                                 <Button onPress={this.onSaveItemPress.bind(this)}>
-                                    {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                                    {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                                 </Button>
                                 </CardSection>
                                 <CardSection>
@@ -851,7 +831,7 @@ class AddVideo extends Component {
                         </View>
                         <View style={{ flex: 1 }}>
                             <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                            <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                            <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                             </TouchableWithoutFeedback>
                         </View>
                     </Header>
@@ -861,7 +841,7 @@ class AddVideo extends Component {
                             <View style={{ marginTop: 10, marginBottom: 10 }}>
                             <CardSection>
                             <Button onPress={this.onSaveItemPress.bind(this)}>
-                                {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                                {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                             </Button>
                             </CardSection>
                             <CardSection>
@@ -989,7 +969,7 @@ class AddVideo extends Component {
                         </View>
                         <View style={{ flex: 1 }}>
                             <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                            <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                            <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                             </TouchableWithoutFeedback>
                         </View>
                     </Header>
@@ -1021,12 +1001,12 @@ class AddVideo extends Component {
                                 <View style={{ marginTop: 10, marginBottom: 10 }}>
                                 <CardSection>
                                 <Button onPress={this.onSaveItemPress.bind(this)}>
-                                    {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                                    {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                                 </Button>
                                 </CardSection>
                                 <CardSection>
                                 <Button onPress={this.createNew.bind(this)}>
-                                    {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                                    {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                                 </Button>
                                 </CardSection>
                                 <CardSection>
@@ -1075,7 +1055,7 @@ class AddVideo extends Component {
                         </View>
                         <View style={{ flex: 1 }}>
                             <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                            <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                            <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                             </TouchableWithoutFeedback>
                         </View>
                     </Header>
@@ -1085,12 +1065,12 @@ class AddVideo extends Component {
                             <View style={{ marginTop: 10, marginBottom: 10 }}>
                             <CardSection>
                             <Button onPress={this.onSaveItemPress.bind(this)}>
-                                {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                                {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                             </Button>
                             </CardSection>
                             <CardSection>
                             <Button onPress={this.createNew.bind(this)}>
-                                {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                                {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                             </Button>
                             </CardSection>
                             <CardSection>

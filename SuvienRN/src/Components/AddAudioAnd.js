@@ -115,7 +115,7 @@ class AddAudioAnd extends Component {
                             <View style={{ flexDirection: 'row', width: (this.state.widthc - 450), backgroundColor: 'white' }}>
                             <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                 <Button onPress={this.onChooseMusicPress.bind(this)}>
-                                    {Languages[this.state.languages]['055']}  <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 30, width: 30 }} />
+                                    {Languages[this.state.languages]['055']}
                                 </Button>
                             </CardSection>
                             </View>
@@ -172,7 +172,7 @@ class AddAudioAnd extends Component {
                         <View style={{ flexDirection: 'row', width: (this.state.widthc - 450), backgroundColor: 'white' }}>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                             <Button onPress={this.onChooseMusicPress.bind(this)}>
-                                {Languages[this.state.languages]['055']}  <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 30, width: 30 }} />
+                                {Languages[this.state.languages]['055']}
                             </Button>
                         </CardSection>
                         </View>
@@ -273,7 +273,7 @@ class AddAudioAnd extends Component {
                         </View>
                         <View style={{ flex: 1 }}>
                             <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                            <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                            <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                             </TouchableWithoutFeedback>
                         </View>
                     </Header>
@@ -281,7 +281,7 @@ class AddAudioAnd extends Component {
                             <View>
                     <CardSection>
                     <Button onPress={this.onSaveItemPress.bind(this)}>
-                        {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                     </Button>
                     </CardSection>
                     <CardSection>
@@ -328,7 +328,7 @@ class AddAudioAnd extends Component {
                         </View>
                         <View style={{ flex: 1 }}>
                             <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                            <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                            <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                             </TouchableWithoutFeedback>
                         </View>
                     </Header>
@@ -336,12 +336,12 @@ class AddAudioAnd extends Component {
                             <View>
                     <CardSection>
                     <Button onPress={this.onSaveItemPress.bind(this)}>
-                        {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                     </Button>
                     </CardSection>
                     <CardSection>
                     <Button onPress={this.createNew.bind(this)}>
-                        {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30 }} />
+                        {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                     </Button>
                     </CardSection>
                     <CardSection>

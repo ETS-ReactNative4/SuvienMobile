@@ -25,7 +25,7 @@ class Games extends Component {
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['108']}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
                     <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
                     </TouchableWithoutFeedback>
                 </View>

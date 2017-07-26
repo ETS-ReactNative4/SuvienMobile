@@ -169,19 +169,16 @@ class AddPhoto extends Component {
                             <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                             <Button onPress={this.onTakePhotoPress.bind(this)}>
                                 {Languages[this.state.languages]['049']}
-                                <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
                             </Button>
                         </CardSection>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                             <Button onPress={this.onChoosePhotoPress.bind(this)}>
-                                {Languages[this.state.languages]['053']}  
-                                <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 30, width: 30, marginTop: 30 }} />
+                                {Languages[this.state.languages]['053']}
                             </Button>
                         </CardSection>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                             <Button onPress={this.onAddWebPhotoPress.bind(this)}>
                                 {Languages[this.state.languages]['056']}
-                                <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                             </Button>
                         </CardSection>
                         </View>
@@ -229,19 +226,16 @@ class AddPhoto extends Component {
                             <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                             <Button onPress={this.onTakePhotoPress.bind(this)}>
                                 {Languages[this.state.languages]['049']}
-                                <Image source={require('../Images/photoimagebig.png')} style={{ height: 30, width: 30 }} />
                             </Button>
                         </CardSection>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                             <Button onPress={this.onChoosePhotoPress.bind(this)}>
                                 {Languages[this.state.languages]['053']}
-                                <Image source={require('../Images/choosefromlibrary.png')} style={{ height: 30, width: 30, marginTop: 30 }} />
                             </Button>
                         </CardSection>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                             <Button onPress={this.onAddWebPhotoPress.bind(this)}>
                                 {Languages[this.state.languages]['056']}
-                                <Image source={require('../Images/webicon.png')} style={{ height: 40, width: 40 }} />
                             </Button>
                         </CardSection>
                         </View>
@@ -414,7 +408,7 @@ class AddPhoto extends Component {
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
@@ -495,7 +489,7 @@ class AddPhoto extends Component {
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
@@ -556,7 +550,7 @@ class AddPhoto extends Component {
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
@@ -642,7 +636,7 @@ class AddPhoto extends Component {
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>

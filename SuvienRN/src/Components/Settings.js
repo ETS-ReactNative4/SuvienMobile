@@ -782,7 +782,7 @@ class Settings extends Component {
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
@@ -930,7 +930,7 @@ class Settings extends Component {
                     <Image source={require('../Images/settings.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
@@ -954,7 +954,7 @@ class Settings extends Component {
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
@@ -1015,7 +1015,7 @@ class Settings extends Component {
                     </View>
                     <View style={{ flex: 1 }}>
                         <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                        <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                        <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                         </TouchableWithoutFeedback>
                     </View>
                 </Header>
@@ -1120,7 +1120,7 @@ class Settings extends Component {
                         <Image source={require('../Images/settings.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                        <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                        <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                         </TouchableWithoutFeedback>
                     </View>
                 </Header>
@@ -1144,7 +1144,7 @@ class Settings extends Component {
                     </View>
                     <View style={{ flex: 1 }}>
                         <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                        <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                        <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                         </TouchableWithoutFeedback>
                     </View>
                 </Header>
@@ -1210,7 +1210,7 @@ class Settings extends Component {
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/homeheader.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>

@@ -46,7 +46,7 @@ class CongratsModal extends Component {
                                     Actions.Settings();
                                 }}
                                 >
-                                    {Languages[this.state.languages]['017']}
+                                    {Languages[this.state.languages]['017']}  <Image source={require('../Images/settings.png')} style={{ height: 30, width: 30 }} />
                                 </Button>
                             </CardSection>
                         </View>

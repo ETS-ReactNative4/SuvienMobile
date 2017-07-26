@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, Image, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, AsyncStorage, Image, TouchableWithoutFeedback, Linking } from 'react-native';
 import { Button, CardSection, Header } from './common';
 import { Actions } from 'react-native-router-flux';
 import Languages from '../Languages/Languages.json';
@@ -29,7 +29,7 @@ class FirstLanding extends Component {
                     </Text>
                 </View>
                 <CardSection>
-                    <Button onPress={() => console.log('Tutorial Rquest')}>
+                    <Button onPress={() => Linking.openURL('http://www.suvien.com/how-to-use-suvien.html')}>
                         {Languages[this.state.languages]['079']}
                     </Button>
                 </CardSection>
