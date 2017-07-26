@@ -264,7 +264,7 @@ class AddAudio extends Component {
                         </View>
                         <View style={{ flex: 1 }}>
                             <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                            <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
+                            <Image source={require('../Images/mainmenu.png')} style={{ height: 40, width: 40, alignSelf: 'flex-end', marginRight: 20 }} />
                             </TouchableWithoutFeedback>
                         </View>
                     </Header>
@@ -319,7 +319,7 @@ class AddAudio extends Component {
                         </View>
                         <View style={{ flex: 1 }}>
                             <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                            <Image source={require('../Images/mainmenu.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: 10 }} />
+                            <Image source={require('../Images/mainmenu.png')} style={{ height: 40, width: 40, alignSelf: 'flex-end', marginRight: 20 }} />
                             </TouchableWithoutFeedback>
                         </View>
                     </Header>
