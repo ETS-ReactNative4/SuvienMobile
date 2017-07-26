@@ -189,19 +189,19 @@ class AddAudio extends Component {
                                 <CardSection style={{ width: (this.state.widthc - 380) }}>
                                 <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                     <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
-                                    <Text style={{ color: '#000', marginRight: 100, marginLeft: 10, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[0]}</Text>
+                                    <Text style={{ color: '#000', marginRight: 100, marginLeft: 10, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6, backgroundColor: 'transparent' }}>{this.state.information[0]}</Text>
                                 </View>
                             </CardSection>
                             <CardSection style={{ width: (this.state.widthc - 380) }}>
                                 <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                     <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
-                                    <Text style={{ color: '#000', marginRight: 100, marginLeft: 10, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[1]}</Text>
+                                    <Text style={{ color: '#000', marginRight: 100, marginLeft: 10, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6, backgroundColor: 'transparent' }}>{this.state.information[1]}</Text>
                                 </View>
                             </CardSection>
                             <CardSection style={{ width: (this.state.widthc - 380) }}>
                                 <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center', width: (this.state.widthc - 380) }}>
                                     <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
-                                    <Text style={{ color: '#000', marginRight: 100, marginLeft: 10, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.information[3]}</Text>
+                                    <Text style={{ color: '#000', marginRight: 100, marginLeft: 10, fontSize: 23, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6, backgroundColor: 'transparent' }}>{this.state.information[3]}</Text>
                                 </View>
                             </CardSection>
                             </View>
