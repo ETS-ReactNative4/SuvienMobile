@@ -115,6 +115,7 @@ class MemoryGame extends Component {
     }
 
     render() {
+        console.log(this.state.cards);
         if (this.state.languages === null) {
             return (
                 <View />
@@ -174,7 +175,12 @@ class MemoryGame extends Component {
                                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['082']}</Text>
                                     <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 5 }}>{Languages[this.state.languages]['095']}</Text>
                                     <CardSection style={{ height: 50, width: 200, backgroundColor: 'transparent', borderBottomWidth: 0 }}>
-                            <Button onPress={this.createNewGame.bind(this)} textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}>
+                            <Button 
+                            onPress={() => {
+                                this.setState({ card1: null, card2: null, cards: null, showCaption: false, complete: false });
+                                this.createNewGame();
+                                }} 
+                                textsStyle={{ fontSize: 20, paddingTop: 5, backgroundColor: 'transparent' }}>
                                 {Languages[this.state.languages]['096']}
                             </Button>
                             </CardSection>
@@ -302,7 +308,7 @@ class MemoryGame extends Component {
              }}
              >{this.state.card1.caption}</Text>
                                          <CardSection style={{ backgroundColor: 'transparent', marginLeft: 0, borderBottomWidth: 0 }}>
-                                             <Button onPress={() => this.setState({ card1: null, card2: null, showCaption: false })} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['098']}</Button>
+                                             <Button onPress={() => this.setState({ card1: null, card2: null, complete: true })} style={{ backgroundColor: '#b7d6ff' }} textsStyle={{ color: 'white' }}>{Languages[this.state.languages]['098']}</Button>
                                          </CardSection>
                                          </View>
                          </View>
