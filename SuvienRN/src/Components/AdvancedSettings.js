@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, Image, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, AsyncStorage, Image, TouchableWithoutFeedback, Platform } from 'react-native';
 import Languages from '../Languages/Languages.json';
 import { CardSection, Button, CheckBox, Header } from './common';
 import RadioForm from 'react-native-simple-radio-button';
@@ -114,7 +114,7 @@ class AdvancedSettings extends Component {
                 </View>
                 <View style={{ flex: 1 }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/mainmenu.png')} style={{ height: 40, width: 40, alignSelf: 'flex-end', marginRight: 20 }} />
+                    <Image source={require('../Images/mainmenu.png')} style={{ height: Platform.OS === 'ios' ? 40 : 50, width: Platform.OS === 'ios' ? 40 : 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: Platform.OS === 'ios' ? 5 : 10 }} />
                     </TouchableWithoutFeedback>
                 </View>
             </Header>

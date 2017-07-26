@@ -356,7 +356,7 @@ class AddMessage extends Component {
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
                     <TouchableWithoutFeedback onPress={() => Actions.Settings()}>
-                        <Image source={require('../Images/settings.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
+                        <Image source={require('../Images/settings.png')} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: Platform.OS === 'ios' ? 0 : 10 }} />
                         </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => Actions.Home()}>
                     <Image source={require('../Images/mainmenu.png')} style={{ height: Platform.OS === 'ios' ? 40 : 50, width: Platform.OS === 'ios' ? 40 : 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: Platform.OS === 'ios' ? 5 : 10 }} />
