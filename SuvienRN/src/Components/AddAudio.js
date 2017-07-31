@@ -1,20 +1,86 @@
 import React, { Component } from 'react';
 import MusicPlayerController from 'react-native-musicplayercontroller';
-import { View, AsyncStorage, Image, Text, ScrollView, TouchableWithoutFeedback, Modal, Dimensions } from 'react-native';
+import { View, AsyncStorage, Image, Text, ScrollView, TouchableWithoutFeedback, Modal, Dimensions, Picker } from 'react-native';
 import { CardSection, Button, Input, Header } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import Orientation from 'react-native-orientation';
 
 class AddAudio extends Component {
-    state = { information: null, caption: null, group: null, acheivement: null, languages: null, isNull: false, heightc: null, widthc: null, color: null }
+    state = { information: null, caption: null, group: 'Select A Tag', acheivement: null, languages: null, isNull: false, heightc: null, widthc: null, color: null, tags: null, tagpick: null }
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async componentWillMount() {
         Orientation.lockToLandscape();
-        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), heightc: Dimensions.get('window').height, widthc: Dimensions.get('window').width });
+        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), heightc: Dimensions.get('window').height, widthc: Dimensions.get('window').width, tags: JSON.parse(await AsyncStorage.getItem('Tags')) });
+    }
+    createPicker() {
+        const firstpicker = [<Picker.Item label={'Select A Tag'} value={'Select A Tag'} />,
+                            <Picker.Item label={'Create A New Tag'} value={'Create A New Tag'} />
+                            ];
+                            
+        const picker = this.state.tags.map(
+            (tag) => (
+                <Picker.Item label={tag} value={tag} />
+            )
+        );
+        const fullpicker = [...firstpicker, ...picker];
+        return (
+            [...fullpicker]
+        );
+    }
+
+    renderPicker() {
+        if (this.state.tags === null || this.state.languages === null) {
+            return (
+                <View />
+            );
+        } else {
+            if (this.state.tagpick === null) {
+                if (this.state.tags.length !== 0) {
+                    return (
+                        [<Text style={{ fontSize: 23, marginLeft: 100, flex: 1, alignSelf: 'center', fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['060']}</Text>,
+                        <Picker
+                            style={{ flex: 6 }}
+                            selectedValue={this.state.group}
+                            onValueChange={(group) => {
+                                if (group === 'Create A New Tag') {
+                                    this.setState({ tagpick: false, group: null });
+                                } else if (group === 'Select A Tag') {
+                                    this.setState({ tagpick: null });
+                                } else {
+                                    this.setState({ group });
+                                }
+                            }}
+                        >
+                        {this.createPicker()}
+                        </Picker>
+                        ]
+                    );
+                } else {
+                    return (
+                        <Input
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
+                        value={this.state.group}
+                        onChangeText={(group) => this.setState({ group })}
+                        />
+                    );
+                }
+            }
+            if (this.state.tagpick === false) {
+                return (
+                    <Input
+                    placeholder={Languages[this.state.languages]['063']}
+                    label={Languages[this.state.languages]['060']}
+                    value={this.state.group}
+                    onChangeText={(group) => this.setState({ group })}
+                    />
+                );
+            }
+        }
     }
     async onSaveItemPress() {
-        if (this.state.information === null || this.state.caption === null || this.state.group === null || this.state.information === '' || this.state.caption === '' || this.state.group === '') {
+        if (this.state.information === null || this.state.caption === null || this.state.group === null || this.state.group === 'Select A Tag' || this.state.information === '' || this.state.caption === '' || this.state.group === '') {
             this.setState({ isNull: true });
         } else {
             const { information, caption, group } = this.state;
@@ -55,7 +121,7 @@ class AddAudio extends Component {
     
         async createNew() {
             const { information, caption, group } = this.state;
-            if (this.state.information === null || this.state.caption === null || this.state.group === null || this.state.information === '' || this.state.caption === '' || this.state.group === '') {
+            if (this.state.information === null || this.state.caption === null || this.state.group === null || this.state.group === 'Select A Tag' || this.state.information === '' || this.state.caption === '' || this.state.group === '') {
                 this.setState({ isNull: true });
             } else {
                 const audios = JSON.parse(await AsyncStorage.getItem('Audio'));
@@ -125,13 +191,7 @@ class AddAudio extends Component {
                                     />
                                 </CardSection>
                                 <CardSection style={{ width: (this.state.widthc - 380) }}>
-                                    <Input
-                                    placeholder={Languages[this.state.languages]['063']}
-                                    label={Languages[this.state.languages]['060']}
-                                    value={this.state.group}
-                                    onChangeText={(group) => this.setState({ group })}
-                                    ref='username'
-                                    />
+                                    {this.renderPicker()}
                                 </CardSection>
                                     <CardSection style={{ width: (this.state.widthc - 380) }}>
                                     <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
@@ -180,13 +240,7 @@ class AddAudio extends Component {
                                 />
                             </CardSection>
                             <CardSection style={{ width: (this.state.widthc - 380) }}>
-                                <Input
-                                placeholder={Languages[this.state.languages]['063']}
-                                label={Languages[this.state.languages]['060']}
-                                value={this.state.group}
-                                onChangeText={(group) => this.setState({ group })}
-                                ref='username'
-                                />
+                                {this.renderPicker()}
                             </CardSection>
                                 <CardSection style={{ width: (this.state.widthc - 380) }}>
                                 <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>

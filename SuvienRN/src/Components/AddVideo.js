@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, AsyncStorage, ScrollView, CameraRoll, Modal, Dimensions, TouchableWithoutFeedback, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Image, AsyncStorage, ScrollView, CameraRoll, Modal, Dimensions, TouchableWithoutFeedback, Platform, Picker } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Languages from '../Languages/Languages.json';
 import { CardSection, Button, Input, Header } from './common';
@@ -7,7 +7,7 @@ import Camera from 'react-native-camera';
 import Orientation from 'react-native-orientation';
 
 class AddVideo extends Component {
-    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, color: null, isNull: false, languages: null, heightc: null, widthc: null, cameraType: 'back', isRecording: false, videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
+    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, color: null, isNull: false, languages: null, heightc: null, widthc: null, cameraType: 'back', isRecording: false, videoID: null, tags: null, tagpick: null, isLaunchCam: false, title: null, caption: null, group: 'Select A Tag', webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
     async componentWillMount() {
         Orientation.lockToLandscape();
         this.setState({ 
@@ -15,8 +15,75 @@ class AddVideo extends Component {
             widthc: Dimensions.get('window').width,
             acheivement: await AsyncStorage.getItem('Acheivement'),
             languages: await AsyncStorage.getItem('Language'),
-            color: await AsyncStorage.getItem('BGColour')
+            color: await AsyncStorage.getItem('BGColour'),
+            tags: JSON.parse(await AsyncStorage.getItem('Tags'))
         });
+    }
+    createPicker() {
+        const firstpicker = [<Picker.Item label={'Select A Tag'} value={'Select A Tag'} />,
+                            <Picker.Item label={'Create A New Tag'} value={'Create A New Tag'} />
+                            ];
+                            
+        const picker = this.state.tags.map(
+            (tag) => (
+                <Picker.Item label={tag} value={tag} />
+            )
+        );
+        const fullpicker = [...firstpicker, ...picker];
+        return (
+            [...fullpicker]
+        );
+    }
+
+    renderPicker() {
+        if (this.state.tags === null || this.state.languages === null) {
+            return (
+                <View />
+            );
+        } else {
+            if (this.state.tagpick === null) {
+                if (this.state.tags.length !== 0) {
+                    return (
+                        [<Text style={{ fontSize: 23, marginLeft: 100, flex: 2, alignSelf: 'center', fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['060']}</Text>,
+                        <Picker
+                            style={{ flex: 6 }}
+                            selectedValue={this.state.group}
+                            onValueChange={(group) => {
+                                if (group === 'Create A New Tag') {
+                                    this.setState({ tagpick: false, group: null });
+                                } else if (group === 'Select A Tag') {
+                                    this.setState({ tagpick: null });
+                                } else {
+                                    this.setState({ group });
+                                }
+                            }}
+                        >
+                        {this.createPicker()}
+                        </Picker>
+                        ]
+                    );
+                } else {
+                    return (
+                        <Input
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
+                        value={this.state.group}
+                        onChangeText={(group) => this.setState({ group })}
+                        />
+                    );
+                }
+            }
+            if (this.state.tagpick === false) {
+                return (
+                    <Input
+                    placeholder={Languages[this.state.languages]['063']}
+                    label={Languages[this.state.languages]['060']}
+                    value={this.state.group}
+                    onChangeText={(group) => this.setState({ group })}
+                    />
+                );
+            }
+        }
     }
     onAddWebVideoPress() {
         this.setState({ webvid: true });
@@ -42,7 +109,7 @@ class AddVideo extends Component {
     async onSaveItemPress() {
         console.log(this.state.videouri);
         console.log(this.state.uri);
-        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || (this.state.videoID === null && this.state.uri === null)) {
+        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || this.state.group === 'Select A Tag' || (this.state.videoID === null && this.state.uri === null)) {
             this.setState({ isNull: true });
         } else {
             if (this.state.mediaType === 'Youtube') {
@@ -129,7 +196,7 @@ class AddVideo extends Component {
     }
 
     async createNew() {
-        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || (this.state.videoID === null && this.state.uri === null)) {
+        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || this.state.group === 'Select A Tag' || (this.state.videoID === null && this.state.uri === null)) {
             this.setState({ isNull: true });
         } else {
             if (this.state.mediaType === 'Youtube') {
@@ -251,12 +318,7 @@ class AddVideo extends Component {
                                 />
                             </CardSection>
                             <CardSection style={{ width: (this.state.widthc - 380) }}>
-                                <Input
-                                placeholder={Languages[this.state.languages]['063']}
-                                label={Languages[this.state.languages]['060']}
-                                value={this.state.group}
-                                onChangeText={(group) => this.setState({ group })}
-                                />
+                                {this.renderPicker()}
                             </CardSection>
                             {this.onRenderYoutube()}
                             </View>
@@ -301,12 +363,7 @@ class AddVideo extends Component {
                                 />
                             </CardSection>
                             <CardSection style={{ width: (this.state.widthc - 380) }}>
-                                <Input
-                                placeholder={Languages[this.state.languages]['063']}
-                                label={Languages[this.state.languages]['060']}
-                                value={this.state.group}
-                                onChangeText={(group) => this.setState({ group })}
-                                />
+                                {this.renderPicker()}
                             </CardSection>
                             {this.onRenderYoutube()}
                             </View>
@@ -358,12 +415,7 @@ class AddVideo extends Component {
                                     />
                                 </CardSection>
                                 <CardSection style={{ width: (this.state.widthc - 380) }}>
-                                    <Input
-                                    placeholder={Languages[this.state.languages]['063']}
-                                    label={Languages[this.state.languages]['060']}
-                                    value={this.state.group}
-                                    onChangeText={(group) => this.setState({ group })}
-                                    />
+                                    {this.renderPicker()}
                                 </CardSection>
                                 {this.onRenderYoutube()}
                                 </View>
@@ -413,13 +465,7 @@ class AddVideo extends Component {
                                 />
                             </CardSection>
                             <CardSection style={{ width: (this.state.widthc - 380) }}>
-                                <Input
-                                placeholder={Languages[this.state.languages]['063']}
-                                label={Languages[this.state.languages]['060']}
-                                value={this.state.group}
-                                onChangeText={(group) => this.setState({ group })}
-                                ref='username'
-                                />
+                                {this.renderPicker()}
                             </CardSection>
                             {this.onRenderYoutube()}
                             </View>
@@ -469,13 +515,7 @@ class AddVideo extends Component {
                                 />
                             </CardSection>
                             <CardSection style={{ width: (this.state.widthc - 380) }}>
-                                <Input
-                                placeholder={Languages[this.state.languages]['063']}
-                                label={Languages[this.state.languages]['060']}
-                                value={this.state.group}
-                                onChangeText={(group) => this.setState({ group })}
-                                ref='username'
-                                />
+                                {this.renderPicker()}
                             </CardSection>
                             {this.onRenderYoutube()}
                             </View>
@@ -522,12 +562,7 @@ class AddVideo extends Component {
                                     />
                                 </CardSection>
                                 <CardSection style={{ width: (this.state.widthc - 380) }}>
-                                    <Input
-                                    placeholder={Languages[this.state.languages]['063']}
-                                    label={Languages[this.state.languages]['060']}
-                                    value={this.state.group}
-                                    onChangeText={(group) => this.setState({ group })}
-                                    />
+                                    {this.renderPicker()}
                                 </CardSection>
                                 {this.onRenderYoutube()}
                                 </View>
@@ -572,13 +607,7 @@ class AddVideo extends Component {
                                 />
                             </CardSection>
                             <CardSection style={{ width: (this.state.widthc - 380) }}>
-                                <Input
-                                placeholder={Languages[this.state.languages]['063']}
-                                label={Languages[this.state.languages]['060']}
-                                value={this.state.group}
-                                onChangeText={(group) => this.setState({ group })}
-                                ref='username'
-                                />
+                                {this.renderPicker()}
                             </CardSection>
                             {this.onRenderYoutube()}
                             </View>
@@ -623,13 +652,7 @@ class AddVideo extends Component {
                                 />
                             </CardSection>
                             <CardSection style={{ width: (this.state.widthc - 380) }}>
-                                <Input
-                                placeholder={Languages[this.state.languages]['063']}
-                                label={Languages[this.state.languages]['060']}
-                                value={this.state.group}
-                                onChangeText={(group) => this.setState({ group })}
-                                ref='username'
-                                />
+                                {this.renderPicker()}
                             </CardSection>
                             {this.onRenderYoutube()}
                             </View>

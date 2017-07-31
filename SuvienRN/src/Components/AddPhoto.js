@@ -49,7 +49,7 @@ class AddPhoto extends Component {
             if (this.state.tagpick === null) {
                 if (this.state.tags.length !== 0) {
                     return (
-                        [<Text style={{ fontSize: 23, marginLeft: 100, flex: 1, alignSelf: 'center', fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['060']}</Text>,
+                        [<Text style={{ fontSize: 23, marginLeft: 100, flex: 2, alignSelf: 'center', fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['060']}</Text>,
                         <Picker
                             style={{ flex: 6 }}
                             selectedValue={this.state.group}
