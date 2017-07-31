@@ -5,9 +5,10 @@ import Languages from '../Languages/Languages.json';
 import RadioForm from 'react-native-simple-radio-button';
 import { Actions } from 'react-native-router-flux';
 import Orientation from 'react-native-orientation';
+import ModalPicker from 'react-native-modal-picker';
 
 class Settings extends Component {
-    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, languages: null, mediaType: null, color: null, media: null, mediaArray: null, selectedItem: null, width: null, modalVisible: false, delete: null, isNull: false, selected: null, preferences: null};
+    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, tags: null, tagpick: null, languages: null, mediaType: null, color: null, media: null, mediaArray: null, selectedItem: null, width: null, modalVisible: false, delete: null, isNull: false, selected: null, preferences: null};
     async componentWillMount() {
         Orientation.lockToLandscape();
         const transarray = ['ENG', 'FRE', 'ESP'];
@@ -21,7 +22,8 @@ class Settings extends Component {
                 width: parseInt(await AsyncStorage.getItem('Width')),
                 languages: await AsyncStorage.getItem('Language'),
                 color: await AsyncStorage.getItem('BGColour'),
-                selected: transarray.indexOf(await AsyncStorage.getItem('Language'))
+                selected: transarray.indexOf(await AsyncStorage.getItem('Language')),
+                tags: JSON.parse(await AsyncStorage.getItem('Tags'))
             });
         }
         if (await AsyncStorage.getItem('name') === null) {
@@ -31,6 +33,84 @@ class Settings extends Component {
             });
         }
     }
+    createPicker() {
+let index = 0;
+const firstpicker = [{ key: index++, label: 'Select A Tag' },
+                    { key: index++, label: 'Create A New Tag' }
+                    ];
+const picker = this.state.tags.map(
+    (tag) => (
+        { key: index++, label: tag }
+    )
+);
+const fullpicker = [...firstpicker, ...picker];
+return (
+    [...fullpicker]
+);
+}
+
+renderPicker() {
+if (this.state.tags === null || this.state.languages === null) {
+    return (
+        <View />
+    );
+} else {
+    if (this.state.tagpick === null) {
+        if (this.state.tags.length !== 0) {
+            return (
+                [<Text style={{ fontSize: 23, marginLeft: 100, alignSelf: 'center', fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['060']}</Text>,
+                <ModalPicker
+                data={this.createPicker()}
+                style={{ marginLeft: Platform.OS === 'ios' ? 70 : 125, width: 300 }}
+                initValue={this.state.selectedItem.group}
+                onChange={(group) => {
+                    const newItem = this.state.selectedItem;
+                        if (group.label === 'Create A New Tag') {
+                            newItem.group = null;
+                            this.setState({ tagpick: false, selectedItem: newItem });
+                        } else if (group.label === 'Select A Tag') {
+                            this.setState({ tagpick: null });
+                        } else {
+                            newItem.group = group.label;
+                            this.setState({ selectedItem: newItem });
+                        }
+                    }} 
+                />
+                ]
+            );
+        } else {
+            return (
+                <Input
+                            placeholder={Languages[this.state.languages]['063']}
+                            label={Languages[this.state.languages]['060']}
+                            value={this.state.selectedItem.group}
+                            onChangeText={(group) => {
+                                const selectedItem = this.state.selectedItem;
+                                selectedItem.group = group;
+                                this.setState({ selectedItem });
+                                }
+                                }
+                            />
+            );
+        }
+    }
+    if (this.state.tagpick === false) {
+        return (
+            <Input
+                            placeholder={Languages[this.state.languages]['063']}
+                            label={Languages[this.state.languages]['060']}
+                            value={this.state.selectedItem.group}
+                            onChangeText={(group) => {
+                                const selectedItem = this.state.selectedItem;
+                                selectedItem.group = group;
+                                this.setState({ selectedItem });
+                                }
+                                }
+                            />
+        );
+    }
+}
+}    
     onDelete(selected) {
         if (selected.mediaType === 'Photo') {
              const media = this.state.mediaArray;
@@ -141,7 +221,7 @@ class Settings extends Component {
 
     async onSaveItemPress() {
         const selected = this.state.selectedItem;
-        if (this.state.selectedItem.title === null || this.state.selectedItem.title === '' || this.state.selectedItem.caption === null || this.state.selectedItem.caption === '' || this.state.selectedItem.group === null || this.state.selectedItem.group === '') {
+        if (this.state.selectedItem.title === null || this.state.selectedItem.title === '' || this.state.selectedItem.caption === null || this.state.selectedItem.caption === '' || this.state.selectedItem.group === null || this.state.selectedItem.group === 'Select A Tag' || this.state.selectedItem.group === '') {
             this.setState({ isNull: true });
         } else {
             const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
@@ -408,17 +488,7 @@ class Settings extends Component {
                             />
                         </CardSection>
                         <CardSection style={{ width: (this.state.width - 380) }}>
-                            <Input
-                            placeholder={Languages[this.state.languages]['063']}
-                            label={Languages[this.state.languages]['060']}
-                            value={this.state.selectedItem.group}
-                            onChangeText={(group) => {
-                                const selectedItem = this.state.selectedItem;
-                                selectedItem.group = group;
-                                this.setState({ selectedItem });
-                                }
-                                }
-                            />
+                            {this.renderPicker()}
                         </CardSection>
                     </View>
                     </View>
@@ -459,17 +529,7 @@ class Settings extends Component {
                             />
                         </CardSection>
                         <CardSection style={{ width: (this.state.width - 380) }}>
-                            <Input
-                            placeholder={Languages[this.state.languages]['063']}
-                            label={Languages[this.state.languages]['060']}
-                            value={this.state.selectedItem.group}
-                            onChangeText={(group) => {
-                                const selectedItem = this.state.selectedItem;
-                                selectedItem.group = group;
-                                this.setState({ selectedItem });
-                                }
-                                }
-                            />
+                            {this.renderPicker()}
                         </CardSection>
                         </View>
                     </View>
@@ -517,17 +577,7 @@ class Settings extends Component {
                         />
                     </CardSection>
                     <CardSection style={{ width: (this.state.width - 380) }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        value={this.state.selectedItem.group}
-                        onChangeText={(group) => {
-                            const selectedItem = this.state.selectedItem;
-                            selectedItem.group = group;
-                            this.setState({ selectedItem });
-                            }
-                            }
-                        />
+                        {this.renderPicker()}
                     </CardSection>
                     </View>
                     </View>
@@ -1046,7 +1096,7 @@ class Settings extends Component {
             }
             if (this.state.selectedItem !== null) {
                     return (
-                        <View>
+                        <View style={{ flex: 1 }}>
                         <Header style={{ height: 60, flexDirection: 'row' }}>
                 <View style={{ flex: 1 }}>
                     <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
@@ -1060,6 +1110,8 @@ class Settings extends Component {
                     </TouchableWithoutFeedback>
                 </View>
             </Header>
+            <ScrollView>
+                <View style={{ marginTop: 10, flex: 1 }}>
             <Modal
                 animationType={"fade"}
                 transparent
@@ -1084,6 +1136,7 @@ class Settings extends Component {
                 </View>
                 </Modal>
                     {this.renderExplorer()}
+                    <View style={{ marginTop: 10, marginBottom: 10 }}>
                     <CardSection>
                         <Button onPress={this.onSaveItemPress.bind(this)}>
                             {Languages[this.state.languages]['077']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
@@ -1099,6 +1152,9 @@ class Settings extends Component {
                             {Languages[this.state.languages]['069']}
                         </Button>
                     </CardSection>
+                    </View>
+                </View>
+                </ScrollView>
                 </View>
             );
             }
@@ -1236,7 +1292,7 @@ class Settings extends Component {
                 }
                 if (this.state.selectedItem !== null) {
                         return (
-                            <View>
+                            <View style={{ flex: 1 }}>
                             <Header style={{ height: 60, flexDirection: 'row' }}>
                     <View style={{ flex: 1 }}>
                         <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
@@ -1273,6 +1329,8 @@ class Settings extends Component {
                 </View>
                 </View>
                 </Modal>
+                <ScrollView>
+                        <View style={{ marginTop: 10, flex: 1 }}>
                         {this.renderExplorer()}
                         <CardSection>
                             <Button onPress={this.onSaveItemPress.bind(this)}>
@@ -1289,6 +1347,8 @@ class Settings extends Component {
                                 {Languages[this.state.languages]['069']}
                             </Button>
                         </CardSection>
+                    </View>
+                    </ScrollView>
                     </View>
                 );
                 }

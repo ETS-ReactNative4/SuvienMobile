@@ -53,7 +53,7 @@ class AddPhoto extends Component {
                         [<Text style={{ fontSize: 23, marginLeft: 100, alignSelf: 'center', fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['060']}</Text>,
                         <ModalPicker
                         data={this.createPicker()}
-                        style={{ marginLeft: 125, width: 300 }}
+                        style={{ marginLeft: Platform.OS === 'ios' ? 70 : 125, width: 300 }}
                         initValue={this.state.group}
                         onChange={(group) => {
                                 if (group.label === 'Create A New Tag') {

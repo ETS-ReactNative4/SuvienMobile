@@ -42,7 +42,7 @@ if (this.state.tags === null || this.state.languages === null) {
                 [<Text style={{ fontSize: 23, marginLeft: 100, alignSelf: 'center', fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['060']}</Text>,
                 <ModalPicker
                 data={this.createPicker()}
-                style={{ marginLeft: 125, width: 300 }}
+                style={{ marginLeft: 70, width: 300 }}
                 initValue={this.state.group}
                 onChange={(group) => {
                         if (group.label === 'Create A New Tag') {
@@ -324,6 +324,8 @@ if (this.state.tags === null || this.state.languages === null) {
                             </TouchableWithoutFeedback>
                         </View>
                     </Header>
+                    <ScrollView>
+                        <View style={{ marginTop: 10, flex: 1 }}>
                             {this.onAudioSelect()}
                             <View>
                     <CardSection>
@@ -337,6 +339,8 @@ if (this.state.tags === null || this.state.languages === null) {
                     </Button>
                     </CardSection>
                 </View>
+                    </View>
+                    </ScrollView>
                     </View>
                 );
             }
@@ -379,6 +383,8 @@ if (this.state.tags === null || this.state.languages === null) {
                             </TouchableWithoutFeedback>
                         </View>
                     </Header>
+                    <ScrollView>
+                        <View style={{ marginTop: 10, flex: 1 }}>
                             {this.onAudioSelect()}
                             <View>
                     <CardSection>
@@ -397,6 +403,8 @@ if (this.state.tags === null || this.state.languages === null) {
                     </Button>
                     </CardSection>
                 </View>
+                    </View>
+                    </ScrollView>
                     </View>
                 );
             }
