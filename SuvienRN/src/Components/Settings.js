@@ -501,7 +501,7 @@ if (this.state.tags === null || this.state.languages === null) {
                     <Image source={{ uri: this.state.selectedItem.imageuri }} style={{ height: 300, width: 300 }} />
                 </CardSection>
                 </View>
-                <View style={{ width: (this.state.width - 450), backgroundColor: 'white', height: 300, justifyContent: 'center' }}>
+                <View style={{ width: (this.state.width - 450), backgroundColor: 'white', justifyContent: 'center' }}>
                 <CardSection style={{ borderTopWidth: 1, width: (this.state.width - 380), marginTop: 10 }}>
                             <Input
                             placeholder={Languages[this.state.languages]['061']}
@@ -1095,68 +1095,68 @@ if (this.state.tags === null || this.state.languages === null) {
                 );
             }
             if (this.state.selectedItem !== null) {
-                    return (
-                        <View style={{ flex: 1 }}>
-                        <Header style={{ height: 60, flexDirection: 'row' }}>
-                <View style={{ flex: 1 }}>
-                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['076']}</Text>
-                </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/mainmenu.png')} style={{ height: Platform.OS === 'ios' ? 40 : 50, width: Platform.OS === 'ios' ? 40 : 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: Platform.OS === 'ios' ? 5 : 10 }} />
-                    </TouchableWithoutFeedback>
-                </View>
-            </Header>
-            <ScrollView>
-                <View style={{ marginTop: 10, flex: 1 }}>
-            <Modal
-                animationType={"fade"}
-                transparent
-                visible={this.state.isNull}
-                onRequestClose={() => {}}
+                return (
+                    <View style={{ flex: 1 }}>
+                    <Header style={{ height: 60, flexDirection: 'row' }}>
+            <View style={{ flex: 1 }}>
+                <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+            </View>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['076']}</Text>
+            </View>
+            <View style={{ flex: 1 }}>
+                <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                <Image source={require('../Images/mainmenu.png')} style={{ height: Platform.OS === 'ios' ? 40 : 50, width: Platform.OS === 'ios' ? 40 : 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: Platform.OS === 'ios' ? 5 : 10 }} />
+                </TouchableWithoutFeedback>
+            </View>
+        </Header>
+        <ScrollView>
+            <View style={{ marginTop: 10, flex: 1 }}>
+        <Modal
+            animationType={"fade"}
+            transparent
+            visible={this.state.isNull}
+            onRequestClose={() => {}}
 >
-            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-                <Image source={{ uri: `blankfield${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 400 }} />
-                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
-                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
-                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
-                        <Button 
-                        onPress={() => {
-                        this.setState({ isNull: false });
-                        }}
-                        >
-                    {Languages[this.state.languages]['113']}
-                        </Button>
-                    </CardSection>
+        <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+            <Image source={{ uri: `blankfield${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 200, width: 400 }} />
+                <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['111']}</Text>
+                <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30, marginTop: 10 }}>{Languages[this.state.languages]['112']}</Text>
+                <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                    <Button 
+                    onPress={() => {
+                    this.setState({ isNull: false });
+                    }}
+                    >
+                {Languages[this.state.languages]['113']}
+                    </Button>
+                </CardSection>
+            </View>
+            </View>
+            </Modal>
+                {this.renderExplorer()}
+                <View style={{ marginTop: 10, marginBottom: 10 }}>
+                <CardSection>
+                    <Button onPress={this.onSaveItemPress.bind(this)}>
+                        {Languages[this.state.languages]['077']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                    </Button>
+                </CardSection>
+                <CardSection>
+                    <Button onPress={() => this.setState({ selectedItem: null })}>
+                        {Languages[this.state.languages]['070']}
+                    </Button>
+                </CardSection>
+                <CardSection>
+                    <Button onPress={() => this.setState({ selectedItem: null, mediaType: null })}>
+                        {Languages[this.state.languages]['069']}
+                    </Button>
+                </CardSection>
                 </View>
-                </View>
-                </Modal>
-                    {this.renderExplorer()}
-                    <View style={{ marginTop: 10, marginBottom: 10 }}>
-                    <CardSection>
-                        <Button onPress={this.onSaveItemPress.bind(this)}>
-                            {Languages[this.state.languages]['077']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
-                        </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={() => this.setState({ selectedItem: null })}>
-                            {Languages[this.state.languages]['070']}
-                        </Button>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={() => this.setState({ selectedItem: null, mediaType: null })}>
-                            {Languages[this.state.languages]['069']}
-                        </Button>
-                    </CardSection>
-                    </View>
-                </View>
-                </ScrollView>
-                </View>
-            );
+            </View>
+            </ScrollView>
+            </View>
+        );
             }
         }
             } 

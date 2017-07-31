@@ -12,8 +12,13 @@ class AddAudioAnd extends Component {
     //console.log(JSON.parse(await AsyncStorage.getItem('samplemusic')));
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async componentWillMount() {
+        const tagarray = JSON.parse(await AsyncStorage.getItem('Tags'));
         Orientation.lockToLandscape();
-        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height, tags: JSON.parse(await AsyncStorage.getItem('Tags')) });
+        if (tagarray.length === 0) {
+        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height, tags: JSON.parse(await AsyncStorage.getItem('Tags')), group: null });
+        } else {
+            this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height, tags: JSON.parse(await AsyncStorage.getItem('Tags')) });
+        }
     }
     createPicker() {
 let index = 0;

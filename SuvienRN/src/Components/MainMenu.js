@@ -18,6 +18,8 @@ class MainMenu extends Component {
         prefobj[array[4]] = false;
         AsyncStorage.setItem('Preferences', JSON.stringify(prefobj));
         */
+        console.log('weee');
+        console.log(await AsyncStorage.getItem('Language'));
         Orientation.lockToLandscape();
         AsyncStorage.setItem('BGColour', 'rgba(60,60,60,0.95)');
          if (await AsyncStorage.getItem('name') !== null && await AsyncStorage.getItem('stage') !== null) {
@@ -199,7 +201,6 @@ class MainMenu extends Component {
     async getFirst() {
         this.setState({ pictures: JSON.parse(await AsyncStorage.getItem('Pictures')) });
         if (JSON.parse(await AsyncStorage.getItem('Ask')) === false || JSON.parse(await AsyncStorage.getItem('Ask')) === null) {
-            console.log('im here!');
             if (await AsyncStorage.getItem('name') === null && await AsyncStorage.getItem('stage') === null) {
             this.setState({ isFirst: true, lang: true });
         } 
@@ -211,7 +212,11 @@ class MainMenu extends Component {
         }
         }
         if (JSON.parse(await AsyncStorage.getItem('Ask')) === true) {
-            this.setState({ isFirst: false, stage: await AsyncStorage.getItem('stage'), isComp: await AsyncStorage.getItem('Achievement'), img: Languages[await AsyncStorage.getItem('Language')]['103'], lang: false, ask: true });
+            if (await AsyncStorage.getItem('name') === null && await AsyncStorage.getItem('stage') === null) {
+                this.setState({ isFirst: true, lang: false, ask: true, language: await AsyncStorage.getItem('Language'), img: Languages[await AsyncStorage.getItem('Language')]['103'] });
+            } else {
+                this.setState({ isFirst: false, stage: await AsyncStorage.getItem('stage'), isComp: await AsyncStorage.getItem('Achievement'), img: Languages[await AsyncStorage.getItem('Language')]['103'], lang: false, ask: true });
+            }
         }
     }
 
@@ -237,7 +242,6 @@ class MainMenu extends Component {
         );
     }
     render() {
-        console.log(this.state.img);
         if (this.state.lang === null) {
             return (
                 <View />

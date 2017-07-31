@@ -10,7 +10,19 @@ import Orientation from 'react-native-orientation';
 class AddVideo extends Component {
     state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, color: null, isNull: false, languages: null, heightc: null, widthc: null, cameraType: 'back', isRecording: false, videoID: null, tags: null, tagpick: null, isLaunchCam: false, title: null, caption: null, group: 'Select A Tag', webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
     async componentWillMount() {
+        const tagarray = JSON.parse(await AsyncStorage.getItem('Tags'));
         Orientation.lockToLandscape();
+        if (tagarray.length === 0) {
+        this.setState({ 
+            heightc: Dimensions.get('window').height,
+            widthc: Dimensions.get('window').width,
+            acheivement: await AsyncStorage.getItem('Acheivement'),
+            languages: await AsyncStorage.getItem('Language'),
+            color: await AsyncStorage.getItem('BGColour'),
+            tags: JSON.parse(await AsyncStorage.getItem('Tags')),
+            group: null
+        });
+    } else {
         this.setState({ 
             heightc: Dimensions.get('window').height,
             widthc: Dimensions.get('window').width,
@@ -19,6 +31,7 @@ class AddVideo extends Component {
             color: await AsyncStorage.getItem('BGColour'),
             tags: JSON.parse(await AsyncStorage.getItem('Tags'))
         });
+    }
     }
     createPicker() {
 let index = 0;

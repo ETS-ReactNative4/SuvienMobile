@@ -11,8 +11,13 @@ class AddAudio extends Component {
     state = { information: null, caption: null, group: 'Select A Tag', acheivement: null, languages: null, isNull: false, heightc: null, widthc: null, color: null, tags: null, tagpick: null }
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async componentWillMount() {
+        const tagarray = JSON.parse(await AsyncStorage.getItem('Tags'));
         Orientation.lockToLandscape();
-        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), heightc: Dimensions.get('window').height, widthc: Dimensions.get('window').width, tags: JSON.parse(await AsyncStorage.getItem('Tags')) });
+        if (tagarray.length === 0) {
+        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), heightc: Dimensions.get('window').height, widthc: Dimensions.get('window').width, tags: JSON.parse(await AsyncStorage.getItem('Tags')), group: null });
+        } else {
+            this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), heightc: Dimensions.get('window').height, widthc: Dimensions.get('window').width, tags: JSON.parse(await AsyncStorage.getItem('Tags')) });
+        }
     }
     createPicker() {
 let index = 0;

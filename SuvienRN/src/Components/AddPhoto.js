@@ -13,16 +13,28 @@ import Orientation from 'react-native-orientation';
 class AddPhoto extends Component {
     state = { imageuri: null, caption: null, group: 'Select A Tag', languages: null, acheivement: null, tagpick: null, tags: null, color: null, isNull: false, modalVisible: false, initval: 'Select A Tag', photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
     async componentWillMount() {
+        const tagarray = JSON.parse(await AsyncStorage.getItem('Tags'));
         Orientation.lockToLandscape();
-        console.log(await AsyncStorage.getItem('Language'));
-        this.setState({ 
-            heightc: Dimensions.get('window').height,
-            widthc: Dimensions.get('window').width,
-            acheivement: await AsyncStorage.getItem('Acheivement'),
-            languages: await AsyncStorage.getItem('Language'),
-            color: await AsyncStorage.getItem('BGColour'),
-            tags: JSON.parse(await AsyncStorage.getItem('Tags'))
-        });
+        if (tagarray.length === 0) {
+            this.setState({ 
+                heightc: Dimensions.get('window').height,
+                widthc: Dimensions.get('window').width,
+                acheivement: await AsyncStorage.getItem('Acheivement'),
+                languages: await AsyncStorage.getItem('Language'),
+                color: await AsyncStorage.getItem('BGColour'),
+                tags: JSON.parse(await AsyncStorage.getItem('Tags')),
+                group: null
+            }); 
+        } else {
+            this.setState({ 
+                heightc: Dimensions.get('window').height,
+                widthc: Dimensions.get('window').width,
+                acheivement: await AsyncStorage.getItem('Acheivement'),
+                languages: await AsyncStorage.getItem('Language'),
+                color: await AsyncStorage.getItem('BGColour'),
+                tags: JSON.parse(await AsyncStorage.getItem('Tags'))
+            });
+        }
     }
 
     createPicker() {
