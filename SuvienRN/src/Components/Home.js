@@ -13,6 +13,7 @@ import { Media } from './';
 class Home extends Component {
     state = { dim: null, media: null, preset: null, tags: null, width: null, acheivement: null, medias: null, languages: null, color: null }
     async componentWillMount() {
+        Orientation.lockToLandscape();
         this.setState({ width: parseInt(await AsyncStorage.getItem('Width')), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour') });
         console.log(await AsyncStorage.getItem('Preferences'));
         this.doMath();

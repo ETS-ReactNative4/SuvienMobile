@@ -2,26 +2,96 @@
 //Add save and return to settings
 //Return to home.
 import React, { Component } from 'react';
-import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity, TouchableWithoutFeedback, Platform, Dimensions } from 'react-native';
+import { View, AsyncStorage, Text, Image, Modal, ScrollView, CameraRoll, TouchableOpacity, TouchableWithoutFeedback, Platform, Dimensions, Picker } from 'react-native';
 import { CardSection, Button, Input, Header } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import Camera from 'react-native-camera';
+import Orientation from 'react-native-orientation';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: null, languages: null, acheivement: null, color: null, isNull: false, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    state = { imageuri: null, caption: null, group: 'Select A Tag', languages: null, acheivement: null, tagpick: null, tags: null, color: null, isNull: false, modalVisible: false, initval: 'Select A Tag', photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
     async componentWillMount() {
+        Orientation.lockToLandscape();
         console.log(await AsyncStorage.getItem('Language'));
         this.setState({ 
             heightc: Dimensions.get('window').height,
             widthc: Dimensions.get('window').width,
             acheivement: await AsyncStorage.getItem('Acheivement'),
             languages: await AsyncStorage.getItem('Language'),
-            color: await AsyncStorage.getItem('BGColour')
+            color: await AsyncStorage.getItem('BGColour'),
+            tags: JSON.parse(await AsyncStorage.getItem('Tags'))
         });
     }
+
+    createPicker() {
+        const firstpicker = [<Picker.Item label={'Select A Tag'} value={'Select A Tag'} />,
+                            <Picker.Item label={'Create A New Tag'} value={'Create A New Tag'} />
+                            ];
+                            
+        const picker = this.state.tags.map(
+            (tag) => (
+                <Picker.Item label={tag} value={tag} />
+            )
+        );
+        const fullpicker = [...firstpicker, ...picker];
+        return (
+            [...fullpicker]
+        );
+    }
+
+    renderPicker() {
+        if (this.state.tags === null || this.state.languages === null) {
+            return (
+                <View />
+            );
+        } else {
+            if (this.state.tagpick === null) {
+                if (this.state.tags.length !== 0) {
+                    return (
+                        [<Text style={{ fontSize: 23, marginLeft: 100, flex: 1, alignSelf: 'center', fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['060']}</Text>,
+                        <Picker
+                            style={{ flex: 6 }}
+                            selectedValue={this.state.group}
+                            onValueChange={(group) => {
+                                if (group === 'Create A New Tag') {
+                                    this.setState({ tagpick: false, group: null });
+                                } else if (group === 'Select A Tag') {
+                                    this.setState({ tagpick: null });
+                                } else {
+                                    this.setState({ group });
+                                }
+                            }}
+                        >
+                        {this.createPicker()}
+                        </Picker>
+                        ]
+                    );
+                } else {
+                    return (
+                        <Input
+                        placeholder={Languages[this.state.languages]['063']}
+                        label={Languages[this.state.languages]['060']}
+                        value={this.state.group}
+                        onChangeText={(group) => this.setState({ group })}
+                        />
+                    );
+                }
+            }
+            if (this.state.tagpick === false) {
+                return (
+                    <Input
+                    placeholder={Languages[this.state.languages]['063']}
+                    label={Languages[this.state.languages]['060']}
+                    value={this.state.group}
+                    onChangeText={(group) => this.setState({ group })}
+                    />
+                );
+            }
+        }
+    }
     async onSaveItemPress() {
-        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || (this.state.imgsrc === null && this.state.imageuri === null)) {
+        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || this.state.group === 'Select A Tag' || (this.state.imgsrc === null && this.state.imageuri === null)) {
             this.setState({ isNull: true });
         } else {
             const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
@@ -199,14 +269,7 @@ class AddPhoto extends Component {
                         />
                     </CardSection>
                     <CardSection style={{ width: (this.state.widthc - 380) }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        value={this.state.group}
-                        onChangeText={(group) => this.setState({ group })}
-                        ref='username'
-                        onFocus={this.inputFocused.bind(this, 'username')}
-                        />
+                    {this.renderPicker()}
                     </CardSection>
                     {this.renderWeb()}
                     </View>
@@ -256,14 +319,7 @@ class AddPhoto extends Component {
                         />
                     </CardSection>
                     <CardSection style={{ width: (this.state.widthc - 380) }}>
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        value={this.state.group}
-                        onChangeText={(group) => this.setState({ group })}
-                        ref='username'
-                        onFocus={this.inputFocused.bind(this, 'username')}
-                        />
+                    {this.renderPicker()}
                     </CardSection>
                     {this.renderWeb()}
                     </View>
@@ -321,7 +377,7 @@ class AddPhoto extends Component {
     }
 
     async createNew() {
-        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || (this.state.imgsrc === null && this.state.imageuri === null)) {
+        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || this.state.group === 'Select A Tag' || (this.state.imgsrc === null && this.state.imageuri === null)) {
             this.setState({ isNull: true });
         } else {
             const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
@@ -370,6 +426,8 @@ class AddPhoto extends Component {
     }
 
     render() {
+        console.log(this.state.tagpick);
+        console.log(this.state.tags);
         if (this.state.languages !== null) {
             if (this.state.isRecording === false) {
             if (this.state.acheivement === null || this.state.acheivement === 'INCOM') {

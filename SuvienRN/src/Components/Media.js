@@ -43,6 +43,7 @@ class Media extends Component {
     }
     async componentWillMount() {
         //Note. The orientation issue only persists on android, not ioss
+        Orientation.lockToLandscape();
         const chosen = this.props.obj;
         this.setState({ languages: await AsyncStorage.getItem('Language') }); 
         console.log(chosen);

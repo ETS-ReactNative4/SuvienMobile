@@ -3,10 +3,12 @@ import { TouchableOpacity, Image, Text, View, AsyncStorage, Dimensions, Platform
 import { CardSection } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
+import Orientation from 'react-native-orientation';
 
 class TagSelect extends Component {
     state = { tags: null, height: null, width: null, languages: null }
     async componentWillMount() {
+        Orientation.lockToLandscape();
         //console.log('Im in compwillmount');
         this.setState({ languages: await AsyncStorage.getItem('Language') });
         this.ridUselessTags(JSON.parse(await AsyncStorage.getItem('Tags')));

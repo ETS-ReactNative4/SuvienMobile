@@ -3,10 +3,12 @@ import { View, Image, AsyncStorage, Text, TouchableOpacity, Platform, TouchableW
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Button, Header } from './common';
+import Orientation from 'react-native-orientation';
 
 class CaptionGame extends Component {
     state = { caption: null, languages: null, complete: false, height: null, width: null, tiles: null, dim: null, congrats: false, timesRun: null, wrongphotos: [], selected: null, color: null }
     async componentWillMount() {
+        Orientation.lockToLandscape();
         this.createNewGame();
         this.doMath();
     }

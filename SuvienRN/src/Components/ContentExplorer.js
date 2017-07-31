@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, AsyncStorage, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { CardSection, Button, Header, Input } from './common';
+import Orientation from 'react-native-orientation';
 
 class ContentExplorer extends Component {
     state = { mediaType: null, media: null, mediaArray: null, selectedItem: null }
     async componentWillMount() {
+        Orientation.lockToLandscape();
         this.setState({ mediaArray: JSON.parse(await AsyncStorage.getItem('Media')) });
     }
 

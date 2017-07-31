@@ -4,11 +4,13 @@ import { View, AsyncStorage, Image, Text, ScrollView, TouchableWithoutFeedback, 
 import { CardSection, Button, Input, Header } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
+import Orientation from 'react-native-orientation';
 
 class AddAudio extends Component {
     state = { information: null, caption: null, group: null, acheivement: null, languages: null, isNull: false, heightc: null, widthc: null, color: null }
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async componentWillMount() {
+        Orientation.lockToLandscape();
         this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), heightc: Dimensions.get('window').height, widthc: Dimensions.get('window').width });
     }
     async onSaveItemPress() {

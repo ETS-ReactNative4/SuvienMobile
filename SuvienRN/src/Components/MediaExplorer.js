@@ -3,11 +3,13 @@ import { View, Image, Text, Dimensions, Platform, AsyncStorage, TouchableWithout
 import { Actions } from 'react-native-router-flux';
 import Languages from '../Languages/Languages.json';
 import { CardSection, Button } from './common';
+import Orientation from 'react-native-orientation';
 
 class MediaExplorer extends Component {
     state = { height: null, width: null, languages: null }
 
     async componentDidMount() {
+        Orientation.lockToLandscape();
         this.setState({ 
             height: Dimensions.get('window').height,
             width: Dimensions.get('window').width,

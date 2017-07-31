@@ -3,10 +3,12 @@ import { View, Image, Text, TouchableWithoutFeedback, AsyncStorage, Dimensions, 
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
 import { Button } from './common';
+import Orientation from 'react-native-orientation';
 
 class HomeBar extends Component {
     state = { greeting: null, name: null, languages: null, section: null, width: null, aorp: null, hour: null, minute: null, currentDate: null, preferences: null, sizes: null, sizes2: null, dayFilter: null, messages: null, icon: null, messageType: null, color: null, admode: 0 }
     async componentWillMount() {
+        Orientation.lockToLandscape();
         this.setState({ width: Dimensions.get('window').width, preferences: JSON.parse(await AsyncStorage.getItem('Preferences')), languages: await AsyncStorage.getItem('Language') });
         this.getInfo();
     }
