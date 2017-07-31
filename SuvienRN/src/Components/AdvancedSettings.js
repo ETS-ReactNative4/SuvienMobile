@@ -63,10 +63,10 @@ class AdvancedSettings extends Component {
         const preferencearray = Languages[this.state.languages]['029'];
         const preset = await AsyncStorage.getItem('Preset');
         if (presetarray.find((pres) => pres === preset) !== undefined) {
+        const newpreset = (Languages[transarray[this.state.selected]]['094'])[presetarray.indexOf(preset)];
          AsyncStorage.setItem('Preset', newpreset);   
         }
         const preferences = this.state.preferences;
-        const newpreset = (Languages[transarray[this.state.selected]]['094'])[presetarray.indexOf(preset)];
         let newpreferences = {};
         console.log(preferences);
         for (let i = 0; i < 5; i++) {
