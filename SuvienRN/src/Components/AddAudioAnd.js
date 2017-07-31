@@ -4,6 +4,7 @@ import { View, AsyncStorage, Image, Text, ScrollView, TouchableWithoutFeedback, 
 import { CardSection, Button, Input, Header } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
+import ModalPicker from 'react-native-modal-picker';
 import Orientation from 'react-native-orientation';
 
 class AddAudioAnd extends Component {
@@ -15,73 +16,72 @@ class AddAudioAnd extends Component {
         this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height, tags: JSON.parse(await AsyncStorage.getItem('Tags')) });
     }
     createPicker() {
-        const firstpicker = [<Picker.Item label={'Select A Tag'} value={'Select A Tag'} />,
-                            <Picker.Item label={'Create A New Tag'} value={'Create A New Tag'} />
-                            ];
-                            
-        const picker = this.state.tags.map(
-            (tag) => (
-                <Picker.Item label={tag} value={tag} />
-            )
-        );
-        const fullpicker = [...firstpicker, ...picker];
-        return (
-            [...fullpicker]
-        );
-    }
+let index = 0;
+const firstpicker = [{ key: index++, label: 'Select A Tag' },
+                    { key: index++, label: 'Create A New Tag' }
+                    ];
+const picker = this.state.tags.map(
+    (tag) => (
+        { key: index++, label: tag }
+    )
+);
+const fullpicker = [...firstpicker, ...picker];
+return (
+    [...fullpicker]
+);
+}
 
-    renderPicker() {
-        if (this.state.tags === null || this.state.languages === null) {
+renderPicker() {
+if (this.state.tags === null || this.state.languages === null) {
+    return (
+        <View />
+    );
+} else {
+    if (this.state.tagpick === null) {
+        if (this.state.tags.length !== 0) {
             return (
-                <View />
+                [<Text style={{ fontSize: 23, marginLeft: 100, alignSelf: 'center', fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['060']}</Text>,
+                <ModalPicker
+                data={this.createPicker()}
+                style={{ marginLeft: 125, width: 300 }}
+                initValue={this.state.group}
+                onChange={(group) => {
+                        if (group.label === 'Create A New Tag') {
+                            this.setState({ tagpick: false, group: null });
+                        } else if (group.label === 'Select A Tag') {
+                            this.setState({ tagpick: null });
+                        } else {
+                            this.setState({ group: group.label });
+                        }
+                    }} 
+                />
+                ]
             );
         } else {
-            if (this.state.tagpick === null) {
-                if (this.state.tags.length !== 0) {
-                    return (
-                        [<Text style={{ fontSize: 23, marginLeft: 100, flex: 1, alignSelf: 'center', fontFamily: 'Roboto-Light' }}>{Languages[this.state.languages]['060']}</Text>,
-                        <Picker
-                            style={{ flex: 7 }}
-                            selectedValue={this.state.group}
-                            onValueChange={(group) => {
-                                if (group === 'Create A New Tag') {
-                                    this.setState({ tagpick: false, group: null });
-                                } else if (group === 'Select A Tag') {
-                                    this.setState({ tagpick: null });
-                                } else {
-                                    this.setState({ group });
-                                }
-                            }}
-                        >
-                        {this.createPicker()}
-                        </Picker>
-                        ]
-                    );
-                } else {
-                    return (
-                        <Input
-                        placeholder={Languages[this.state.languages]['063']}
-                        label={Languages[this.state.languages]['060']}
-                        labelstyle={{ flex: 1 }}
-                        value={this.state.group}
-                        onChangeText={(group) => this.setState({ group })}
-                        />
-                    );
-                }
-            }
-            if (this.state.tagpick === false) {
-                return (
-                    <Input
-                    placeholder={Languages[this.state.languages]['063']}
-                    label={Languages[this.state.languages]['060']}
-                    labelstyle={{ flex: 1 }}
-                    value={this.state.group}
-                    onChangeText={(group) => this.setState({ group })}
-                    />
-                );
-            }
+            return (
+                <Input
+                placeholder={Languages[this.state.languages]['063']}
+                label={Languages[this.state.languages]['060']}
+                value={this.state.group}
+                labelstyle={{ flex: 2 }}
+                onChangeText={(group) => this.setState({ group })}
+                />
+            );
         }
     }
+    if (this.state.tagpick === false) {
+        return (
+            <Input
+            placeholder={Languages[this.state.languages]['063']}
+            label={Languages[this.state.languages]['060']}
+            value={this.state.group}
+            labelstyle={{ flex: 2 }}
+            onChangeText={(group) => this.setState({ group })}
+            />
+        );
+    }
+}
+}
     async onSaveItemPress() {
         if (this.state.uri === null || this.state.caption === null || this.state.group === null || this.state.group === 'Select A Tag' || this.state.uri === '' || this.state.caption === '' || this.state.group === '') {
             this.setState({ isNull: true });
@@ -176,32 +176,39 @@ class AddAudioAnd extends Component {
             if (this.state.title === null || this.state.album === null || this.state.artist === null) {
                 return (
                     <View style={{ alignItems: 'flex-start', flexDirection: 'row', width: this.state.widthc, marginTop: 10 }}>
-                        <View>
-                        <CardSection style={{ borderBottomWidth: 0 }}>
+                                <View>
+                                <CardSection style={{ borderBottomWidth: 0 }}>
                             <Image source={{ uri: Languages[this.state.languages]['066'] }} style={{ height: 300, width: 300 }} />
                         </CardSection>
-                        </View>
-                        <View style={{ width: (this.state.widthc - 450), backgroundColor: 'white' }}>
-                            <View style={{ flexDirection: 'row', width: (this.state.widthc - 450), backgroundColor: 'white' }}>
-                            <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
+                                </View>
+                                <View style={{ width: (this.state.widthc - 450), backgroundColor: 'white' }}>
+                                    <View style={{ flexDirection: 'row', width: (this.state.widthc - 450), backgroundColor: 'white' }}>
+                                        <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
                                 <Button onPress={this.onChooseMusicPress.bind(this)}>
                                     {Languages[this.state.languages]['055']}
                                 </Button>
                             </CardSection>
                             </View>
-                            <CardSection style={{ width: (this.state.widthc - 380) }}>
+                            <CardSection style={{ borderTopWidth: 1, width: (this.state.widthc - 380), marginTop: 10 }}>
+                            <Input
+                            placeholder={Languages[this.state.languages]['061']}
+                            label={Languages[this.state.languages]['058']}
+                            value={this.state.title}
+                            onChangeText={(title) => console.log(title)}
+                            />
+                        </CardSection>
+                        <CardSection style={{ width: (this.state.widthc - 380) }}>
                             <Input
                             placeholder={Languages[this.state.languages]['062']}
                             label={Languages[this.state.languages]['059']}
                             value={this.state.caption}
-                            labelstyle={{ flex: 1 }}
                             onChangeText={(caption) => this.setState({ caption })}
                             />
                         </CardSection>
                         <CardSection style={{ width: (this.state.widthc - 380) }}>
                             {this.renderPicker()}
                         </CardSection>
-                            <CardSection>
+                    <CardSection>
                             <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
                                 <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
@@ -333,6 +340,8 @@ class AddAudioAnd extends Component {
                             </TouchableWithoutFeedback>
                         </View>
                     </Header>
+                    <ScrollView>
+                    <View style={{ marginTop: 10, flex: 1 }}>
                             {this.onAudioSelect()}
                             <View>
                     <CardSection>
@@ -347,6 +356,8 @@ class AddAudioAnd extends Component {
                     </CardSection>
                 </View>
                     </View>
+                    </ScrollView>
+                </View>
                 );
             }
             if (this.state.acheivement !== null && this.state.acheivement !== 'INCOM') {

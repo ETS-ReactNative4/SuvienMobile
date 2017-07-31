@@ -10,6 +10,7 @@
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",
     "react-native-camera": "^0.6.0",
+    "react-native-modal-picker": "0.0.16",
     "react-native-musicplayercontroller": "^1.0.0",
     "react-native-orientation": "git+https://github.com/yamill/react-native-orientation.git",
     "react-native-router-flux": "^3.39.1",
