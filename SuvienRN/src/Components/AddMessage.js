@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, AsyncStorage, Dimensions, Platform, TouchableWithoutFeedback, Image, ScrollView, Modal } from 'react-native';
+import { View, Text, Picker, AsyncStorage, Dimensions, Platform, TouchableWithoutFeedback, Image, ScrollView, Modal, CameraRoll, TouchableOpacity } from 'react-native';
 import { CardSection, Button, Input, Header, CheckBox } from './common';
 import Languages from '../Languages/Languages.json';
 import { Actions } from 'react-native-router-flux';
@@ -7,7 +7,7 @@ import Camera from 'react-native-camera';
 import Orientation from 'react-native-orientation';
 
 class AddMessage extends Component {
-    state = { secheight: null, secwidth: null, message: null, color: null, day: '[]', startHour: 0, modalVisible: false, delete: null, invalid: false, startMinute: 0, isRecording: false, isNull: false, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
+    state = { secheight: null, secwidth: null, message: null, color: null, day: '[]', startHour: 0, videovisible: false, modalVisible: false, delete: null, invalid: false, startMinute: 0, isRecording: false, isNull: false, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
     async componentWillMount() {
         Orientation.lockToLandscape();
         if (Platform.OS === 'ios') {
@@ -242,6 +242,33 @@ class AddMessage extends Component {
             <View />
         );
     }
+    }
+
+    renderVideos() {
+        const allvideos = this.state.videos.map((video) => 
+            //For future applications, long press may prove to be more user friendly
+             (
+            <TouchableOpacity 
+            onPress={() => {
+                this.setState({ uri: video.node.image.uri, videovisible: false });/** */
+                }}
+                key={video.node.image.uri}
+            >
+                <Image style={{ height: 150, width: 150, marginLeft: 20, marginTop: 20 }} source={{ uri: video.node.image.uri }} />
+            </TouchableOpacity>
+            ));
+            return (
+                [...allvideos]
+            );
+    }
+    
+    onChooseVideoPress() {
+        this.setState({ videovisible: true });
+        CameraRoll.getPhotos({
+                first: 10000, //Quick and dirty fix. Will update to a more friendly fix in later versions
+                assetType: 'Videos'
+            })
+            .then(r => this.setState({ videos: r.edges }));
     }
 
     startRecording() {
@@ -1238,38 +1265,101 @@ class AddMessage extends Component {
             }
             if (this.state.currentMessage === null) {
                 if (this.state.uri === null) {
-                return (
-            <View>
-                <Header style={{ height: 60, flexDirection: 'row' }}>
-                <View style={{ flex: 1 }}>
-                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
-                </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
-                    <Image source={require('../Images/mainmenu.png')} style={{ height: Platform.OS === 'ios' ? 40 : 50, width: Platform.OS === 'ios' ? 40 : 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: Platform.OS === 'ios' ? 5 : 10 }} />
-                    </TouchableWithoutFeedback>
-                </View>
-            </Header>
-                <CardSection style={{ marginLeft: 0 }}>
-                    <Button onPress={() => this.setState({ isLaunchCam: true })}>
-                        {Languages[this.state.languages]['050']}
-                    </Button>
-                </CardSection>
-                <CardSection>
-                    <Button onPress={() => this.setState({ messageType: null })}>
-                            {Languages[this.state.languages]['070']}
-                    </Button>
-                </CardSection>
-                <CardSection>
-                    <Button onPress={() => Actions.Settings()}>
-                            {Languages[this.state.languages]['069']}
-                    </Button>
-                </CardSection>
-            </View>
-        );
+                    if (Platform.OS === 'ios') {
+                        return (
+                            <View>
+                                <Header style={{ height: 60, flexDirection: 'row' }}>
+                                <View style={{ flex: 1 }}>
+                                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                                </View>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                                    <Image source={require('../Images/mainmenu.png')} style={{ height: Platform.OS === 'ios' ? 40 : 50, width: Platform.OS === 'ios' ? 40 : 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: Platform.OS === 'ios' ? 5 : 10 }} />
+                                    </TouchableWithoutFeedback>
+                                </View>
+                            </Header>
+                            <Modal
+                                animationType={'fade'}
+                                transparent
+                                visible={this.state.videovisible}
+                                onRequestClose={() => {}}
+                            >
+                                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', backgroundColor: this.state.color }}>
+                                        <View style={{ width: 910, backgroundColor: '#D9D9D9', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
+                                            <TouchableWithoutFeedback onPress={() => this.setState({ videos: null })}>
+                                        <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 40, width: 40, marginRight: 5 }} />
+                                    </TouchableWithoutFeedback>
+                                            <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['088']}</Text>
+                                        </View>
+                                        <View style={{ height: 590, width: 910, backgroundColor: '#EFEFEF', position: 'relative', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'row', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>
+                                            <ScrollView>
+                                                <View style={{ marginLeft: 20, flexDirection: 'row', flexWrap: 'wrap' }}>
+                                                    {this.renderVideos()}
+                                                </View>
+                                            </ScrollView>
+                                        </View>
+                                    </View>
+                                </Modal>
+                                <CardSection style={{ marginLeft: 0 }}>
+                                    <Button onPress={() => this.setState({ isLaunchCam: true })}>
+                                        {Languages[this.state.languages]['050']}
+                                    </Button>
+                                </CardSection>
+                                <CardSection>
+                                    <Button onPress={this.onChooseVideoPress.bind(this)}>
+                                            {Languages[this.state.languages]['054']}
+                                    </Button>
+                                </CardSection>
+                                <CardSection>
+                                    <Button onPress={() => this.setState({ messageType: null })}>
+                                            {Languages[this.state.languages]['070']}
+                                    </Button>
+                                </CardSection>
+                                <CardSection>
+                                    <Button onPress={() => Actions.Settings()}>
+                                            {Languages[this.state.languages]['069']}
+                                    </Button>
+                                </CardSection>
+                            </View>
+                        ); 
+                    }
+                    if (Platform.OS === 'android') {
+                        return (
+                            <View>
+                                <Header style={{ height: 60, flexDirection: 'row' }}>
+                                <View style={{ flex: 1 }}>
+                                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                                </View>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                                    <Image source={require('../Images/mainmenu.png')} style={{ height: Platform.OS === 'ios' ? 40 : 50, width: Platform.OS === 'ios' ? 40 : 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: Platform.OS === 'ios' ? 5 : 10 }} />
+                                    </TouchableWithoutFeedback>
+                                </View>
+                            </Header>
+                                <CardSection style={{ marginLeft: 0 }}>
+                                    <Button onPress={() => this.setState({ isLaunchCam: true })}>
+                                        {Languages[this.state.languages]['050']}
+                                    </Button>
+                                </CardSection>
+                                <CardSection>
+                                    <Button onPress={() => this.setState({ messageType: null })}>
+                                            {Languages[this.state.languages]['070']}
+                                    </Button>
+                                </CardSection>
+                                <CardSection>
+                                    <Button onPress={() => Actions.Settings()}>
+                                            {Languages[this.state.languages]['069']}
+                                    </Button>
+                                </CardSection>
+                            </View>
+                        );
+                    }
             }
             if (this.state.uri !== null) {
                 return (
