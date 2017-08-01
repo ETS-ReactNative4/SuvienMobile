@@ -596,8 +596,8 @@ class AddMessage extends Component {
                     />
                     </View>
                 </CardSection>
-                    <CardSection style={{ height: this.state.scheight, flexDirection: 'row' }}>
-                        <View>
+                    <CardSection style={{ height: this.state.scheight, flexDirection: 'row', justifyContent: 'center' }}>
+                        <View style={{ marginRight: Platform.OS === 'ios' ? 50 : 0 }}>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
@@ -872,8 +872,8 @@ class AddMessage extends Component {
                     />
                     </View>
                 </CardSection>
-                    <CardSection style={{ height: this.state.secheight, flexDirection: 'row' }}>
-                        <View>
+                    <CardSection style={{ height: this.state.secheight, flexDirection: 'row', justifyContent: 'center' }}>
+                        <View style={{ marginRight: Platform.OS === 'ios' ? 50 : 0 }}>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
@@ -1167,8 +1167,8 @@ class AddMessage extends Component {
                     />
                     </View>
                 </CardSection>
-                    <CardSection style={{ height: this.state.secheight, flexDirection: 'row' }}>
-                        <View>
+                    <CardSection style={{ height: this.state.secheight, flexDirection: 'row', justifyContent: 'center' }}>
+                        <View style={{ marginRight: Platform.OS === 'ios' ? 50 : 0 }}>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
@@ -1479,8 +1479,8 @@ class AddMessage extends Component {
                     />
                     </View>
                 </CardSection>
-                    <CardSection style={{ height: this.state.secheight, flexDirection: 'row' }}>
-                        <View>
+                    <CardSection style={{ height: this.state.secheight, flexDirection: 'row', justifyContent: 'center' }}>
+                        <View style={{ marginRight: Platform.OS === 'ios' ? 50 : 0 }}>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row', height: 100 }}>
                     <Picker
