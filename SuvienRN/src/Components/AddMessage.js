@@ -116,79 +116,83 @@ class AddMessage extends Component {
     }
     
         async createNew() {
-            const dd = new Date();
-            const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
-            if (this.state.currentMessage === null) {
-                const { message, day, startHour, startMinute, endHour, endMinute, messageType, uri, title } = this.state;
-            if (messageType === 'Msg') {
-                messages.push({
-                day: JSON.parse(day),
-                message,
-                startHour,
-                startMinute,
-                endHour,
-                endMinute,
-                messageType,
-                messageID: dd.getTime()
-            }); 
-            }
-            if (messageType === 'VideoMsg') {
-                messages.push({
-                day: JSON.parse(day),
-                message: title,
-                startHour,
-                startMinute,
-                endHour,
-                endMinute,
-                uri,
-                messageType,
-                messageID: dd.getTime()
-            });
-            }
-           AsyncStorage.setItem('Messages', JSON.stringify(messages));
-           console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
-           this.setState({ message: null, day: '[]', startHour: 0, startMinute: 0, endHour: 0, endMinute: 0, title: null, messages: JSON.parse(await AsyncStorage.getItem('Messages')), messageType: null, isLaunchCam: false, deletedMessage: null, uri: null, cameraType: 'back', currentMessage: null });
-            } 
-            if (this.state.currentMessage !== null) {
-                const selected = JSON.parse(this.state.currentMessage);
-                const searc = messages.findIndex((element, index, array) => {
-                    if (element.messageID === selected.messageID) {
-                        return true;
-                    } else {
-                        return false;
-                    }});
-                if (selected.messageType === 'Msg') {
-                    const { day, message, startHour, startMinute, endHour, endMinute, messageID } = selected;
-                messages[searc] = {
-                    day,
+            if (((((this.state.message === null || this.state.message === '') && this.state.messageType === 'Msg') || ((this.state.title === null || this.state.message === '') && this.state.messageType === 'VideoMsg') || this.state.day === '[]') && this.state.currentMessage === null) || (this.state.currentMessage !== null && (JSON.parse(this.state.currentMessage).message === null || JSON.parse(this.state.currentMessage).message === '' || JSON.parse(this.state.currentMessage).day.length === 0))) {
+                this.setState({ isNull: true });
+            } else {
+                const dd = new Date();
+                const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
+                if (this.state.currentMessage === null) {
+                    const { message, day, startHour, startMinute, endHour, endMinute, messageType, uri, title } = this.state;
+                if (messageType === 'Msg') {
+                    messages.push({
+                    day: JSON.parse(day),
                     message,
                     startHour,
                     startMinute,
                     endHour,
                     endMinute,
-                    messageType: 'Msg',
-                    messageID
-                };
-                AsyncStorage.setItem('Messages', JSON.stringify(messages));
-                console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
-                Actions.Home();
-            }
-                if (selected.messageType === 'VideoMsg') {
-                    const { day, message, uri, startHour, startMinute, endHour, endMinute, messageID } = selected;
-                messages[searc] = {
-                    day,
-                    message,
+                    messageType,
+                    messageID: dd.getTime()
+                }); 
+                }
+                if (messageType === 'VideoMsg') {
+                    messages.push({
+                    day: JSON.parse(day),
+                    message: title,
                     startHour,
                     startMinute,
                     endHour,
                     endMinute,
                     uri,
-                    messageType: 'VideoMsg',
-                    messageID
-                };
-                AsyncStorage.setItem('Messages', JSON.stringify(messages));
-                console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
-                Actions.Home();
+                    messageType,
+                    messageID: dd.getTime()
+                });
+                }
+               AsyncStorage.setItem('Messages', JSON.stringify(messages));
+               console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+               this.setState({ message: null, day: '[]', startHour: 0, startMinute: 0, endHour: 0, endMinute: 0, title: null, messages: JSON.parse(await AsyncStorage.getItem('Messages')), messageType: null, isLaunchCam: false, deletedMessage: null, uri: null, cameraType: 'back', currentMessage: null });
+                } 
+                if (this.state.currentMessage !== null) {
+                    const selected = JSON.parse(this.state.currentMessage);
+                    const searc = messages.findIndex((element, index, array) => {
+                        if (element.messageID === selected.messageID) {
+                            return true;
+                        } else {
+                            return false;
+                        }});
+                    if (selected.messageType === 'Msg') {
+                        const { day, message, startHour, startMinute, endHour, endMinute, messageID } = selected;
+                    messages[searc] = {
+                        day,
+                        message,
+                        startHour,
+                        startMinute,
+                        endHour,
+                        endMinute,
+                        messageType: 'Msg',
+                        messageID
+                    };
+                    AsyncStorage.setItem('Messages', JSON.stringify(messages));
+                    console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+                    Actions.Home();
+                }
+                    if (selected.messageType === 'VideoMsg') {
+                        const { day, message, uri, startHour, startMinute, endHour, endMinute, messageID } = selected;
+                    messages[searc] = {
+                        day,
+                        message,
+                        startHour,
+                        startMinute,
+                        endHour,
+                        endMinute,
+                        uri,
+                        messageType: 'VideoMsg',
+                        messageID
+                    };
+                    AsyncStorage.setItem('Messages', JSON.stringify(messages));
+                    console.log(JSON.parse(await AsyncStorage.getItem('Messages')));
+                    Actions.Home();
+                    }
                 }
             }
         }
