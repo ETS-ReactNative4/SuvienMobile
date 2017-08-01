@@ -1139,7 +1139,7 @@ if (this.state.tags === null || this.state.languages === null) {
                 <View style={{ marginTop: 10, marginBottom: 10 }}>
                 <CardSection>
                     <Button onPress={this.onSaveItemPress.bind(this)}>
-                        {Languages[this.state.languages]['077']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                        {Languages[this.state.languages]['077']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                     </Button>
                 </CardSection>
                 <CardSection>
@@ -1334,7 +1334,7 @@ if (this.state.tags === null || this.state.languages === null) {
                         {this.renderExplorer()}
                         <CardSection>
                             <Button onPress={this.onSaveItemPress.bind(this)}>
-                                {Languages[this.state.languages]['077']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30 }} />
+                                {Languages[this.state.languages]['077']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                             </Button>
                         </CardSection>
                         <CardSection>

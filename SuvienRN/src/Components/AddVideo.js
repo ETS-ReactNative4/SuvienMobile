@@ -299,17 +299,17 @@ if (this.state.tags === null || this.state.languages === null) {
                             <View style={{ width: (this.state.widthc - 450), backgroundColor: 'white' }}>
                                 <View style={{ flexDirection: 'row', width: (this.state.widthc - 450), backgroundColor: 'white' }}>
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                                    <Button onPress={this.onTakeVideoPress.bind(this)}>
+                                    <Button onPress={this.onTakeVideoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                         {Languages[this.state.languages]['050']}
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                                    <Button onPress={this.onChooseVideoPress.bind(this)}>
+                                    <Button onPress={this.onChooseVideoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                         {Languages[this.state.languages]['054']}
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                                    <Button onPress={this.onAddWebVideoPress.bind(this)}>
+                                    <Button onPress={this.onAddWebVideoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                         {Languages[this.state.languages]['057']}
                                     </Button>
                                 </CardSection>
@@ -396,17 +396,17 @@ if (this.state.tags === null || this.state.languages === null) {
                                 <View style={{ width: (this.state.widthc - 450), backgroundColor: 'white' }}>
                                     <View style={{ flexDirection: 'row', width: (this.state.widthc - 450), backgroundColor: 'white' }}>
                                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                                        <Button onPress={this.onTakeVideoPress.bind(this)}>
+                                        <Button onPress={this.onTakeVideoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                             {Languages[this.state.languages]['050']}
                                         </Button>
                                     </CardSection>
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                                        <Button onPress={this.onChooseVideoPress.bind(this)}>
+                                        <Button onPress={this.onChooseVideoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                             {Languages[this.state.languages]['054']}
                                         </Button>
                                     </CardSection>
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                                        <Button onPress={this.onAddWebVideoPress.bind(this)}>
+                                        <Button onPress={this.onAddWebVideoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                             {Languages[this.state.languages]['057']}
                                         </Button>
                                     </CardSection>
@@ -446,17 +446,17 @@ if (this.state.tags === null || this.state.languages === null) {
                             <View style={{ width: (this.state.widthc - 450), backgroundColor: 'white' }}>
                                 <View style={{ flexDirection: 'row', width: (this.state.widthc - 450), backgroundColor: 'white' }}>
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                                    <Button onPress={this.onTakeVideoPress.bind(this)}>
+                                    <Button onPress={this.onTakeVideoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                         {Languages[this.state.languages]['050']}
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                                    <Button onPress={this.onChooseVideoPress.bind(this)}>
+                                    <Button onPress={this.onChooseVideoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                         {Languages[this.state.languages]['054']}
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                                    <Button onPress={this.onAddWebVideoPress.bind(this)}>
+                                    <Button onPress={this.onAddWebVideoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                         {Languages[this.state.languages]['057']}
                                     </Button>
                                 </CardSection>
@@ -496,17 +496,17 @@ if (this.state.tags === null || this.state.languages === null) {
                             <View style={{ width: (this.state.widthc - 450), backgroundColor: 'white' }}>
                                 <View style={{ flexDirection: 'row', width: (this.state.widthc - 450), backgroundColor: 'white' }}>
                                     <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                                    <Button onPress={this.onTakeVideoPress.bind(this)}>
+                                    <Button onPress={this.onTakeVideoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                         {Languages[this.state.languages]['050']}
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                                    <Button onPress={this.onChooseVideoPress.bind(this)}>
+                                    <Button onPress={this.onChooseVideoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                         {Languages[this.state.languages]['054']}
                                     </Button>
                                 </CardSection>
                                 <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                                    <Button onPress={this.onAddWebVideoPress.bind(this)}>
+                                    <Button onPress={this.onAddWebVideoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                         {Languages[this.state.languages]['057']}
                                     </Button>
                                 </CardSection>

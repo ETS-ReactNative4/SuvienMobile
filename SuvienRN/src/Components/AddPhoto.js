@@ -154,7 +154,7 @@ class AddPhoto extends Component {
 
     onSaveURLPress() {
         const url = this.state.imgsrc;
-        if (url.substring(0, 7) !== 'http://' || url.substring(0, 8) !== 'https://') {
+        if (url.substring(0, 7) !== 'http://' && url.substring(0, 8) !== 'https://') {
             Image.getSize(`https://${this.state.imgsrc}`, (width, height) => { this.setState({ height, width, imageuri: `http://${this.state.imgsrc}` }); });
         } else {
             Image.getSize(this.state.imgsrc, (width, height) => { this.setState({ height, width, imageuri: this.state.imgsrc }); });
@@ -249,17 +249,20 @@ class AddPhoto extends Component {
                     <View style={{ width: (this.state.widthc - 380), backgroundColor: 'white' }}>
                         <View style={{ flexDirection: 'row', width: (this.state.widthc - 380), backgroundColor: 'white' }}>
                             <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                            <Button onPress={this.onTakePhotoPress.bind(this)}>
+                            <Button 
+                            onPress={this.onTakePhotoPress.bind(this)}
+                            style={{ backgroundColor: 'transparent' }}
+                            >
                                 {Languages[this.state.languages]['049']}
                             </Button>
                         </CardSection>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                            <Button onPress={this.onChoosePhotoPress.bind(this)}>
+                            <Button onPress={this.onChoosePhotoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                 {Languages[this.state.languages]['053']}
                             </Button>
                         </CardSection>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                            <Button onPress={this.onAddWebPhotoPress.bind(this)}>
+                            <Button onPress={this.onAddWebPhotoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                 {Languages[this.state.languages]['056']}
                             </Button>
                         </CardSection>
@@ -299,17 +302,17 @@ class AddPhoto extends Component {
                     <View style={{ width: (this.state.widthc - 450), backgroundColor: 'white' }}>
                         <View style={{ flexDirection: 'row', width: (this.state.widthc - 450), backgroundColor: 'white' }}>
                             <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                            <Button onPress={this.onTakePhotoPress.bind(this)}>
+                            <Button onPress={this.onTakePhotoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                 {Languages[this.state.languages]['049']}
                             </Button>
                         </CardSection>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                            <Button onPress={this.onChoosePhotoPress.bind(this)}>
+                            <Button onPress={this.onChoosePhotoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                 {Languages[this.state.languages]['053']}
                             </Button>
                         </CardSection>
                         <CardSection style={{ flex: 1, borderBottomWidth: 0, marginLeft: 0, marginRight: 0 }}>
-                            <Button onPress={this.onAddWebPhotoPress.bind(this)}>
+                            <Button onPress={this.onAddWebPhotoPress.bind(this)} style={{ backgroundColor: 'transparent' }}>
                                 {Languages[this.state.languages]['056']}
                             </Button>
                         </CardSection>
