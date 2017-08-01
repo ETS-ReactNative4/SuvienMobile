@@ -460,7 +460,7 @@ if (this.state.tags === null || this.state.languages === null) {
                     <Image source={{ uri: this.state.selectedItem.uri }} style={{ height: 300, width: 300 }} />
                 </CardSection>
                 </View>
-                <View style={{ width: (this.state.width - 450), backgroundColor: 'white', height: 300, justifyContent: 'center' }}>
+                <View style={{ width: (this.state.width - 450), backgroundColor: 'white', justifyContent: 'center' }}>
                 <CardSection style={{ borderTopWidth: 1, width: (this.state.width - 380), marginTop: 10 }}>
                             <Input
                             placeholder={Languages[this.state.languages]['061']}
@@ -544,7 +544,7 @@ if (this.state.tags === null || this.state.languages === null) {
                 <Image source={require('../Images/musicalbumart.png')} style={{ height: 300, width: 300 }} />
             </CardSection>
             </View>
-            <View style={{ width: (this.state.width - 450), backgroundColor: 'white', height: 300, justifyContent: 'center' }}>
+            <View style={{ width: (this.state.width - 450), backgroundColor: 'white', justifyContent: 'center' }}>
             <CardSection style={{ borderTopWidth: 1, width: (this.state.width - 380), marginTop: 10 }}>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
