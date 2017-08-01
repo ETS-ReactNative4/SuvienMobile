@@ -201,7 +201,7 @@ class HomeBar extends Component {
     renderHeaderGreeting() {
         const { greeting, currentDate, preferences, languages } = this.state;
         const dd = new Date();
-        const finalmessages = this.state.dayFilter.filter((day) => (day.startHour <= dd.getHours() && day.startMinute <= dd.getMinutes() && day.endHour >= dd.getHours() && day.endMinute > dd.getMinutes()));
+        const finalmessages = this.state.dayFilter.filter((day) => ((day.startHour < dd.getHours()) || (day.startHour === dd.getHours() && day.startMinute <= dd.getMinutes()) || (day.endHour > dd.getHours()) || (day.endHour === dd.getHours() && day.endMinute > dd.getMinutes())));
         const finalmessage = finalmessages.reverse();
         const authArray = [];
         const proparray = [Languages[languages]['031'], (Languages[languages]['029'])[0]];
@@ -325,7 +325,7 @@ class HomeBar extends Component {
                 }
                 if (this.state.messageType === 'VideoMsg') {
                     const dd = new Date();
-                    const finalmessage = this.state.dayFilter.filter((day) => (day.startHour <= dd.getHours() && day.startMinute <= dd.getMinutes() && day.endHour >= dd.getHours() && day.endMinute > dd.getMinutes()));
+                    const finalmessage = this.state.dayFilter.filter((day) => ((day.startHour < dd.getHours()) || (day.startHour === dd.getHours() && day.startMinute <= dd.getMinutes()) || (day.endHour > dd.getHours()) || (day.endHour === dd.getHours() && day.endMinute > dd.getMinutes())));
                     return (
             <View style={{ flexDirection: 'row' }}>
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
@@ -383,7 +383,7 @@ class HomeBar extends Component {
                 }
                 if (this.state.messageType === 'VideoMsg') {
                     const dd = new Date();
-                    const finalmessage = this.state.dayFilter.filter((day) => (day.startHour <= dd.getHours() && day.startMinute <= dd.getMinutes() && day.endHour >= dd.getHours() && day.endMinute > dd.getMinutes()));
+                    const finalmessage = this.state.dayFilter.filter((day) => ((day.startHour < dd.getHours()) || (day.startHour === dd.getHours() && day.startMinute <= dd.getMinutes()) || (day.endHour > dd.getHours()) || (day.endHour === dd.getHours() && day.endMinute > dd.getMinutes())));
                     return (
             <View style={{ flexDirection: 'row' }}>
                 <View style={{ width: finalsize, alignItems: 'center', justifyContent: 'flex-start', marginLeft: 60, flexDirection: 'row' }}>
