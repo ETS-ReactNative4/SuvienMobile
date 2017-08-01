@@ -167,7 +167,7 @@ if (this.state.tags === null || this.state.languages === null) {
             AsyncStorage.setItem('Media', JSON.stringify(gen));
             AsyncStorage.setItem('Audio', JSON.stringify(audios));
             console.log(await AsyncStorage.getItem('Audio'));
-            this.setState({ title: null, artist: null, album: null, uri: null, caption: null, group: null });
+            this.setState({ title: null, artist: null, album: null, uri: null, caption: null, group: 'Select A Tag' });
         }
     }
     
@@ -194,14 +194,6 @@ if (this.state.tags === null || this.state.languages === null) {
                                 </Button>
                             </CardSection>
                             </View>
-                            <CardSection style={{ borderTopWidth: 1, width: (this.state.widthc - 380), marginTop: 10 }}>
-                            <Input
-                            placeholder={Languages[this.state.languages]['061']}
-                            label={Languages[this.state.languages]['058']}
-                            value={this.state.title}
-                            onChangeText={(title) => console.log(title)}
-                            />
-                        </CardSection>
                         <CardSection style={{ width: (this.state.widthc - 380) }}>
                             <Input
                             placeholder={Languages[this.state.languages]['062']}
@@ -404,6 +396,8 @@ if (this.state.tags === null || this.state.languages === null) {
                             </TouchableWithoutFeedback>
                         </View>
                     </Header>
+                    <ScrollView>
+                    <View style={{ marginTop: 10, flex: 1 }}>
                             {this.onAudioSelect()}
                             <View>
                     <CardSection>
@@ -422,6 +416,8 @@ if (this.state.tags === null || this.state.languages === null) {
                     </Button>
                     </CardSection>
                 </View>
+                    </View>
+                    </ScrollView>
                     </View>
                 );
             }

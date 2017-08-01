@@ -433,7 +433,7 @@ class AddPhoto extends Component {
         AsyncStorage.setItem('uniqueID', JSON.stringify(objec));
         AsyncStorage.setItem('Media', JSON.stringify(gen));
         AsyncStorage.setItem('Pictures', JSON.stringify(photos));
-        this.setState({ imageuri: null, caption: null, group: null, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, cameraType: 'back', webphoto: null, imgsrc: null });
+        this.setState({ imageuri: null, caption: null, group: 'Select A Tag', modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, cameraType: 'back', webphoto: null, imgsrc: null });
         }
     }
 

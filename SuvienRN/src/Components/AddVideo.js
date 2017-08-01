@@ -280,7 +280,7 @@ if (this.state.tags === null || this.state.languages === null) {
                 }
                 AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
                 AsyncStorage.setItem('Media', JSON.stringify(gen));
-                this.setState({ thumbnail: null, videosrc: null, height: null, width: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null });
+                this.setState({ thumbnail: null, videosrc: null, height: null, width: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: 'Select A Tag', webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null });
                 }
         }
         
