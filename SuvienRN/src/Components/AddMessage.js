@@ -596,7 +596,8 @@ class AddMessage extends Component {
                     />
                     </View>
                 </CardSection>
-                    <CardSection style={{ height: this.state.scheight, flexDirection: 'column' }}>
+                    <CardSection style={{ height: this.state.scheight, flexDirection: 'row' }}>
+                        <View>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
@@ -614,8 +615,8 @@ class AddMessage extends Component {
                         {this.createPicker(minutes)}
                     </Picker>
                     </View>
-                </CardSection>
-                <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
+                    </View>
+                    <View>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
@@ -632,6 +633,7 @@ class AddMessage extends Component {
                     >
                         {this.createPicker(minutes)}
                     </Picker>
+                    </View>
                     </View>
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
@@ -870,7 +872,8 @@ class AddMessage extends Component {
                     />
                     </View>
                 </CardSection>
-                    <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
+                    <CardSection style={{ height: this.state.secheight, flexDirection: 'row' }}>
+                        <View>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
@@ -894,8 +897,8 @@ class AddMessage extends Component {
                         {this.createPicker(minutes)}
                     </Picker>
                     </View>
-                </CardSection>
-                <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
+                    </View>
+                    <View>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
@@ -918,6 +921,7 @@ class AddMessage extends Component {
                     >
                         {this.createPicker(minutes)}
                     </Picker>
+                    </View>
                     </View>
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
@@ -1163,7 +1167,8 @@ class AddMessage extends Component {
                     />
                     </View>
                 </CardSection>
-                    <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
+                    <CardSection style={{ height: this.state.secheight, flexDirection: 'row' }}>
+                        <View>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
@@ -1187,8 +1192,8 @@ class AddMessage extends Component {
                         {this.createPicker(minutes)}
                     </Picker>
                     </View>
-                </CardSection>
-                <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
+                    </View>
+                    <View>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row', height: 100 }}>
                     <Picker
@@ -1211,6 +1216,7 @@ class AddMessage extends Component {
                     >
                         {this.createPicker(minutes)}
                     </Picker>
+                    </View>
                     </View>
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
@@ -1473,7 +1479,8 @@ class AddMessage extends Component {
                     />
                     </View>
                 </CardSection>
-                    <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
+                    <CardSection style={{ height: this.state.secheight, flexDirection: 'row' }}>
+                        <View>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row', height: 100 }}>
                     <Picker
@@ -1491,8 +1498,8 @@ class AddMessage extends Component {
                         {this.createPicker(minutes)}
                     </Picker>
                     </View>
-                </CardSection>
-                <CardSection style={{ height: this.state.secheight, flexDirection: 'column' }}>
+                    </View>
+                    <View>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row', height: 100 }}>
                     <Picker
@@ -1509,6 +1516,7 @@ class AddMessage extends Component {
                     >
                         {this.createPicker(minutes)}
                     </Picker>
+                    </View>
                     </View>
                 </CardSection>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
