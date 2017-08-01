@@ -7,7 +7,7 @@ import Camera from 'react-native-camera';
 import Orientation from 'react-native-orientation';
 
 class AddMessage extends Component {
-    state = { secheight: null, secwidth: null, message: null, color: null, day: '[]', startHour: 0, videovisible: false, modalVisible: false, delete: null, invalid: false, startMinute: 0, isRecording: false, isNull: false, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
+    state = { secheight: null, secwidth: null, message: null, videos: null, color: null, day: '[]', startHour: 0, videovisible: false, modalVisible: false, delete: null, invalid: false, startMinute: 0, isRecording: false, isNull: false, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
     async componentWillMount() {
         Orientation.lockToLandscape();
         if (Platform.OS === 'ios') {
@@ -1266,7 +1266,47 @@ class AddMessage extends Component {
             if (this.state.currentMessage === null) {
                 if (this.state.uri === null) {
                     if (Platform.OS === 'ios') {
-                        return (
+                        if (this.state.videos === null) {
+                            return (
+                            <View>
+                                <Header style={{ height: 60, flexDirection: 'row' }}>
+                                <View style={{ flex: 1 }}>
+                                    <Image source={require('../Images/placeholderphoto.png')} style={{ marginLeft: 30, height: 40, width: 120 }} />
+                                </View>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['087']}</Text>
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <TouchableWithoutFeedback onPress={() => Actions.Home()}>
+                                    <Image source={require('../Images/mainmenu.png')} style={{ height: Platform.OS === 'ios' ? 40 : 50, width: Platform.OS === 'ios' ? 40 : 50, alignSelf: 'flex-end', marginRight: 20, marginBottom: Platform.OS === 'ios' ? 5 : 10 }} />
+                                    </TouchableWithoutFeedback>
+                                </View>
+                            </Header>
+                                <CardSection style={{ marginLeft: 0 }}>
+                                    <Button onPress={() => this.setState({ isLaunchCam: true })}>
+                                        {Languages[this.state.languages]['050']}
+                                    </Button>
+                                </CardSection>
+                                <CardSection>
+                                    <Button onPress={this.onChooseVideoPress.bind(this)}>
+                                            {Languages[this.state.languages]['054']}
+                                    </Button>
+                                </CardSection>
+                                <CardSection>
+                                    <Button onPress={() => this.setState({ messageType: null })}>
+                                            {Languages[this.state.languages]['070']}
+                                    </Button>
+                                </CardSection>
+                                <CardSection>
+                                    <Button onPress={() => Actions.Settings()}>
+                                            {Languages[this.state.languages]['069']}
+                                    </Button>
+                                </CardSection>
+                            </View>
+                        );
+                        }
+                        if (this.state.videos !== null) {
+                            return (
                             <View>
                                 <Header style={{ height: 60, flexDirection: 'row' }}>
                                 <View style={{ flex: 1 }}>
@@ -1324,7 +1364,8 @@ class AddMessage extends Component {
                                     </Button>
                                 </CardSection>
                             </View>
-                        ); 
+                        );
+                        }       
                     }
                     if (Platform.OS === 'android') {
                         return (
