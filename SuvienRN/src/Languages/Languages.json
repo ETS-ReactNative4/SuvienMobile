@@ -126,7 +126,9 @@
         "123" : "You may have deleted this content off your device.",
         "124" : "We will return you to the main menu in 5 seconds...",
         "125" : "For this reason, we will delete this tile.",
-        "126" : "Delete a..."
+        "126" : "Delete a...",
+        "127" : "Select A Tag",
+        "128" : "Create A New Tag"
     },
     "FRE" : {
         "000" : "Démarrer",
@@ -255,7 +257,9 @@
         "123" : "Il est probable que vous avez supprimé le contenu",
         "124" : "Nous vous renverrons à la page d'accueil en 5 secondes ...",
         "125" : "Pour cette raison, nous supprimerons cette tuile",
-        "126" : "Supprimer un..."
+        "126" : "Supprimer un...",
+        "127" : "Choisir Un Tag",
+        "128" : "Créer Un Nouveau Tag"
     },
     "ESP" : {
         "000" : "Empezar",
@@ -384,6 +388,8 @@
         "123" : "Es probable que usted eliminó el contenido",
         "124" : "Le devolveremos a la página principal en 5 segundos ...",
         "125" : "Por esta razón, se eliminará este teja",
-        "126" : "Eliminar un..."
+        "126" : "Eliminar un...",
+        "127" : "Elegir Una Etiqueta",
+        "128" : "Crear Una Etiqueta Nueva"
     }
 }

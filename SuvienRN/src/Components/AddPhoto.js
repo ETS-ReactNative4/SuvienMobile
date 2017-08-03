@@ -11,7 +11,7 @@ import Camera from 'react-native-camera';
 import Orientation from 'react-native-orientation';
 
 class AddPhoto extends Component {
-    state = { imageuri: null, caption: null, group: 'Select A Tag', languages: null, acheivement: null, tagpick: null, tags: null, color: null, isNull: false, modalVisible: false, initval: 'Select A Tag', photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
+    state = { imageuri: null, caption: null, group: null, languages: null, acheivement: null, tagpick: null, tags: null, color: null, isNull: false, modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, heightc: null, widthc: null, cameraType: 'back', webphoto: null, imgsrc: null } //'file:///var/mobile/Containers/Data/Application/96AF4229-C558-4743-8B14-D280B93DF4E9/Documents/images/44643C96-6A95-47A1-9B27-2EA09F2319B2.jpg'
     async componentWillMount() {
         const tagarray = JSON.parse(await AsyncStorage.getItem('Tags'));
         Orientation.lockToLandscape();
@@ -22,8 +22,7 @@ class AddPhoto extends Component {
                 acheivement: await AsyncStorage.getItem('Acheivement'),
                 languages: await AsyncStorage.getItem('Language'),
                 color: await AsyncStorage.getItem('BGColour'),
-                tags: JSON.parse(await AsyncStorage.getItem('Tags')),
-                group: null
+                tags: JSON.parse(await AsyncStorage.getItem('Tags'))
             }); 
         } else {
             this.setState({ 
@@ -32,15 +31,16 @@ class AddPhoto extends Component {
                 acheivement: await AsyncStorage.getItem('Acheivement'),
                 languages: await AsyncStorage.getItem('Language'),
                 color: await AsyncStorage.getItem('BGColour'),
-                tags: JSON.parse(await AsyncStorage.getItem('Tags'))
+                tags: JSON.parse(await AsyncStorage.getItem('Tags')),
+                group: Languages[await AsyncStorage.getItem('Language')]['127']
             });
         }
     }
 
     createPicker() {
         let index = 0;
-        const firstpicker = [{ key: index++, label: 'Select A Tag' },
-                            { key: index++, label: 'Create A New Tag' }
+        const firstpicker = [{ key: index++, label: Languages[this.state.languages]['127'] },
+                            { key: index++, label: Languages[this.state.languages]['128'] }
                             ];
         const picker = this.state.tags.map(
             (tag) => (
@@ -68,9 +68,9 @@ class AddPhoto extends Component {
                         style={{ marginLeft: Platform.OS === 'ios' ? 70 : 125, width: 300 }}
                         initValue={this.state.group}
                         onChange={(group) => {
-                                if (group.label === 'Create A New Tag') {
+                                if (group.label === Languages[this.state.languages]['128']) {
                                     this.setState({ tagpick: false, group: null });
-                                } else if (group.label === 'Select A Tag') {
+                                } else if (group.label === Languages[this.state.languages]['127']) {
                                     this.setState({ tagpick: null });
                                 } else {
                                     this.setState({ group: group.label });
@@ -103,7 +103,7 @@ class AddPhoto extends Component {
         }
     }
     async onSaveItemPress() {
-        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || this.state.group === 'Select A Tag' || (this.state.imgsrc === null && this.state.imageuri === null)) {
+        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || this.state.group === Languages[this.state.languages]['127'] || (this.state.imgsrc === null && this.state.imageuri === null)) {
             this.setState({ isNull: true });
         } else {
             const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
@@ -392,7 +392,7 @@ class AddPhoto extends Component {
     }
 
     async createNew() {
-        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || this.state.group === 'Select A Tag' || (this.state.imgsrc === null && this.state.imageuri === null)) {
+        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || this.state.group === Languages[this.state.languages]['127'] || (this.state.imgsrc === null && this.state.imageuri === null)) {
             this.setState({ isNull: true });
         } else {
             const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
@@ -436,7 +436,7 @@ class AddPhoto extends Component {
         AsyncStorage.setItem('uniqueID', JSON.stringify(objec));
         AsyncStorage.setItem('Media', JSON.stringify(gen));
         AsyncStorage.setItem('Pictures', JSON.stringify(photos));
-        this.setState({ imageuri: null, caption: null, group: 'Select A Tag', modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, cameraType: 'back', webphoto: null, imgsrc: null });
+        this.setState({ imageuri: null, caption: null, group: Languages[this.state.languages]['127'], modalVisible: false, photos: null, height: null, width: null, title: null, isFavourite: false, isRecording: false, cameraType: 'back', webphoto: null, imgsrc: null });
         }
     }
 
