@@ -26,6 +26,8 @@ class AddMessage extends Component {
     }
 
     async onSaveMessagePress() {
+        console.log(this.state.startHour);
+        console.log(this.state.endHour);
             if (((((this.state.message === null || this.state.message === '') && this.state.messageType === 'Msg') || ((this.state.title === null || this.state.message === '') && this.state.messageType === 'VideoMsg') || this.state.day === '[]') && this.state.currentMessage === null) || (this.state.currentMessage !== null && (JSON.parse(this.state.currentMessage).message === null || JSON.parse(this.state.currentMessage).message === '' || JSON.parse(this.state.currentMessage).day.length === 0))) {
                 this.setState({ isNull: true });
             } else {
@@ -37,7 +39,7 @@ class AddMessage extends Component {
                 };
                 if (this.state.currentMessage === null) {
                     const { message, day, startHour, startMinute, endHour, endMinute, messageType, uri, title } = this.state;
-                    if ((this.state.startHour > this.state.endHour) || (this.state.startHour === this.state.endHour && this.state.startMinute >= this.state.endMinute)) {
+                    if ((timeobj[this.state.aorp][startHour] > timeobj[this.state.aorpend][endHour]) || (timeobj[this.state.aorp][startHour] === timeobj[this.state.aorpend][endHour] && this.state.startMinute >= this.state.endMinute)) {
                         this.setState({ invalid: true });
                     } else {
                         if (messageType === 'Msg') {
@@ -72,7 +74,7 @@ class AddMessage extends Component {
                 } 
                 if (this.state.currentMessage !== null) {
                     const selected = JSON.parse(this.state.currentMessage);
-                    if ((selected.startHour > selected.endHour) || (selected.startHour === selected.endHour && selected.startMinute >= selected.endMinute)) {
+                    if ((timeobj[this.state.aorp][selected.startHour] > timeobj[this.state.aorpend][selected.endHour]) || (timeobj[this.state.aorp][selected.startHour] === timeobj[this.state.aorpend][selected.endHour] && selected.startMinute >= selected.endMinute)) {
                         this.setState({ invalid: true });
                     } else {
                         const searc = messages.findIndex((element, index, array) => {
@@ -223,7 +225,7 @@ class AddMessage extends Component {
                         <View style={{ flexDirection: 'row' }}>
                             <TouchableWithoutFeedback 
                             onPress={() => {
-                            this.setState({ messageType: message.messageType, currentMessage: JSON.stringify(message) });
+                            this.setState({ messageType: message.messageType, currentMessage: JSON.stringify(message), aorp: message.startHour >= 12 ? 'PM' : 'AM', aorpend: message.endHour >= 12 ? 'PM' : 'AM' });
                             }}
                             >
                             <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20, marginRight: 10 }} />
@@ -1026,9 +1028,6 @@ class AddMessage extends Component {
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
                             {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                         </Button>
-                        <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
-                        </Button>
                         <Button onPress={() => Actions.Settings()}>
                             {Languages[this.state.languages]['069']}
                         </Button>
@@ -1346,9 +1345,6 @@ class AddMessage extends Component {
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
                         <Button onPress={this.onSaveMessagePress.bind(this)}>
                             {Languages[this.state.languages]['067']}  <Image source={require('../Images/saveicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
-                        </Button>
-                        <Button onPress={this.createNew.bind(this)}>
-                            {Languages[this.state.languages]['068']}  <Image source={require('../Images/infoicon.png')} style={{ height: 30, width: 30, marginTop: 10 }} />
                         </Button>
                         <Button onPress={() => Actions.Settings()}>
                             {Languages[this.state.languages]['069']}
