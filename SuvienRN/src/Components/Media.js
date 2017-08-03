@@ -478,10 +478,10 @@ class Media extends Component {
                                             <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
                                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
                                                 {this.state.title}
-                                            </Text>
-                                            <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                 <Image source={imagerend} style={{ height: 40, width: 40 }} />
                                             </TouchableWithoutFeedback>
+                                            </Text>
                                         </View>
                                             <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                             <Text style={styles.textBodyStyle}>
