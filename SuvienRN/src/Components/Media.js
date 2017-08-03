@@ -477,7 +477,7 @@ class Media extends Component {
                                         <View>
                                             <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
                                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                {this.state.title}  <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                 <Image source={imagerend} style={{ height: 40, width: 40 }} />
                                             </TouchableWithoutFeedback>
                                             </Text>
@@ -520,7 +520,7 @@ class Media extends Component {
                                         <View>
                                             <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
                                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                {this.state.title}  <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                 <Image source={imagerend} style={{ height: 40, width: 40 }} />
                                             </TouchableWithoutFeedback>
                                             </Text>
@@ -563,7 +563,7 @@ class Media extends Component {
                                             <View>
                                                 <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
                                                 <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                    {this.state.title}  <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                    {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                     <Image source={imagerend} style={{ height: 40, width: 40 }} />
                                                 </TouchableWithoutFeedback>
                                                 </Text>
@@ -595,7 +595,7 @@ class Media extends Component {
                                                 <View>
                                                     <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
                                                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                        {this.state.title}  <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                        {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                         <Image source={imagerend} style={{ height: 40, width: 40 }} />
                                                     </TouchableWithoutFeedback>
                                                     </Text>
@@ -631,7 +631,7 @@ class Media extends Component {
                                                 <View>
                                                     <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
                                                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                        {this.state.title}  <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                        {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                         <Image source={imagerend} style={{ height: 40, width: 40 }} />
                                                     </TouchableWithoutFeedback>
                                                     </Text>
@@ -729,7 +729,7 @@ class Media extends Component {
                                 <ScrollView>
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                        {this.state.title}  <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                        {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                         <Image source={this.state.imagerend} style={{ height: 40, width: 40 }} />
                                     </TouchableWithoutFeedback>
                                     </Text>
@@ -801,7 +801,7 @@ class Media extends Component {
                                                 <ScrollView>
                                                 <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
                                                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                        {this.state.title}  <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                        {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                         <Image source={this.state.imagerend} style={{ height: 40, width: 40 }} />
                                                     </TouchableWithoutFeedback>
                                                     </Text>
