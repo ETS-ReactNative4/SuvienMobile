@@ -128,7 +128,8 @@
         "125" : "For this reason, we will delete this tile.",
         "126" : "Delete a...",
         "127" : "Select A Tag",
-        "128" : "Create A New Tag"
+        "128" : "Create A New Tag",
+        "129" : "Cancel"
     },
     "FRE" : {
         "000" : "Démarrer",
@@ -259,7 +260,8 @@
         "125" : "Pour cette raison, nous supprimerons cette tuile",
         "126" : "Supprimer un...",
         "127" : "Choisir Un Tag",
-        "128" : "Créer Un Nouveau Tag"
+        "128" : "Créer Un Nouveau Tag",
+        "129" : "Annuler"
     },
     "ESP" : {
         "000" : "Empezar",
@@ -390,6 +392,7 @@
         "125" : "Por esta razón, se eliminará este teja",
         "126" : "Eliminar un...",
         "127" : "Elegir Una Etiqueta",
-        "128" : "Crear Una Etiqueta Nueva"
+        "128" : "Crear Una Etiqueta Nueva",
+        "129" : "Cancelar"
     }
 }
