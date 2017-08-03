@@ -8,7 +8,7 @@ import Orientation from 'react-native-orientation';
 import ModalPicker from 'react-native-modal-picker';
 
 class Settings extends Component {
-    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, tags: null, tagpick: null, languages: null, mediaType: null, color: null, media: null, mediaArray: null, selectedItem: null, width: null, modalVisible: false, delete: null, isNull: false, selected: null, preferences: null};
+    state = { name: '', stage: null, isFirst: false, acheivement: null, preset: null, tags: null, isNotRand: false, tagpick: null, languages: null, mediaType: null, color: null, media: null, mediaArray: null, selectedItem: null, width: null, modalVisible: false, delete: null, isNull: false, selected: null, preferences: null};
     async componentWillMount() {
         Orientation.lockToLandscape();
         const transarray = ['ENG', 'FRE', 'ESP'];
@@ -996,6 +996,29 @@ if (this.state.tags === null || this.state.languages === null) {
                 </View>
                 </View>
                 </Modal>
+                <Modal
+                animationType={"fade"}
+                transparent
+                visible={this.state.isNotRand}
+                onRequestClose={() => {}}
+>
+            <View style={{ backgroundColor: this.state.color, flex: 1, height: null, width: null, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ height: 600, width: 800, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 30, fontFamily: 'Roboto-Light', flexWrap: 'wrap', marginLeft: 20, alignSelf: 'center', alignContent: 'center' }}>{Languages[this.state.languages]['130']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginTop: 10 }}>{Languages[this.state.languages]['131']}</Text>
+                    <Text style={{ marginLeft: 20, marginRight: 20, fontSize: 20, fontFamily: 'Roboto-Thin', marginBottom: 30 }}>{Languages[this.state.languages]['132']}</Text>
+                    <CardSection style={{ borderBottomWidth: 0, marginRight: 15 }}>
+                        <Button 
+                        onPress={() => {
+                        this.setState({ isNotRand: false });
+                        }}
+                        >
+                    {Languages[this.state.languages]['113']}
+                        </Button>
+                    </CardSection>
+                </View>
+                </View>
+                </Modal>
             <ScrollView>
             <View style={{ marginTop: 10, marginLeft: 80, marginRight: 80, alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row' }}>
@@ -1062,9 +1085,13 @@ if (this.state.tags === null || this.state.languages === null) {
                     >{Languages[this.state.languages]['046']}
                     </Button>
                     <Button 
-                    onPress={() => {
-                        AsyncStorage.setItem('Preset', (Languages[this.state.languages]['094'])[2]);
-                        Actions.Home();
+                    onPress={async () => {
+                        if (await AsyncStorage.getItem('RAND') === 'false') {
+                            this.setState({ isNotRand: true });
+                        } else {
+                            AsyncStorage.setItem('Preset', (Languages[this.state.languages]['094'])[2]);
+                            Actions.Home();
+                        }
                         }}
                     >{Languages[this.state.languages]['047']}
                     </Button>

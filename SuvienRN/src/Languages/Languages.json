@@ -129,7 +129,10 @@
         "126" : "Delete a...",
         "127" : "Select A Tag",
         "128" : "Create A New Tag",
-        "129" : "Cancel"
+        "129" : "Cancel",
+        "130" : "The random preset is temporarily disabled",
+        "131" : "There is content you have deleted on your device that you haven't deleted in the app.",
+        "132" : "Please delete these tiles to continue."
     },
     "FRE" : {
         "000" : "Démarrer",
@@ -261,8 +264,11 @@
         "126" : "Supprimer un...",
         "127" : "Choisir Un Tag",
         "128" : "Créer Un Nouveau Tag",
-        "129" : "Annuler"
-    },
+        "129" : "Annuler",
+        "130" : "The random preset is temporarily disabled",
+        "131" : "There is content you have deleted on your device that you haven't deleted in the app.",
+        "132" : "Please delete these tiles to continue."
+     },
     "ESP" : {
         "000" : "Empezar",
         "001" : "Comenzar",
@@ -393,6 +399,9 @@
         "126" : "Eliminar un...",
         "127" : "Elegir Una Etiqueta",
         "128" : "Crear Una Etiqueta Nueva",
-        "129" : "Cancelar"
+        "129" : "Cancelar",
+        "130" : "The random preset is temporarily disabled",
+        "131" : "There is content you have deleted on your device that you haven't deleted in the app.",
+        "132" : "Please delete these tiles to continue."
     }
 }

@@ -186,10 +186,10 @@ class MainMenu extends Component {
                 prefobj[array[i]] = true;
             }
             prefobj[array[4]] = false;
-            const keys = ['Videos', 'Tags', 'Media', 'Pictures', 'Favourites', 'Height', 'Width', 'Audio', 'Messages', 'Acheivement', 'Cards', 'Preset', 'Preferences', 'Ask', 'BGColour'];
+            const keys = ['Videos', 'Tags', 'Media', 'Pictures', 'Favourites', 'Height', 'Width', 'Audio', 'Messages', 'Acheivement', 'Cards', 'Preset', 'Preferences', 'Ask', 'BGColour', 'RAND'];
             const values = [JSON.stringify([]), JSON.stringify([]), JSON.stringify([]), JSON.stringify([]), JSON.stringify([]), Dimensions.get('window').height.toString(), Dimensions.get('window').width.toString(), 
                             JSON.stringify([]), JSON.stringify([]), 'INCOM', JSON.stringify([]), (Languages[await AsyncStorage.getItem('Language')]['094'])[3], JSON.stringify(prefobj), JSON.stringify(this.state.ask),
-                            'rgba(60,60,60,0.85)'
+                            'rgba(60,60,60,0.85)', 'true'
                            ];
             for (let i = 0; i < keys.length; i++) {
                 AsyncStorage.setItem(keys[i], values[i]);
