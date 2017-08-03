@@ -49,6 +49,9 @@ if (this.state.tags === null || this.state.languages === null) {
                 data={this.createPicker()}
                 style={{ marginLeft: 70, width: 300 }}
                 initValue={this.state.group}
+                cancelText={Languages[this.state.languages]['129']}
+                optionTextStyle={{ color: 'black', fontSize: 24, fontFamily: 'Roboto-Thin' }}
+                cancelTextStyle={{ color: 'black', fontSize: 24, fontFamily: 'Roboto-Thin' }}
                 onChange={(group) => {
                         if (group.label === Languages[this.state.languages]['128']) {
                             this.setState({ tagpick: false, group: null });
