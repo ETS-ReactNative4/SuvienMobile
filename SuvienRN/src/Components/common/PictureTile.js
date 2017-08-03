@@ -6,10 +6,10 @@ import { Actions } from 'react-native-router-flux';
 import MusicPlayerController from 'react-native-musicplayercontroller';
 
 class PictureTile extends Component {
-    state = { imageuri: null, caption: null, tag: null, isNull: true, languages: null, isnone: null, noint: false }
+    state = { imageuri: null, caption: null, tag: null, isNull: true, languages: null, isnone: null, noint: false, preset: null }
 
     async componentWillMount() {
-        this.setState({ languages: await AsyncStorage.getItem('Language') });
+        this.setState({ languages: await AsyncStorage.getItem('Language'), preset: await AsyncStorage.getItem('Preset') });
     }
     render() {
         if (this.state.languages !== null) {
@@ -67,13 +67,13 @@ class PictureTile extends Component {
                 );
             }
             if (this.state.isnone !== null) {
+                AsyncStorage.setItem('RAND', 'false');
+                if (this.state.preset === Languages[this.state.languages]['094'][2]) {
+                    AsyncStorage.setItem('Preset', Languages[this.state.languages]['094'][0]);
+                }
                 return (
                     <TouchableOpacity 
                     onPress={async () => {
-                        AsyncStorage.setItem('RAND', 'false');
-                        if (await AsyncStorage.getItem('Preset') === Languages[this.state.languages]['094'][2]) {
-                            AsyncStorage.setItem('Preset', Languages[this.state.languages]['094'][0]);
-                        }
                         this.props.onChangePress({ uri: this.props.data.imageuri,
                         title: this.props.data.title, 
                         caption: this.props.data.caption, 
@@ -231,13 +231,13 @@ class PictureTile extends Component {
                 );
             }
             if (this.state.isnone !== null) {
+                AsyncStorage.setItem('RAND', 'false');
+                if (this.state.preset === Languages[this.state.languages]['094'][2]) {
+                    AsyncStorage.setItem('Preset', Languages[this.state.languages]['094'][0]);
+                }
                 return (
                     <TouchableOpacity 
                     onPress={async () => {
-                        AsyncStorage.setItem('RAND', 'false');
-                        if (await AsyncStorage.getItem('Preset') === Languages[this.state.languages]['094'][2]) {
-                            AsyncStorage.setItem('Preset', Languages[this.state.languages]['094'][0]);
-                        }
                         this.props.onChangePress({ uri: this.props.data.uri,
                         title: this.props.data.title, 
                         caption: this.props.data.caption, 

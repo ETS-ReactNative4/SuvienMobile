@@ -18,8 +18,7 @@ class MainMenu extends Component {
         prefobj[array[4]] = false;
         AsyncStorage.setItem('Preferences', JSON.stringify(prefobj));
         */
-        console.log('weee');
-        console.log(await AsyncStorage.getItem('Language'));
+        AsyncStorage.setItem('RAND', 'true');
         Orientation.lockToLandscape();
         AsyncStorage.setItem('BGColour', 'rgba(60,60,60,0.95)');
          if (await AsyncStorage.getItem('name') !== null && await AsyncStorage.getItem('stage') !== null) {
@@ -242,6 +241,7 @@ class MainMenu extends Component {
         );
     }
     render() {
+        AsyncStorage.setItem('RAND', 'true');
         if (this.state.lang === null) {
             return (
                 <View />
