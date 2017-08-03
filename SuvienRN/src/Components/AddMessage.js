@@ -7,7 +7,7 @@ import Camera from 'react-native-camera';
 import Orientation from 'react-native-orientation';
 
 class AddMessage extends Component {
-    state = { secheight: null, secwidth: null, message: null, videos: null, color: null, day: '[]', startHour: 0, videovisible: false, modalVisible: false, delete: null, invalid: false, startMinute: 0, isRecording: false, isNull: false, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
+    state = { secheight: null, secwidth: null, message: null, videos: null, color: null, day: '[]', startHour: 0, videovisible: false, aorp: 'AM', aorpend: 'AM', modalVisible: false, delete: null, invalid: false, startMinute: 0, isRecording: false, isNull: false, languages: null, endHour: 0, endMinute: 0, title: null, messages: null, messageType: null, isLaunchCam: false, deletedMessage: null, heightc: null, widthc: null, uri: null, cameraType: 'back', currentMessage: null }
     async componentWillMount() {
         Orientation.lockToLandscape();
         if (Platform.OS === 'ios') {
@@ -31,6 +31,10 @@ class AddMessage extends Component {
             } else {
                 const dd = new Date();
                 const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
+                const timeobj = {
+                    'AM': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                    'PM': [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+                };
                 if (this.state.currentMessage === null) {
                     const { message, day, startHour, startMinute, endHour, endMinute, messageType, uri, title } = this.state;
                     if ((this.state.startHour > this.state.endHour) || (this.state.startHour === this.state.endHour && this.state.startMinute >= this.state.endMinute)) {
@@ -40,9 +44,9 @@ class AddMessage extends Component {
                             messages.push({
                             day: JSON.parse(day),
                             message,
-                            startHour,
+                            startHour: timeobj[this.state.aorp][startHour],
                             startMinute,
-                            endHour,
+                            endHour: timeobj[this.state.aorpend][endHour],
                             endMinute,
                             messageType,
                             messageID: dd.getTime()
@@ -52,9 +56,9 @@ class AddMessage extends Component {
                             messages.push({
                             day: JSON.parse(day),
                             message: title,
-                            startHour,
+                            startHour: timeobj[this.state.aorp][startHour],
                             startMinute,
-                            endHour,
+                            endHour: timeobj[this.state.aorpend][endHour],
                             endMinute,
                             uri,
                             messageType,
@@ -82,9 +86,9 @@ class AddMessage extends Component {
                         messages[searc] = {
                             day,
                             message,
-                            startHour,
+                            startHour: timeobj[this.state.aorp][startHour],
                             startMinute,
-                            endHour,
+                            endHour: timeobj[this.state.aorpend][endHour],
                             endMinute,
                             messageType: 'Msg',
                             messageID
@@ -98,9 +102,9 @@ class AddMessage extends Component {
                         messages[searc] = {
                             day,
                             message,
-                            startHour,
+                            startHour: timeobj[this.state.aorp][startHour],
                             startMinute,
-                            endHour,
+                            endHour: timeobj[this.state.aorpend][endHour],
                             endMinute,
                             uri,
                             messageType: 'VideoMsg',
@@ -121,15 +125,19 @@ class AddMessage extends Component {
             } else {
                 const dd = new Date();
                 const messages = JSON.parse(await AsyncStorage.getItem('Messages'));
+                const timeobj = {
+                    'AM': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                    'PM': [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+                };
                 if (this.state.currentMessage === null) {
                     const { message, day, startHour, startMinute, endHour, endMinute, messageType, uri, title } = this.state;
                 if (messageType === 'Msg') {
                     messages.push({
                     day: JSON.parse(day),
                     message,
-                    startHour,
+                    startHour: timeobj[this.state.aorp][startHour],
                     startMinute,
-                    endHour,
+                    endHour: timeobj[this.state.aorpend][endHour],
                     endMinute,
                     messageType,
                     messageID: dd.getTime()
@@ -139,9 +147,9 @@ class AddMessage extends Component {
                     messages.push({
                     day: JSON.parse(day),
                     message: title,
-                    startHour,
+                    startHour: timeobj[this.state.aorp][startHour],
                     startMinute,
-                    endHour,
+                    endHour: timeobj[this.state.aorpend][endHour],
                     endMinute,
                     uri,
                     messageType,
@@ -165,9 +173,9 @@ class AddMessage extends Component {
                     messages[searc] = {
                         day,
                         message,
-                        startHour,
+                        startHour: timeobj[this.state.aorp][startHour],
                         startMinute,
-                        endHour,
+                        endHour: timeobj[this.state.aorpend][endHour],
                         endMinute,
                         messageType: 'Msg',
                         messageID
@@ -181,9 +189,9 @@ class AddMessage extends Component {
                     messages[searc] = {
                         day,
                         message,
-                        startHour,
+                        startHour: timeobj[this.state.aorp][startHour],
                         startMinute,
-                        endHour,
+                        endHour: timeobj[this.state.aorpend][endHour],
                         endMinute,
                         uri,
                         messageType: 'VideoMsg',
@@ -319,7 +327,18 @@ class AddMessage extends Component {
             );
         }
         if (this.state.languages !== null) {
-            let j;
+            //let j;
+            const hours = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
+            let i;
+            const minutes = [];
+            for (i = 0; i < 60; i++) {
+                if (i < 10) {
+                    minutes.push(`0${i}`);
+                } else {
+                    minutes.push(`${i}`);
+                }
+            }
+            /*
         const hours = [];
         for (j = 0; j < 24; j++) {
             if (j < 10) {
@@ -328,15 +347,7 @@ class AddMessage extends Component {
                 hours.push(`${j}`);
             }
         }
-        let i;
-        const minutes = [];
-        for (i = 0; i < 60; i++) {
-            if (i < 10) {
-                minutes.push(`0${i}`);
-            } else {
-                minutes.push(`${i}`);
-            }
-        }
+        }*/
         if (this.state.isLaunchCam === false) {
             if (this.state.messageType === null) {
             return (
@@ -632,18 +643,33 @@ class AddMessage extends Component {
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={this.state.startHour}
-                    onValueChange={startHour => this.setState({ startHour })}
+                    onValueChange={(startHour) => {
+                        if (startHour >= 12) {
+                            this.setState({ startHour, aorp: 'PM' });
+                        }
+                        if (startHour < 12) {
+                            this.setState({ startHour, aorp: 'AM' });
+                        }
+                        }}
                     >
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={this.state.startMinute}
                     onValueChange={startMinute => this.setState({ startMinute })}
                     >
                         {this.createPicker(minutes)}
+                    </Picker>
+                    <Picker
+                    style={{ width: 100 }}
+                    selectedValue={this.state.aorp}
+                    onValueChange={aorp => this.setState({ aorp })}
+                    >
+                    <Picker.Item label="AM" value="AM" />
+                    <Picker.Item label="PM" value="PM" />
                     </Picker>
                     </View>
                     </View>
@@ -651,18 +677,33 @@ class AddMessage extends Component {
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={this.state.endHour}
-                    onValueChange={endHour => this.setState({ endHour })}
+                    onValueChange={(endHour) => {
+                        if (endHour >= 12) {
+                            this.setState({ endHour, aorpend: 'PM' });
+                        }
+                        if (endHour >= 12) {
+                            this.setState({ endHour, aorpend: 'AM' });
+                        }
+                        }}
                     >
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={this.state.endMinute}
                     onValueChange={endMinute => this.setState({ endMinute })}
                     >
                         {this.createPicker(minutes)}
+                    </Picker>
+                    <Picker
+                    style={{ width: 100 }}
+                    selectedValue={this.state.aorpend}
+                    onValueChange={aorpend => this.setState({ aorpend })}
+                    >
+                    <Picker.Item label="AM" value="AM" />
+                    <Picker.Item label="PM" value="PM" />
                     </Picker>
                     </View>
                     </View>
@@ -908,17 +949,22 @@ class AddMessage extends Component {
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={selected.startHour}
-                    onValueChange={startHour => {
+                    onValueChange={(startHour) => {
                         selected.startHour = startHour;
-                        this.setState({ currentMessage: JSON.stringify(selected) });
+                        if (startHour >= 12) {
+                            this.setState({ currentMessage: JSON.stringify(selected), aorp: 'PM' });
+                        }
+                        if (startHour < 12) {
+                            this.setState({ currentMessage: JSON.stringify(selected), aorp: 'AM' });
+                        }
                         }}
                     >
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={selected.startMinute}
                     onValueChange={startMinute => {
                         selected.startMinute = startMinute;
@@ -927,23 +973,36 @@ class AddMessage extends Component {
                     >
                         {this.createPicker(minutes)}
                     </Picker>
+                    <Picker
+                    style={{ width: 100 }}
+                    selectedValue={this.state.aorp}
+                    onValueChange={aorp => this.setState({ aorp })}
+                    >
+                    <Picker.Item label="AM" value="AM" />
+                    <Picker.Item label="PM" value="PM" />
+                    </Picker>
                     </View>
                     </View>
                     <View>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={selected.endHour}
                     onValueChange={endHour => {
                         selected.endHour = endHour;
-                        this.setState({ currentMessage: JSON.stringify(selected) });
+                        if (endHour >= 12) {
+                            this.setState({ currentMessage: JSON.stringify(selected), aorpend: 'PM' });
+                        }
+                        if (endHour < 12) {
+                            this.setState({ currentMessage: JSON.stringify(selected), aorpend: 'AM' });
+                        }
                         }}
                     >
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={selected.endMinute}
                     onValueChange={endMinute => {
                         selected.endMinute = endMinute;
@@ -951,6 +1010,14 @@ class AddMessage extends Component {
                         }}
                     >
                         {this.createPicker(minutes)}
+                    </Picker>
+                    <Picker
+                    style={{ width: 100 }}
+                    selectedValue={this.state.aorpend}
+                    onValueChange={aorpend => this.setState({ aorpend })}
+                    >
+                    <Picker.Item label="AM" value="AM" />
+                    <Picker.Item label="PM" value="PM" />
                     </Picker>
                     </View>
                     </View>
@@ -1203,17 +1270,22 @@ class AddMessage extends Component {
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row' }}>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={selected.startHour}
                     onValueChange={startHour => {
                         selected.startHour = startHour;
-                        this.setState({ currentMessage: JSON.stringify(selected) });
+                        if (startHour >= 12) {
+                            this.setState({ currentMessage: JSON.stringify(selected), aorp: 'PM' });
+                        }
+                        if (startHour < 12) {
+                            this.setState({ currentMessage: JSON.stringify(selected), aorp: 'AM' });
+                        }
                         }}
                     >
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={selected.startMinute}
                     onValueChange={startMinute => {
                         selected.startMinute = startMinute;
@@ -1222,23 +1294,36 @@ class AddMessage extends Component {
                     >
                         {this.createPicker(minutes)}
                     </Picker>
+                    <Picker
+                    style={{ width: 100 }}
+                    selectedValue={this.state.aorp}
+                    onValueChange={aorp => this.setState({ aorp })}
+                    >
+                    <Picker.Item label="AM" value="AM" />
+                    <Picker.Item label="PM" value="PM" />
+                    </Picker>
                     </View>
                     </View>
                     <View>
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row', height: 100 }}>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={selected.endHour}
                     onValueChange={endHour => {
                         selected.endHour = endHour;
-                        this.setState({ currentMessage: JSON.stringify(selected) });
+                        if (endHour >= 12) {
+                            this.setState({ currentMessage: JSON.stringify(selected), aorpend: 'PM' });
+                        }
+                        if (endHour < 12) {
+                            this.setState({ currentMessage: JSON.stringify(selected), aorpend: 'AM' });
+                        }
                         }}
                     >
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={selected.endMinute}
                     onValueChange={endMinute => {
                         selected.endMinute = endMinute;
@@ -1246,6 +1331,14 @@ class AddMessage extends Component {
                         }}
                     >
                         {this.createPicker(minutes)}
+                    </Picker>
+                    <Picker
+                    style={{ width: 100 }}
+                    selectedValue={this.state.aorpend}
+                    onValueChange={aorpend => this.setState({ aorpend })}
+                    >
+                    <Picker.Item label="AM" value="AM" />
+                    <Picker.Item label="PM" value="PM" />
                     </Picker>
                     </View>
                     </View>
@@ -1619,18 +1712,33 @@ class AddMessage extends Component {
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['091']}</Text>
                         <View style={{ flexDirection: 'row', height: 100 }}>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={this.state.startHour}
-                    onValueChange={startHour => this.setState({ startHour })}
+                    onValueChange={(startHour) => {
+                        if (startHour >= 12) {
+                            this.setState({ startHour, aorp: 'PM' })
+                        }
+                        if (startHour < 12) {
+                            this.setState({ startHour, aorp: 'AM' })
+                        }
+                        }}
                     >
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={this.state.startMinute}
                     onValueChange={startMinute => this.setState({ startMinute })}
                     >
                         {this.createPicker(minutes)}
+                    </Picker>
+                    <Picker
+                    style={{ width: 100 }}
+                    selectedValue={this.state.aorp}
+                    onValueChange={aorp => this.setState({ aorp })}
+                    >
+                    <Picker.Item label="AM" value="AM" />
+                    <Picker.Item label="PM" value="PM" />
                     </Picker>
                     </View>
                     </View>
@@ -1638,18 +1746,33 @@ class AddMessage extends Component {
                         <Text style={{ fontSize: 18, paddingLeft: 20 }}>{Languages[this.state.languages]['092']}</Text>
                         <View style={{ flexDirection: 'row', height: 100 }}>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={this.state.endHour}
-                    onValueChange={endHour => this.setState({ endHour })}
+                    onValueChange={(endHour) => {
+                        if (endHour >= 12) {
+                            this.setState({ endHour, aorpend: 'PM' })
+                        }
+                        if (endHour >= 12) {
+                            this.setState({ endHour, aorpend: 'AM' })
+                        }
+                        }}
                     >
                         {this.createPicker(hours)}
                     </Picker>
                     <Picker
-                    style={{ width: this.state.secwidth }}
+                    style={{ width: this.state.secwidth / 2 }}
                     selectedValue={this.state.endMinute}
                     onValueChange={endMinute => this.setState({ endMinute })}
                     >
                         {this.createPicker(minutes)}
+                    </Picker>
+                    <Picker
+                    style={{ width: 100 }}
+                    selectedValue={this.state.aorpend}
+                    onValueChange={aorpend => this.setState({ aorpend })}
+                    >
+                    <Picker.Item label="AM" value="AM" />
+                    <Picker.Item label="PM" value="PM" />
                     </Picker>
                     </View>
                     </View>
@@ -1751,6 +1874,7 @@ class AddMessage extends Component {
     }
         }
         }
+        
 
 const styles = {
   container: {
