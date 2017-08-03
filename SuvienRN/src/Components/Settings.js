@@ -598,7 +598,8 @@ if (this.state.tags === null || this.state.languages === null) {
                     <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
                         <View style={{ backgroundColor: 'transparent', height: 200 }} />
                         <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <ScrollView>
+                                <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                             <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                 <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
                                     <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
@@ -611,6 +612,9 @@ if (this.state.tags === null || this.state.languages === null) {
                                     <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
                                 </TouchableWithoutFeedback>
                             </View>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                        </View>
+                        </ScrollView>
                         </View>
                     </Image>
                 ));
@@ -627,7 +631,8 @@ if (this.state.tags === null || this.state.languages === null) {
                     <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.uri }}>
                         <View style={{ backgroundColor: 'transparent', height: 200 }} />
                         <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <ScrollView>
+                                <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                             <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                 <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
                                     <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
@@ -640,6 +645,9 @@ if (this.state.tags === null || this.state.languages === null) {
                                     <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
                                 </TouchableWithoutFeedback>
                             </View>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                        </View>
+                        </ScrollView>
                         </View>
                     </Image>
                     );
@@ -649,7 +657,8 @@ if (this.state.tags === null || this.state.languages === null) {
                     <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
                         <View style={{ backgroundColor: 'transparent', height: 200 }} />
                         <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <ScrollView>
+                                <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                             <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                 <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
                                     <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
@@ -662,6 +671,9 @@ if (this.state.tags === null || this.state.languages === null) {
                                     <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
                                 </TouchableWithoutFeedback>
                             </View>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                        </View>
+                        </ScrollView>
                         </View>
                     </Image>
                     );
@@ -678,7 +690,8 @@ if (this.state.tags === null || this.state.languages === null) {
                     <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={require('../Images/musicalbumart.png')}>
                         <View style={{ backgroundColor: 'transparent', height: 200 }} />
                         <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <ScrollView>
+                                <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                             <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                 <TouchableWithoutFeedback onPress={() => this.setState({ selectedItem: photo })}>
                                     <Image source={require('../Images/infoicon.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginRight: 10 }} />
@@ -691,6 +704,9 @@ if (this.state.tags === null || this.state.languages === null) {
                                     <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
                                 </TouchableWithoutFeedback>
                             </View>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                        </View>
+                        </ScrollView>
                         </View>
                     </Image>
                     );
@@ -708,7 +724,8 @@ if (this.state.tags === null || this.state.languages === null) {
                     <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
                         <View style={{ backgroundColor: 'transparent', height: 200 }} />
                         <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <ScrollView>
+                                <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                             <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                 <TouchableWithoutFeedback 
                                 onPress={() => {
@@ -718,6 +735,9 @@ if (this.state.tags === null || this.state.languages === null) {
                                     <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
                                 </TouchableWithoutFeedback>
                             </View>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                        </View>
+                        </ScrollView>
                         </View>
                     </Image>
                 ));
@@ -734,7 +754,8 @@ if (this.state.tags === null || this.state.languages === null) {
                     <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.uri }}>
                         <View style={{ backgroundColor: 'transparent', height: 200 }} />
                         <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <ScrollView>
+                            <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                             <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                 <TouchableWithoutFeedback 
                                 onPress={() => {
@@ -744,6 +765,9 @@ if (this.state.tags === null || this.state.languages === null) {
                                     <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
                                 </TouchableWithoutFeedback>
                             </View>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            </View>
+                        </ScrollView>
                         </View>
                     </Image>
                     );
@@ -753,7 +777,8 @@ if (this.state.tags === null || this.state.languages === null) {
                     <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={{ uri: photo.imageuri }}>
                         <View style={{ backgroundColor: 'transparent', height: 200 }} />
                         <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <ScrollView>
+                                <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                             <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                 <TouchableWithoutFeedback 
                                 onPress={() => {
@@ -763,6 +788,9 @@ if (this.state.tags === null || this.state.languages === null) {
                                     <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
                                 </TouchableWithoutFeedback>
                             </View>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                        </View>
+                        </ScrollView>
                         </View>
                     </Image>
                     );
@@ -779,7 +807,8 @@ if (this.state.tags === null || this.state.languages === null) {
                     <Image style={{ height: 300, width: 300, marginLeft: 20, marginTop: 20 }} source={require('../Images/musicalbumart.png')}>
                         <View style={{ backgroundColor: 'transparent', height: 200 }} />
                         <View style={{ backgroundColor: this.state.color, height: 100, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                            <ScrollView>
+                                <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                             <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                 <TouchableWithoutFeedback 
                                 onPress={() => {
@@ -789,6 +818,9 @@ if (this.state.tags === null || this.state.languages === null) {
                                     <Image source={require('../Images/delete.png')} style={{ height: 40, width: 40, alignSelf: 'center', marginLeft: 20 }} />
                                 </TouchableWithoutFeedback>
                             </View>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto-Light', fontSize: 20 }}>{photo.title}</Text>
+                        </View>
+                        </ScrollView>
                         </View>
                     </Image>
                     );
