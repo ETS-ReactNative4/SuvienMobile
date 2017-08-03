@@ -163,7 +163,7 @@ if (this.state.tags === null || this.state.languages === null) {
                 AsyncStorage.setItem('Media', JSON.stringify(gen));
                 AsyncStorage.setItem('Audio', JSON.stringify(audios));
                 console.log(await AsyncStorage.getItem('Audio'));
-                this.setState({ information: null, caption: null, group: Languages[this.state.languages]['127'], tags: JSON.parse(await AsyncStorage.getItem('Tags')) });
+                this.setState({ information: null, caption: null, group: Languages[this.state.languages]['127'], tags: JSON.parse(await AsyncStorage.getItem('Tags')), tagpick: null });
             }
             }
     
