@@ -29,7 +29,7 @@ class AddVideo extends Component {
             languages: await AsyncStorage.getItem('Language'),
             color: await AsyncStorage.getItem('BGColour'),
             tags: JSON.parse(await AsyncStorage.getItem('Tags')),
-            group: Languages[this.state.languages]['127']
+            group: Languages[await AsyncStorage.getItem('Language')]['127']
         });
     }
     }

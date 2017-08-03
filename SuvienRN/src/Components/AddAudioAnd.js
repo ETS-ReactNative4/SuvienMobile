@@ -17,7 +17,7 @@ class AddAudioAnd extends Component {
         if (tagarray.length === 0) {
         this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height, tags: JSON.parse(await AsyncStorage.getItem('Tags')) });
         } else {
-            this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height, tags: JSON.parse(await AsyncStorage.getItem('Tags')), group: Languages[this.state.languages]['127'] });
+            this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height, tags: JSON.parse(await AsyncStorage.getItem('Tags')), group: Languages[await AsyncStorage.getItem('Language')]['127'] });
         }
     }
     createPicker() {
