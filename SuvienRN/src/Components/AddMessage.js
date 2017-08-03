@@ -683,7 +683,7 @@ class AddMessage extends Component {
                         if (endHour >= 12) {
                             this.setState({ endHour, aorpend: 'PM' });
                         }
-                        if (endHour >= 12) {
+                        if (endHour < 12) {
                             this.setState({ endHour, aorpend: 'AM' });
                         }
                         }}
@@ -1752,7 +1752,7 @@ class AddMessage extends Component {
                         if (endHour >= 12) {
                             this.setState({ endHour, aorpend: 'PM' })
                         }
-                        if (endHour >= 12) {
+                        if (endHour < 12) {
                             this.setState({ endHour, aorpend: 'AM' })
                         }
                         }}
