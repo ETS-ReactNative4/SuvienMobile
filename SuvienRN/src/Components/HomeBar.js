@@ -39,7 +39,7 @@ class HomeBar extends Component {
             const dd = new Date();
             this.setState({ hour: this.parseHour(dd.getHours()), minute: this.addZero(dd.getMinutes()) });
             if (this.state.dayFilter !== null && this.state.dayFilter.length !== 0) {
-                const finalmessages = this.state.dayFilter.filter((day) => ((day.startHour < dd.getHours()) || (day.startHour === dd.getHours() && day.startMinute <= dd.getMinutes()) || (day.endHour > dd.getHours()) || (day.endHour === dd.getHours() && day.endMinute > dd.getMinutes()))); 
+                const finalmessages = this.state.dayFilter.filter((day) => (((day.startHour < dd.getHours()) || (day.startHour === dd.getHours() && day.startMinute <= dd.getMinutes())) && ((day.endHour > dd.getHours()) || (day.endHour === dd.getHours() && day.endMinute > dd.getMinutes())))); 
                 const finalmessage = finalmessages.reverse();
                 if ((finalmessage !== undefined && finalmessage.length !== 0) && dd.getHours() < 12) { //this works on the time and after
                     if (dd.getMinutes() === finalmessage[0].startMinute && dd.getSeconds() <= 6) {
