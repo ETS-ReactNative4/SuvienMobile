@@ -8,22 +8,22 @@ import ModalPicker from 'react-native-modal-picker';
 import Orientation from 'react-native-orientation';
 
 class AddAudioAnd extends Component {
-    state = { title: null, artist: null, album: null, uri: null, caption: null, group: 'Select A Tag', acheivement: null, languages: null, isNull: false, widthc: null, heightc: null, color: null, tags: null, tagpick: null }
+    state = { title: null, artist: null, album: null, uri: null, caption: null, group: null, acheivement: null, languages: null, isNull: false, widthc: null, heightc: null, color: null, tags: null, tagpick: null }
     //console.log(JSON.parse(await AsyncStorage.getItem('samplemusic')));
 //WARNING! Make sure to fix the unique id problem!! you need to add a check for presets
     async componentWillMount() {
         const tagarray = JSON.parse(await AsyncStorage.getItem('Tags'));
         Orientation.lockToLandscape();
         if (tagarray.length === 0) {
-        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height, tags: JSON.parse(await AsyncStorage.getItem('Tags')), group: null });
+        this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height, tags: JSON.parse(await AsyncStorage.getItem('Tags')) });
         } else {
-            this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height, tags: JSON.parse(await AsyncStorage.getItem('Tags')) });
+            this.setState({ acheivement: await AsyncStorage.getItem('Acheivement'), languages: await AsyncStorage.getItem('Language'), color: await AsyncStorage.getItem('BGColour'), widthc: Dimensions.get('window').width, heightc: Dimensions.get('window').height, tags: JSON.parse(await AsyncStorage.getItem('Tags')), group: Languages[this.state.languages]['127'] });
         }
     }
     createPicker() {
 let index = 0;
-const firstpicker = [{ key: index++, label: 'Select A Tag' },
-                    { key: index++, label: 'Create A New Tag' }
+const firstpicker = [{ key: index++, label: Languages[this.state.languages]['127'] },
+                    { key: index++, label: Languages[this.state.languages]['128'] }
                     ];
 const picker = this.state.tags.map(
     (tag) => (
@@ -51,9 +51,9 @@ if (this.state.tags === null || this.state.languages === null) {
                 style={{ marginLeft: 125, width: 300 }}
                 initValue={this.state.group}
                 onChange={(group) => {
-                        if (group.label === 'Create A New Tag') {
+                        if (group.label === Languages[this.state.languages]['128']) {
                             this.setState({ tagpick: false, group: null });
-                        } else if (group.label === 'Select A Tag') {
+                        } else if (group.label === Languages[this.state.languages]['127']) {
                             this.setState({ tagpick: null });
                         } else {
                             this.setState({ group: group.label });
@@ -88,7 +88,7 @@ if (this.state.tags === null || this.state.languages === null) {
 }
 }
     async onSaveItemPress() {
-        if (this.state.uri === null || this.state.caption === null || this.state.group === null || this.state.group === 'Select A Tag' || this.state.uri === '' || this.state.caption === '' || this.state.group === '') {
+        if (this.state.uri === null || this.state.caption === null || this.state.group === null || this.state.group === Languages[this.state.languages]['127'] || this.state.uri === '' || this.state.caption === '' || this.state.group === '') {
             this.setState({ isNull: true });
         } else {
             const { title, caption, group, artist, album, uri } = this.state;
@@ -130,7 +130,7 @@ if (this.state.tags === null || this.state.languages === null) {
     }
 
     async createNew() {
-        if (this.state.uri === null || this.state.caption === null || this.state.group === null || this.state.uri === '' || this.state.group === 'Select A Tag' || this.state.caption === '' || this.state.group === '') {
+        if (this.state.uri === null || this.state.caption === null || this.state.group === null || this.state.uri === '' || this.state.group === Languages[this.state.languages]['127'] || this.state.caption === '' || this.state.group === '') {
             this.setState({ isNull: true });
         } else {
             const { title, caption, group, artist, album, uri } = this.state;
@@ -167,7 +167,7 @@ if (this.state.tags === null || this.state.languages === null) {
             AsyncStorage.setItem('Media', JSON.stringify(gen));
             AsyncStorage.setItem('Audio', JSON.stringify(audios));
             console.log(await AsyncStorage.getItem('Audio'));
-            this.setState({ title: null, artist: null, album: null, uri: null, caption: null, group: 'Select A Tag' });
+            this.setState({ title: null, artist: null, album: null, uri: null, caption: null, group: Languages[this.state.languages]['127'] });
         }
     }
     

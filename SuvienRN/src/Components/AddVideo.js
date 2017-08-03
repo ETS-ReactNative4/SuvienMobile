@@ -8,7 +8,7 @@ import Camera from 'react-native-camera';
 import Orientation from 'react-native-orientation';
 
 class AddVideo extends Component {
-    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, color: null, isNull: false, languages: null, heightc: null, widthc: null, cameraType: 'back', isRecording: false, videoID: null, tags: null, tagpick: null, isLaunchCam: false, title: null, caption: null, group: 'Select A Tag', webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
+    state = { thumbnail: null, videosrc: null, height: null, width: null, acheivement: null, color: null, isNull: false, languages: null, heightc: null, widthc: null, cameraType: 'back', isRecording: false, videoID: null, tags: null, tagpick: null, isLaunchCam: false, title: null, caption: null, group: null, webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null }
     async componentWillMount() {
         const tagarray = JSON.parse(await AsyncStorage.getItem('Tags'));
         Orientation.lockToLandscape();
@@ -19,8 +19,7 @@ class AddVideo extends Component {
             acheivement: await AsyncStorage.getItem('Acheivement'),
             languages: await AsyncStorage.getItem('Language'),
             color: await AsyncStorage.getItem('BGColour'),
-            tags: JSON.parse(await AsyncStorage.getItem('Tags')),
-            group: null
+            tags: JSON.parse(await AsyncStorage.getItem('Tags'))
         });
     } else {
         this.setState({ 
@@ -29,14 +28,15 @@ class AddVideo extends Component {
             acheivement: await AsyncStorage.getItem('Acheivement'),
             languages: await AsyncStorage.getItem('Language'),
             color: await AsyncStorage.getItem('BGColour'),
-            tags: JSON.parse(await AsyncStorage.getItem('Tags'))
+            tags: JSON.parse(await AsyncStorage.getItem('Tags')),
+            group: Languages[this.state.languages]['127']
         });
     }
     }
     createPicker() {
 let index = 0;
-const firstpicker = [{ key: index++, label: 'Select A Tag' },
-                    { key: index++, label: 'Create A New Tag' }
+const firstpicker = [{ key: index++, label: Languages[this.state.languages]['127'] },
+                    { key: index++, label: Languages[this.state.languages]['128'] }
                     ];
 const picker = this.state.tags.map(
     (tag) => (
@@ -64,9 +64,9 @@ if (this.state.tags === null || this.state.languages === null) {
                 style={{ marginLeft: Platform.OS === 'ios' ? 70 : 125, width: 300 }}
                 initValue={this.state.group}
                 onChange={(group) => {
-                        if (group.label === 'Create A New Tag') {
+                        if (group.label === Languages[this.state.languages]['128']) {
                             this.setState({ tagpick: false, group: null });
-                        } else if (group.label === 'Select A Tag') {
+                        } else if (group.label === Languages[this.state.languages]['127']) {
                             this.setState({ tagpick: null });
                         } else {
                             this.setState({ group: group.label });
@@ -122,7 +122,7 @@ if (this.state.tags === null || this.state.languages === null) {
     async onSaveItemPress() {
         console.log(this.state.videouri);
         console.log(this.state.uri);
-        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || this.state.group === 'Select A Tag' || (this.state.videoID === null && this.state.uri === null)) {
+        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || this.state.group === Languages[this.state.languages]['127'] || (this.state.videoID === null && this.state.uri === null)) {
             this.setState({ isNull: true });
         } else {
             if (this.state.mediaType === 'Youtube') {
@@ -209,7 +209,7 @@ if (this.state.tags === null || this.state.languages === null) {
     }
 
     async createNew() {
-        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || this.state.group === 'Select A Tag' || (this.state.videoID === null && this.state.uri === null)) {
+        if (this.state.title === null || this.state.caption === null || this.state.group === null || this.state.title === '' || this.state.caption === '' || this.state.group === '' || this.state.group === Languages[this.state.languages]['127'] || (this.state.videoID === null && this.state.uri === null)) {
             this.setState({ isNull: true });
         } else {
             if (this.state.mediaType === 'Youtube') {
@@ -280,7 +280,7 @@ if (this.state.tags === null || this.state.languages === null) {
                 }
                 AsyncStorage.setItem('Videos', JSON.stringify(videoobj));
                 AsyncStorage.setItem('Media', JSON.stringify(gen));
-                this.setState({ thumbnail: null, videosrc: null, height: null, width: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: 'Select A Tag', webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null });
+                this.setState({ thumbnail: null, videosrc: null, height: null, width: null, cameraType: 'back', videoID: null, isLaunchCam: false, title: null, caption: null, group: Languages[this.state.languages]['127'], webvid: false, mediaType: null, modalVisible: false, videos: null, uri: null });
                 }
         }
         

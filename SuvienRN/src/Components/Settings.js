@@ -35,8 +35,8 @@ class Settings extends Component {
     }
     createPicker() {
 let index = 0;
-const firstpicker = [{ key: index++, label: 'Select A Tag' },
-                    { key: index++, label: 'Create A New Tag' }
+const firstpicker = [{ key: index++, label: Languages[this.state.languages]['127'] },
+                    { key: index++, label: Languages[this.state.languages]['128'] }
                     ];
 const picker = this.state.tags.map(
     (tag) => (
@@ -65,10 +65,10 @@ if (this.state.tags === null || this.state.languages === null) {
                 initValue={this.state.selectedItem.group}
                 onChange={(group) => {
                     const newItem = this.state.selectedItem;
-                        if (group.label === 'Create A New Tag') {
+                        if (group.label === Languages[this.state.languages]['128']) {
                             newItem.group = null;
                             this.setState({ tagpick: false, selectedItem: newItem });
-                        } else if (group.label === 'Select A Tag') {
+                        } else if (group.label === Languages[this.state.languages]['127']) {
                             this.setState({ tagpick: null });
                         } else {
                             newItem.group = group.label;
@@ -221,7 +221,7 @@ if (this.state.tags === null || this.state.languages === null) {
 
     async onSaveItemPress() {
         const selected = this.state.selectedItem;
-        if (this.state.selectedItem.title === null || this.state.selectedItem.title === '' || this.state.selectedItem.caption === null || this.state.selectedItem.caption === '' || this.state.selectedItem.group === null || this.state.selectedItem.group === 'Select A Tag' || this.state.selectedItem.group === '') {
+        if (this.state.selectedItem.title === null || this.state.selectedItem.title === '' || this.state.selectedItem.caption === null || this.state.selectedItem.caption === '' || this.state.selectedItem.group === null || this.state.selectedItem.group === Languages[this.state.languages]['127'] || this.state.selectedItem.group === '') {
             this.setState({ isNull: true });
         } else {
             const mytags = JSON.parse(await AsyncStorage.getItem('Tags'));
