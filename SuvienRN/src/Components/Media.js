@@ -10,6 +10,8 @@ import Video from 'react-native-video';
 class Media extends Component {
     state = { 
         uri: null, 
+        buttoncolor: 'white',
+        isPaused: false,
         loading: null,
         caption: null, 
         tag: null, 
@@ -663,8 +665,11 @@ class Media extends Component {
                 //console.log('Im in the first if!');
                 if (this.state.album !== null && this.state.title !== null && this.state.artist !== null){
                     MusicPlayerController.isPlaying(() => {
+                        
                     }, () => {
-                        this.preloadMusicPlay();
+                        if (this.state.isPaused === false) {
+                            this.preloadMusicPlay();
+                        }
                     });
                     return (
                     <View style={{ height: 500, backgroundColor: '#e3edf9', flexDirection: 'row', width: 800 }}>
@@ -700,15 +705,18 @@ class Media extends Component {
                             <CardSection style={{ backgroundColor: 'transparent', borderBottomWidth: 0 }}>
                             <Button 
                             onPress={() => {
+                                this.setState({ buttoncolor: '#c0cde0' });
                                 //this.preloadMusicPlay();
                                 MusicPlayerController.playMusic(() => {
                                     //console.log('I playin!');
                                 // Successfully playing
+                                this.setState({ isPaused: false });
                                 }, () => {
                                     //console.log('I failed Nooooo');
                                 // Failed to play
                                 });
                                 }}
+                                style={{ backgroundColor: this.state.buttoncolor }}
                             >
                                 {Languages[this.state.languages]['018']}
                             </Button>
@@ -718,6 +726,7 @@ class Media extends Component {
                             onPress={() => {
                                 MusicPlayerController.pauseMusic(() => {
                                     //console.log('I stoppin!');
+                                    this.setState({ buttoncolor: 'white', isPaused: true });
                                 // Successfully playing
                                 }, () => {
                                     //console.log('I failed Nooooo');
