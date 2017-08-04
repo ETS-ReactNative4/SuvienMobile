@@ -475,12 +475,13 @@ class Media extends Component {
                         <View style={{ height: 250, backgroundColor: '#e3edf9', width: newWidth }}>
                                     <ScrollView>
                                         <View>
-                                            <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                            <View style={{ flexDirection: 'row', alignItems: 'flex-end', flexWrap: 'wrap' }}>
                                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                {this.state.title}
+                                            </Text>
+                                            <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                 <Image source={imagerend} style={{ height: 40, width: 40 }} />
                                             </TouchableWithoutFeedback>
-                                            </Text>
                                         </View>
                                             <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                             <Text style={styles.textBodyStyle}>
@@ -518,12 +519,13 @@ class Media extends Component {
                         <View style={{ height: newHeight, backgroundColor: '#e3edf9', width: 400 }}>
                                     <ScrollView>
                                         <View>
-                                            <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                            <View style={{ flexDirection: 'row', alignItems: 'flex-end', flexWrap: 'wrap' }}>
                                             <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                {this.state.title}
+                                            </Text>
+                                            <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                 <Image source={imagerend} style={{ height: 40, width: 40 }} />
                                             </TouchableWithoutFeedback>
-                                            </Text>
                                         </View>
                                             <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                             <Text style={styles.textBodyStyle}>
@@ -561,12 +563,13 @@ class Media extends Component {
                             <View style={{ height: 250, backgroundColor: '#e3edf9', width: 800 }}>
                                         <ScrollView>
                                             <View>
-                                                <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                                <View style={{ flexDirection: 'row', alignItems: 'flex-end', flexWrap: 'wrap' }}>
                                                 <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                    {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                    {this.state.title}
+                                                </Text>
+                                                <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                     <Image source={imagerend} style={{ height: 40, width: 40 }} />
                                                 </TouchableWithoutFeedback>
-                                                </Text>
                                             </View>
                                                 <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                                 <Text style={styles.textBodyStyle}>
@@ -593,12 +596,13 @@ class Media extends Component {
                                 <View style={{ height: 250, backgroundColor: '#e3edf9', width: 800 }}>
                                             <ScrollView>
                                                 <View>
-                                                    <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                                    <View style={{ flexDirection: 'row', alignItems: 'flex-end', flexWrap: 'wrap' }}>
                                                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                        {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                        {this.state.title}
+                                                    </Text>
+                                                    <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                         <Image source={imagerend} style={{ height: 40, width: 40 }} />
                                                     </TouchableWithoutFeedback>
-                                                    </Text>
                                                 </View>
                                                     <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                                     <Text style={styles.textBodyStyle}>
@@ -629,12 +633,13 @@ class Media extends Component {
                                 <View style={{ height: 250, backgroundColor: '#e3edf9', width: 800 }}>
                                             <ScrollView>
                                                 <View>
-                                                    <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                                    <View style={{ flexDirection: 'row', alignItems: 'flex-end', flexWrap: 'wrap' }}>
                                                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                        {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                        {this.state.title}
+                                                    </Text>
+                                                    <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                         <Image source={imagerend} style={{ height: 40, width: 40 }} />
                                                     </TouchableWithoutFeedback>
-                                                    </Text>
                                                 </View>
                                                     <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                                     <Text style={styles.textBodyStyle}>
@@ -727,12 +732,13 @@ class Media extends Component {
                         <View>
                             <View style={{ height: scheight, width: 400, backgroundColor: '#e3edf9', marginLeft: 5, marginRight: 10, justifyContent: 'center' }}>
                                 <ScrollView>
-                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
                                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                        {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                        {this.state.title}
+                                    </Text>
+                                    <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                         <Image source={this.state.imagerend} style={{ height: 40, width: 40 }} />
                                     </TouchableWithoutFeedback>
-                                    </Text>
                                     </View>
                                         <Text style={styles.textBodyStyle}>{this.state.artist} - {this.state.album}</Text>
                                         <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
@@ -799,12 +805,13 @@ class Media extends Component {
                                             />
                                             <View style={{ height: 250, width: 800, backgroundColor: '#e3edf9', marginLeft: 10, marginRight: 10 }}>
                                                 <ScrollView>
-                                                <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+                                                <View style={{ flexDirection: 'row', alignItems: 'flex-end', flexWrap: 'wrap' }}>
                                                     <Text style={{ fontSize: 30, fontFamily: 'Roboto-Thin', backgroundColor: '#e3edf9', marginTop: 10, marginLeft: 5, marginRight: 10, borderBottomWidth: 1, borderColor: '#ced6e0' }}>
-                                                        {this.state.title} <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
+                                                        {this.state.title}
+                                                    </Text>
+                                                    <TouchableWithoutFeedback onPress={this.onFavouritePress.bind(this)}>
                                                         <Image source={this.state.imagerend} style={{ height: 40, width: 40 }} />
                                                     </TouchableWithoutFeedback>
-                                                    </Text>
                                                 </View>
                                                     <Text style={styles.textBodyStyle}>{this.state.caption}</Text>
                                                     <Text style={styles.textBodyStyle}>
