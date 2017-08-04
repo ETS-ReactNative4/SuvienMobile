@@ -124,6 +124,9 @@
 		747D57431F19678B00C70AF1 /* recording.png in Resources */ = {isa = PBXBuildFile; fileRef = 747D57401F19678B00C70AF1 /* recording.png */; };
 		747D57441F19678B00C70AF1 /* recordingesp.png in Resources */ = {isa = PBXBuildFile; fileRef = 747D57411F19678B00C70AF1 /* recordingesp.png */; };
 		747D57451F19678B00C70AF1 /* recordingfre.png in Resources */ = {isa = PBXBuildFile; fileRef = 747D57421F19678B00C70AF1 /* recordingfre.png */; };
+		7481B9911F34BF39008F59E6 /* suviensplashnew.png in Resources */ = {isa = PBXBuildFile; fileRef = 7481B98E1F34BF39008F59E6 /* suviensplashnew.png */; };
+		7481B9921F34BF39008F59E6 /* suviensplashnewesp.png in Resources */ = {isa = PBXBuildFile; fileRef = 7481B98F1F34BF39008F59E6 /* suviensplashnewesp.png */; };
+		7481B9931F34BF39008F59E6 /* suviensplashnewfre.png in Resources */ = {isa = PBXBuildFile; fileRef = 7481B9901F34BF39008F59E6 /* suviensplashnewfre.png */; };
 		749C560B1F1CFA520051B889 /* nointernet.png in Resources */ = {isa = PBXBuildFile; fileRef = 749C56081F1CFA520051B889 /* nointernet.png */; };
 		749C560C1F1CFA520051B889 /* nointernetesp.png in Resources */ = {isa = PBXBuildFile; fileRef = 749C56091F1CFA520051B889 /* nointernetesp.png */; };
 		749C560D1F1CFA520051B889 /* nointernetfre.png in Resources */ = {isa = PBXBuildFile; fileRef = 749C560A1F1CFA520051B889 /* nointernetfre.png */; };
@@ -427,6 +430,9 @@
 		747D57401F19678B00C70AF1 /* recording.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recording.png; sourceTree = "<group>"; };
 		747D57411F19678B00C70AF1 /* recordingesp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recordingesp.png; sourceTree = "<group>"; };
 		747D57421F19678B00C70AF1 /* recordingfre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recordingfre.png; sourceTree = "<group>"; };
+		7481B98E1F34BF39008F59E6 /* suviensplashnew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suviensplashnew.png; sourceTree = "<group>"; };
+		7481B98F1F34BF39008F59E6 /* suviensplashnewesp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suviensplashnewesp.png; sourceTree = "<group>"; };
+		7481B9901F34BF39008F59E6 /* suviensplashnewfre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = suviensplashnewfre.png; sourceTree = "<group>"; };
 		749C56081F1CFA520051B889 /* nointernet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nointernet.png; sourceTree = "<group>"; };
 		749C56091F1CFA520051B889 /* nointernetesp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nointernetesp.png; sourceTree = "<group>"; };
 		749C560A1F1CFA520051B889 /* nointernetfre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nointernetfre.png; sourceTree = "<group>"; };
@@ -731,6 +737,9 @@
 				74330F5C1F1923FE005152BF /* nocontentsfre.png */,
 				74330F5D1F1923FE005152BF /* nourl.png */,
 				74330F5E1F1923FE005152BF /* nourlesp.png */,
+				7481B98E1F34BF39008F59E6 /* suviensplashnew.png */,
+				7481B98F1F34BF39008F59E6 /* suviensplashnewesp.png */,
+				7481B9901F34BF39008F59E6 /* suviensplashnewfre.png */,
 				74330F5F1F1923FE005152BF /* nourlfre.png */,
 				742D192F1F14FC3700CC489D /* novideo.png */,
 				742D19301F14FC3700CC489D /* novideoesp.png */,
@@ -864,8 +873,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 6G6223H57R;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1215,7 +1223,9 @@
 				749C56301F1D04A80051B889 /* loadingflagesp.png in Resources */,
 				7462BA811EE72A9200DB279F /* Roboto-Medium.ttf in Resources */,
 				742D19451F14FC3700CC489D /* nocontentesp.png in Resources */,
+				7481B9921F34BF39008F59E6 /* suviensplashnewesp.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				7481B9931F34BF39008F59E6 /* suviensplashnewfre.png in Resources */,
 				7408C6061EFAFB7700F952B2 /* ClementePDag-Book.ttf in Resources */,
 				7408C6121EFAFB7700F952B2 /* UltimaPDac-UltraLight.ttf in Resources */,
 				74330F611F1923FE005152BF /* nocontentsesp.png in Resources */,
@@ -1246,6 +1256,7 @@
 				74A03A3C1F1FA73D001423E5 /* garbage.png in Resources */,
 				749C562F1F1D04A80051B889 /* loadingflag.png in Resources */,
 				74330F601F1923FE005152BF /* nocontents.png in Resources */,
+				7481B9911F34BF39008F59E6 /* suviensplashnew.png in Resources */,
 				749C560C1F1CFA520051B889 /* nointernetesp.png in Resources */,
 				749C56311F1D04A80051B889 /* loadingflagfre.png in Resources */,
 				749C56631F1D19E30051B889 /* backbuttondark.png in Resources */,
@@ -1474,11 +1485,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				"DEAD_CODE_STRIPPING[arch=*]" = YES;
-				DEVELOPMENT_TEAM = 6G6223H57R;
+				DEVELOPMENT_TEAM = U2RPC92845;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-image-pickerios",
@@ -1495,7 +1506,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = SuvienRN;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "4f3764b1-45e9-4561-94cb-ac4411eb20ef";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: *";
 				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1508,7 +1520,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6G6223H57R;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-image-pickerios",
@@ -1525,6 +1537,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = SuvienRN;
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
