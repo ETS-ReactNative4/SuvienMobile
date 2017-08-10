@@ -1570,7 +1570,7 @@ class AddMessage extends Component {
                     />
                 </CardSection>
                 <CardSection style={{ marginLeft: 0, alignItems: 'center', justifyContent: 'center' }}>
-                    <Image source={{ uri: this.state.uri }} style={{ height: 300, width: 400 }} />
+                    <Image source={{ uri: this.state.uri }} style={{ height: 200, width: 300 }} />
                 </CardSection>
                 <CardSection style={{ flexDirection: 'column', height: 70 }}>
                     <Text style={{ fontSize: 18, paddingLeft: 20, marginBottom: 5 }}>{Languages[this.state.languages]['090']}</Text>
