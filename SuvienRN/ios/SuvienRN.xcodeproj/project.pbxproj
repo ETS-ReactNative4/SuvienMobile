@@ -142,6 +142,8 @@
 		74FAC1EC1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */; };
 		74FAC1ED1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */; };
 		74FAC1EE1EF165AC00F4E4FC /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */; };
+		74FD0E571F34FAD800304076 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FD0E561F34FAD800304076 /* StoreKit.framework */; };
+		74FD0E591F34FAD900304076 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FD0E581F34FAD900304076 /* GameKit.framework */; };
 		74FECB191EEED0C600934A37 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FECB181EEED08700934A37 /* libRCTCameraRoll.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
@@ -446,6 +448,8 @@
 		74A03A3A1F1FA73D001423E5 /* invalidtime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invalidtime.png; sourceTree = "<group>"; };
 		74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClementePDag-Book.ttf"; path = "../android/app/src/main/assets/fonts/ClementePDag-Book.ttf"; sourceTree = "<group>"; };
 		74FAC20F1EF1671100F4E4FC /* ClementePDae-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClementePDae-Light.ttf"; path = "../android/app/src/main/assets/fonts/ClementePDae-Light.ttf"; sourceTree = "<group>"; };
+		74FD0E561F34FAD800304076 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		74FD0E581F34FAD900304076 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		74FECB131EEED08600934A37 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -476,11 +480,13 @@
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
+				74FD0E591F34FAD900304076 /* GameKit.framework in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				6917A18CA0C240B88EB36C6E /* libRCTCamera.a in Frameworks */,
 				50958FC2713C4043A2DF8665 /* libRCTVideo.a in Frameworks */,
+				74FD0E571F34FAD800304076 /* StoreKit.framework in Frameworks */,
 				1988736B27484D039F9A92DE /* libRCTOrientation.a in Frameworks */,
 				250D0C83BBC94D9BB81F89CD /* libRNReactNativeMusicplayercontroller.a in Frameworks */,
 			);
@@ -657,6 +663,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7481B99A1F34F394008F59E6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				74FD0E581F34FAD900304076 /* GameKit.framework */,
+				74FD0E561F34FAD800304076 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		74FECB141EEED08600934A37 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -757,6 +772,7 @@
 				00E356EF1AD99517003FC87E /* SuvienRNTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				DC6AAEF0BEF040928F07CD43 /* Resources */,
+				7481B99A1F34F394008F59E6 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -873,7 +889,22 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = U2RPC92845;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1506,8 +1537,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = SuvienRN;
-				PROVISIONING_PROFILE = "4f3764b1-45e9-4561-94cb-ac4411eb20ef";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: *";
+				PROVISIONING_PROFILE = "9c14e665-29e5-48f8-8e8a-d882aa4e7480";
+				PROVISIONING_PROFILE_SPECIFIER = "Suvien 2.0";
 				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1518,9 +1549,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = U2RPC92845;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-image-pickerios",
@@ -1537,8 +1568,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = SuvienRN;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "9c14e665-29e5-48f8-8e8a-d882aa4e7480";
+				PROVISIONING_PROFILE_SPECIFIER = "Suvien 2.0";
 				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
