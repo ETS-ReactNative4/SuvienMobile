@@ -65,7 +65,7 @@ class CaptionGame extends Component {
     }
 
     async doMath() {
-      const height = ((parseInt(await AsyncStorage.getItem('Height')) - 70) / 2);
+      const height = ((parseInt(await AsyncStorage.getItem('Height')) - 170) / 2);
       const width = ((parseInt(await AsyncStorage.getItem('Width')) - 400) / 2);
       if (height < width) {
           this.setState({ dim: height });
