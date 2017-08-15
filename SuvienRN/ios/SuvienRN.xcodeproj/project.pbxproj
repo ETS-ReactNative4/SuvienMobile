@@ -38,6 +38,9 @@
 		50958FC2713C4043A2DF8665 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2201807E9FA7490D9F933BDA /* libRCTVideo.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6917A18CA0C240B88EB36C6E /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3541B4E2DCDC4E6E89323488 /* libRCTCamera.a */; };
+		740191C31F40CEE200D3B51C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 740191C21F40CEE200D3B51C /* MapKit.framework */; };
+		740191C51F40CEE400D3B51C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 740191C41F40CEE400D3B51C /* GameKit.framework */; };
+		740191C61F40D76200D3B51C /* libjschelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EAD1DF850E9000B6D8A /* libjschelpers.a */; };
 		7408C6061EFAFB7700F952B2 /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6021EFAFB7700F952B2 /* ClementePDag-Book.ttf */; };
 		7408C6071EFAFB7700F952B2 /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6021EFAFB7700F952B2 /* ClementePDag-Book.ttf */; };
 		7408C6081EFAFB7700F952B2 /* ClementePDag-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7408C6021EFAFB7700F952B2 /* ClementePDag-Book.ttf */; };
@@ -401,6 +404,8 @@
 		55219E0736DA49B3BA478EA5 /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOrientation.xcodeproj; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		69ABDCC154B64C4F872708B9 /* libRNReactNativeMusicplayercontroller.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReactNativeMusicplayercontroller.a; sourceTree = "<group>"; };
+		740191C21F40CEE200D3B51C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		740191C41F40CEE400D3B51C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		7408C6021EFAFB7700F952B2 /* ClementePDag-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ClementePDag-Book.ttf"; sourceTree = "<group>"; };
 		7408C6031EFAFB7700F952B2 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		7408C6041EFAFB7700F952B2 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
@@ -446,6 +451,7 @@
 		74A03A3A1F1FA73D001423E5 /* invalidtime.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invalidtime.png; sourceTree = "<group>"; };
 		74FAC1EA1EF165AC00F4E4FC /* ClementePDag-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClementePDag-Book.ttf"; path = "../android/app/src/main/assets/fonts/ClementePDag-Book.ttf"; sourceTree = "<group>"; };
 		74FAC20F1EF1671100F4E4FC /* ClementePDae-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClementePDae-Light.ttf"; path = "../android/app/src/main/assets/fonts/ClementePDae-Light.ttf"; sourceTree = "<group>"; };
+		74FEAF4F1F3CC953000BFB1A /* SuvienRN.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SuvienRN.entitlements; path = SuvienRN/SuvienRN.entitlements; sourceTree = "<group>"; };
 		74FECB131EEED08600934A37 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -467,6 +473,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				740191C61F40D76200D3B51C /* libjschelpers.a in Frameworks */,
 				74FECB191EEED0C600934A37 /* libRCTCameraRoll.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -476,6 +483,8 @@
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
+				740191C51F40CEE400D3B51C /* GameKit.framework in Frameworks */,
+				740191C31F40CEE200D3B51C /* MapKit.framework in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
@@ -591,6 +600,7 @@
 		13B07FAE1A68108700A75B9A /* SuvienRN */ = {
 			isa = PBXGroup;
 			children = (
+				74FEAF4F1F3CC953000BFB1A /* SuvienRN.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -655,6 +665,15 @@
 				743A79371EE6E20B001BD07F /* libRCTOrientation.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		74FEAF181F3CC2AC000BFB1A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				740191C41F40CEE400D3B51C /* GameKit.framework */,
+				740191C21F40CEE200D3B51C /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		74FECB141EEED08600934A37 /* Products */ = {
@@ -757,6 +776,7 @@
 				00E356EF1AD99517003FC87E /* SuvienRNTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				DC6AAEF0BEF040928F07CD43 /* Resources */,
+				74FEAF181F3CC2AC000BFB1A /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -873,7 +893,22 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = U2RPC92845;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1485,6 +1520,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = SuvienRN/SuvienRN.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -1505,9 +1541,10 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.Suvien2;
 				PRODUCT_NAME = SuvienRN;
-				PROVISIONING_PROFILE = "4f3764b1-45e9-4561-94cb-ac4411eb20ef";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: *";
+				PROVISIONING_PROFILE = "4523052b-20a6-4c33-9fbd-8e9ea6b9972b";
+				PROVISIONING_PROFILE_SPECIFIER = "iOS Distribution Profile Final";
 				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1518,9 +1555,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = SuvienRN/SuvienRN.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = U2RPC92845;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-image-pickerios",
@@ -1536,9 +1574,10 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.Suvien2;
 				PRODUCT_NAME = SuvienRN;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "4523052b-20a6-4c33-9fbd-8e9ea6b9972b";
+				PROVISIONING_PROFILE_SPECIFIER = "iOS Distribution Profile Final";
 				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
