@@ -210,19 +210,19 @@ if (this.state.tags === null || this.state.languages === null) {
                         </CardSection>
                     <CardSection>
                             <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
+                                <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
                                 <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
                             </View>
                         </CardSection>
                         <CardSection>
                             <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
+                                <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
                                 <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
                             </View>
                         </CardSection>
                         <CardSection>
                             <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
+                                <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
                                 <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{(Languages[this.state.languages]['094'])[3]}</Text>
                             </View>
                         </CardSection>
@@ -251,7 +251,7 @@ if (this.state.tags === null || this.state.languages === null) {
                         placeholder={Languages[this.state.languages]['062']}
                         label={Languages[this.state.languages]['059']}
                         value={this.state.caption}
-                        labelstyle={{ flex: 1 }}
+                        labelstyle={{ flex: 2 }}
                         onChangeText={(caption) => this.setState({ caption })}
                         />
                     </CardSection>
@@ -260,19 +260,19 @@ if (this.state.tags === null || this.state.languages === null) {
                     </CardSection>
                         <CardSection>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['058']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.title}</Text>
                         </View>
                     </CardSection>
                     <CardSection>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['051']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.album}</Text>
                         </View>
                     </CardSection>
                     <CardSection>
                         <View style={{ height: 40, flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 1, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
+                            <Text style={{ fontSize: 23, marginLeft: 100, flex: 2, fontFamily: 'Roboto-Light', marginBottom: 7 }}>{Languages[this.state.languages]['052']}</Text>
                             <Text style={{ color: '#000', marginRight: 100, marginLeft: 20, fontSize: 20, fontFamily: 'Roboto-Light', paddingTop: 3, flex: 6 }}>{this.state.artist}</Text>
                         </View>
                     </CardSection>
