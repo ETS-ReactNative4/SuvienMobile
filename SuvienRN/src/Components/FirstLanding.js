@@ -31,7 +31,7 @@ class FirstLanding extends Component {
                     </Text>
                 </View>
                 <CardSection>
-                    <Button onPress={() => Linking.openURL('http://www.suvien.com/how-to-use-suvien.html')}>
+                    <Button onPress={() => Linking.openURL('http://www.suvien.com/how-to-use-suvien20.html')}>
                         {Languages[this.state.languages]['079']}
                     </Button>
                 </CardSection>

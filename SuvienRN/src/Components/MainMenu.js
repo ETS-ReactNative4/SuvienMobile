@@ -67,7 +67,7 @@ class MainMenu extends Component {
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
                                 <View style={{ flex: 150 }}>
-                                    <Button style={styles.buttonContainer} onPress={() => Linking.openURL('http://www.suvien.com/how-to-use-suvien.html')}>
+                                    <Button style={styles.buttonContainer} onPress={() => Linking.openURL('http://www.suvien.com/how-to-use-suvien20.html')}>
                                         {Languages[this.state.language]['003']}
                                     </Button>
                                 </View>
@@ -93,7 +93,7 @@ class MainMenu extends Component {
                             </CardSection>
                             <CardSection style={{ flex: 50, justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0, backgroundColor: 'transparent', position: 'relative', flexDirection: 'row' }}>
                                 <View style={{ flex: 150 }}>
-                                    <Button style={styles.buttonContainer} onPress={() => Linking.openURL('http://www.suvien.com/how-to-use-suvien.html')}>
+                                    <Button style={styles.buttonContainer} onPress={() => Linking.openURL('http://www.suvien.com/how-to-use-suvien20.html')}>
                                         {Languages[this.state.language]['003']}
                                     </Button>
                                 </View>
