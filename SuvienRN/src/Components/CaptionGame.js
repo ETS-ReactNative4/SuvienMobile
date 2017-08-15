@@ -119,11 +119,7 @@ class CaptionGame extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['106']}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
+                <View style={{ flex: 1 }} />
             </Header>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                 <View style={{ flexDirection: 'row', width: (this.state.dim * 2), flexWrap: 'wrap' }}>
@@ -136,6 +132,13 @@ class CaptionGame extends Component {
                 </View>
                 </View>
                 </View>
+                <View style={{ alignSelf: 'center', height: 100, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }}>
+                    <CardSection style={{ height: 70 }}>
+                    <Button onPress={() => Actions.MainMenu()}>
+                        {Languages[this.state.languages]['070']}
+                    </Button>
+                    </CardSection>
+                    </View>
                 </View>
             );
             }
@@ -191,11 +194,7 @@ class CaptionGame extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['106']}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
+                <View style={{ flex: 1 }} />
             </Header>
                 <View style={{ flexDirection: 'row'}}>
                 <View style={{ flexDirection: 'row', width: (this.state.dim * 2), flexWrap: 'wrap' }}>
@@ -222,6 +221,13 @@ class CaptionGame extends Component {
                 </View>
                 </View>
                 </View>
+                <View style={{ alignSelf: 'center', height: 100, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }}>
+                    <CardSection style={{ height: 70 }}>
+                    <Button onPress={() => Actions.MainMenu()}>
+                        {Languages[this.state.languages]['070']}
+                    </Button>
+                    </CardSection>
+                    </View>
                 </View>
             );
                     }
@@ -286,11 +292,7 @@ class CaptionGame extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['106']}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
+                <View style={{ flex: 1 }} />
             </Header>
                 <View style={{ flexDirection: 'row'}}>
                 <View style={{ flexDirection: 'row', width: (this.state.dim * 2), flexWrap: 'wrap' }}>
@@ -317,6 +319,13 @@ class CaptionGame extends Component {
                 </View>
                 </View>
                 </View>
+                <View style={{ alignSelf: 'center', height: 100, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }}>
+                    <CardSection style={{ height: 70 }}>
+                    <Button onPress={() => Actions.MainMenu()}>
+                        {Languages[this.state.languages]['070']}
+                    </Button>
+                    </CardSection>
+                    </View>
                 </View>
             );
                     }
@@ -365,11 +374,7 @@ class CaptionGame extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['106']}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
+                <View style={{ flex: 1 }} />
             </Header>
                 <View style={{ flexDirection: 'row'}}>
                 <View style={{ flexDirection: 'row', width: (this.state.dim * 2), flexWrap: 'wrap' }}>
@@ -396,6 +401,13 @@ class CaptionGame extends Component {
                 </View>
                 </View>
                 </View>
+                <View style={{ alignSelf: 'center', height: 100, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }}>
+                    <CardSection style={{ height: 70 }}>
+                    <Button onPress={() => Actions.MainMenu()}>
+                        {Languages[this.state.languages]['070']}
+                    </Button>
+                    </CardSection>
+                    </View>
                 </View>
             );
                 }

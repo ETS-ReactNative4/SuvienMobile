@@ -147,17 +147,19 @@ class MemoryGame extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
+                <View style={{ flex: 1 }} />
             </Header>
                     </View>
                 <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                     {this.renderTiles()}
                 </View>
-                <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }} />
+                <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }}>
+                    <CardSection style={{ height: 70 }}>
+                    <Button onPress={() => Actions.MainMenu()}>
+                        {Languages[this.state.languages]['070']}
+                    </Button>
+                    </CardSection>
+                    </View>
                 </View>
             );
             }
@@ -208,16 +210,19 @@ class MemoryGame extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
+                <View style={{ flex: 1 }} />
             </Header>
                             </View>
                         <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                             {this.renderTiles()}
                         </View>
+                        <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }}>
+                    <CardSection style={{ height: 70 }}>
+                    <Button onPress={() => Actions.MainMenu()}>
+                        {Languages[this.state.languages]['070']}
+                    </Button>
+                    </CardSection>
+                    </View>
                         </View>
                     );
                 } else {
@@ -266,16 +271,19 @@ class MemoryGame extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
+                <View style={{ flex: 1 }} />
             </Header>
                          </View>
                      <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                          {this.renderTiles()}
                      </View>
+                     <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }}>
+                    <CardSection style={{ height: 70 }}>
+                    <Button onPress={() => Actions.MainMenu()}>
+                        {Languages[this.state.languages]['070']}
+                    </Button>
+                    </CardSection>
+                    </View>
                      </View>
                  );
                         }
@@ -323,16 +331,19 @@ class MemoryGame extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
+                <View style={{ flex: 1 }} />
             </Header>
                          </View>
                      <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                          {this.renderTiles()}
                      </View>
+                     <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }}>
+                    <CardSection style={{ height: 70 }}>
+                    <Button onPress={() => Actions.MainMenu()}>
+                       {Languages[this.state.languages]['070']}
+                    </Button>
+                    </CardSection>                    
+                    </View>
                      </View>
                  );
                      }
@@ -382,16 +393,19 @@ class MemoryGame extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
+                <View style={{ flex: 1 }} />
             </Header>
                          </View>
                      <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                          {this.renderTiles()}
                      </View>
+                     <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }}>
+                    <CardSection style={{ height: 70 }}>
+                    <Button onPress={() => Actions.MainMenu()}>
+                        {Languages[this.state.languages]['070']}
+                    </Button>
+                    </CardSection>
+                    </View>
                      </View>
                  );
                         }
@@ -439,16 +453,19 @@ class MemoryGame extends Component {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 27, fontFamily: 'Roboto-Thin' }}>{Languages[this.state.languages]['099']}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={() => Actions.MainMenu()}>
-                    <Image source={{ uri: `backbuttondark${Platform.OS === 'ios' ? '.png' : ''}` }} style={{ height: 50, width: 50, alignSelf: 'flex-end', marginRight: 20 }} />
-                    </TouchableWithoutFeedback>
-                </View>
+                <View style={{ flex: 1 }} />
             </Header>
                          </View>
                      <View style={{ flexWrap: 'wrap', alignSelf: 'center', justifyContent: 'center', height: (this.state.height - 70) }}>
                          {this.renderTiles()}
                      </View>
+                     <View style={{ alignSelf: 'center', flex: 1, alignItems: 'center', justifyContent: 'center', width: (this.state.width - 40), marginBottom: 30 }}>
+                    <CardSection style={{ height: 70 }}>
+                    <Button onPress={() => Actions.MainMenu()}>
+                        {Languages[this.state.languages]['070']}
+                    </Button>
+                    </CardSection>
+                    </View>
                      </View>
                  );
                      }
