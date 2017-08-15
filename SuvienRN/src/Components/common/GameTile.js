@@ -9,11 +9,11 @@ class GameTile extends Component {
          const height = parseInt(JSON.parse(await AsyncStorage.getItem('Height')));
          const width = parseInt(JSON.parse(await AsyncStorage.getItem('Width')));
          if (Platform.OS === 'android') {
-            newHeight = parseFloat((height - 80) / 2);
+            newHeight = parseFloat((height - 180) / 2);
             newWidth = parseFloat((width - 20) / 4);
         }
         if (Platform.OS === 'ios') {
-            newHeight = parseFloat((height - 20) / 2);
+            newHeight = parseFloat((height - 120) / 2);
             newWidth = parseFloat((width - 20) / 4);
         }
          if (newWidth <= newHeight) {
